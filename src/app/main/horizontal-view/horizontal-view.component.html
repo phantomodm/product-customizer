@@ -172,12 +172,13 @@
                       </mat-slider>
                   </div>
                   <div class="horizontal-view__item" >
-                    <ngx-slick class="carousel">
+                      <glove-carousel-view></glove-carousel-view>
+                    <!-- <ngx-slick class="carousel">
                       <div ngxSlickItem *ngFor="let image of filteredImages | async">
                         <p>{{image}}</p>
                         <img mat-card-image [src]="image">
                       </div>
-                    </ngx-slick>
+                    </ngx-slick> -->
                   </div>
                 </div>&nbsp;
                 <div class="horizontal-view__button">
@@ -198,7 +199,9 @@
                   <div class="horizontal-view__item">
                     <glove-customizer-horizontal-view [slideConfig]="slideConfig"  [showNavigationIndicators]="showNavigationIndicators"
                       [showNavigationArrows]="showNavigationArrows" [question]="question"></glove-customizer-horizontal-view>
+                    <!-- <glove-customizer-horizontal-view></glove-customizer-horizontal-view> -->
                   </div>
+                  
                   <div class="horizontal-view__item">
                     <div class="horizontal-wizard-slider">
                       <div *ngIf="sliderStatus">
@@ -232,7 +235,7 @@
               <ng-template matStepLabel>Choose Web</ng-template>
               <div *ngFor="let question of (wizardPrompts)?.gloveWeb">                
                 <mat-card-title>{{question.label}}</mat-card-title>
-              <div id="glove-webs" style="height: 400px;">
+              <div id="glove-webs" class="horizontal-view__web_container">
                 <web-view [webs]="filteredGloveWebs"></web-view>
               </div>                
 
@@ -292,8 +295,8 @@
                 <li class="finalize-view"><div class="finalize-view_image"><svg id="gloveCloneSummary3"></svg></div></li>
               </ul>
               
-              <div class="horizontal-view__button">
-                  <button class="button button--primary" type="submit" md-raised-button >Add to Cart</button>
+              <div class="finalize-view__button">
+                  <button type="submit" >Add to Cart</button>
               </div>
             </mat-step>
 

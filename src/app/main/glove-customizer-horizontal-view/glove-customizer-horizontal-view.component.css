@@ -10,6 +10,10 @@
     display: block;
 }
 
+.carousel-control-next-icon{
+    background:blue;
+}
+
 .horizontal-view{
     width:1000px;
 }

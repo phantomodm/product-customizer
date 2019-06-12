@@ -1,4 +1,40 @@
-<div class="center-slick">
+<!-- <div class="">
+    <ngu-carousel  [inputs]="carouselTile">
+      <button type="button" class="leftRs" NguCarouselPrev>Previous</button>
+      <button type="button" class="rightRs" NguCarouselNext>Next</button>
+      <ngu-item NguCarouselItem><div><svg id="mOutside" width="400" height="400"></svg></div></ngu-item>
+      <ngu-item NguCarouselItem><div><svg id="mInside" width="400" height="400"></svg></div></ngu-item>
+      <ngu-item NguCarouselItem><div><svg id="mSideview" width="400" height="400"></svg></div></ngu-item>
+      <ngu-tile #horizontalGloveCustomizer *nguCarouselDef="let glove;">
+        <section>
+          <label for="">
+            <mat-card class="mat-elevation-z10">
+              <div class="">
+                <div class="">
+                  <img mat-card-image [src]="glove">
+                </div>
+              </div>
+            </mat-card>
+          </label>
+        </section>
+      </ngu-tile>
+    </ngu-carousel>
+  </div> -->
+
+<ngb-carousel>
+  <ng-template ngbSlide>
+      <div><svg id="mOutside" width="400" height="400"></svg></div>
+  </ng-template>
+  <ng-template ngbSlide>
+      <div><svg id="mInside" width="400" height="400"></svg></div>
+  </ng-template>
+  <ng-template ngbSlide>
+      <div><svg id="mSideview" width="400" height="400"></svg></div>
+  </ng-template>  
+</ngb-carousel>
+  
+
+<!-- <div class="center-slick">
   <ngx-slick class="carousel" [config]='{"slidesToShow": 1, "slidesToScroll": 1}'>
     <div class="slide">
         <svg id="mOutside" width="400" height="400"></svg>
@@ -10,30 +46,4 @@
       <svg id="mSideview" width="400" height="400"></svg>
     </div>
   </ngx-slick>
-</div>
-
-<div class="">
-    <ngu-carousel class="ngu-slider-main"  [inputs]="carouselTile"
-      [dataSource]="question">
-      <button type="button" class="leftRs" NguCarouselPrev>Previous</button>
-      <button type="button" class="rightRs" NguCarouselNext>Next</button>
-  
-      <ngu-tile #gloveCarousel *nguCarouselDef="let glove;">
-        <section>
-          <label for="">
-            <mat-card class="mat-elevation-z10">
-                <div class="slide">
-                    <svg id="mOutside" width="400" height="400"></svg>
-                </div>  
-                <div class="slide">
-                  <svg id="mInside" width="400" height="400"></svg>
-                </div>
-                <div class="slide">
-                  <svg id="mSideview" width="400" height="400"></svg>
-                </div>
-            </mat-card>
-          </label>
-        </section>
-      </ngu-tile>
-    </ngu-carousel>
-  </div>
+</div> -->
