@@ -1,0 +1,195 @@
+
+
+#hands mat-card {
+    margin-right: 8px;
+    width:100%;
+}
+
+#hands div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 6px;
+}
+
+#hands img{
+    width: 175px
+}
+
+.glove-series {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.glove-series_info {
+    width:20%;
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    justify-content: space-around;
+    background: purple;
+    color:white;
+    margin:2px;
+    height:14rem;
+
+}
+
+.finalize-view__list {
+    display: flex;
+    justify-content: center;
+}
+
+.finalize-view__list li {
+    list-style: none;
+}
+
+.finalize-view {
+    width:30%;
+    max-width: 30rem;
+}
+
+@media screen and (min-width:32rem){
+
+    .glove-series_info{
+        justify-items: center;
+    }
+
+    .title {
+        padding-left: 8px;
+    }
+
+
+}
+
+
+
+@media screen and (max-width:30rem){
+    .glove-series{
+        width: 17rem;
+        justify-content: space-around;
+    }
+    
+    .glove-series_info{
+        width:18%;
+    }
+}
+
+.vertical-container {    
+    width: 100%;
+}
+
+.vertical-view_column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vertical-view-column_img{
+    width: 30%;
+}
+.title {
+    padding-left: 8px;
+}
+
+.vertical-view_row{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.vertical-flex-grow{
+    flex: 1 0;
+}
+
+.slider  {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: flex-start;
+}
+
+@media (min-width:33.125rem){
+    .vertical-flex-grow {
+        flex: 0.2 0 250px;
+    }
+
+    .mat-slider-vertical{
+        min-height: 18.75rem;
+    }
+
+    .slider {
+        justify-content: center;
+    }
+}
+/* .vertical-view__item
+.mat-slider-vertical {
+    flex: 0 8 50px;
+} */
+
+.vertical-view__item {
+    display: flex;
+    margin-bottom: 2px;
+}
+
+/* .vertical-view_row
+.vertical-view__item {
+    flex-direction:row;
+    
+} */
+
+.vertical-view_row
+.vertical-view__item button{
+    margin: 0.3rem;
+}
+
+.vertical-view__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.vertical-view__button button{
+    margin-right:8px;
+}
+
+.vertical-wizard-slider{
+    min-width: 450px;
+}
+
+.mat-radio-button {
+    margin-bottom: 5px;
+}
+
+.mat-slider-vertical{
+    min-height: 250px
+}
+
+.wrap {
+    flex-flow: wrap;
+}
+
+/* the slides */
+.slick-slide {
+    margin: 0 10px;
+    padding: 1rem;
+}
+/* the parent */
+.slick-list {
+    margin: 0 -10px;
+}
+
+.center-panel{
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 0.5rem;
+}
+
+.vert-dexterity{
+    width: 125px;
+    padding: 0.5rem;
+}

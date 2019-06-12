@@ -1,0 +1,31 @@
+<div class="hand-size-view_row">
+  <ngu-carousel class="ngu-slider-main" style="min-width:200px; max-width: 400px" [inputs]="carouselTile" [dataSource]="hands">
+    <button type="button" class="leftRs" NguCarouselPrev>Previous</button>
+    <button type="button" class="rightRs" NguCarouselNext>Next</button>
+
+    <ngu-tile #handSize *nguCarouselDef="let hand;">
+      <section>
+        <label for={{hand.id}}>
+          <mat-card class="mat-elevation-z10">
+            <div class="hand-size-view_column">
+            <div class="hand-size-view__list">
+              <mat-card-header>
+                <mat-card-title>{{hand.valueString}}</mat-card-title>
+              </mat-card-header>
+              &nbsp;
+            </div>
+            <div class="hand-size-view__list">
+              <img mat-card-md-image src="./assets/images/{{hand.img}}">
+            </div>
+            <div class="hand-size-view__list">
+              <mat-card-actions fxLayoutAlign="center">
+                <button mat-raised-button color="primary" (click)="setHandSize(hand.valueString, hand.id, hand.formName)">Select</button>
+              </mat-card-actions>
+            </div>
+            </div>
+          </mat-card>
+        </label>
+      </section>
+    </ngu-tile>
+  </ngu-carousel>
+</div>

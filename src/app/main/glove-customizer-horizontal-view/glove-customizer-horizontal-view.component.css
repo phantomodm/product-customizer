@@ -1,0 +1,44 @@
+*:focus {
+    outline: none !important;
+    border: 0 !important;
+}
+
+.center-slick{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.horizontal-view{
+    width:1000px;
+}
+
+.loadingOverlay {
+    background-color: rgba(255,255,255, 0.9);
+    display: none;
+    z-index: zIndex("low");
+}
+
+/* .slick-next {
+    right: -15px;
+}
+
+.slick-prev {
+    right: -15px;
+}
+
+.slick-slide {
+    width:450px;
+    margin-left:25px;
+} */
+
+@media only screen and (max-width: 960px) {
+    .mat-card-title {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+}
+
+

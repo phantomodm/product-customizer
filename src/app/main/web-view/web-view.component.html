@@ -1,0 +1,33 @@
+<div class="web-view_row">
+  <ngu-carousel class="ngu-slider-main" style="min-width:211px;" [inputs]="carouselTile"
+    [dataSource]="filteredGloveWebs">
+    <button type="button" class="leftRs" NguCarouselPrev>Previous</button>
+    <button type="button" class="rightRs" NguCarouselNext>Next</button>
+
+    <ngu-tile #carousel *nguCarouselDef="let web;">
+      <section>
+        <label for={{web.id}}>
+          <mat-card class="mat-elevation-z10">
+            <div class="web-view_column">
+              <div class="web-view__list">
+                <mat-card-header>
+                  <mat-card-title>{{web.valueString}}</mat-card-title>
+                </mat-card-header>
+                &nbsp;
+              </div>
+              <div class="web-view__list">
+                <img mat-card-image [src]="web.imageURL">
+              </div>
+              <div class="web-view__list">
+                <mat-card-actions>
+                  <button mat-raised-button color="primary"
+                    (click)="setWebOptions(web.valueString, web.value, web.formName)">Select</button>
+                </mat-card-actions>
+              </div>
+            </div>
+          </mat-card>
+        </label>
+      </section>
+    </ngu-tile>
+  </ngu-carousel>
+</div>

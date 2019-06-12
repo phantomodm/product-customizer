@@ -1,0 +1,305 @@
+<mat-card>
+    <form [formGroup]="verticalForm">
+        <mat-vertical-stepper #verticalMenu1>
+            <mat-step>
+                <mat-icon icon="thumbs-up"></mat-icon>
+                <ng-template matStepLabel>Setup</ng-template>
+                <mat-horizontal-stepper #verticalSubMenu1
+                    (selectionChange)="setMenuStatus(verticalSubMenu1._steps._results,'subForm1')">
+                    <div class="vertical-container">
+
+                        <!-- Question #1 -->
+                        <mat-step>
+                            <mat-icon icon="thumbs-up"></mat-icon>
+                            <ng-template matStepLabel>Glove Type</ng-template>
+                            <div class="vertical-view_column" *ngFor="let sport of (wizardPrompts)?.sportPlayed">
+                                <mat-card-title>{{sport.label}}</mat-card-title>
+                                <div class="vertical-view_row">
+                                    <div class="vertical-view__item" *ngFor="let option of sport.options"><button
+                                            mat-raised-button type="button" color="primary"
+                                            (click)="setGloveSeries(option.valueString, option.value, option.id, 'subForm1', sport.formName)">{{option.valueString}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            &nbsp;
+
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperNext type="button">Next</button>
+                            </div>
+
+                        </mat-step>
+                        <!-- Question #2 -->
+                        <mat-step>
+
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Glove Quality</ng-template>
+                            <div *ngFor="let series of (wizardPrompts)?.gloveSeries">
+                                <div class="vertical-view_column">
+                                    <div class="title">
+                                        <mat-card-title>{{series.label}}</mat-card-title>
+                                    </div>
+                                    <div class="glove-series">
+                                        <div class="glove-series_info" fxFlexAlign="center"
+                                            *ngFor="let option of series.options"><button mat-raised-button
+                                                type="button" color="primary"
+                                                (click)="setGloveSeries(option.valueString,option.value, option.id, 'subForm1',series.formName)">{{option.valueString}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            &nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button">Next</button>
+                            </div>
+                        </mat-step>
+                        <!-- Question #3 -->
+                        <mat-step>
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Position</ng-template>
+                            <div *ngFor="let position of (wizardPrompts)?.positions">
+                                <mat-card-title>{{position.label}}</mat-card-title>
+                                <div class="vertical-view_row">
+                                    <div class="vertical-view__item wrap" *ngFor="let option of position.options">
+                                        <button mat-raised-button type="button" color="primary"
+                                            (click)="setGloveType(option.shortName, option.fullName, option.value, position.formName,'subForm1')">{{option.fullName}}</button>
+                                    </div>
+                                </div>
+                                &nbsp;
+                                <div class="vertical-view__button">
+                                    <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                    <button mat-raised-button matStepperNext type="button">Next</button>
+                                </div>
+                            </div>
+                        </mat-step>
+                        <!-- Question #4 -->
+                        <mat-step>
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Glove Hand</ng-template>
+                            <div *ngFor="let hand of (wizardPrompts)?.gloveHand">
+                                <mat-card-title>{{hand.label}}</mat-card-title>
+                                <div class="vertical-view_row">
+                                    <mat-card class="vertical-view_column vertical-view-column_img"
+                                        *ngFor="let option of hand.options" (click)="setGloveHand($event)">
+                                        <div>
+                                            <img mat-card-image src="./assets/images/{{option.img}}">
+                                        </div>
+
+                                        <div>
+                                            <button mat-raised-button type="button">{{option.valueString}}</button>
+                                        </div>
+                                    </mat-card>
+                                </div> &nbsp;
+                                <div class="vertical-view__button">
+                                    <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                    <button mat-raised-button matStepperNext type="button">Next</button>
+                                </div>
+                            </div>
+
+                        </mat-step>
+                        <!-- Question #5 -->
+                        <mat-step>
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Hand Size</ng-template>
+                            <div *ngFor="let size of (wizardPrompts)?.gloveFit">
+                                <mat-card-title>{{size.label}}</mat-card-title>
+                                <div class="">
+                                    <hand-size-view [hands]="size.options"></hand-size-view>
+                                    &nbsp;
+                                </div>
+                            </div>
+                            &nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button">Next</button>
+                            </div>
+                        </mat-step>
+                        <!-- Question #6 -->
+                        <mat-step>
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Protection</ng-template>
+                            <div *ngFor="let pad of (wizardPrompts)?.gloveProtection">
+                                <mat-card-title>{{pad.label}}</mat-card-title>
+                                <div class="vertical-view_column">
+                                    <div class="vertical-view_row" *ngFor="let option of pad.options">
+                                        <div class="vertical-view__list">
+                                            <button mat-raised-button type="button" color="primary"
+                                                (click)="setGloveOptions(option.valueString, option.value, option.id,'subForm1',pad.formName)">
+                                                {{option.valueString}}
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>&nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button">Next</button>
+                            </div>
+                        </mat-step>
+                        <!-- Question #7 -->
+                        <mat-step>
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Flexibility</ng-template>
+                            <div *ngFor="let flex of (wizardPrompts)?.gloveCondition">
+                                <mat-card-title>{{flex.label}}</mat-card-title>
+                                <div class="vertical-view_column">
+                                    <div class="vertical-view_row" *ngFor="let option of flex.options">
+                                        <div class="vertical-view__list">
+                                           <button mat-raised-button type="button" color="primary"
+                                            (click)="setGloveOptions(option.valueString, option.value, option.id, 'subForm1',flex.formName)">
+                                            {{option.valueString}}
+                                            </button> 
+                                        </div>
+                                        
+                                    </div>
+                                </div>&nbsp;
+                                <div class="vertical-view__button">
+                                    <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                    <button *ngIf="verifySubMenuCompletion('subForm1')" mat-raised-button
+                                        (click)="nextStep()" type="button">Next</button>
+                                </div>
+                            </div>
+                        </mat-step>
+                    </div>
+                </mat-horizontal-stepper>
+            </mat-step>
+
+            <mat-step>
+                <mat-icon icon="thumbs-up"></mat-icon>
+                <ng-template matStepLabel>Design</ng-template>
+                <mat-horizontal-stepper #verticalSubMenu2
+                    (selectionChange)="setMenuStatus(verticalSubMenu2._steps._results,'subForm2')">
+                    <!-- Question #1: Sub 2 -->
+                    <mat-step>
+                        <ng-template matStepLabel>Glove Size</ng-template>
+                        <div *ngFor="let question of (wizardPrompts)?.gloveSize">
+                            <mat-card-title>{{question.label}}</mat-card-title>
+                            <div class="vertical-view_row  ">
+                                <div class="vertical-view__list slider">
+
+                                    <mat-slider [min]="slider.handSliderMin" [max]="slider.handSliderMax"
+                                        [step]="slider.handSliderStep" [thumbLabel]=true
+                                        [vertical]="slider.handSliderVertical" [value]="slider.handSliderValue"
+                                        [tickInterval]="slider.tickInterval" (change)="setGloveSize($event)">
+                                    </mat-slider>
+
+                                </div>
+
+                                <div class="vertical-view__list vertical-flex-grow">
+                                    <!-- <ngx-slick class="carousel" [config]="imgSlideConfig">
+                                        <div ngxSlickItem class="slide" style="width: 250px;"
+                                            *ngFor="let image of filteredImages"> 
+                                            <img mat-card-image [src]="image">
+                                        </div>
+                                    </ngx-slick> -->
+                                    <glove-carousel-view></glove-carousel-view>
+
+                                </div>
+
+                            </div>&nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button">Next</button>
+                            </div>
+                        </div>
+                    </mat-step>
+                    <!-- Question #2: Sub 2 -->
+                    <mat-step>
+                        <mat-icon icon="thumbs-up"></mat-icon>
+                        <ng-template matStepLabel>Customize</ng-template>
+
+                        <div fxLayout="column" *ngFor="let question of (wizardPrompts)?.gloveDesign">
+                            <div fxFlex="10%">
+                            </div>
+                            <div fxFlex="20%">
+
+                                <glove-customizer-vertical-view [showNavigationIndicators]="showNavigationIndicators"
+                                    [showNavigationArrows]="showNavigationArrows" [question]="question">
+                                </glove-customizer-vertical-view>
+
+                            </div>
+                            <div fxFlex=10% fxLayoutAlign="center">
+                            </div>&nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button">Next</button>
+                            </div>
+                        </div>
+                    </mat-step>
+                    <!-- Question #3: Sub 2 -->
+                    <mat-step>
+                        <ng-template matStepLabel>Web</ng-template>
+                        <div *ngFor="let question of (wizardPrompts)?.gloveWeb">
+                            <mat-card-title>{{question.label}}</mat-card-title>
+                            <div>
+                                <web-view [webs]="filteredGloveWebs" [slideConfig]="slideConfig"></web-view>
+                            </div>&nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button (click)="nextStep()" type="button">Next</button>
+                            </div>
+                        </div>
+                    </mat-step>
+                    <!-- Question #4 -->
+                    <mat-step>
+                        <ng-template matStepLabel>Personalize</ng-template>
+
+                        <div fxLayout="column" fxLayoutAlign=" center">
+                            <div *ngFor="let question of (wizardPrompts)?.gloveName">
+                                <mat-card-title>{{question.label}}</mat-card-title>
+                                <div fxLayout="row" fxLayoutAlign="center" *ngFor="let option of question.options">
+                                    <mat-form-field class="">
+                                        <input matInput formControlName="glovePersonalization"
+                                            placeholder="{{option.value}}" maxlength="16" [value]="">
+                                        <button mat-button *ngIf="option.value" matSuffix mat-icon-button
+                                            aria-label="Clear">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                            </div>&nbsp;
+                            <div *ngFor="let font of (wizardPrompts)?.gloveFont">
+                                <div>
+                                    <mat-card-title>{{font.label}}</mat-card-title>
+                                </div>
+                                <mat-radio-group>
+                                    <mat-radio-button fxLayout="column" *ngFor="let option of font.options"
+                                        [name]="option.name" [value]="option.value"
+                                        (click)="setGloveOptions(option.valueString, option.value, option.id, option.name, font.formName)">
+                                        {{option.valueString}}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>&nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button (click)="nextStep()" type="button">Next</button>
+                            </div>
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </mat-step>
+
+            <mat-step>
+                <mat-icon icon="thumbs-up"></mat-icon>
+                <ng-template matStepLabel>Finalize</ng-template>
+                <mat-horizontal-stepper>
+                    <mat-step>
+                        <mat-icon icon="thumbs-up"></mat-icon>
+                        <ng-template matStepLabel></ng-template>
+                            <ul class="finalize-view__list">
+                                <li class="finalize-view"><div class="finalize-view_image"><svg id="vgloveCloneSummary1"></svg></div></li>
+                                <li class="finalize-view"><div class="finalize-view_image"><svg id="vgloveCloneSummary2"></svg></div></li>
+                                <li class="finalize-view"><div class="finalize-view_image"><svg id="vgloveCloneSummary3"></svg></div></li>
+                            </ul>
+                            
+                            <div class="vertical-view__button">
+                                <button class="button button--primary" type="submit" md-raised-button >Add to Cart</button>
+                            </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </mat-step>
+        </mat-vertical-stepper>
+    </form>
+</mat-card>

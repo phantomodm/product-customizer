@@ -1,3 +1,22 @@
-<p>
-  main works!
-</p>
+<div fxLayout="row" fxLayoutAlign="start start">
+  
+  <div [hidden]="(isScreenSmall$ | async)">
+      <horizontal-view [wizardPrompts]="gloveWizardSteps$ | async" [sliderStatus]="gloveSliderSelector"
+      [(emitComponent)]="emitComponent" [(formValues)]="formValues" 
+      [slider]="slider" [(stepIndex)]="currentWizardIndex" 
+      (updateFormValues)="syncForm($event)"
+      [gloveColorsMap]="gloveColorsMap"
+      [gloveWebs]="filteredGloveWebs"></horizontal-view>
+  </div>
+  <div [hidden]="!(isScreenSmall$ | async)">
+      <vertical-view [wizardPrompts]="gloveWizardSteps$ | async" [sliderStatus]="gloveSliderSelector" 
+      [(emitComponent)]="emitComponent" [(formValues)]="formValues" 
+      [slider]="slider" [(stepIndex)]="currentWizardIndex" 
+      (updateFormValues)="syncForm($event)"
+      [customParts]="customPartsValue$ | async"
+      [gloveColorsMap]="gloveColorsMap"
+      [gloveWebs]="filteredGloveWebs"
+      ></vertical-view>
+  </div>
+
+</div>
