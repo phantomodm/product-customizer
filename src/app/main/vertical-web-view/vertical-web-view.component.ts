@@ -20,7 +20,7 @@ export class VerticalWebViewComponent implements OnInit {
 
   public carouselTile: NguCarouselConfig =
   {
-    grid: {xs: 1, sm: 1, md: 2, lg: 2, all: 0},
+    grid: {xs: 1, sm: 2, md: 2, lg: 3, all: 0},
     slide: 2,
     speed: 400,
     animation: 'lazy',

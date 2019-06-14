@@ -196,39 +196,39 @@
                             </div>
                         </div>
                     </mat-step>
+
                     <!-- Question #2: Sub 2 -->
                     <mat-step>
                         <mat-icon icon="thumbs-up"></mat-icon>
                         <ng-template matStepLabel>Customize</ng-template>
 
-                        <div fxLayout="column" *ngFor="let question of (wizardPrompts)?.gloveDesign">
-                            <div fxFlex="10%">
+                        <div *ngFor="let question of (wizardPrompts)?.gloveDesign">
+                            <div class="vertical-view_column">
+                                <div class="vertical-view__list vertical-flex-grow">
+                                    <glove-customizer-vertical-view
+                                        [showNavigationIndicators]="showNavigationIndicators"
+                                        [showNavigationArrows]="showNavigationArrows" [question]="question">
+                                    </glove-customizer-vertical-view>
+                                </div>
                             </div>
-                            <div fxFlex="20%">
 
-                                <glove-customizer-vertical-view [showNavigationIndicators]="showNavigationIndicators"
-                                    [showNavigationArrows]="showNavigationArrows" [question]="question">
-                                </glove-customizer-vertical-view>
-
-                            </div>
-                            <div fxFlex=10% fxLayoutAlign="center">
-                            </div>&nbsp;
                             <div class="vertical-view__button">
                                 <button mat-raised-button matStepperPrevious type="button">Back</button>
                                 <button mat-raised-button matStepperNext type="button">Next</button>
                             </div>
                         </div>
                     </mat-step>
+
                     <!-- Question #3: Sub 2 -->
                     <mat-step>
                         <ng-template matStepLabel>Web</ng-template>
                         <div *ngFor="let question of (wizardPrompts)?.gloveWeb">
                             <mat-card-title>{{question.label}}</mat-card-title>
-                            <div class="vertical-view_row">
+                            <div class="">
                                 <div class=" vertical-view__list vertical-flex-grow">
                                     <vertical-web-view [webs]="filteredGloveWebs"></vertical-web-view>
                                 </div>&nbsp;
-                            </div>                            
+                            </div>
 
                             <div class="vertical-view__button">
                                 <button mat-raised-button matStepperPrevious type="button">Back</button>
@@ -236,6 +236,7 @@
                             </div>
                         </div>
                     </mat-step>
+
                     <!-- Question #4 -->
                     <mat-step>
                         <ng-template matStepLabel>Personalize</ng-template>

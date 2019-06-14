@@ -12,6 +12,21 @@ export class GloveCustomizerVerticalViewComponent implements OnInit {
   @Input() showNavigationArrows;  
   @Input() question;
 
+  public carouselTile =
+  {
+    grid: {xs: 1, sm: 1, md: 1, lg: 1, all: 0},
+    slide: 2,
+    speed: 400,
+    animation: 'lazy',
+    loop: true,
+    point: {
+      visible: true
+    },
+    load: 2,
+    touch: true,
+    easing: 'ease'
+  }
+
   constructor(config: NgbCarouselConfig) {
     config.interval = null;
     config.showNavigationArrows = false;

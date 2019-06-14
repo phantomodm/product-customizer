@@ -1,4 +1,4 @@
-
+<!-- 
 <div >
   <ngx-slick class="carousel " [config]='{"slidesToShow": 1, "slidesToScroll": 1}'>
     <div ngxSlickItem class="slide ">
@@ -12,4 +12,15 @@
     </div>
   </ngx-slick> 
 
-</div>
+</div> -->
+<ngb-carousel>
+    <ng-template ngbSlide>
+        <div><svg id="vOutside" width="400" height="400"></svg></div>
+    </ng-template>
+    <ng-template ngbSlide>
+        <div><svg id="vInside" width="400" height="400"></svg></div>
+    </ng-template>
+    <ng-template ngbSlide>
+        <div><svg id="vSideview" width="400" height="400"></svg></div>
+    </ng-template>  
+  </ngb-carousel>

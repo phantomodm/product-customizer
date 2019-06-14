@@ -1,5 +1,5 @@
-<div class="vertical-web-view_row">
-  <div class="vertical-web-view__list">
+<!-- <div class="vertical-vertical-web-view_row">
+  <div class="vertical-vertical-web-view__list">
     <ngu-carousel [inputs]="carouselTile" [dataSource]="filteredGloveWebs">
       <section> 
       <ngu-tile #verticalWeb *nguCarouselDef="let web;">
@@ -30,4 +30,35 @@
         <button type="button" class="rightRs" NguCarouselNext>Next</button>
       </ngu-carousel>
   </div>  
-</div>
+</div> -->
+
+<div>
+    <ngu-carousel [inputs]="carouselTile" [dataSource]="filteredGloveWebs">
+      <button type="button" class="leftRs" NguCarouselPrev>Previous</button>
+      <button type="button" class="rightRs" NguCarouselNext>Next</button>
+  
+      <ngu-tile #verticalWeb *nguCarouselDef="let web;">
+        <section>
+          <label style="width: 100%" for={{web.id}}>
+              <div class="vertical-web-view_column">
+                  <div class="vertical-web-view__list">
+                      <mat-card-header>
+                        <mat-card-title>{{web.valueString}}</mat-card-title>
+                      </mat-card-header>
+                      &nbsp;
+                  </div>
+                  <div class="vertical-web-view__list">
+                    <img mat-card-image [src]="web.imageURL" >
+                  </div>
+                  <div class="vertical-web-view__list">
+                    <mat-card-actions fxLayoutAlign="center">
+                      <button mat-raised-button color="primary"
+                        (click)="setWebOptions(web.valueString, web.value, web.formName)">Select</button>
+                    </mat-card-actions>
+                  </div>
+              </div>
+          </label>
+        </section>
+      </ngu-tile>
+    </ngu-carousel>
+  </div>
