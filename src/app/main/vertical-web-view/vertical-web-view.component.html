@@ -1,0 +1,33 @@
+<div class="vertical-web-view_row">
+  <div class="vertical-web-view__list">
+    <ngu-carousel [inputs]="carouselTile" [dataSource]="filteredGloveWebs">
+      <section> 
+      <ngu-tile #verticalWeb *nguCarouselDef="let web;">
+          
+            <label for={{web.id}}>
+              <mat-card class="mat-elevation-z10">
+                
+                  <mat-card-header>
+                    <mat-card-title>{{web.valueString}}</mat-card-title>
+                  </mat-card-header>
+                  &nbsp;
+                  <div>
+                    <img mat-card-image src="assets\images\9P_catcher_fastback_back1.png">
+                  </div>
+                  <div>
+                    <mat-card-actions>
+                      <button mat-raised-button color="primary"
+                        (click)="setHandSize(hand.valueString, hand.id, hand.formName)">Select</button>
+                    </mat-card-actions>
+                  </div>
+
+              </mat-card>
+            </label>
+          
+        </ngu-tile>
+        </section>
+        <button type="button" class="leftRs" NguCarouselPrev>Previous</button>
+        <button type="button" class="rightRs" NguCarouselNext>Next</button>
+      </ngu-carousel>
+  </div>  
+</div>

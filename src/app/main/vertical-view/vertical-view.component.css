@@ -35,6 +35,28 @@
 
 }
 
+.finalize-view__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.finalize-view__button button{
+    display: flex;
+    justify-content: center;
+    font-size: 0.75rem;
+    padding: 1em 2em;
+    min-width: 200px;
+    background: #0160b4;
+    border-color: #0160b4;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.2em;
+    border-radius: 3px;
+    line-height: 20px;
+}
+
 .finalize-view__list {
     display: flex;
     justify-content: center;
@@ -75,6 +97,10 @@
     }
 }
 
+.title {
+    padding-left: 8px;
+}
+
 .vertical-container {    
     width: 100%;
 }
@@ -87,9 +113,6 @@
 
 .vertical-view-column_img{
     width: 30%;
-}
-.title {
-    padding-left: 8px;
 }
 
 .vertical-view_row{
@@ -104,6 +127,28 @@
 .vertical-flex-grow{
     flex: 1 0;
 }
+
+.vertical-view__item {
+    display: flex;
+    margin-bottom: 2px;
+}
+
+.vertical-view_row
+.vertical-view__item button{
+    margin: 0.3rem;
+}
+
+.vertical-view__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.vertical-view__button button{
+    margin-right:8px;
+}
+
+
 
 .slider  {
     display: flex;
@@ -124,44 +169,14 @@
         justify-content: center;
     }
 }
-/* .vertical-view__item
-.mat-slider-vertical {
-    flex: 0 8 50px;
-} */
 
-.vertical-view__item {
-    display: flex;
-    margin-bottom: 2px;
-}
-
-/* .vertical-view_row
-.vertical-view__item {
-    flex-direction:row;
-    
-} */
-
-.vertical-view_row
-.vertical-view__item button{
-    margin: 0.3rem;
-}
-
-.vertical-view__button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.vertical-view__button button{
-    margin-right:8px;
-}
-
-.vertical-wizard-slider{
+.vertical-wizard-slider {
     min-width: 450px;
 }
 
-/* .mat-radio-button {
-    margin-bottom: 5px;
-} */
+.vertical-view__web-view {
+    width: 800px;
+}
 
 .mat-slider-vertical{
     min-height: 250px
@@ -171,28 +186,7 @@
     flex-flow: wrap;
 }
 
-.finalize-view__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.finalize-view__button button{
-    display: flex;
-    justify-content: center;
-    font-size: 0.75rem;
-    padding: 1em 2em;
-    min-width: 200px;
-    background: #0160b4;
-    border-color: #0160b4;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: 0.2em;
-    border-radius: 3px;
-    line-height: 20px;
-
-}
 
 /* the slides */
 .slick-slide {

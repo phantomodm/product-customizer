@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { YouthGloveConfirmComponent } from './youth-glove-confirm.component';
+import { VerticalWebViewComponent } from './vertical-web-view.component';
 
-describe('YouthGloveConfirmComponent', () => {
-  let component: YouthGloveConfirmComponent;
-  let fixture: ComponentFixture<YouthGloveConfirmComponent>;
+describe('VerticalWebViewComponent', () => {
+  let component: VerticalWebViewComponent;
+  let fixture: ComponentFixture<VerticalWebViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ YouthGloveConfirmComponent ]
+      declarations: [ VerticalWebViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(YouthGloveConfirmComponent);
+    fixture = TestBed.createComponent(VerticalWebViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

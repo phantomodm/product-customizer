@@ -1,31 +1,26 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
-import { GloveApi } from 'src/app/shared/lib/gloveApi';
-import { takeUntil } from 'rxjs/operators';
-import { GloveDataService } from 'src/app/shared/services/gloveData';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { GloveWebs } from 'src/app/shared/models/nine-positions-models';
+import { MatSnackBar } from '@angular/material';
+import { GloveApi } from 'src/app/shared/lib/gloveApi';
+import { GloveDataService } from 'src/app/shared/services/gloveData';
+import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'web-view',
-  templateUrl: './web-view.component.html',
-  styleUrls: ['./web-view.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'vertical-web-view',
+  templateUrl: './vertical-web-view.component.html',
+  styleUrls: ['./vertical-web-view.component.css']
 })
-export class WebViewComponent implements OnInit, AfterViewInit {
-
+export class VerticalWebViewComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
-
-  @Input() webs;
-  @Input() slideConfig;
-  @Output() updateFormValues = new EventEmitter(); 
-  @ViewChild('carousel') carousel: NguCarousel<any>;
+  @Input('webs') webs ;
+  @ViewChild('verticalWeb') carousel: NguCarousel<any>;
 
   public carouselTile: NguCarouselConfig =
   {
-    grid: {xs: 1, sm: 1, md: 3, lg: 3, all: 0},
+    grid: {xs: 1, sm: 1, md: 2, lg: 2, all: 0},
     slide: 2,
     speed: 400,
     animation: 'lazy',
@@ -43,6 +38,7 @@ export class WebViewComponent implements OnInit, AfterViewInit {
   allGloveWebs: GloveWebs[] = [];
   filteredGloveWebs: GloveWebs[] = [];
   canvasLoaded: boolean = false;
+  updateFormValues: any;
 
   constructor(private snackBar: MatSnackBar, 
               private nysApi:GloveApi,
@@ -80,11 +76,9 @@ export class WebViewComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit(): void { 
-
+  ngAfterViewInit(): void {
     !_.isEqual(this.canvasLoaded,true) ? this.nysApi.initCanvas() : false;    
     this.cdr.detectChanges();
-
   }
 
   webSelected(id: string, value: string){

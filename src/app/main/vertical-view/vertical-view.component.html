@@ -147,12 +147,12 @@
                                 <div class="vertical-view_column">
                                     <div class="vertical-view_row" *ngFor="let option of flex.options">
                                         <div class="vertical-view__list">
-                                           <button mat-raised-button type="button" color="primary"
-                                            (click)="setGloveOptions(option.valueString, option.value, option.id, 'subForm1',flex.formName)">
-                                            {{option.valueString}}
-                                            </button> 
+                                            <button mat-raised-button type="button" color="primary"
+                                                (click)="setGloveOptions(option.valueString, option.value, option.id, 'subForm1',flex.formName)">
+                                                {{option.valueString}}
+                                            </button>
                                         </div>
-                                        
+
                                     </div>
                                 </div>&nbsp;
                                 <div class="vertical-view__button">
@@ -176,26 +176,17 @@
                         <ng-template matStepLabel>Glove Size</ng-template>
                         <div *ngFor="let question of (wizardPrompts)?.gloveSize">
                             <mat-card-title>{{question.label}}</mat-card-title>
-                            <div class="vertical-view_row  ">
+                            <div class="vertical-view_row">
                                 <div class="vertical-view__list slider">
-
                                     <mat-slider [min]="slider.handSliderMin" [max]="slider.handSliderMax"
                                         [step]="slider.handSliderStep" [thumbLabel]=true
                                         [vertical]="slider.handSliderVertical" [value]="slider.handSliderValue"
                                         [tickInterval]="slider.tickInterval" (change)="setGloveSize($event)">
                                     </mat-slider>
-
                                 </div>
 
                                 <div class="vertical-view__list vertical-flex-grow">
-                                    <!-- <ngx-slick class="carousel" [config]="imgSlideConfig">
-                                        <div ngxSlickItem class="slide" style="width: 250px;"
-                                            *ngFor="let image of filteredImages"> 
-                                            <img mat-card-image [src]="image">
-                                        </div>
-                                    </ngx-slick> -->
                                     <glove-carousel-view></glove-carousel-view>
-
                                 </div>
 
                             </div>&nbsp;
@@ -233,9 +224,12 @@
                         <ng-template matStepLabel>Web</ng-template>
                         <div *ngFor="let question of (wizardPrompts)?.gloveWeb">
                             <mat-card-title>{{question.label}}</mat-card-title>
-                            <div>
-                                <web-view [webs]="filteredGloveWebs" [slideConfig]="slideConfig"></web-view>
-                            </div>&nbsp;
+                            <div class="vertical-view_row">
+                                <div class=" vertical-view__list vertical-flex-grow">
+                                    <vertical-web-view [webs]="filteredGloveWebs"></vertical-web-view>
+                                </div>&nbsp;
+                            </div>                            
+
                             <div class="vertical-view__button">
                                 <button mat-raised-button matStepperPrevious type="button">Back</button>
                                 <button mat-raised-button (click)="nextStep()" type="button">Next</button>
@@ -288,15 +282,21 @@
                     <mat-step>
                         <mat-icon icon="thumbs-up"></mat-icon>
                         <ng-template matStepLabel></ng-template>
-                            <ul class="finalize-view__list">
-                                <li class="finalize-view"><div class="finalize-view_image"><svg id="vgloveCloneSummary1"></svg></div></li>
-                                <li class="finalize-view"><div class="finalize-view_image"><svg id="vgloveCloneSummary2"></svg></div></li>
-                                <li class="finalize-view"><div class="finalize-view_image"><svg id="vgloveCloneSummary3"></svg></div></li>
-                            </ul>
-                            
-                            <div class="finalize-view__button">
-                                <button type="submit">Add to Cart</button>
-                            </div>
+                        <ul class="finalize-view__list">
+                            <li class="finalize-view">
+                                <div class="finalize-view_image"><svg id="vgloveCloneSummary1"></svg></div>
+                            </li>
+                            <li class="finalize-view">
+                                <div class="finalize-view_image"><svg id="vgloveCloneSummary2"></svg></div>
+                            </li>
+                            <li class="finalize-view">
+                                <div class="finalize-view_image"><svg id="vgloveCloneSummary3"></svg></div>
+                            </li>
+                        </ul>
+
+                        <div class="finalize-view__button">
+                            <button type="submit">Add to Cart</button>
+                        </div>
                     </mat-step>
                 </mat-horizontal-stepper>
             </mat-step>

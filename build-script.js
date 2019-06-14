@@ -9,5 +9,5 @@ const concat = require('concat');
     ]
 
     await fs.ensureDir('nystix-ui')
-    await concat(files,'app-name.js')
+    await concat(files,'nystix-ui/nystix-customizer.js')
 })

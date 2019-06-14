@@ -1,18 +1,19 @@
-<div >
-  <form (ngSubmit)="onSubmit()" [formGroup]="horizontalForm" data-card-item-overlay >
-    <mat-card [class.mat-elevation-z8]=true >
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="horizontalForm" data-card-item-overlay>
+    <mat-card [class.mat-elevation-z8]=true>
       <mat-horizontal-stepper id="horizontal1" #mainMenu1>
-        <mat-step >
+        <mat-step>
           <mat-icon></mat-icon>
           <ng-template matStepLabel>Setup</ng-template>
-          <mat-horizontal-stepper #horizontalSubMenu1 (selectionChange)="setMenuStatus(horizontalSubMenu1._steps._results,'subForm1')">
+          <mat-horizontal-stepper #horizontalSubMenu1
+            (selectionChange)="setMenuStatus(horizontalSubMenu1._steps._results,'subForm1')">
             <div class="horizontal-container">
-            
-            <!-- Question #1 -->
-            <mat-step>
-              <mat-icon></mat-icon>
-              <ng-template matStepLabel>Glove Type</ng-template>
-              
+
+              <!-- Question #1 -->
+              <mat-step>
+                <mat-icon></mat-icon>
+                <ng-template matStepLabel>Glove Type</ng-template>
+
                 <div class="horizontal-view_column" *ngFor="let sport of (wizardPrompts)?.sportPlayed">
                   <mat-card-title>{{sport.label}}</mat-card-title>
                   <mat-radio-group class="horizontal-view__item" formControlName="{{sport.formName}}">
@@ -25,154 +26,161 @@
                 <div class="horizontal-view__button">
                   <button mat-raised-button matStepperNext type="button">Next</button>
                 </div>
-              
-            </mat-step>
-            
-            <!-- Question #2 -->
-            <mat-step>
-              <mat-icon></mat-icon>
-              <ng-template matStepLabel>Glove Quality</ng-template>
-              <div id="leather-quality" class="horizontal-view_column" *ngFor="let series of (wizardPrompts)?.gloveSeries">
-                <mat-card-title>{{series.label}}</mat-card-title>
-                <mat-radio-group class="horizontal-view__item" formControlName="{{series.formName}}">
-                  <mat-radio-button *ngFor="let option of series.options" [name]="option.name" [value]="option.value"
-                    (click)="setGloveSeries(option.valueString,option.value,option.id,'subForm1')">
-                    {{option.valueString}}
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>&nbsp;
-              <div class="horizontal-view__button">
-                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                <button mat-raised-button matStepperNext type="button">Next</button>
-              </div>
-            </mat-step>
-          
-            <!-- Question #3 -->
-            <mat-step>
-              <mat-icon></mat-icon>
-              <ng-template matStepLabel>Position</ng-template>
-              <div id="glove-position" *ngFor="let position of (wizardPrompts)?.positions">
-                <mat-card-title>{{position.label}}</mat-card-title>
-              </div>
-              <div class="horizontal-view__column horizontal-container" fxLayoutAlign="start center">
-                <div class="svg_positions horizontal-view__item">
-                  <svg id="positions"></svg>
-                </div>  
-                
-              </div>&nbsp;
-              <div class="horizontal-view__button">
-                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                <button mat-raised-button matStepperNext type="button">Next</button>
-              </div>
-            </mat-step>
 
-            <!-- Question #4 -->
-            <mat-step>
-              <mat-icon></mat-icon>
-              <ng-template matStepLabel>Glove Hand</ng-template>
-              <div id="glove-hand"  *ngFor="let hand of (wizardPrompts)?.gloveHand">
-                <mat-card-title>{{hand.label}}</mat-card-title>
-                <div id="hands" class="horizontal-view_row">
-                  <mat-card *ngFor="let option of hand.options" (click)="setGloveHand($event)">
-                    <div>
-                      <img src="./assets/images/{{option.img}}">
-                    </div>
-                    
-                    <div>
-                      <button mat-raised-button type="button">{{option.valueString}}</button>
-                    </div>                    
-                  </mat-card>
-                </div>  
-                &nbsp;
-                <div class="horizontal-view__button">
-                  <button mat-raised-button matStepperPrevious type="button">Back</button>
-                  <button mat-raised-button matStepperNext type="button">Next</button>
-                </div>
-              </div>
-            </mat-step>
+              </mat-step>
 
-            <!-- Question #5 -->
-            <mat-step>
-              <ng-template matStepLabel>Hand Size</ng-template>
-              <div id="hand-size" *ngFor="let size of (wizardPrompts)?.gloveFit">
-                <mat-card-title>{{size.label}}</mat-card-title>
-                <div id="hands" class="horizontal-view_row">
-                  <mat-card *ngFor="let option of size.options">
-                    <div>
-                      <img src="./assets/images/{{option.img}}">
-                    </div>
-                    
-                    <div class="horizontal-view__button" fxLayoutAlign="center">
-                      <button mat-raised-button type="button">{{option.valueString}}</button>
-                    </div>
-                    
-                  </mat-card>
+              <!-- Question #2 -->
+              <mat-step>
+                <mat-icon></mat-icon>
+                <ng-template matStepLabel>Glove Quality</ng-template>
+                <div id="leather-quality" class="horizontal-view_column"
+                  *ngFor="let series of (wizardPrompts)?.gloveSeries">
+                  <mat-card-title>{{series.label}}</mat-card-title>
+                  <mat-radio-group class="horizontal-view__item" formControlName="{{series.formName}}">
+                    <mat-radio-button *ngFor="let option of series.options" [name]="option.name" [value]="option.value"
+                      (click)="setGloveSeries(option.valueString,option.value,option.id,'subForm1')">
+                      {{option.valueString}}
+                    </mat-radio-button>
+                  </mat-radio-group>
                 </div>&nbsp;
                 <div class="horizontal-view__button">
                   <button mat-raised-button matStepperPrevious type="button">Back</button>
                   <button mat-raised-button matStepperNext type="button">Next</button>
                 </div>
-              </div>
-            </mat-step>
+              </mat-step>
 
-            <!-- Question #6 -->
-            <mat-step>
-              <ng-template matStepLabel>Protection</ng-template>
-              <div id="glove-padding" class="horizontal-view_column" *ngFor="let question of (wizardPrompts)?.gloveProtection">
-                <mat-card-title>{{question.label}}</mat-card-title>
-                <mat-radio-group class="horizontal-view__item" formControlName="{{question.formName}}">
-                  <mat-radio-button *ngFor="let option of question.options" [name]="option.name" [value]="option.value"
-                    (click)="setGloveSeries(option.valueString,option.value,option.id,'subForm1')">
-                    {{option.valueString}}
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>&nbsp;
-              <div class="horizontal-view__button">
-                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                <button mat-raised-button matStepperNext type="button">Next</button>
-              </div>
-            </mat-step>
+              <!-- Question #3 -->
+              <mat-step>
+                <mat-icon></mat-icon>
+                <ng-template matStepLabel>Position</ng-template>
+                <div id="glove-position" *ngFor="let position of (wizardPrompts)?.positions">
+                  <mat-card-title>{{position.label}}</mat-card-title>
+                </div>
+                <div class="horizontal-view__column horizontal-container" fxLayoutAlign="start center">
+                  <div class="svg_positions horizontal-view__item">
+                    <svg id="positions"></svg>
+                  </div>
 
-            <!-- Question #7 -->
-            <mat-step>
-              <ng-template matStepLabel>Flexibility</ng-template>
-              <div id="glove-condition" class="horizontal-view_column" *ngFor="let question of (wizardPrompts)?.gloveCondition">
-                <mat-card-title>{{question.label}}</mat-card-title>
-                <mat-radio-group class="horizontal-view__item" formControlName="{{question.formName}}">
-                  <mat-radio-button *ngFor="let option of question.options" [name]="option.name" [value]="option.value"
-                  (click)="setGloveOptions('subForm1', question.formName, option.id)" >
-                    
-                    {{option.valueString}}
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>&nbsp;
-              <div class="horizontal-view__button">
-                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                <button *ngIf="verifySubMenuCompletion('subForm1')" mat-raised-button (click)="nextStep()" type="button">Next</button>
-              </div>
-            </mat-step>
-          </div>        
+                </div>&nbsp;
+                <div class="horizontal-view__button">
+                  <button mat-raised-button matStepperPrevious type="button">Back</button>
+                  <button mat-raised-button matStepperNext type="button">Next</button>
+                </div>
+              </mat-step>
+
+              <!-- Question #4 -->
+              <mat-step>
+                <mat-icon></mat-icon>
+                <ng-template matStepLabel>Glove Hand</ng-template>
+                <div id="glove-hand" *ngFor="let hand of (wizardPrompts)?.gloveHand">
+                  <mat-card-title>{{hand.label}}</mat-card-title>
+                  <div id="hands" class="horizontal-view_row">
+                    <mat-card *ngFor="let option of hand.options" (click)="setGloveHand($event)">
+                      <div>
+                        <img src="./assets/images/{{option.img}}">
+                      </div>
+
+                      <div>
+                        <button mat-raised-button type="button">{{option.valueString}}</button>
+                      </div>
+                    </mat-card>
+                  </div>
+                  &nbsp;
+                  <div class="horizontal-view__button">
+                    <button mat-raised-button matStepperPrevious type="button">Back</button>
+                    <button mat-raised-button matStepperNext type="button">Next</button>
+                  </div>
+                </div>
+              </mat-step>
+
+              <!-- Question #5 -->
+              <mat-step>
+                <ng-template matStepLabel>Hand Size</ng-template>
+                <div id="hand-size" *ngFor="let size of (wizardPrompts)?.gloveFit">
+                  <mat-card-title>{{size.label}}</mat-card-title>
+                  <div id="hands" class="horizontal-view_row">
+                    <mat-card *ngFor="let option of size.options">
+                      <div>
+                        <img src="./assets/images/{{option.img}}">
+                      </div>
+
+                      <div class="horizontal-view__button" fxLayoutAlign="center">
+                        <button mat-raised-button type="button">{{option.valueString}}</button>
+                      </div>
+
+                    </mat-card>
+                  </div>&nbsp;
+                  <div class="horizontal-view__button">
+                    <button mat-raised-button matStepperPrevious type="button">Back</button>
+                    <button mat-raised-button matStepperNext type="button">Next</button>
+                  </div>
+                </div>
+              </mat-step>
+
+              <!-- Question #6 -->
+              <mat-step>
+                <ng-template matStepLabel>Protection</ng-template>
+                <div id="glove-padding" class="horizontal-view_column"
+                  *ngFor="let question of (wizardPrompts)?.gloveProtection">
+                  <mat-card-title>{{question.label}}</mat-card-title>
+                  <mat-radio-group class="horizontal-view__item" formControlName="{{question.formName}}">
+                    <mat-radio-button *ngFor="let option of question.options" [name]="option.name"
+                      [value]="option.value"
+                      (click)="setGloveSeries(option.valueString,option.value,option.id,'subForm1')">
+                      {{option.valueString}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>&nbsp;
+                <div class="horizontal-view__button">
+                  <button mat-raised-button matStepperPrevious type="button">Back</button>
+                  <button mat-raised-button matStepperNext type="button">Next</button>
+                </div>
+              </mat-step>
+
+              <!-- Question #7 -->
+              <mat-step>
+                <ng-template matStepLabel>Flexibility</ng-template>
+                <div id="glove-condition" class="horizontal-view_column"
+                  *ngFor="let question of (wizardPrompts)?.gloveCondition">
+                  <mat-card-title>{{question.label}}</mat-card-title>
+                  <mat-radio-group class="horizontal-view__item" formControlName="{{question.formName}}">
+                    <mat-radio-button *ngFor="let option of question.options" [name]="option.name"
+                      [value]="option.value" (click)="setGloveOptions('subForm1', question.formName, option.id)">
+
+                      {{option.valueString}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>&nbsp;
+                <div class="horizontal-view__button">
+                  <button mat-raised-button matStepperPrevious type="button">Back</button>
+                  <button *ngIf="verifySubMenuCompletion('subForm1')" mat-raised-button (click)="nextStep()"
+                    type="button">Next</button>
+                </div>
+              </mat-step>
+            </div>
           </mat-horizontal-stepper>
         </mat-step>
 
         <mat-step>
           <mat-icon></mat-icon>
           <ng-template matStepLabel>Design</ng-template>
-          <mat-horizontal-stepper #horizontalSubMenu2 (selectionChange)="setMenuStatus(horizontalSubMenu2._steps._results,'subForm2')">
+          <mat-horizontal-stepper #horizontalSubMenu2
+            (selectionChange)="setMenuStatus(horizontalSubMenu2._steps._results,'subForm2')">
             <!-- Question #1 -->
             <mat-step>
               <ng-template matStepLabel>Glove Size</ng-template>
-              <div id="glove-size"  *ngFor="let question of (wizardPrompts)?.gloveSize">
+              <div id="glove-size" *ngFor="let question of (wizardPrompts)?.gloveSize">
                 <mat-card-title>{{question.label}}</mat-card-title>
                 <div class="horizontal-view_row">
                   <div class="horizontal-view__item">
-                    <mat-slider #sliderOne [min]="slider.handSliderMin" [max]="slider.handSliderMax" [step]="slider.handSliderStep"
-                        [thumbLabel]=true [vertical]="slider.handSliderVertical" [value]="slider.handSliderValue"
-                        [tickInterval]="slider.tickInterval" (change)="setGloveSize($event, sliderOne)" >
-                      </mat-slider>
+                    <mat-slider #sliderOne [min]="slider.handSliderMin" [max]="slider.handSliderMax"
+                      [step]="slider.handSliderStep" [thumbLabel]=true [vertical]="slider.handSliderVertical"
+                      [value]="slider.handSliderValue" [tickInterval]="slider.tickInterval"
+                      (change)="setGloveSize($event, sliderOne)">
+                    </mat-slider>
                   </div>
-                  <div class="horizontal-view__item" >
-                      <glove-carousel-view></glove-carousel-view>
+                  <div class="horizontal-view__item">
+                    <glove-carousel-view></glove-carousel-view>
                     <!-- <ngx-slick class="carousel">
                       <div ngxSlickItem *ngFor="let image of filteredImages | async">
                         <p>{{image}}</p>
@@ -197,26 +205,29 @@
                 <div id="glove-customizer" class="horizontal-view_column">
 
                   <div class="horizontal-view__item">
-                    <glove-customizer-horizontal-view [slideConfig]="slideConfig"  [showNavigationIndicators]="showNavigationIndicators"
-                      [showNavigationArrows]="showNavigationArrows" [question]="question"></glove-customizer-horizontal-view>
+                    <glove-customizer-horizontal-view [slideConfig]="slideConfig"
+                      [showNavigationIndicators]="showNavigationIndicators"
+                      [showNavigationArrows]="showNavigationArrows" [question]="question">
+                    </glove-customizer-horizontal-view>
                     <!-- <glove-customizer-horizontal-view></glove-customizer-horizontal-view> -->
                   </div>
-                  
+
                   <div class="horizontal-view__item">
                     <div class="horizontal-wizard-slider">
                       <div *ngIf="sliderStatus">
-                        <ng5-slider #horizontalSlider class="vertical-wizard-slider" [(value)]="value" [options]="gloveSlider"
-                          (userChangeStart)="onFinishSliderOne(horizontalSlider.value)" (userChange)="onFinishSliderOne(horizontalSlider.value)"></ng5-slider>
+                        <ng5-slider #horizontalSlider class="vertical-wizard-slider" [(value)]="value"
+                          [options]="gloveSlider" (userChangeStart)="onFinishSliderOne(horizontalSlider.value)"
+                          (userChange)="onFinishSliderOne(horizontalSlider.value)"></ng5-slider>
                       </div>
                       <div *ngIf="!sliderStatus">
                         <ng5-slider #horizontalEmbSlider class="vertical-wizard-slider" [(value)]="valueEmbroidery"
                           [options]="embroiderySlider" (userChangeStart)="onFinishSliderOne(horizontalEmbSlider.value)"
                           (userChange)="onFinishSliderTwo(horizontalEmbSlider.value)"></ng5-slider>
                       </div>
-                    </div>                  
+                    </div>
                   </div>&nbsp;
                 </div>
-                
+
                 <!-- <div fxLayout="row wrap"  fxLayoutAlign="center" fxLayoutGap="4px">
                   <div id="fab-button" *ngFor="let color of filteredDataSlider">
                     <div [ngStyle]="{'background-color': color.hex }"></div>
@@ -233,17 +244,20 @@
             <!-- Question #3 -->
             <mat-step>
               <ng-template matStepLabel>Choose Web</ng-template>
-              <div *ngFor="let question of (wizardPrompts)?.gloveWeb">                
+              <div *ngFor="let question of (wizardPrompts)?.gloveWeb">
                 <mat-card-title>{{question.label}}</mat-card-title>
-              <div id="glove-webs" class="horizontal-view__web_container">
-                <web-view [webs]="filteredGloveWebs"></web-view>
-              </div>                
+                
+                <div class="horizontal-view_column" >
 
-              <div class="horizontal-view__button">
-                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                <button mat-raised-button matStepperNext type="button">Next</button>
-              </div>
-              
+                    <web-view class="horizontal-view__web-view" [webs]="filteredGloveWebs"></web-view>
+ 
+                </div>
+
+                <div class="horizontal-view__button">
+                  <button mat-raised-button matStepperPrevious type="button">Back</button>
+                  <button mat-raised-button matStepperNext type="button">Next</button>
+                </div>
+
               </div>
             </mat-step>
 
@@ -255,8 +269,8 @@
                   <mat-card-title>{{question.label}}</mat-card-title>
                   <div id="glove-branding" class="horizontal-view__item" *ngFor="let option of question.options">
                     <mat-form-field>
-                      <input matInput formControlName="glovePersonalization" placeholder="{{option.value}}" maxlength="16"
-                        [value]="">
+                      <input matInput formControlName="glovePersonalization" placeholder="{{option.value}}"
+                        maxlength="16" [value]="">
                       <button mat-button *ngIf="option.value" matSuffix mat-icon-button aria-label="Clear">
                         <mat-icon>close</mat-icon>
                       </button>
@@ -268,16 +282,16 @@
                     <mat-card-title>{{font.label}}</mat-card-title>
                   </div>
                   <mat-radio-group class="horizontal-view__item">
-                    <mat-radio-button *ngFor="let option of font.options" [name]="option.name"
-                      [value]="option.value" (click)="setGloveOptions(option.valueString,option.value,option.name,font.formName)">
+                    <mat-radio-button *ngFor="let option of font.options" [name]="option.name" [value]="option.value"
+                      (click)="setGloveOptions(option.valueString,option.value,option.name,font.formName)">
                       {{option.valueString}}
                     </mat-radio-button>
                   </mat-radio-group>
                 </div>&nbsp;
                 <div class="horizontal-view__button">
-                    <button mat-raised-button matStepperPrevious type="button">Back</button>
-                    <button mat-raised-button (click)="nextStep()" type="button">Next</button>
-                  </div>
+                  <button mat-raised-button matStepperPrevious type="button">Back</button>
+                  <button mat-raised-button (click)="nextStep()" type="button">Next</button>
+                </div>
               </div>
             </mat-step>
 
@@ -290,13 +304,19 @@
             <ng-template matStepLabel>Finalize</ng-template>
             <mat-step>
               <ul class="finalize-view__list">
-                <li class="finalize-view"><div class="finalize-view_image"><svg id="gloveCloneSummary1"></svg></div></li>
-                <li class="finalize-view"><div class="finalize-view_image"><svg id="gloveCloneSummary2"></svg></div></li>
-                <li class="finalize-view"><div class="finalize-view_image"><svg id="gloveCloneSummary3"></svg></div></li>
+                <li class="finalize-view">
+                  <div class="finalize-view_image"><svg id="gloveCloneSummary1"></svg></div>
+                </li>
+                <li class="finalize-view">
+                  <div class="finalize-view_image"><svg id="gloveCloneSummary2"></svg></div>
+                </li>
+                <li class="finalize-view">
+                  <div class="finalize-view_image"><svg id="gloveCloneSummary3"></svg></div>
+                </li>
               </ul>
-              
+
               <div class="finalize-view__button">
-                  <button type="submit" >Add to Cart</button>
+                <button type="submit">Add to Cart</button>
               </div>
             </mat-step>
 
