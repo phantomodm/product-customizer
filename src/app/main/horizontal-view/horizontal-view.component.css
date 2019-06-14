@@ -50,6 +50,10 @@
     align-items: center;
 }
 
+.horizontal-view__web-view {
+    width: 800px;
+}
+
 .horizontal-view_row{
     display: flex;
     flex-direction: row;
@@ -134,9 +138,8 @@
 }
 
 .horizontal-view__web_container{
-    height: 400px; 
     display:flex; 
-    justify-content: center;
+    
 }
 /* 
 .horizontal-view{

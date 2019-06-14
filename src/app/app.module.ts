@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, Injector } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule} from '@angular/fire/database';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatDialogModule,
   MatIconModule,
@@ -36,8 +37,8 @@ import { WebViewComponent } from './main/web-view/web-view.component';
 import { GloveCustomizerHorizontalViewComponent } from './main/glove-customizer-horizontal-view/glove-customizer-horizontal-view.component';
 import { GloveCustomizerVerticalViewComponent } from './main/glove-customizer-vertical-view/glove-customizer-vertical-view.component';
 import { ImageCarouselComponent } from './main/image-carousel/image-carousel.component';
-import { YouthGloveConfirmComponent } from './main/youth-glove-confirm/youth-glove-confirm.component';
 import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-carousel-view.component';
+import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 
 
 const firebase = {
@@ -66,8 +67,8 @@ const routes: Routes = [
     GloveCustomizerHorizontalViewComponent,
     GloveCustomizerVerticalViewComponent,
     ImageCarouselComponent,
-    YouthGloveConfirmComponent,
-    GloveCarouselViewComponent
+    GloveCarouselViewComponent,
+    VerticalWebViewComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +78,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
+    FlexLayoutModule,
     MatDialogModule,
     MatIconModule,
     MatInputModule,
@@ -97,11 +99,12 @@ const routes: Routes = [
     NgxWebstorageModule.forRoot()
   ],
   entryComponents:[MainComponent],
-  providers: [],
-  bootstrap: [AppComponent]
+  
 })
 export class AppModule {
-  constructor(private injector:Injector){
+  constructor(private injector:Injector){}
+
+  ngDoBootstrap(){
     const el = createCustomElement(MainComponent,{injector: this.injector})
     customElements.define('glove-customizer', el)
   }

@@ -6,7 +6,7 @@ import { GloveDataService } from '../shared/services/gloveData';
 import { MatDialog } from '@angular/material';
 import { GloveApi } from '../shared/lib/gloveApi';
 import * as _ from 'lodash';
-import { YouthGloveConfirmComponent } from './youth-glove-confirm/youth-glove-confirm.component';
+
 
 @Component({
   selector: 'app-main',
@@ -63,11 +63,11 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     const screenSizeChanged$ = source$.pipe(map(checkScreenSize));
     this.isScreenSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
   
-    this.handSizeConfirmationDialog = this.nysApi.notifyObservables$.pipe(takeUntil(this.unsubscribe$)).subscribe((res)=>{
-      if (res.hasOwnProperty('option') && res.option === 'Hand Size'){
-        this.openDialog();
-      } 
-    })
+    // this.handSizeConfirmationDialog = this.nysApi.notifyObservables$.pipe(takeUntil(this.unsubscribe$)).subscribe((res)=>{
+    //   if (res.hasOwnProperty('option') && res.option === 'Hand Size'){
+    //     this.openDialog();
+    //   } 
+    // })
   }
 
   ngOnInit() {
@@ -114,16 +114,16 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     }    
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(YouthGloveConfirmComponent,{
-      width: '250px',
-      data: {gloveType: this.nysApi.customGloveData.isYouthGlove}
-    })
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(YouthGloveConfirmComponent,{
+  //     width: '250px',
+  //     data: {gloveType: this.nysApi.customGloveData.isYouthGlove}
+  //   })
 
-    dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe$)).subscribe(result => {
-      console.log("dialog is closed")
-      this.nysApi.customGloveData.isYouthGlove = result;
-    })
-  }
+  //   dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe$)).subscribe(result => {
+  //     console.log("dialog is closed")
+  //     this.nysApi.customGloveData.isYouthGlove = result;
+  //   })
+  // }
 
 }

@@ -35,7 +35,6 @@ export class GloveCarouselViewComponent implements OnInit {
       if(!res){
         return false;
       } else {
-        console.log(res)
         this.filteredGloveImages = res;
         this.cdr.detectChanges();
       }

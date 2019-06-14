@@ -22,17 +22,17 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+            "styles": [ 
               "src/assets/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
+              "src/assets/css/vendor/slick/slick-theme.css",
               "src/assets/css/vendor/slick/slick.css"
             ],
             "scripts": [
-             
-              {
-                "input": "node_modules/document-register-element/build/document-register-element.js"
-              }
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/vendor/slick.js"
+              
             ],
             "es5BrowserSupport": true
           },
