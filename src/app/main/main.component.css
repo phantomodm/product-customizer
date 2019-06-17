@@ -1,0 +1,30 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+}
+
+.nine-position-product-details,
+.nine-position-image-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.nine-position-image-container,
+.nine-position-product-details {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 992px){
+
+    .nine-position-image-container,
+    .nine-position-product-details {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+}

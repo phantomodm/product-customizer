@@ -1,0 +1,53 @@
+<div>
+  <div style="display: flex; flex-direction: column; justify-content:space-around">
+    <h2>Quick Order Glove</h2>
+    <span>PRICE</span>
+    <h4>$230</h4>
+
+
+    <div *ngFor="let series of gloveData.gloveSeries">
+      <p>{{series.label}}</p>
+      <div class="form-group">
+        <label for="series.id">{{series.label}}</label>
+        <select class="form-control" name="glove_series" id="series.id">
+          <option *ngFor="let option of series.options" value="option.value">{{option.html}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngFor="let series of gloveData.gloveBody">
+      <div class="form-group">
+        <label for="series.id">{{series.label}}</label>
+        <select class="form-control" name="glove_body" id="series.id">
+          <option *ngFor="let option of series.options" value="option.value">{{option.color}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngFor="let accent of gloveData.gloveAccent">
+      <div class="form-group">
+        <label for="accent.id">{{accent.label}}</label>
+        <select class="form-control" name="glove_accent" id="accent.id">
+          <option *ngFor="let option of accent.options" value="option.value">{{option.color}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngFor="let trim of gloveData.gloveTrim">
+      <div class="form-group">
+        <label for="trim.id">{{trim.label}}</label>
+        <select class="form-control" name="glove_trim" id="trim.id">
+          <option *ngFor="let option of trim.options" value="option.value">{{option.color}}</option>
+        </select>
+      </div>
+    </div>
+    <div *ngFor="let logo of gloveData.gloveLogo">
+      <div class="form-group">
+        <label for="logo.id">{{logo.label}}</label>
+        <select class="form-control" name="glove_logo" id="logo.id">
+        <option *ngFor="let option of logo.options" value="option.value">{{option.color}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
