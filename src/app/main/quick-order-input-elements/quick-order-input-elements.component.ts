@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { gloveData } from '../../shared/data/data'
+
 
 @Component({
   selector: 'quick-order-input-elements',
@@ -15,7 +15,7 @@ export class QuickOrderInputElementsComponent implements OnInit {
         "options":[{"html": "Rise", "id": "wccf_product_field_glove_series", "name": "attribute[1195]", "value": "rise_series"}, {"html": "Elite", "id": "wccf_product_field_glove_series", "name": "attribute[1195]", "value": "elite_japanese_steer"}, {"html": "Elite Kip", "id": "wccf_product_field_glove_series", "name": "attribute[1195]", "value": "elite_kip"}]
     }],
     "gloveBody":[{
-        "label": "Glove Accent Color",
+        "label": "Glove Body Color",
         "id":"wccf_product_field_glove_body_color",
         "options":[{"color": "Black", "hex": "#000000", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "black"}, {"color": "Mocha", "hex": "#863615", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "mocha"}, {"color": "Navy Blue", "hex": "#000080", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "navy_blue"}, {"color": "Royal Blue", "hex": "#4169e1", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "royal_blue"}, {"color": "Red", "hex": "#e60000", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "red"}, {"color": "Orange", "hex": "#f95a01", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "orange"}, {"color": "Camel", "hex": "#ffe87a", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "camel"}, {"color": "Tan", "hex": "#ba5900", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "tan"}, {"color": "Lemon Yellow", "hex": "#edef53", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "lemon_yellow"}, {"color": "White", "hex": "#ffffff", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "white"}, {"color": "Grey", "hex": "#606060", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "grey"}, {"color": "Yellow", "hex": "#fbdb01", "html": "body", "id": "wccf_product_field_glove_body_color_qo", "name": "attribute[1255]", "value": "yellow"}]
     }],
@@ -40,6 +40,10 @@ export class QuickOrderInputElementsComponent implements OnInit {
 
   ngOnInit() {
    
+  }
+
+  test(event){
+    console.log(event)
   }
 
 }

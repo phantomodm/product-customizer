@@ -18,7 +18,12 @@
     padding-right: 15px;
     padding-left: 15px;
 }
-
+@media (min-width:576px){
+    .nine-position-image-container,
+    .nine-position-product-details {
+        flex: 0.3 0;
+    }
+}
 @media (min-width: 992px){
 
     .nine-position-image-container,

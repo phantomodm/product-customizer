@@ -4,7 +4,8 @@ import * as _ from 'lodash';
 import { TweenLite, Power2 } from 'gsap';
 import * as Snap from 'snapsvg-cjs';
 import {interval, timer} from 'rxjs';
-import { takeWhile, takeUntil, skipWhile, takeLast, take, distinctUntilChanged, tap } from 'rxjs/operators';
+import { takeWhile, take} from 'rxjs/operators';
+import { gloveColor } from '../data/data';
 
 declare var $: any;
 
@@ -37,7 +38,7 @@ export class GloveApiService {
 
   constructor(private customData:GloveDataService) { 
     
-    this.colors = [];
+    this.colors = gloveColor;
 
     console.log('running...')
 
@@ -129,12 +130,15 @@ export class GloveApiService {
     }
 
     const fill = _.random(0, 11);
+    console.log(fill)
+
     setTimeout(() => {      
       _.forEach(this.optionTitle, (d) => {          
         switch (d) {          
           case "body":
           case "trim":
           case "accent":
+            console.log(this.colors[fill])
             this.applyFillToCanvas(d, this.colors[fill], this.data.imgBase);
             break;
           case "logo":
