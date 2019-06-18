@@ -162,7 +162,7 @@ export class GloveApiService {
     return colorCode;
   }
 
-  getHexIdFromDomSelection(event) {
+  getHexIdFromDomSelection(event,fill) {
     let self = this;
     let attrName = event.target.name;
     //console.log(attrName)
@@ -183,9 +183,11 @@ export class GloveApiService {
         default:
           if (value.name == attrName && value.value == attrValue) {
             const fill = value.hex;
-            const html = value.html;
+            const html = value.id;
             self.applyFillToCanvas(html, fill, imgBase);
           }
+
+          self.applyFillToCanvas("body",fill,imgBase)
       }
 
     })

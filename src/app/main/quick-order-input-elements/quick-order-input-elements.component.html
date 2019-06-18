@@ -15,20 +15,22 @@
     </div>
 
     <div *ngFor="let series of gloveData.gloveBody">
-      <div class="form-group">
+      <div class="form-group radio-input-container">
         <label for="series.id">{{series.label}}</label>
         <select class="form-control" name="glove_body" id="series.id" (change)="test($event)">
           <option *ngFor="let option of series.options" value="{{option.value}}">{{option.color}}</option>
         </select>
+        <div id="body" class="radio-buttons" *ngFor="let option of series.options" [style.background]="option.hex" type="button" (click)="applyFill($event,option.hex)"></div>
       </div>
     </div>
 
     <div *ngFor="let accent of gloveData.gloveAccent">
-      <div class="form-group">
+      <div class="form-group radio-input-container">
         <label for="accent.id">{{accent.label}}</label>
         <select class="form-control" name="glove_accent" id="accent.id" (change)="test($event)">
           <option *ngFor="let option of accent.options" value="{{option.value}}">{{option.color}}</option>
         </select>
+        <div id="accents" class="radio-buttons" *ngFor="let option of accent.options" [style.background]="option.hex" type="button" (click)="applyFill($event)"></div>
       </div>
     </div>
 

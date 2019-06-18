@@ -1,0 +1,13 @@
+.radio-input-container {
+    display: flex;
+    flex-flow:wrap;
+
+}
+
+.radio-buttons {
+    height: 25px;
+    width: 25px;
+    display: flex;
+    margin:2px;
+}
+

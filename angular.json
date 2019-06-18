@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-webcomponent-base",
+            "outputPath": "dist/ng-product-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -29,6 +29,8 @@
             ],
             "scripts": [
               "src/assets/js/jquery/jquery.min.js",
+              "./node_modules/gsap/umd/TweenMax.js",
+              "./node_modules/gsap/umd/ScrollToPlugin.js",
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js"
               }

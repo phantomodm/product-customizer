@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GloveApiService } from 'src/app/shared/services/glove-api.service';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class QuickOrderInputElementsComponent implements OnInit {
     }]
 }
 
-  constructor() { }
+  constructor(private gloveApi:GloveApiService) { }
 
   ngOnInit() {
    
@@ -44,6 +45,11 @@ export class QuickOrderInputElementsComponent implements OnInit {
 
   test(event){
     console.log(event)
+  }
+
+  applyFill(event,fill){
+    console.log(event)
+    this.gloveApi.getHexIdFromDomSelection(event,fill)
   }
 
 }
