@@ -5,19 +5,25 @@
     <h4>$230</h4>
 
 
-    <div *ngFor="let series of gloveData.gloveSeries">
+    <div *ngFor="let data of gloveData">
       <div class="form-group">
-        <label for="series.id">{{series.label}}</label>
-        <select class="form-control" name="glove_series" id="series.id" (change)="test($event)">
-          <option  *ngFor="let option of series.options" value="{{option.value}}">{{option.html}}</option>
-        </select>
+        <label for="{{data.elementId}}">{{data.elementLabel}}</label>
+        <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
+          <div id="body" class="radio-buttons" *ngFor="let option of data.elementOptions" [style.background]="option.hex"
+            type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" ></div>
+        </div>
+        <div *ngIf="data.elementType != 'radio'" class="form-group">
+          <select class="form-control" name="glove_series" id="{{data.elementId}}" (change)="test($event)">
+            <option *ngFor="let option of data.elementOptions" value="{{option.value}}" >{{option.innerHtml}}</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <div *ngFor="let series of gloveData.gloveBody">
+    <!-- <div *ngFor="let series of gloveData.gloveBody">
       <div class="form-group radio-input-container">
-        <label for="series.id">{{series.label}}</label>
-        <select class="form-control" name="glove_body" id="series.id" (change)="test($event)">
+        <label for="series.elementId">{{series.label}}</label>
+        <select class="form-control" name="glove_body" id="series.elementId" (change)="test($event)">
           <option *ngFor="let option of series.options" value="{{option.value}}">{{option.color}}</option>
         </select>
         <div id="body" class="radio-buttons" *ngFor="let option of series.options" [style.background]="option.hex" type="button" (click)="applyFill($event,option.hex)"></div>
@@ -49,6 +55,6 @@
         <option *ngFor="let option of logo.options" value="{{option.value}}">{{option.color}}</option>
         </select>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

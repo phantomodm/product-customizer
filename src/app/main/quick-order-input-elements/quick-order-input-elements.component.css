@@ -11,3 +11,11 @@
     margin:2px;
 }
 
+.qo-tooltip-class .tooltip-inner {
+    background-color: purple;
+}
+
+.qo-tooltip-class .arrow::before {
+    border-top-color: purple;
+}
+
