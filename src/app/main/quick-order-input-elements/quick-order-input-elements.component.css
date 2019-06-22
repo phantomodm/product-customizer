@@ -11,6 +11,20 @@
     margin:2px;
 }
 
+.web-buttons{
+    width: 3.125rem;
+    height:3.125rem;
+    margin:2px;
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.web-buttons img {
+    height: 100%;
+    padding: 2px;
+}
+
 .qo-tooltip-class .tooltip-inner {
     background-color: purple;
 }

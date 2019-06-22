@@ -94,7 +94,6 @@ export class GloveApiService {
   
 
   initCanvas() {
-    console.log("canvas running")
 
     this.svgMain = Snap("#svgMain");
     this.svgInside = Snap("#svgInside");
@@ -130,8 +129,6 @@ export class GloveApiService {
     }
 
     const fill = _.random(0, 11);
-    console.log(fill)
-
     setTimeout(() => {      
       _.forEach(this.optionTitle, (d) => {          
         switch (d) {          
@@ -327,7 +324,6 @@ export class GloveApiService {
             let element = (svgElement + f);
             switch (el) {
               case "svgMain":
-                console.log(element)
                 if ($(element).length != 0) {
                   if (_.includes(element, "stch")) {
                     self.svgMain.select(element).attr({ "fill": 'none', stroke: fillHex });

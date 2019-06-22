@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { GloveApiService } from 'src/app/shared/services/glove-api.service';
 import { qoData } from 'src/app/shared/data/data';
+import { DomSanitizer } from '@angular/platform-browser'
 
 
 @Component({
   selector: 'quick-order-input-elements',
   templateUrl: './quick-order-input-elements.component.html',
-  styleUrls: ['./quick-order-input-elements.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./quick-order-input-elements.component.css']
 })
 export class QuickOrderInputElementsComponent implements OnInit {
 
@@ -41,15 +41,23 @@ export class QuickOrderInputElementsComponent implements OnInit {
 
   gloveData;
 
-  constructor(private gloveApi:GloveApiService) { }
+  constructor(private gloveApi:GloveApiService,private _sanitizer:DomSanitizer) { }
 
-  ngOnInit() {
-   this.gloveData = qoData;
-   console.log(this.gloveData)
+  public sanitizeImage(image: string) {
+    console.log(image)
+    return this._sanitizer.bypassSecurityTrustUrl(`url(${image})`);
   }
 
-  test(event){
-    console.log(event)
+  
+  ngOnInit() {
+   this.gloveData = qoData;
+  }
+
+  test(event:string){
+    if(event !== "gloveWeb"){
+      return false
+    }  
+    
   }
 
   applyFill(event,fill){

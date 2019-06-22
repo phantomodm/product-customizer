@@ -6,18 +6,49 @@
 
 
     <div *ngFor="let data of gloveData">
-      <div class="form-group">
+       <div class="form-group">
         <label for="{{data.elementId}}">{{data.elementLabel}}</label>
-        <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
-          <div id="body" class="radio-buttons" *ngFor="let option of data.elementOptions" [style.background]="option.hex"
-            type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" ></div>
+       <!-- <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
+          <div *ngIf="data.id != gloveWeb" id="body" class="radio-buttons" *ngFor="let option of data.elementOptions" [style.background]="option.hex"
+            type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" >
+          </div>
         </div>
+
+
         <div *ngIf="data.elementType != 'radio'" class="form-group">
           <select class="form-control" name="glove_series" id="{{data.elementId}}" (change)="test($event)">
             <option *ngFor="let option of data.elementOptions" value="{{option.value}}" >{{option.innerHtml}}</option>
           </select>
         </div>
-      </div>
+      </div> -->
+      
+      <ng-container [ngSwitch]="test(data.id)">
+        <ng-container *ngSwitchCase="gloveBody">
+            <div class="radio-input-container">
+              <div id="body" class="web-buttons" *ngFor="let option of data.elementOptions" 
+                type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" >
+              <img src="{{data.uri}}{{option.file}}" alt="">
+              </div>
+            </div>
+        </ng-container>
+
+        
+        <ng-container *ngSwitchDefault>
+            <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
+              <div id="body" class="radio-buttons" *ngFor="let option of data.elementOptions" [style.background]="option.hex"
+                type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" >
+              </div>
+            </div>
+
+
+            <div *ngIf="data.elementType != 'radio'" class="form-group">
+              <select class="form-control" name="glove_series" id="{{data.elementId}}" (change)="test($event)">
+                <option *ngFor="let option of data.elementOptions" value="{{option.value}}" >{{option.innerHtml}}</option>
+              </select>
+            </div>
+        </ng-container>
+      </ng-container>
+
     </div>
 
     <!-- <div *ngFor="let series of gloveData.gloveBody">
