@@ -6,9 +6,11 @@
 
 
     <div *ngFor="let data of gloveData">
-       <div class="form-group">
-        <label for="{{data.elementId}}">{{data.elementLabel}}</label>
-       <!-- <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
+      <div class="form-group">
+        <label for="{{data.elementId}}">{{data.elementLabel}}</label><i class="fas fa-info-circle" [openDelay]="100"
+          [closeDelay]="200" triggers="mouseenter:mouseleave" ngbPopover="{{data?.elementHelp}}"
+          popoverTitle="Glove Series"></i>
+        <!-- <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
           <div *ngIf="data.id != gloveWeb" id="body" class="radio-buttons" *ngFor="let option of data.elementOptions" [style.background]="option.hex"
             type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" >
           </div>
@@ -21,71 +23,44 @@
           </select>
         </div>
       </div> -->
-      
-      <ng-container [ngSwitch]="test(data.id)">
-        <ng-container *ngSwitchCase="gloveBody">
-            <div class="radio-input-container">
-              <div id="body" class="web-buttons" *ngFor="let option of data.elementOptions" 
-                type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" >
-              <img src="{{data.uri}}{{option.file}}" alt="">
-              </div>
+
+        <ng-container [ngSwitch]="gloveWebExpressionCheck(data.id)">
+          <ng-container *ngSwitchCase="gloveWeb">
+            <div id="{{data.elementId}}" class="radio-input-container">
+              <ng-container *ngFor="let option of filterWebInputs(data.elementOptions)">
+                <div id="{{data.elementId}}_{{option.value}}" class="web-buttons" type="button"
+                  (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}"
+                  tooltipClass="qo-tooltip-class">
+                  <ng-container>
+                    <img src="{{data.uri}}{{option.file}}" alt="{{option.innerHtml}}">
+                  </ng-container>                  
+                  
+                  <!-- <img src="{{data.uri}}{{option | webFilter: 'outfield'}}" alt=""> -->
+                </div>
+              </ng-container>
             </div>
-        </ng-container>
+          </ng-container>
 
-        
-        <ng-container *ngSwitchDefault>
-            <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
-              <div id="body" class="radio-buttons" *ngFor="let option of data.elementOptions" [style.background]="option.hex"
-                type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" >
-              </div>
+          <ng-container *ngSwitchDefault>
+            <div id="{{data.elementId}}" class="radio-input-container" *ngIf="data.elementType == 'radio'">
+              <ng-container *ngFor="let option of filterColorInputs(data.elementOptions, data.id)">
+                <div id="{{data.elementId}}_{{option.value}}" [attr.data-glove_section]="option.gloveSection" class="radio-buttons"
+                  [style.background]="option.hex" type="button"
+                  (click)="applyFill($event,option.hex,option.value,data.elementId)" ngbTooltip="{{option.innerHtml}}" 
+                  tooltipClass="qo-tooltip-class">
+                </div>
+              </ng-container>
             </div>
 
-
-            <div *ngIf="data.elementType != 'radio'" class="form-group">
-              <select class="form-control" name="glove_series" id="{{data.elementId}}" (change)="test($event)">
-                <option *ngFor="let option of data.elementOptions" value="{{option.value}}" >{{option.innerHtml}}</option>
+            <div id="{{data.elementId}}" *ngIf="data.elementType != 'radio'" class="form-group">
+              <select [attr.data-glove_section]="option?.gloveSection" class="form-control" name="glove_series"
+                id="{{data.elementId}}" (change)="selectValueReceiver($event)" >
+                <option *ngFor="let option of data.elementOptions" value="{{option.value}}">{{option.innerHtml}}
+                </option>
               </select>
             </div>
+          </ng-container>
         </ng-container>
-      </ng-container>
-
-    </div>
-
-    <!-- <div *ngFor="let series of gloveData.gloveBody">
-      <div class="form-group radio-input-container">
-        <label for="series.elementId">{{series.label}}</label>
-        <select class="form-control" name="glove_body" id="series.elementId" (change)="test($event)">
-          <option *ngFor="let option of series.options" value="{{option.value}}">{{option.color}}</option>
-        </select>
-        <div id="body" class="radio-buttons" *ngFor="let option of series.options" [style.background]="option.hex" type="button" (click)="applyFill($event,option.hex)"></div>
       </div>
     </div>
-
-    <div *ngFor="let accent of gloveData.gloveAccent">
-      <div class="form-group radio-input-container">
-        <label for="accent.id">{{accent.label}}</label>
-        <select class="form-control" name="glove_accent" id="accent.id" (change)="test($event)">
-          <option *ngFor="let option of accent.options" value="{{option.value}}">{{option.color}}</option>
-        </select>
-        <div id="accents" class="radio-buttons" *ngFor="let option of accent.options" [style.background]="option.hex" type="button" (click)="applyFill($event)"></div>
-      </div>
-    </div>
-
-    <div *ngFor="let trim of gloveData.gloveTrim">
-      <div class="form-group">
-        <label for="trim.id">{{trim.label}}</label>
-        <select class="form-control" name="glove_trim" id="trim.id" (change)="test($event)">
-          <option *ngFor="let option of trim.options" value="{{option.value}}">{{option.color}}</option>
-        </select>
-      </div>
-    </div>
-    <div *ngFor="let logo of gloveData.gloveLogo">
-      <div class="form-group">
-        <label for="logo.id">{{logo.label}}</label>
-        <select class="form-control" name="glove_logo" id="logo.id">
-        <option *ngFor="let option of logo.options" value="{{option.value}}">{{option.color}}</option>
-        </select>
-      </div>
-    </div> -->
   </div>
-</div>

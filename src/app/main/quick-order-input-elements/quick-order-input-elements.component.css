@@ -33,3 +33,7 @@
     border-top-color: purple;
 }
 
+.form-group > i {
+    margin: 0.25rem;
+}
+

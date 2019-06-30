@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
 import { QuickOrderImageCarouselComponent } from './main/quick-order-image-carousel/quick-order-image-carousel.component';
 import { QuickOrderInputElementsComponent } from './main/quick-order-input-elements/quick-order-input-elements.component';
+import { WebFilterPipe } from './shared/lib/pipe/web-filter.pipe';
 
 const firebase = {
   "apiKey": "AIzaSyCx7LYeap73Rn3VKs7U1GRlndySXHHu0Dw",
@@ -48,7 +49,8 @@ const routes: Routes = [
     AppComponent,
     MainComponent,
     QuickOrderImageCarouselComponent,
-    QuickOrderInputElementsComponent
+    QuickOrderInputElementsComponent,
+    WebFilterPipe
   ],
   imports: [
     BrowserModule,

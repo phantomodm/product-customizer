@@ -84,13 +84,11 @@ export class GloveApiService {
         starter.pipe(takeWhile(checkData),take(1)).subscribe((res) => {
           this.initCanvas();
           console.log(this.data)
-        });
-          
+        });           
         
       }
     )
-  }
-    
+  }  
   
 
   initCanvas() {
@@ -159,32 +157,42 @@ export class GloveApiService {
     return colorCode;
   }
 
-  getHexIdFromDomSelection(event,fill) {
+  getHexIdFromDomSelection(event:any,fill:string,value:string,element:string) {
     let self = this;
-    let attrName = event.target.name;
-    //console.log(attrName)
-    let attrValue = event.target.value;
-    let imgBase = self.data.imgBase;
+    const gloveSection = event.target.dataset.glove_section;
+    const imgBase = self.data.imgBase;
+    const domValue = value;
+    const elementId = element;
+    // let attrName = event.target.name;
+    // console.log(at)
+    // let attrValue = event.target.value;
+    // console.log(attrValue)
+    
 
     _.forEach(self.data.attributes, (value, key) => {
 
-      switch (attrValue) {
-        case ("776"):
-        case ("453"):
-        case ("108"):
-          if (value.name == attrName && value.value == attrValue) {
-            const html = value.html;
-            self.selectAndFillToGloveSeries(html, imgBase);
-          }
+      switch (value) {
+        case ("rise_series"):
+        case ("elite_japanese_steer"):
+        case ("elite_kip"):
+          // if (value.name == attrName && value.value == attrValue) {
+          //   const html = value.html;
+          //   self.selectAndFillToGloveSeries(html, imgBase);
+          // }
+          console.log(gloveSection.split('_').pop())
+          self.selectAndFillToGloveSeries(gloveSection,imgBase);
           break;
         default:
-          if (value.name == attrName && value.value == attrValue) {
-            const fill = value.hex;
-            const html = value.id;
-            self.applyFillToCanvas(html, fill, imgBase);
-          }
+          self.applyFillToCanvas(gloveSection,fill,imgBase)
+          self.applyHtmlInput(elementId,domValue);
+          // if (value.name == attrName && value.value == attrValue) {
+          //   const fill = value.hex;
+          //   const html = value.id;
+          //   self.applyFillToCanvas(html, fill, imgBase);
+          //   self.applyHtmlInput(value);
+          // }
 
-          self.applyFillToCanvas("body",fill,imgBase)
+          //self.applyFillToCanvas("body",fill,imgBase)
       }
 
     })
@@ -477,7 +485,19 @@ export class GloveApiService {
 
   }
 
-
+  applyHtmlInput(element:string,value:string){
+    try {
+      try {
+        (<HTMLInputElement>document.getElementById(`${element}_${value}`)).checked = true;
+        
+      } catch (error) {
+        (<HTMLInputElement>document.getElementById(element)).value = value;
+      }
+      
+    } catch (error) {
+      console.log("Dev mode")
+    }
+  }
 
   //** Set glove series selection in local model*/
   // TODO - Examine value output from frontend and make necessary changes
