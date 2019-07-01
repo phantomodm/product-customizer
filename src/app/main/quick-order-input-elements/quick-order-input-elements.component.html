@@ -10,19 +10,6 @@
         <label for="{{data.elementId}}">{{data.elementLabel}}</label><i class="fas fa-info-circle" [openDelay]="100"
           [closeDelay]="200" triggers="mouseenter:mouseleave" ngbPopover="{{data?.elementHelp}}"
           popoverTitle="Glove Series"></i>
-        <!-- <div class="radio-input-container" *ngIf="data.elementType == 'radio'">
-          <div *ngIf="data.id != gloveWeb" id="body" class="radio-buttons" *ngFor="let option of data.elementOptions" [style.background]="option.hex"
-            type="button" (click)="applyFill($event,option.hex)" ngbTooltip="{{option.innerHtml}}" tooltipClass="qo-tooltip-class" >
-          </div>
-        </div>
-
-
-        <div *ngIf="data.elementType != 'radio'" class="form-group">
-          <select class="form-control" name="glove_series" id="{{data.elementId}}" (change)="test($event)">
-            <option *ngFor="let option of data.elementOptions" value="{{option.value}}" >{{option.innerHtml}}</option>
-          </select>
-        </div>
-      </div> -->
 
         <ng-container [ngSwitch]="gloveWebExpressionCheck(data.id)">
           <ng-container *ngSwitchCase="gloveWeb">
