@@ -58,7 +58,6 @@ export class QuickOrderInputElementsComponent implements OnInit {
         })
       })      
     } else if (_id === "gloveLogo" || "embroideryColor"){
-      console.log(_id)
       return db;
     }
 

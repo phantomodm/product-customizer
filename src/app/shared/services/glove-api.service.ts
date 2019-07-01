@@ -5,7 +5,7 @@ import { TweenLite, Power2 } from 'gsap';
 import * as Snap from 'snapsvg-cjs';
 import {interval, timer} from 'rxjs';
 import { takeWhile, take} from 'rxjs/operators';
-import { gloveColor } from '../data/data';
+import { gloveColor, qoOrder } from '../data/data';
 
 declare var $: any;
 
@@ -60,6 +60,13 @@ export class GloveApiService {
 
   init(){
 
+    _.forEach(qoOrder,(v,k)=>{
+      const profile = "one-color-mitt"
+      if (_.isEqual(profile, k)){
+        console.log(v)
+      }
+    })
+
     this.customData.getQuickOrderData().subscribe(
       (data)=>{
         let self = this;
@@ -75,7 +82,6 @@ export class GloveApiService {
               return false;
             }         
           })
-          
         }
 
         /** Observable timer for slow connections */
@@ -162,12 +168,7 @@ export class GloveApiService {
     const gloveSection = event.target.dataset.glove_section;
     const imgBase = self.data.imgBase;
     const domValue = value;
-    const elementId = element;
-    // let attrName = event.target.name;
-    // console.log(at)
-    // let attrValue = event.target.value;
-    // console.log(attrValue)
-    
+    const elementId = element;   
 
     _.forEach(self.data.attributes, (value, key) => {
 
@@ -185,16 +186,7 @@ export class GloveApiService {
         default:
           self.applyFillToCanvas(gloveSection,fill,imgBase)
           self.applyHtmlInput(elementId,domValue);
-          // if (value.name == attrName && value.value == attrValue) {
-          //   const fill = value.hex;
-          //   const html = value.id;
-          //   self.applyFillToCanvas(html, fill, imgBase);
-          //   self.applyHtmlInput(value);
-          // }
-
-          //self.applyFillToCanvas("body",fill,imgBase)
       }
-
     })
   }
 
@@ -306,7 +298,6 @@ export class GloveApiService {
       this.c_svgSide.append(this.svgSide.clone(this.sView));
     })
   }
-
 
   cloneCanvas() {
     console.log("clone div");
@@ -504,7 +495,6 @@ export class GloveApiService {
   setGloveSeries(valueString, formValue) {
     let key = "series";
     let value = "value";
-
     this.gloveData.gloveSeries[key] = valueString;
     this.gloveData.gloveSeries[value] = formValue;
   }
@@ -532,7 +522,6 @@ export class GloveApiService {
     }
 
   }
-
 
   //** Loads Catcher's mitt glove canvas */
   loadCatcher() {
