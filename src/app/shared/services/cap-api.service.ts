@@ -56,28 +56,12 @@ export class CapApiService {
                         } else {
                             return false;
                         }
-
                     })
-
                 }
-
 
                 /** Observable timer for slow connections */
                 const starter = interval(1000);
-                starter.pipe(takeWhile(data:boolean => {
-                    _.forEach(data, (r) => {
-                        if (profile === r.designTemplate) {
-                            self.data = r;
-                            console.log(self.data)
-                            return true;
-                        } else {
-                            return false;
-                        }
-
-                    })
-                    }
-                    
-                    ),
+                starter.pipe(takeWhile(checkCapData),
                     take(1)).subscribe((res) => {
                     if(res){
                         this.initCanvas();
