@@ -23,10 +23,14 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/css/bootstrap/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": [
+              "src/assets/js/jquery.min.js",
+              "./node_modules/gsap/umd/TweenMax.js",
+              "./node_modules/gsap/umd/ScrollToPlugin.js",
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js"
               }

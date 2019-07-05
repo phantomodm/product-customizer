@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CapDataService } from '../shared/services/cap-data.service';
+import { CapApiService } from '../shared/services/cap-api.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private capApi:CapApiService) { }
 
   ngOnInit() {
+    this.capApi.init("one-color-cap");
   }
 
 }
