@@ -49,8 +49,7 @@ const routes: Routes = [
     AppComponent,
     MainComponent,
     QuickOrderImageCarouselComponent,
-    QuickOrderInputElementsComponent,
-    WebFilterPipe
+    QuickOrderInputElementsComponent
   ],
   imports: [
     BrowserModule,

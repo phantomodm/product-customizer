@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { GloveApiService } from '../shared/services/glove-api.service';
 import { Observable } from 'rxjs';
 
@@ -8,8 +8,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit, AfterViewInit {
-  
-  data$:Observable<any>;
+  @Input() glove;
+  @Input() profile;
+  data$: Observable<any>;
   watcher$ = false;
 
   constructor(private gloveApi: GloveApiService) { }
@@ -19,7 +20,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.gloveApi.init()
+    this.gloveApi.init(this.profile,this.glove);
   }
 
 }

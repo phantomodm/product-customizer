@@ -71,10 +71,10 @@ export default class CustomGloveQO {
         this.oView = this.svgMain.group(), this.iView = this.svgInside.group(), this.sView = this.svgSide.group();
 
         switch (this.data.imgBase) {
-            case "cm":
+            case "catcher-mitt":
                 this.loadCatcher();
                 break;
-            case "cmf":
+            case "catcher-fastback":
                 this.loadCatcherFB();
                 break;
             case "inf":
@@ -486,9 +486,9 @@ export default class CustomGloveQO {
 
             this.svgMain.attr({ viewBox: "0 0 400 400" });
 
-            var g = f.selectAll('#cm_x5F_vw3_x5F_utoe, #cm_x5F_vw3_x5F_thb, #cm_x5F_vw3_x5F_bfg, #cm_x5F_vw3_x5F_web, #cm_x5F_vw3_x5F_plm, #cm_x5F_vw3_x5F_lin, #cm_x5F_vw3_x5F_bnd, #cm_x5F_vw3_x5F_fpad, #cm_x5F_vw3_x5F_stch, #cm_x5F_vw3_x5F_lce, #cm_x5F_vw3_x5F_logo, #cm_x5F_open_x5F_back');
+            var g = f.selectAll('#catcher-mitt_x5F_vw3_x5F_utoe, #catcher-mitt_x5F_vw3_x5F_thb, #catcher-mitt_x5F_vw3_x5F_bfg, #catcher-mitt_x5F_vw3_x5F_web, #catcher-mitt_x5F_vw3_x5F_plm, #catcher-mitt_x5F_vw3_x5F_lin, #catcher-mitt_x5F_vw3_x5F_bnd, #catcher-mitt_x5F_vw3_x5F_fpad, #catcher-mitt_x5F_vw3_x5F_stch, #catcher-mitt_x5F_vw3_x5F_lce, #catcher-mitt_x5F_vw3_x5F_logo, #catcher-mitt_x5F_open_x5F_back');
             g.forEach(function (el, i) {
-                var p = ["cm_x5F_vw3_x5F_utoe", "cm_x5F_vw3_x5F_thb", "cm_x5F_vw3_x5F_bfg", "cm_x5F_vw3_x5F_web", "cm_x5F_vw3_x5F_plm", "cm_x5F_vw3_x5F_lin", "cm_x5F_vw3_x5F_bnd", "cm_x5F_vw3_x5F_fpad", "cm_x5F_vw3_x5F_stch", "cm_x5F_vw3_x5F_lce", "cm_x5F_vw3_x5F_logo", "#cm_x5F_open_xF_back"];
+                var p = ["catcher-mitt_x5F_vw3_x5F_utoe", "catcher-mitt_x5F_vw3_x5F_thb", "catcher-mitt_x5F_vw3_x5F_bfg", "catcher-mitt_x5F_vw3_x5F_web", "catcher-mitt_x5F_vw3_x5F_plm", "catcher-mitt_x5F_vw3_x5F_lin", "catcher-mitt_x5F_vw3_x5F_bnd", "catcher-mitt_x5F_vw3_x5F_fpad", "catcher-mitt_x5F_vw3_x5F_stch", "catcher-mitt_x5F_vw3_x5F_lce", "catcher-mitt_x5F_vw3_x5F_logo", "#catcher-mitt_x5F_open_xF_back"];
                 var layer = p[i];
 
 
@@ -509,10 +509,10 @@ export default class CustomGloveQO {
 
         Snap.load("{{ cdn 'assets/img/nine-positions/catcher_inside_view.svg'}}", (f) => {
             this.svgInside.attr({ viewBox: "0 0 400 400" });
-            var g = f.selectAll('#cm_x5F_vw2_x5F_plm, #cm_x5F_vw2_x5F_web, #cm_x5F_vw2_x5F_tgt, #cm_x5F_vw2_x5F_stch, #cm_x5F_vw2_x5F_bnd, #cm_x5F_vw2_x5F_lce, #cm_x5F_pocket_x5F_view, #cm_x5F_vw2_x5F_rse, #cm_x5F_rise_x5F_logo');
+            var g = f.selectAll('#catcher-mitt_x5F_vw2_x5F_plm, #catcher-mitt_x5F_vw2_x5F_web, #catcher-mitt_x5F_vw2_x5F_tgt, #catcher-mitt_x5F_vw2_x5F_stch, #catcher-mitt_x5F_vw2_x5F_bnd, #catcher-mitt_x5F_vw2_x5F_lce, #catcher-mitt_x5F_pocket_x5F_view, #catcher-mitt_x5F_vw2_x5F_rse, #catcher-mitt_x5F_rise_x5F_logo');
 
             g.forEach((el, i) => {
-                var p = ["cm_x5F_vw2_x5F_plm", "cm_x5F_vw2_x5F_web", "cm_x5F_vw2_x5F_tgt", "cm_x5F_vw2_x5F_stch", "cm_x5F_vw2_x5F_bnd", "cm_x5F_vw2_x5F_lce", "cm_x5F_pocket_x5F_view", "cm_x5F_vw2_x5F_rse", "cm__x5F_rise_x5F_logo"];
+                var p = ["catcher-mitt_x5F_vw2_x5F_plm", "catcher-mitt_x5F_vw2_x5F_web", "catcher-mitt_x5F_vw2_x5F_tgt", "catcher-mitt_x5F_vw2_x5F_stch", "catcher-mitt_x5F_vw2_x5F_bnd", "catcher-mitt_x5F_vw2_x5F_lce", "catcher-mitt_x5F_pocket_x5F_view", "catcher-mitt_x5F_vw2_x5F_rse", "catcher-mitt__x5F_rise_x5F_logo"];
                 var layer = p[i];
 
                 //Apply default fills & add to group
@@ -531,10 +531,10 @@ export default class CustomGloveQO {
 
         Snap.load("{{ cdn 'assets/img/nine-positions/catcher_side_view.svg'}}", (f) => {
             this.svgSide.attr({ viewBox: "0 0 400 400" });
-            var g = f.selectAll('#cm_x5F_vw1_x5F_utoe, #cm_x5F_vw1_x5F_thb, #cm_x5F_vw1_x5F_logo, #cm_x5F_vw1_x5F_bnd, #cm_x5F_vw1_x5F_plm, #cm_x5F_vw1_x5F_web, #cm_x5F_vw1_x5F_fpad, #cm_x5F_vw1_x5F_stch, #cm_x5F_vw1_x5F_lce, #cm_x5F_side_x5F_view');
+            var g = f.selectAll('#catcher-mitt_x5F_vw1_x5F_utoe, #catcher-mitt_x5F_vw1_x5F_thb, #catcher-mitt_x5F_vw1_x5F_logo, #catcher-mitt_x5F_vw1_x5F_bnd, #catcher-mitt_x5F_vw1_x5F_plm, #catcher-mitt_x5F_vw1_x5F_web, #catcher-mitt_x5F_vw1_x5F_fpad, #catcher-mitt_x5F_vw1_x5F_stch, #catcher-mitt_x5F_vw1_x5F_lce, #catcher-mitt_x5F_side_x5F_view');
 
             g.forEach((el, i) => {
-                var p = ["cm_x5F_vw1_x5F_utoe", "cm_x5F_vw1_x5F_thb", "cm_x5F_vw1_x5F_logo", "cm_x5F_vw1_x5F_bnd", "cm_x5F_vw1_x5F_plm", "cm_x5F_vw1_x5F_web", "cm_x5F_vw1_x5F_fpad", "cm_x5F_vw1_x5F_stch", "cm_x5F_vw1_x5F_lce", "cm_x5F_side_x5F_view"];
+                var p = ["catcher-mitt_x5F_vw1_x5F_utoe", "catcher-mitt_x5F_vw1_x5F_thb", "catcher-mitt_x5F_vw1_x5F_logo", "catcher-mitt_x5F_vw1_x5F_bnd", "catcher-mitt_x5F_vw1_x5F_plm", "catcher-mitt_x5F_vw1_x5F_web", "catcher-mitt_x5F_vw1_x5F_fpad", "catcher-mitt_x5F_vw1_x5F_stch", "catcher-mitt_x5F_vw1_x5F_lce", "catcher-mitt_x5F_side_x5F_view"];
                 var layer = p[i];
 
 
@@ -784,9 +784,9 @@ export default class CustomGloveQO {
         Snap.load("{{ cdn 'assets/img/nine-positions/catcher_fastback_back.svg'}}", (f) => {
 
             this.svgMain.attr({ viewBox: "0 0 400 400" });
-            var g = f.selectAll('#cmf_x5F_vw3_x5F_utoe, #cmf_x5F_vw3_x5F_thb, #cmf_x5F_vw3_x5F_logo, #cmf_x5F_vw3_x5F_mid, #cmf_x5F_vw3_x5F_bfg, #cmf_x5F_vw3_x5F_plm, #cmf_x5F_vw3_x5F_wlt ,#cmf_x5F_vw3_x5F_stch, #cmf_x5F_vw3_x5F_bnd, #cmf_x5F_vw3_x5F_web, #cmf_x5F_vw3_x5F_lce, #cmf_x5F_vw3_x5F_fpad, #cmf_x5F_fastback_x5F_back');
+            var g = f.selectAll('#catcher-fastback_x5F_vw3_x5F_utoe, #catcher-fastback_x5F_vw3_x5F_thb, #catcher-fastback_x5F_vw3_x5F_logo, #catcher-fastback_x5F_vw3_x5F_mid, #catcher-fastback_x5F_vw3_x5F_bfg, #catcher-fastback_x5F_vw3_x5F_plm, #catcher-fastback_x5F_vw3_x5F_wlt ,#catcher-fastback_x5F_vw3_x5F_stch, #catcher-fastback_x5F_vw3_x5F_bnd, #catcher-fastback_x5F_vw3_x5F_web, #catcher-fastback_x5F_vw3_x5F_lce, #catcher-fastback_x5F_vw3_x5F_fpad, #catcher-fastback_x5F_fastback_x5F_back');
             g.forEach(function (el, i) {
-                var p = ["cmf_x5F_vw3_x5F_utoe", "cmf_x5F_vw3_x5F_thb", "#cmf_x5F_vw3_x5F_logo", "#cmf_x5F_vw3_x5F_mid", "cmf_x5F_vw3_x5F_bfg", "#cmf_x5F_vw3_x5F_plm", "#cmf_x5F_vw3_x5F_wlt", "#cmf_x5F_vw3_x5F_stch", "cmf_x5F_vw3_x5F_bnd", "cmf_x5F_vw3_x5F_web", "cmf_x5F_vw3_x5F_lce", "cmf_x5F_vw3_x5F_fpad", "cmf_x5F_fastback_x5F_back"];
+                var p = ["catcher-fastback_x5F_vw3_x5F_utoe", "catcher-fastback_x5F_vw3_x5F_thb", "#catcher-fastback_x5F_vw3_x5F_logo", "#catcher-fastback_x5F_vw3_x5F_mid", "catcher-fastback_x5F_vw3_x5F_bfg", "#catcher-fastback_x5F_vw3_x5F_plm", "#catcher-fastback_x5F_vw3_x5F_wlt", "#catcher-fastback_x5F_vw3_x5F_stch", "catcher-fastback_x5F_vw3_x5F_bnd", "catcher-fastback_x5F_vw3_x5F_web", "catcher-fastback_x5F_vw3_x5F_lce", "catcher-fastback_x5F_vw3_x5F_fpad", "catcher-fastback_x5F_fastback_x5F_back"];
                 var layer = p[i];
 
                 //Apply default fills & add to group
@@ -806,10 +806,10 @@ export default class CustomGloveQO {
 
         Snap.load("{{ cdn 'assets/img/nine-positions/catcher_fastback_inside_view.svg'}}", (f) => {
             this.svgInside.attr({ viewBox: "0 0 400 400" });
-            var g = f.selectAll('#cmf_x5F_vw2_x5F_plm, #cmf_x5F_vw2_x5F_web, #cmf_x5F_vw2_x5F_tgt, #cmf_x5F_vw2_x5F_stch, #cmf_x5F_vw2_x5F_bnd, #cmf_x5F_vw2_x5F_lce, #cmf_x5F_pocket_x5F_view, #cmf_x5F_vw2_x5F_rse, #cmf_x5F_rise_x5F_logo');
+            var g = f.selectAll('#catcher-fastback_x5F_vw2_x5F_plm, #catcher-fastback_x5F_vw2_x5F_web, #catcher-fastback_x5F_vw2_x5F_tgt, #catcher-fastback_x5F_vw2_x5F_stch, #catcher-fastback_x5F_vw2_x5F_bnd, #catcher-fastback_x5F_vw2_x5F_lce, #catcher-fastback_x5F_pocket_x5F_view, #catcher-fastback_x5F_vw2_x5F_rse, #catcher-fastback_x5F_rise_x5F_logo');
 
             g.forEach((el, i) => {
-                var p = ["cmf_x5F_vw2_x5F_plm", "cmf_x5F_vw2_x5F_web", "cmf_x5F_vw2_x5F_tgt", "cmf_x5F_vw2_x5F_stch", "cmf_x5F_vw2_x5F_bnd", "cmf_x5F_vw2_x5F_lce", "cmf_x5F_pocket_x5F_view", "cmf_x5F_vw2_x5F_rse", "cmf_x5F_rise_x5F_logo"];
+                var p = ["catcher-fastback_x5F_vw2_x5F_plm", "catcher-fastback_x5F_vw2_x5F_web", "catcher-fastback_x5F_vw2_x5F_tgt", "catcher-fastback_x5F_vw2_x5F_stch", "catcher-fastback_x5F_vw2_x5F_bnd", "catcher-fastback_x5F_vw2_x5F_lce", "catcher-fastback_x5F_pocket_x5F_view", "catcher-fastback_x5F_vw2_x5F_rse", "catcher-fastback_x5F_rise_x5F_logo"];
                 var layer = p[i];
 
                 //Apply default fills & add to group
@@ -828,10 +828,10 @@ export default class CustomGloveQO {
 
         Snap.load("{{ cdn 'assets/img/nine-positions/catcher_fastback_side.svg'}}", (f) => {
             this.svgSide.attr({ viewBox: "0 0 400 400" });
-            var g = f.selectAll('#cmf_x5F_vw1_x5F_thb, #cmf_x5F_vw1_x5F_logo, #cmf_x5F_vw1_x5F_utoe, #cmf_x5F_vw1_x5F_wlt, #cmf_x5F_vw1_x5F_web, #cmf_x5F_vw1_x5F_bnd, #cmf_x5F_vw1_x5F_plm, #cmf_x5F_vw1_x5F_stch, #cmf_x5F_vw1_x5F_blt, #cmf_x5F_vw1_x5F_lce, #cmf_x5F_vw1_x5F_fastback_x5F_side');
+            var g = f.selectAll('#catcher-fastback_x5F_vw1_x5F_thb, #catcher-fastback_x5F_vw1_x5F_logo, #catcher-fastback_x5F_vw1_x5F_utoe, #catcher-fastback_x5F_vw1_x5F_wlt, #catcher-fastback_x5F_vw1_x5F_web, #catcher-fastback_x5F_vw1_x5F_bnd, #catcher-fastback_x5F_vw1_x5F_plm, #catcher-fastback_x5F_vw1_x5F_stch, #catcher-fastback_x5F_vw1_x5F_blt, #catcher-fastback_x5F_vw1_x5F_lce, #catcher-fastback_x5F_vw1_x5F_fastback_x5F_side');
 
             g.forEach((el, i) => {
-                var p = ["cmf_x5F_vw1_x5F_thb", "cmf_x5F_vw1_x5F_logo", "cmf_x5F_vw1_x5F_utoe", "cmf_x5F_vw1_x5F_wlt", "cmf_x5F_vw1_x5F_web", "cmf_x5F_vw1_x5F_bnd", "cmf_x5F_vw1_x5F_plm", "cmf_x5F_vw1_x5F_stch", "cmf_x5F_vw1_x5F_blt", "cmf_x5F_vw1_x5F_lce", "cmf_x5F_vw1_x5F_fastback_x5F_side"];
+                var p = ["catcher-fastback_x5F_vw1_x5F_thb", "catcher-fastback_x5F_vw1_x5F_logo", "catcher-fastback_x5F_vw1_x5F_utoe", "catcher-fastback_x5F_vw1_x5F_wlt", "catcher-fastback_x5F_vw1_x5F_web", "catcher-fastback_x5F_vw1_x5F_bnd", "catcher-fastback_x5F_vw1_x5F_plm", "catcher-fastback_x5F_vw1_x5F_stch", "catcher-fastback_x5F_vw1_x5F_blt", "catcher-fastback_x5F_vw1_x5F_lce", "catcher-fastback_x5F_vw1_x5F_fastback_x5F_side"];
                 var layer = p[i];
 
                 //Apply default fills & add to group

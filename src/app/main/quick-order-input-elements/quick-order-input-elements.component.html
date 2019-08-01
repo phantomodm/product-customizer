@@ -5,7 +5,7 @@
     <h4>$230</h4>
 
 
-    <div *ngFor="let data of gloveData">
+    <div *ngFor="let data of gloveData | async">
       <div class="form-group">
         <label for="{{data.elementId}}">{{data.elementLabel}}</label><i class="fas fa-info-circle" [openDelay]="100"
           [closeDelay]="200" triggers="mouseenter:mouseleave" ngbPopover="{{data?.elementHelp}}"
@@ -40,14 +40,14 @@
             </div>
 
             <div id="{{data.elementId}}" *ngIf="data.elementType != 'radio'" class="form-group">
-              <select [attr.data-glove_section]="option?.gloveSection" class="form-control" name="glove_series"
+              <select [attr.data-glove_section]="data.elementInfo" class="form-control" name="glove_series"
                 id="{{data.elementId}}" (change)="selectValueReceiver($event)" >
-                <option *ngFor="let option of data.elementOptions" value="{{option.value}}">{{option.innerHtml}}
+                <option id="{{data.elementId}}_{{option.value}}" *ngFor="let option of data.elementOptions" value="{{option.value}}">{{option.innerHtml}}
                 </option>
               </select>
             </div>
           </ng-container>
-        </ng-container>
+      </ng-container>
       </div>
     </div>
   </div>
