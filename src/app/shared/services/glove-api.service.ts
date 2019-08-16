@@ -436,23 +436,35 @@ export class GloveApiService {
             switch (el) {
               case 'svgMain':
                 if ($(element).length != 0) {
+                  if (_.includes(element, 'stch')) {
+                    self.svgMain.select(element).attr({ fill: 'none', stroke: fillHex });
+
+                    break;
+                  }
                   TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                   // self.svgMain.select(element).attr({ fill: fillHex });
                 }
                 break;
               case 'svgInside':
                 if ($(element).length != 0) {
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
-                }
+                  if (_.includes(element, 'stch')) {
+                    self.svgInside.select(element).attr({ fill: 'none', stroke: fillHex });
 
-                if(`#${gloveType}_x5F_vw2_x5F_rse`.length !== 0){
-                  self.svgInside.select(`#${gloveType}_x5F_vw2_x5F_rse`).attr({ fill: fillHex });
-                }
+                    break;
+                  }
+                  
+                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                }                
 
                 break;
               case 'svgSide':
                 // console.log('logos')
                 if ($(element).length != 0) {
+                  if (_.includes(element, 'stch')) {
+                    self.svgSide.select(element).attr({ fill: 'none', stroke: fillHex });
+
+                    break;
+                  }
                   TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                   // self.svgSide.select(element).attr({ fill: fillHex });
                 }
@@ -908,7 +920,7 @@ export class GloveApiService {
           el.attr({ fill: '#FFFAFA' });
         }
 
-        if (filter === 'rise' || filter === 'elite') {
+        if (filter === 'rise' || filter === 'elite' || filter === "rse") {
           el.attr({ opacity: 0 });
           this.setSeriesOnGlove(filter, el);
         }

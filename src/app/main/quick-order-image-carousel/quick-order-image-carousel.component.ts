@@ -1,15 +1,18 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { GloveApiService } from 'src/app/shared/services/glove-api.service';
-
+//import { GloveApiService } from 'src/app/shared/services/glove-api.service';
+import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'quick-order-image-carousel',
   templateUrl: './quick-order-image-carousel.component.html',
-  styleUrls: ['./quick-order-image-carousel.component.css']
+  styleUrls: ['./quick-order-image-carousel.component.css'],
+  providers: [NgbCarouselConfig]
 })
 export class QuickOrderImageCarouselComponent implements OnInit, AfterViewInit {
 
-  constructor(private gloveApi:GloveApiService) { }
+  constructor(config: NgbCarouselConfig) {
+    config.showNavigationArrows = false
+   }
 
   ngOnInit() {
   }
