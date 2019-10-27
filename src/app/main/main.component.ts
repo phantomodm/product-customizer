@@ -58,10 +58,10 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   
   
   constructor(public dialog: MatDialog, private gloveData:GloveDataService, private nysApi: GloveApi ) {
-    const checkScreenSize = () => document.body.clientWidth < 960;
-    const source$ = fromEvent(window,'resize').pipe(takeUntil(this.unsubscribe$), distinctUntilChanged());
-    const screenSizeChanged$ = source$.pipe(map(checkScreenSize));
-    this.isScreenSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
+    // const checkScreenSize = () => document.body.clientWidth < 960;
+    // const source$ = fromEvent(window,'resize').pipe(takeUntil(this.unsubscribe$), distinctUntilChanged());
+    // const screenSizeChanged$ = source$.pipe(map(checkScreenSize));
+    // this.isScreenSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
   
     // this.handSizeConfirmationDialog = this.nysApi.notifyObservables$.pipe(takeUntil(this.unsubscribe$)).subscribe((res)=>{
     //   if (res.hasOwnProperty('option') && res.option === 'Hand Size'){
@@ -92,27 +92,24 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     let el = (<HTMLElement><unknown>document.querySelectorAll(".mat-horizontal-stepper-header-container"));
+    el[0].style.display = "none";
     el[1].style.display = "none";
     el[2].style.display = "none";
-    el[3].style.display = "none";
-    el[4].style.display = "none";
-    el[5].style.display = "none";
-    el[6].style.display = "none";
   }
 
   setGlvSize(event){
     this.nysApi.setGloveSize(event);
   }
 
-  /**Tracks values from form child components and saves values in store. */
-  syncForm(val){    
-    if(!_.isEqual(val,this.formValues)){
-      this.nysApi.saveFormValues(val);
-      this.formValues = _.assignIn(this.formValues,val);
-    } else {
-     return null;
-    }    
-  }
+  /**Tracks values from form child components and saves values in store. -REMOVED FOR NYSTIX.COM */
+  // syncForm(val){    
+  //   if(!_.isEqual(val,this.formValues)){
+  //     this.nysApi.saveFormValues(val);
+  //     this.formValues = _.assignIn(this.formValues,val);
+  //   } else {
+  //    return null;
+  //   }    
+  // }
 
   // openDialog(): void {
   //   const dialogRef = this.dialog.open(YouthGloveConfirmComponent,{

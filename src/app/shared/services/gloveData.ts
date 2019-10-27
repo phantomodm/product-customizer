@@ -4,7 +4,6 @@ import { Observable, of, combineLatest } from 'rxjs';
 import { GloveColors, WizardPrompts } from '../models/nine-positions-models';
 import { map,tap, filter, flatMap } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { _MatFormFieldMixinBase } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +15,20 @@ import { _MatFormFieldMixinBase } from '@angular/material';
   }
 
   getGloveColors(): Observable<any>{
-    return this.db.list('nine-positions-colors').valueChanges();
+    return this.db.list('nystixs-colors').valueChanges();
   }
 
   getWizardData():Observable<any>{
-    return this.db.object('nine-positions-design-wizard').snapshotChanges();
-    //return this.db.list('nine-positions-design-wizard').valueChanges();
+    return this.db.object('nystixs-design-wizard').snapshotChanges();
+    //return this.db.list('nystixs-design-wizard').valueChanges();
   }
 
   getGloveInputElements():Observable<any>{
-    return this.db.object('nine-positions-custom-elements').snapshotChanges();
+    return this.db.object('nystixs-custom-elements').snapshotChanges();
   }
 
   getGloveSliderColors(): Observable<any> {
-    return this.db.list('nine-positions-color-slider').valueChanges();
+    return this.db.list('nystixs-color-slider').valueChanges();
   }
 
   getWizardSteps(): Observable<WizardPrompts> {

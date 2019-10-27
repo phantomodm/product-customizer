@@ -7,22 +7,22 @@ import * as _ from 'lodash';
 })
 
 export class StorageService {
-  @LocalStorage('9PCustomGloveBuild',{}) gloveBuildLocalStorage;
+  @LocalStorage('NYStixCustomGloveBuild',{}) gloveBuildLocalStorage;
   
   constructor(private storage:LocalStorageService) { }
 
   initializeStorage(payload:{}){
-    if(!this.storage.retrieve('9PCustomGloveBuild')){
-      this.localStorageInit('9PCustomGloveBuild',{}); 
+    if(!this.storage.retrieve('NYStixCustomGloveBuild')){
+      this.localStorageInit('NYStixCustomGloveBuild',{}); 
     } 
     else {
-      this.localStorageImport('9PCustomGloveBuild',payload);    
+      this.localStorageImport('NYStixCustomGloveBuild',payload);    
     }
   }
 
   saveToStorage(payload:any){
     const values = _.clone(payload);
-    this.localStorageExport('9PCustomGloveBuild',values);
+    this.localStorageExport('NYStixCustomGloveBuild',values);
   }
 
   localStorageImport = (key:any,destination:any) => {

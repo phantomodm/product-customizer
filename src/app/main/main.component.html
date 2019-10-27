@@ -1,14 +1,14 @@
 <div>
   
-  <div [hidden]="(isScreenSmall$ | async)">
+  <!-- <div [hidden]="(isScreenSmall$ | async)">
       <horizontal-view [wizardPrompts]="gloveWizardSteps$ | async" [sliderStatus]="gloveSliderSelector"
       [(emitComponent)]="emitComponent" [(formValues)]="formValues" 
       [slider]="slider" [(stepIndex)]="currentWizardIndex" 
       (updateFormValues)="syncForm($event)"
       [gloveColorsMap]="gloveColorsMap"
       [gloveWebs]="filteredGloveWebs"></horizontal-view>
-  </div>
-  <div [hidden]="!(isScreenSmall$ | async)">
+  </div> -->
+  <!-- <div>
       <vertical-view [wizardPrompts]="gloveWizardSteps$ | async" [sliderStatus]="gloveSliderSelector" 
       [(emitComponent)]="emitComponent" [(formValues)]="formValues" 
       [slider]="slider" [(stepIndex)]="currentWizardIndex" 
@@ -17,6 +17,16 @@
       [gloveColorsMap]="gloveColorsMap"
       [gloveWebs]="filteredGloveWebs"
       ></vertical-view>
-  </div>
+  </div> -->
+
+  <div>
+    <vertical-view [wizardPrompts]="gloveWizardSteps$ | async" 
+    [sliderStatus]="gloveSliderSelector"     
+    [slider]="slider"    
+    [customParts]="customPartsValue$ | async"
+    [gloveColorsMap]="gloveColorsMap"
+    [gloveWebs]="filteredGloveWebs"
+    ></vertical-view>
+</div>
 
 </div>

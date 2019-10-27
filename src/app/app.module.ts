@@ -42,12 +42,12 @@ import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-
 
 
 const firebase = {
-  "apiKey": "AIzaSyCx7LYeap73Rn3VKs7U1GRlndySXHHu0Dw",
-  "authDomain": "bc-qo-custom.firebaseapp.com",
-  "databaseURL": "https://bc-qo-custom.firebaseio.com",
-  "projectId": "bc-qo-custom",
+  "apiKey": "nys-glove-tool",
+  "authDomain": "nys-glove-tool.firebaseapp.com",
+  "databaseURL": "https://nys-glove-tool.firebaseio.com",
+  "projectId": "nys-glove-tool",
   "storageBucket": "",
-  "messagingSenderId": "298814992358"
+  "messagingSenderId": "215259533349"
 }
 
 const routes: Routes = [

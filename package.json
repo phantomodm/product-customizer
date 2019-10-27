@@ -42,7 +42,7 @@
     "lodash": "^4.17.11",
     "ng5-slider": "^1.1.14",
     "ngx-slick": "^0.2.1",
-    "ngx-webstorage": "^3.0.0-beta.14",
+    "ngx-webstorage": "3.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.5.2",
     "snapsvg-cjs": "^0.0.6",

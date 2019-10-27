@@ -104,32 +104,32 @@ export class VerticalViewComponent implements OnInit {
 
   //** Function initiates subscriptions listening to changes in form emitting and editing values */
   onChanges(){
-    this.subscripiton = this.verticalForm.valueChanges.pipe(takeUntil(this.unsubscribe$),distinctUntilChanged()).subscribe((val)=>{
-      if(_.isEmpty(this.results)){
-        this.results = _.assignIn(this.results,val)
-        //console.log("fired from vComponent: 1st condition",this.results)
-        this.updateFormValues.emit(this.results)
-      } else if(!_.isEqual(val,this.results)){
-        this.results = _.assignIn(this.results,val)
-        console.log("fired from vComponent: 2nd condition")
-        this.updateFormValues.emit(this.results)
-        this.emitComponent = "vertical";
-        this.notifyCurrentComponent.emit(this.emitComponent)
-      } else { return null; }
+    // this.subscripiton = this.verticalForm.valueChanges.pipe(takeUntil(this.unsubscribe$),distinctUntilChanged()).subscribe((val)=>{
+    //   if(_.isEmpty(this.results)){
+    //     this.results = _.assignIn(this.results,val)
+    //     //console.log("fired from vComponent: 1st condition",this.results)
+    //     this.updateFormValues.emit(this.results)
+    //   } else if(!_.isEqual(val,this.results)){
+    //     this.results = _.assignIn(this.results,val)
+    //     console.log("fired from vComponent: 2nd condition")
+    //     this.updateFormValues.emit(this.results)
+    //     this.emitComponent = "vertical";
+    //     this.notifyCurrentComponent.emit(this.emitComponent)
+    //   } else { return null; }
       
-    })
+    // })
 
-    this.formStatus = this.nysApi.formObservable$.pipe(takeUntil(this.unsubscribe$),distinctUntilChanged()).subscribe((res)=>{      
-      if(this.emitComponent != "horizontal"){
-          let data = {};
-          data = _.assignIn(data,this.formValues,res)
-          //console.log("Data received in Observable "+ data)
-          //console.log("Form Status Observable :" + data)
-          this.verticalForm.setValue(data)
-          //console.log(this.verticalForm.value)
-      }
+    // this.formStatus = this.nysApi.formObservable$.pipe(takeUntil(this.unsubscribe$),distinctUntilChanged()).subscribe((res)=>{      
+    //   if(this.emitComponent != "horizontal"){
+    //       let data = {};
+    //       data = _.assignIn(data,this.formValues,res)
+    //       //console.log("Data received in Observable "+ data)
+    //       //console.log("Form Status Observable :" + data)
+    //       this.verticalForm.setValue(data)
+    //       //console.log(this.verticalForm.value)
+    //   }
       
-    })
+    // })
 
     this.filteredImages = this.nysApi.loadFilteredImages();
     
@@ -168,8 +168,8 @@ export class VerticalViewComponent implements OnInit {
   setGloveOptions(event: string, formValue:string, optionAttribute:string, menuName: string, control:string){
       //this.nysApi.customGloveData.gloveSeries.series = _.lowerCase(event);
       var id = control;
-      this.results = _.assignIn(this.results,{[id]:formValue});        
-      this.emitComponent = "vertical";
+      // this.results = _.assignIn(this.results,{[id]:formValue});        
+      // this.emitComponent = "vertical";
       this.nysApi.setWorkFlowValidity(menuName,control);
       this.nysApi.applyHtmlInput(optionAttribute);
 
@@ -195,17 +195,17 @@ export class VerticalViewComponent implements OnInit {
           break;
       }
 
-      this.updateFormValues.emit(this.results)      
-      this.notifyCurrentComponent.emit(this.emitComponent);
+      // this.updateFormValues.emit(this.results)      
+      // this.notifyCurrentComponent.emit(this.emitComponent);
   }
 
   setGloveSeries(event: string, value:string, attributeName: string, menuName:string, control:string){
     
     if(control == "sportPlayed"){
-      this.results = _.assignIn(this.results,{sportPlayed:value});
-      this.updateFormValues.emit(this.results)
-      this.emitComponent = "vertical";
-      this.notifyCurrentComponent.emit(this.emitComponent);
+      //this.results = _.assignIn(this.results,{sportPlayed:value});
+      //this.updateFormValues.emit(this.results)
+      // this.emitComponent = "vertical";
+      // this.notifyCurrentComponent.emit(this.emitComponent);
       console.log(event)
       switch(event){
         case "Softball":
@@ -215,30 +215,32 @@ export class VerticalViewComponent implements OnInit {
           this.snackBar.open(event + " model selected", 'DISMISS',{duration:2000})
       }
 
-    } else {
-      let eventFilter = event.split('(').pop().slice(0,-1);
-      console.log(eventFilter)
+    } 
+    //COMMENT OUT SERIES NAME FOR NYStix Gloves
+    // else {
+    //   let eventFilter = event.split('(').pop().slice(0,-1);
+    //   console.log(eventFilter)
 
-      switch(eventFilter){
-        case "Rise":
-        this.snackBar.open("RISE series selected.",'DISMISS',{duration:2000})
-        break;
-        case "Elite JS":
-        this.snackBar.open("Elite JS series selected.",'DISMISS',{duration:2000})
-        break;
-        case "Elite Kip":
-        this.snackBar.open("Elite Kip series selected.",'DISMISS',{duration:2000})
-        break;
-        default:
-        this.snackBar.open("Cowhide selected.",'DISMISS',{duration:2000})
-      }
+    //   switch(eventFilter){
+    //     case "Rise":
+    //     this.snackBar.open("RISE series selected.",'DISMISS',{duration:2000})
+    //     break;
+    //     case "Elite JS":
+    //     this.snackBar.open("Elite JS series selected.",'DISMISS',{duration:2000})
+    //     break;
+    //     case "Elite Kip":
+    //     this.snackBar.open("Elite Kip series selected.",'DISMISS',{duration:2000})
+    //     break;
+    //     default:
+    //     this.snackBar.open("Cowhide selected.",'DISMISS',{duration:2000})
+    //   }
       
-      this.nysApi.customGloveData.gloveSeries.series = _.lowerCase(eventFilter);
-      this.results = _.assignIn(this.results,{gloveSeries:value});
-      this.updateFormValues.emit(this.results)
-      this.emitComponent = "vertical";
-      this.notifyCurrentComponent.emit(this.emitComponent)
-    }
+    //   this.nysApi.customGloveData.gloveSeries.series = _.lowerCase(eventFilter);
+    //   this.results = _.assignIn(this.results,{gloveSeries:value});
+    //   this.updateFormValues.emit(this.results)
+    //   this.emitComponent = "vertical";
+    //   this.notifyCurrentComponent.emit(this.emitComponent)
+    // }
 
     this.nysApi.applyHtmlInput(attributeName);
     //this.nysApi.setGloveSeries(_.lowerCase(event),value,attributeName);
@@ -319,11 +321,11 @@ export class VerticalViewComponent implements OnInit {
     this.nysApi.setGloveCanvas(this.nysApi.indexToValue(setting,this.gloveEmbroiderySlider));
   }
 
-  //**Emits current stepper index */
-  emitVerticalStep(index:number){
-    this.indexForWizardStep = index;
-    this.stepIndexChange.emit(this.indexForWizardStep);
-  }
+  //**Emits current stepper index*/
+  // emitVerticalStep(index:number){
+  //   this.indexForWizardStep = index;
+  //   this.stepIndexChange.emit(this.indexForWizardStep);
+  // }
 
   ngOnDestroy(){
     this.unsubscribe$.next();
