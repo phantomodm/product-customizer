@@ -5,8 +5,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatStep, MatSnackBar } from '@angular/material';
 import * as _ from 'lodash';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { GloveColors } from 'src/app/shared/models/nine-positions-models';
+import { GloveColors, GloveSlider } from 'src/app/shared/models/nine-positions-models';
 import { GloveDataService } from 'src/app/shared/services/gloveData';
+import { gloveDesignData, embroiderySliderData } from 'src/app/shared/data/api-data';
+import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class VerticalViewComponent implements OnInit {
   @Input() positions;
   @Input() customParts;
   @Input() gloveColorsMap;
-  @Input('stepIndex') indexForWizardStep: number;
+  //@Input('stepIndex') indexForWizardStep: number;
   @Input() formValues;
   @Input() gloveSeries;
   @Input() gloveBuildData;
@@ -32,9 +34,13 @@ export class VerticalViewComponent implements OnInit {
   //@Input() customGloveValue;
   @Input() sliderStatus;
   @Output() notifyCurrentComponent = new EventEmitter();
-  @Output() stepIndexChange = new EventEmitter();
+ // @Output() stepIndexChange = new EventEmitter();
   @Output() updateFormValues = new EventEmitter();
   @ViewChild('verticalMenu1') stepper;
+
+  //**Misc */
+  customPartsValue$: Observable<any>;
+  customPartsValue = [];
 
   //** Form Properties */
   verticalForm: FormGroup;
@@ -54,26 +60,37 @@ export class VerticalViewComponent implements OnInit {
   slideConfig = {"slidesToShow": 2, "slidesToScroll": 2, "swipeToslide":true};
   imgSlideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "swipeToslide":true};
 
+  // //**internal object of selected radio options. Compared against new values emitted by observable */
+  // private results = {};
+
   //** properties and functions to manage Ng5-slider*/
+  // //** properties and functions to manage Ng5-slider*/
+  // gloveCustomSlider = _.map(this.gloveSliderColors, 'value');
+  // gloveSlider = this.nysApi.gloveSlider; 
+  
+  // //**Embroidery color slider */
+  // gloveEmbroiderySlider = _.map(this.embroiderSliderColors,'value');
+  // embroiderySlider = this.nysApi.embroiderySlider;
+  // gloveDesignData = [];
+  // leatherColors = [];
+  // embroideryColors = [];
+
+
+ //** properties and functions to manage Ng5-slider*/ 
   embroiderSliderColors: GloveColors[];
   gloveSliderColors: GloveColors[];
+  filteredDataSlider: GloveSlider[] = [];
+  gloveDataSlider: GloveSlider[];
+  gloveEmbroiderySlider: string[];
+  gloveCustomSlider = [];
+  gloveSlider: Options;
+  embroiderySlider: Options;
+  value: number;
+  valueEmbroidery: number;
   
-  //**internal object of selected radio options. Compared against new values emitted by observable */
-  private results = {};
-
-  //** properties and functions to manage Ng5-slider*/
-  gloveCustomSlider = _.map(this.gloveSliderColors, 'value');
-  gloveSlider = this.nysApi.gloveSlider; 
+  // End Slider properties declaration */
   
-  //**Embroidery color slider */
-  gloveEmbroiderySlider = _.map(this.embroiderSliderColors,'value');
-  embroiderySlider = this.nysApi.embroiderySlider;
-  gloveDesignData = [];
-  leatherColors = [];
-  embroideryColors = [];
-
-  customPartsValue$: Observable<any>;
-  customPartsValue = [];
+  
   
   constructor(private fb:FormBuilder, 
               private snackBar:MatSnackBar,
@@ -81,22 +98,101 @@ export class VerticalViewComponent implements OnInit {
               private gloveData: GloveDataService ) {}
 
   ngOnInit() {
+    this.filteredDataSlider = gloveDesignData;
     this.formFields = this.nysApi.getFormValues();
-    this.verticalForm = this.fb.group(this.formFields);
+    // this.gloveData.getGloveSliderColors().subscribe(
+    //   (res:GloveSlider[]) => this.filteredDataSlider = res
+    // )
     this.formValues = this.nysApi.getFormValues();
+    this.verticalForm = this.fb.group(this.formFields);
+    
     this.onChanges();
     this.filteredImages = this.nysApi.loadFilteredImages();
-    this.customPartsValue$ = this.gloveData.getCustomParts();
+    this.gloveData.getGloveSliderColors().subscribe(
+      (res:GloveSlider[]) => {
+        this.gloveDataSlider = this.filteredDataSlider = res
+        console.log(res)
+      }
+    )
+    this.nysApi.currentLeatherType$.subscribe(res => {
+      console.log('connected')
+      var filter = []
+      switch (res) {
+        case "kip":
+          _.filter(this.filteredDataSlider,(f)=>{
+            _.find(f.leather,m => {
+              if(m == res){
+                filter.push(f)
+              }
+            })
+          })
+          this.leatherSliderColors(filter);
+          break;
+      
+        default:
+          this.leatherSliderColors(this.filteredDataSlider)
+          this.embSliderColors(embroiderySliderData)
+          break;
+      }
+      console.log(this.filteredDataSlider)
+    })
+    
+    this.tobedetermined();
 
+  }
+  //** Forgotten Function */
+
+  tobedetermined(){
+    this.customPartsValue$ = this.gloveData.getCustomParts();
     this.customPartsValue$.pipe(takeUntil(this.unsubscribe$)).subscribe(
       val => _.forEach(val,(v)=>{
         this.customPartsValue.push(v);
       })
     );
-
-    console.log(this.filteredImages)
-    
   }
+  //**Glove Leather Slider */
+  leatherSliderColors(db:GloveSlider[]){    
+    this.gloveCustomSlider = _.map(db, 'value');
+    this.value = this.nysApi.valueToIndex("Start", this.gloveCustomSlider)
+    this.gloveSlider = {
+      showSelectionBar: true,
+      stepsArray: this.gloveCustomSlider.map((color:string):CustomStepDefinition => {
+      return { value: this.nysApi.valueToIndex(color,this.gloveCustomSlider) };
+      }),
+      translate: (value: number, label: LabelType): string =>{
+      return this.nysApi.indexToValue(value, this.gloveCustomSlider);
+      },
+      showTicks:true,
+      getPointerColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+      getTickColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+      getSelectionBarColor: (value:number): string => {
+      return this.nysApi.setSliderColor(value,db);
+      }
+    }
+  }
+
+  //**Embroidery color slider */
+  embSliderColors(db: { "value": string; "hex": string; }[]){    
+    
+    this.gloveEmbroiderySlider = _.map(db,'value');
+    this.valueEmbroidery = this.nysApi.valueToIndex("Start",this.gloveEmbroiderySlider);
+
+    this.embroiderySlider = {
+      showSelectionBar: true,
+      stepsArray: this.gloveEmbroiderySlider.map((color:string):CustomStepDefinition => {
+      return { value: this.nysApi.valueToIndex(color,this.gloveEmbroiderySlider) };
+      }),
+      translate: (value: number, label: LabelType): string =>{
+      return this.nysApi.indexToValue(value, this.gloveEmbroiderySlider);
+      },showTicks:true,
+      getPointerColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+      getTickColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+      getSelectionBarColor: (value:number): string => {
+      return this.nysApi.setSliderColor(value,db);
+      }
+    }
+  }
+
   //** Advance to next step of master stepper */
   nextStep(){
     this.stepper.next(); 
@@ -133,26 +229,12 @@ export class VerticalViewComponent implements OnInit {
 
     this.filteredImages = this.nysApi.loadFilteredImages();
     
-    this.gloveData.getCustomParts().subscribe(val => {
-      //console.log(val)
-      this.gloveDesignData.push(val);
-      _.forEach(this.gloveDesignData,(v)=>{
-        _.forEach(v.gloveSection,(f)=>{
-            if(f === "leather"){
-              this.leatherColors.push(v);          
-            }
-
-            if(f === "embroidery"){
-              this.embroideryColors.push(v)
-            }            
-        })
-      })
-    });
   }
 
   setGloveHand(event){
+    console.log(event);
     const id = event.target.parentElement.id;
-    console.log(id);
+    
     switch (id) {
       case "leftHand":
         this.snackBar.open("You wear your glove on LEFT",'DISMISS',{duration:2000})

@@ -29,7 +29,7 @@
 
                         </mat-step>
                         <!-- Question #2 -->
-                        <mat-step>
+                        <!-- <mat-step>
 
                             <mat-icon></mat-icon>
                             <ng-template matStepLabel>Glove Quality</ng-template>
@@ -53,7 +53,8 @@
                                 <button mat-raised-button matStepperPrevious type="button">Back</button>
                                 <button mat-raised-button matStepperNext type="button">Next</button>
                             </div>
-                        </mat-step>
+                        </mat-step> -->
+                        
                         <!-- Question #3 -->
                         <mat-step>
                             <mat-icon></mat-icon>
@@ -137,7 +138,7 @@
                                 <button mat-raised-button matStepperPrevious type="button">Back</button>
                                 <button mat-raised-button matStepperNext type="button">Next</button>
                             </div>
-                        </mat-step>
+                        </mat-step> 
                         <!-- Question #7 -->
                         <mat-step>
                             <mat-icon></mat-icon>
@@ -209,6 +210,25 @@
                                         [showNavigationIndicators]="showNavigationIndicators"
                                         [showNavigationArrows]="showNavigationArrows" [question]="question">
                                     </glove-customizer-vertical-view>
+
+                                    <div class="vertical-view__item">
+                                        <div class="horizontal-wizard-slider">
+                                          <div *ngIf="sliderStatus">
+                                            <ng5-slider class="vertical-wizard-slider" [(value)]="value"
+                                              [options]="gloveSlider" (userChangeStart)="onFinishSliderOne(horizontalSlider.value)"
+                                              (userChange)="onFinishSliderOne(horizontalSlider.value)"></ng5-slider>
+                                          </div>
+                                          <div *ngIf="!sliderStatus">
+                                            <ng5-slider class="vertical-wizard-slider" [(value)]="valueEmbroidery"
+                                              [options]="embroiderySlider" (userChangeStart)="onFinishSliderOne(horizontalEmbSlider.value)"
+                                              (userChange)="onFinishSliderTwo(horizontalEmbSlider.value)"></ng5-slider>
+                                          </div>
+                                        </div>
+                                      </div>&nbsp;
+                                    <!-- <mat-slider
+                                    (change)="onFinishSliderOne(horizontalSlider.value)"
+                                    [value]=""
+                                    ></mat-slider> -->
                                 </div>
                             </div>
 

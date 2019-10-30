@@ -538,7 +538,7 @@ export class GloveApi {
         // this.gloveCloneMainVertical.clear(); this.gloveCloneInsideVertical.clear(); this.gloveCloneSideVertical.clear();
         //this.gloveCloneMainVertical.clear(); this.gloveCloneInsideVertical.clear(); this.gloveCloneSideVertical.clear();
         this.bgroup1.clear(), this.bgroup2.clear(), this.bgroup3.clear();
-        this.vgroup1.clear(), this.vgroup2.clear(), this.vgroup3.clear();
+        // this.vgroup1.clear(), this.vgroup2.clear(), this.vgroup3.clear();
     }
 
     //** Returns filtered array of images for step 5 */
@@ -1570,93 +1570,93 @@ export class GloveApi {
             let svgCheck = '<path id="check_mark" d="M50.1 25.2l7.1 7.2 16.7-16.8" draggable="false" stroke="white" stroke-width=3 />',
                 svgCheckSpeed = 140;
 
-            // Wizard Question 2. What is position played? 
-            Snap.load("assets/images/field2.svg", (f) => {
-                this.fieldMap.attr({ viewBox: "0 0 400 400" });
-                let self = this;
-                var g = f.selectAll('#base,#outfield,#infield,#mound,#lf_of,#cf_of,#rf_of,#ss_inf,#second_inf,#third_inf,#p_pitcher,#fb_fbase,#mitt_cm');
-                g.forEach((el, i) => {
-                    var p = ['base', 'outfield', 'infield', 'mound', 'lf_of', 'cf_of', 'rf_of', 'ss_inf', 'second_inf', 'third_inf', 'p_pitcher', 'fb_fbase', 'mitt_cm'];
-                    var layer = p[i];
+            // // Wizard Question 2. What is position played? 
+            // Snap.load("assets/images/field2.svg", (f) => {
+            //     this.fieldMap.attr({ viewBox: "0 0 400 400" });
+            //     let self = this;
+            //     var g = f.selectAll('#base,#outfield,#infield,#mound,#lf_of,#cf_of,#rf_of,#ss_inf,#second_inf,#third_inf,#p_pitcher,#fb_fbase,#mitt_cm');
+            //     g.forEach((el, i) => {
+            //         var p = ['base', 'outfield', 'infield', 'mound', 'lf_of', 'cf_of', 'rf_of', 'ss_inf', 'second_inf', 'third_inf', 'p_pitcher', 'fb_fbase', 'mitt_cm'];
+            //         var layer = p[i];
 
-                    if (layer.includes("base") || layer.includes("mound")) {
-                        el.attr({ fill: 'black' });
-                    } else {
-                        el.attr({ fill: 'white' });
-                    }
+            //         if (layer.includes("base") || layer.includes("mound")) {
+            //             el.attr({ fill: 'black' });
+            //         } else {
+            //             el.attr({ fill: 'white' });
+            //         }
 
-                    if (layer.includes("_")) {
-                        el.attr({ fill: 'blue', stroke: 'red', strokeWidth: 1 });
-                        var filteredName = layer.split('_').pop();
-                        el.name = filteredName;
-                        var myDrawing1 = new Drawing(svgCircle, 't5, 32, s1.1', svgCircleSpeed, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,-50s0.5', self.fieldMap);
-                        var myDrawing2 = new Drawing(svgCheck, 't0,32 s1.3', svgCheckSpeed, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,-38s0.5', self.fieldMap);
-                        ((() => {
-                            el.click(() => {
+            //         if (layer.includes("_")) {
+            //             el.attr({ fill: 'blue', stroke: 'red', strokeWidth: 1 });
+            //             var filteredName = layer.split('_').pop();
+            //             el.name = filteredName;
+            //             var myDrawing1 = new Drawing(svgCircle, 't5, 32, s1.1', svgCircleSpeed, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,-50s0.5', self.fieldMap);
+            //             var myDrawing2 = new Drawing(svgCheck, 't0,32 s1.3', svgCheckSpeed, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,-38s0.5', self.fieldMap);
+            //             ((() => {
+            //                 el.click(() => {
 
-                                if (!el.hasClass('.checked')) {
-                                    self.fieldMap.selectAll('#check_circle, #check_mark').remove();
+            //                     if (!el.hasClass('.checked')) {
+            //                         self.fieldMap.selectAll('#check_circle, #check_mark').remove();
 
-                                    myDrawing1.initDraw();
-                                    myDrawing1.callOnFinished = function () {
-                                        self.fieldMap.selectAll('#check_circle').attr({ fill: "#7ac142" });
-                                        myDrawing2.initDraw();
-                                    };
-                                    el.addClass('checked');
-                                    el.removeClass('unchecked');
-                                } else {
-                                    el.removeClass('checked');
-                                    el.addClass('unchecked');
-                                    self.fieldMap.selectAll('checked').forEach(function (el) {
-                                        el.remove();
-                                    });
-                                }
+            //                         myDrawing1.initDraw();
+            //                         myDrawing1.callOnFinished = function () {
+            //                             self.fieldMap.selectAll('#check_circle').attr({ fill: "#7ac142" });
+            //                             myDrawing2.initDraw();
+            //                         };
+            //                         el.addClass('checked');
+            //                         el.removeClass('unchecked');
+            //                     } else {
+            //                         el.removeClass('checked');
+            //                         el.addClass('unchecked');
+            //                         self.fieldMap.selectAll('checked').forEach(function (el) {
+            //                             el.remove();
+            //                         });
+            //                     }
 
-                                if (self.gloveType && self.gloveType === el.name) {
-                                    ////console.log('Glove type are the same');
-                                    ////console.log(el.name);
-                                } else {
-                                    self.clearGloveCanvas();
-                                    self.gloveType = el.name;
+            //                     if (self.gloveType && self.gloveType === el.name) {
+            //                         ////console.log('Glove type are the same');
+            //                         ////console.log(el.name);
+            //                     } else {
+            //                         self.clearGloveCanvas();
+            //                         self.gloveType = el.name;
 
 
-                                    switch (self.gloveType) {
-                                        case 'inf':
-                                            self.setGloveSizeSlider("10.50", "12.00", .25);
-                                            self.loadInfield();
-                                            self.setGloveType(el.name);
+            //                         switch (self.gloveType) {
+            //                             case 'inf':
+            //                                 self.setGloveSizeSlider("10.50", "12.00", .25);
+            //                                 self.loadInfield();
+            //                                 self.setGloveType(el.name);
 
-                                            break;
-                                        case 'of':
-                                            self.setGloveSizeSlider("12.00", "13.00", .25);
-                                            self.loadOutfield();
-                                            self.setGloveType(el.name);
-                                            break;
-                                        case 'fbase':
-                                            self.setGloveSizeSlider("12.50", "13.00", .25);
-                                            self.loadFbase();
-                                            self.setGloveType(el.name);
-                                            break;
-                                        case 'cm':
-                                            self.setGloveSizeSlider("32.00", "34.00", .50);
-                                            self.loadCatcher();
-                                            self.setGloveType(el.name);
-                                            break;
-                                        case 'pitcher':
-                                            self.setGloveSizeSlider("12.50", "13.00", .25);
-                                            self.loadPitcher();
-                                            self.setGloveType(el.name);
-                                            break;
-                                        default:
-                                        ////console.log('done');
-                                    }
-                                }
-                            });
-                        })(), false);
-                    }
-                    self.fieldMap.append(el);
-                });
-            });           
+            //                                 break;
+            //                             case 'of':
+            //                                 self.setGloveSizeSlider("12.00", "13.00", .25);
+            //                                 self.loadOutfield();
+            //                                 self.setGloveType(el.name);
+            //                                 break;
+            //                             case 'fbase':
+            //                                 self.setGloveSizeSlider("12.50", "13.00", .25);
+            //                                 self.loadFbase();
+            //                                 self.setGloveType(el.name);
+            //                                 break;
+            //                             case 'cm':
+            //                                 self.setGloveSizeSlider("32.00", "34.00", .50);
+            //                                 self.loadCatcher();
+            //                                 self.setGloveType(el.name);
+            //                                 break;
+            //                             case 'pitcher':
+            //                                 self.setGloveSizeSlider("12.50", "13.00", .25);
+            //                                 self.loadPitcher();
+            //                                 self.setGloveType(el.name);
+            //                                 break;
+            //                             default:
+            //                             ////console.log('done');
+            //                         }
+            //                     }
+            //                 });
+            //             })(), false);
+            //         }
+            //         self.fieldMap.append(el);
+            //     });
+            // });           
 
         } catch (error) {
             return false;
