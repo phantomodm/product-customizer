@@ -9,6 +9,7 @@ import { GloveColors, GloveSlider } from 'src/app/shared/models/nine-positions-m
 import { GloveDataService } from 'src/app/shared/services/gloveData';
 import { gloveDesignData, embroiderySliderData } from 'src/app/shared/data/api-data';
 import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
+import { GloveSize } from 'src/app/shared/models/nine-positions-models';
 
 
 @Component({
@@ -87,6 +88,7 @@ export class VerticalViewComponent implements OnInit {
   embroiderySlider: Options;
   value: number;
   valueEmbroidery: number;
+  glove: GloveSize;
   
   // End Slider properties declaration */
   
@@ -110,32 +112,33 @@ export class VerticalViewComponent implements OnInit {
     this.filteredImages = this.nysApi.loadFilteredImages();
     this.gloveData.getGloveSliderColors().subscribe(
       (res:GloveSlider[]) => {
-        this.gloveDataSlider = this.filteredDataSlider = res
-        console.log(res)
+        this.gloveDataSlider = this.filteredDataSlider = res;
+        this.initilizeGloveSlider();
       }
     )
-    this.nysApi.currentLeatherType$.subscribe(res => {
-      console.log('connected')
-      var filter = []
-      switch (res) {
-        case "kip":
-          _.filter(this.filteredDataSlider,(f)=>{
-            _.find(f.leather,m => {
-              if(m == res){
-                filter.push(f)
-              }
-            })
-          })
-          this.leatherSliderColors(filter);
-          break;
+    
+    // this.nysApi.currentLeatherType$.subscribe(res => {
+    //   console.log('connected')
+    //   var filter = []
+    //   switch (res) {
+    //     case "kip":
+    //       _.filter(this.filteredDataSlider,(f)=>{
+    //         _.find(f.leather,m => {
+    //           if(m == res){
+    //             filter.push(f)
+    //           }
+    //         })
+    //       })
+    //       this.leatherSliderColors(filter);
+    //       break;
       
-        default:
-          this.leatherSliderColors(this.filteredDataSlider)
-          this.embSliderColors(embroiderySliderData)
-          break;
-      }
-      console.log(this.filteredDataSlider)
-    })
+    //     default:
+    //       this.leatherSliderColors(this.filteredDataSlider)
+    //       this.embSliderColors(embroiderySliderData)
+    //       break;
+    //   }
+    //   console.log(this.filteredDataSlider)
+    // })
     
     this.tobedetermined();
 
@@ -150,6 +153,12 @@ export class VerticalViewComponent implements OnInit {
       })
     );
   }
+
+  initilizeGloveSlider(){
+    this.leatherSliderColors(this.filteredDataSlider);
+    this.embSliderColors(embroiderySliderData);
+  }
+
   //**Glove Leather Slider */
   leatherSliderColors(db:GloveSlider[]){    
     this.gloveCustomSlider = _.map(db, 'value');
@@ -332,8 +341,10 @@ export class VerticalViewComponent implements OnInit {
 
   //** Set glove size choice from frontend and snackbar confirmation bar*/
   setGloveSize(event){
-    this.snackBar.open(event.value + "\" inch glove was selected.",'DISMISS',{duration:2000})
-    this.nysApi.setGloveSize(event);
+    const id = event
+    this.snackBar.open(id.value + "\" inch glove was selected.",'DISMISS',{duration:2000})
+    this.glove.size = `${id.value}`;
+    this.nysApi.setGloveSize(id);
   }
 
   //** Set position choice from frontend and snackbar confirmation bar*/

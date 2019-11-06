@@ -35,6 +35,12 @@ export interface GloveSlider {
     leather:string[];
 }
 
+export interface GloveSize {
+    size?:string;
+    content?:string;
+    img?: string;
+}
+
 export interface NavFormControl { 
     sportPlayed: string; 
     gloveType: string; 

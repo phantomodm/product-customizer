@@ -101,7 +101,6 @@ export class GloveApi {
                 complete: false,
                 menu: [
                     { step: STEPS.sportPlayed, valid: false },
-                    { step: STEPS.gloveSeries, valid: false },
                     { step: STEPS.gloveType, valid: false },
                     { step: STEPS.gloveHand, valid: false },
                     { step: STEPS.handSize, valid: false },
@@ -147,6 +146,7 @@ export class GloveApi {
         this.indicatorMap = this.customGloveData.indicatorCanvasMap;
         this.formValues = this.customGloveData.formValues;
         this.currentGlovePart.next(false);
+        this.currentLeatherType.next("steer");
         this.gloveData.getCustomParts()
             .subscribe(val => {
                 _.forEach(val, (v) => {
@@ -474,12 +474,11 @@ export class GloveApi {
     }
 
     private _applyHtmlInput(value: string) {
-        console.log(value);
+       
         try {
             (<HTMLInputElement>document.getElementById(value)).checked = true;
         } catch (error) {
             console.log("Dev Mode...")
-            console.log(this.customGloveData)
         }
     }
 
