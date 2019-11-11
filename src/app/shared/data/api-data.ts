@@ -15,7 +15,7 @@
 // ]
 
 export const gloveDesignData =[
-    {"value":"Start","hex":null,"leather":["kip","steer"]},
+    {"value":"Start","hex":"#c0c0c0","leather":["kip","steer"]},
     {"value": "Black","hex": "#010101","leather":["kip","steer"]},
     {"value": "Mocha","hex": "#863615","leather":["steer"]},
     {"value": "Navy Blue","hex": "#000080","leather":["steer"]},

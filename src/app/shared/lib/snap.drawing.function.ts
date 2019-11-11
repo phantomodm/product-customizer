@@ -45,7 +45,9 @@ Drawing.prototype.draw = function () { // this is the main animation bit
     //this.groupClone.append(myPath);
 
     myPath.attr({
-        fill: 'none',        
+        fill: 'none',
+        id:'check_mark',
+        class:'confirmation-check',       
         "stroke-dasharray": this.leng + " " + this.leng,
         "stroke-dashoffset": this.leng
     });

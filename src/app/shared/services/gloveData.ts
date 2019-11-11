@@ -65,4 +65,7 @@ import * as _ from 'lodash';
     )
   }
 
+  getGloveSizeContent(): Observable<any>{
+    return this.db.list('nystixs-glove-guide').valueChanges() ;
+  }
 }

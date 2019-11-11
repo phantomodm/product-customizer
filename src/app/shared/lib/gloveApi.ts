@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { STEPS, Glove, WebFilter } from '../models/wizard.models';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { GloveColors } from '../models/nine-positions-models';
+import { GloveColors, HtmlInputValue } from '../models/nine-positions-models';
 import { GloveDataService } from '../services/gloveData';
 import { Options, CustomStepDefinition, LabelType } from 'ng5-slider';
 import { Drawing } from './snap.drawing.function';
@@ -85,7 +85,7 @@ export class GloveApi {
 
     currentLeatherType = new Subject<string>();
     currentLeatherType$ = this.currentLeatherType.asObservable();
-
+    
     //**Web database */
     webData$ = this.gloveData.getPositionsData();
 
@@ -149,15 +149,19 @@ export class GloveApi {
         this.currentLeatherType.next("steer");
         this.gloveData.getCustomParts()
             .subscribe(val => {
+                
                 _.forEach(val, (v) => {
+                    
                     this.gloveCustomData.push(v);
                 })
+                
             });
 
         this.gloveData.getWizardSteps().subscribe(val => {
             if (_.has(val, "gloveFit")) {
                 this.wizardSteps.push(val);
             }
+            
         })
 
         this.gloveData.getGloveColors().subscribe(val => {
@@ -257,12 +261,6 @@ export class GloveApi {
                         let currentGlove = this.customGloveData.shoWebType;
                         htmlId = o.id;
                         this.currentGloveType.next(o.webType)
-                        console.log(o.webType)
-                        //**Filters Step 5 image carousel */
-                        _.forEach(o.img, (i) => {
-                            console.log(i)
-                            this.updateImageFilter.push(i);
-                        })
                     }
                 })
                 return 1;
@@ -322,49 +320,7 @@ export class GloveApi {
     //** Returns slider index to value function for front-end slider */
     indexToValue(index: number, db): string {
         return db[index];
-    }
-
-    // //** properties and functions to manage Ng5-slider*/ 
-    gloveCustomSlider = _.map(this.gloveDesignData, 'value');
-    value: number = this.valueToIndex("Start", this.gloveCustomSlider);
-
-    gloveSlider: Options = {
-        showSelectionBar: true,
-        stepsArray: this.gloveCustomSlider.map((color: string): CustomStepDefinition => {
-            return { value: this.valueToIndex(color, this.gloveCustomSlider) };
-        }),
-        translate: (value: number, label: LabelType): string => {
-            return this.indexToValue(value, this.gloveCustomSlider);
-        },
-        showTicks: true,
-        getPointerColor: (value: number): string => { return this.setSliderColor(value, this.gloveDesignData) },
-        getTickColor: (value: number): string => { return this.setSliderColor(value, this.gloveDesignData) },
-        getSelectionBarColor: (value: number): string => {
-            return this.setSliderColor(value, this.gloveDesignData);
-        }
-    }
-
-    //**Embroidery color slider */
-    gloveEmbroiderySlider = _.map(this.embroiderySliderData, 'value');
-    valueEmbroidery: number = this.valueToIndex("Start", this.gloveEmbroiderySlider);
-
-    embroiderySlider: Options = {
-        showSelectionBar: true,
-        stepsArray: this.gloveEmbroiderySlider.map((color: string): CustomStepDefinition => {
-            return { value: this.valueToIndex(color, this.gloveEmbroiderySlider) };
-        }),
-        translate: (value: number, label: LabelType): string => {
-            return this.indexToValue(value, this.gloveEmbroiderySlider);
-        }, showTicks: true,
-        getPointerColor: (value: number): string => { return this.setSliderColor(value, this.embroiderySliderData) },
-        getTickColor: (value: number): string => { return this.setSliderColor(value, this.embroiderySliderData) },
-        getSelectionBarColor: (value: number): string => {
-            return this.setSliderColor(value, this.embroiderySliderData);
-        }
-    }
-    //** END SLIDER CONFIGURATION */
-
-    
+    }   
 
     // Functions supporting front-end form functionality
     //** Initial form values */
@@ -415,24 +371,16 @@ export class GloveApi {
 
     // TODO Possibly replacable by Renderer2 function
     //** Collects and sets customer input for hand customer wears glove on question #3 */
-    setGloveHand(glovehand: string) {
-        const id = glovehand.split('H').shift();
+    setGloveHand(gloveHand: string, htmlValue:HtmlInputValue) {
+        const id = gloveHand;
         this.gloveBody.gloveHand = id;
-        _.forEach(this.wizardSteps, (w) => {
-            _.forEach(w.gloveHand, (g) => {
-                _.forEach(g.options, (o) => {
-                    const name = _.toLower(o.valueString)
-                    if (_.isEqual(name, id)) {
-                        this._applyHtmlInput(o.id);
-                    }
-                })
-            })
-        })
+        this._applyHtmlInput(htmlValue)
     }
 
     //** Sets selected glove size */
     setGloveSize = (event: any) => {
         let value = event.value.toString();
+        console.log(value);
         (value.length == 2) ? value += '.00'
             : (value.length == 4) ? value += '0'
                 : null;
@@ -441,9 +389,8 @@ export class GloveApi {
             _.forEach(w.gloveSize, (g) => {
                 _.forEach(g.options, (o) => {
                     if (o.valueString === value) {
-                        this._applyHtmlInput(o.id)
+                        this._applyHtmlInput({'id':o.id,'value':o.value})
                     }
-
                 })
             })
         })
@@ -452,38 +399,40 @@ export class GloveApi {
 
     //** Collects customer input description of hand question#4. */
     //** If Small Hands is selected a popup ask if glove is for youth player */
-    setHandSize(handSizeId: string) {
+    setHandSize(handSizeId: string, htmlValue:HtmlInputValue) {
         const id = handSizeId;
         this.gloveBody.handSize = id;
-        _.forEach(this.wizardSteps, (w) => {
-            _.forEach(w.gloveFit, (value, key) => {
-                _.forEach(value.options, (o) => {
-                    if (_.includes(id, _.toLower(o.valueString))) {
-                        console.log(id)
-                        if (_.isEqual(id, "smallHand")) {
-                            this.notifyOther({ option: 'Hand Size', value: id });
-                            //this.customGloveData.isYouthGlove = true;
-                            this._applyHtmlInput(o.id);
-                        }
-                        this.customGloveData.isYouthGlove = false;
-                        this._applyHtmlInput(o.id);
-                    }
-                })
-            })
-        })
+        this.applyHtmlInput(htmlValue)
+        // _.forEach(this.wizardSteps, (w) => {
+        //     _.forEach(w.gloveFit, (value, key) => {
+        //         _.forEach(value.options, (o) => {
+        //             if (_.includes(id, _.toLower(o.valueString))) {
+        //                 console.log(id)
+        //                 if (_.isEqual(id, "smallHand")) {
+        //                     this.notifyOther({ option: 'Hand Size', value: id });
+        //                     //this.customGloveData.isYouthGlove = true;
+        //                     this._applyHtmlInput(o.id);
+        //                 }
+        //                 this.customGloveData.isYouthGlove = false;
+        //                 this._applyHtmlInput(o.id);
+        //             }
+        //         })
+        //     })
+        // })
     }
 
-    private _applyHtmlInput(value: string) {
-       
+    private _applyHtmlInput(inputValue:HtmlInputValue) {
+       const formId = `attribute_${inputValue.id}`;
+       console.log(inputValue)
         try {
-            (<HTMLInputElement>document.getElementById(value)).checked = true;
+            (<HTMLInputElement>document.getElementById(formId)).value = inputValue.value;
         } catch (error) {
             console.log("Dev Mode...")
         }
     }
 
-    applyHtmlInput(value: string) {
-        this._applyHtmlInput(value);
+    applyHtmlInput(htmlValue:HtmlInputValue) {
+        this._applyHtmlInput(htmlValue);
     }
 
     updateWebFilter() {
@@ -651,32 +600,9 @@ export class GloveApi {
             self.imageType = obj.name;
             self.customGloveData.currModel = obj.model;
             self.setGloveSliderControl(obj.name);
+            
             //e.stopPropagation();
         });
-
-        // element2.click(function (e) {
-        //     ;
-        //     ////console.log("virtual click")
-        //     if (!this.hasClass('selected')) {
-        //         self.m1.selectAll('.selected').forEach(function (el) {
-        //             el.removeClass('selected');
-        //         });
-        //         self.m2.selectAll('.selected').forEach(function (el) {
-        //             el.removeClass('selected');
-        //         });
-        //         self.m3.selectAll('.selected').forEach(function (el) {
-        //             el.removeClass('selected');
-        //         });
-        //         this.addClass('selected');
-        //     } else {
-        //         this.addClass('unselected');
-        //     }
-        //     self.imageType = obj.name;
-        //     self.customGloveData.currModel = obj.model;
-        //     self.setGloveSliderControl(obj.name);
-        //     //e.stopPropagation();
-
-        // });
 
         element.mouseover(function (e) {
             ;
@@ -689,35 +615,34 @@ export class GloveApi {
         })
     }
 
-    setGloveSeries = (valueString: string, formValue: string, htmlId: string) => {
-        let key = "series";
-        let value = "value";
+    // setGloveSeries = (valueString: string, formValue: string, htmlId: string) => {
+    //     let key = "series";
+    //     let value = "value";
 
-        if (_.includes(valueString, 'elite')) {
-            this.customGloveData.gloveSeries[key] = "elite";
-            this.setSeriesOnGlove("elite");
-            if(_.includes(valueString,'kip')){
-                this.currentLeatherType.next('kip');
-            }
-        } else if (_.includes(valueString, 'rise')) {
-            this.customGloveData.gloveSeries[key] = "rise";
-            this.currentLeatherType.next('rise');
-            this.setSeriesOnGlove("rise")
-        } else {
-            this.currentLeatherType.next('cowhide');
-            console.log("cowhide")
-        }
+    //     if (_.includes(valueString, 'elite')) {
+    //         this.customGloveData.gloveSeries[key] = "elite";
+    //         this.setSeriesOnGlove("elite");
+    //         if(_.includes(valueString,'kip')){
+    //             this.currentLeatherType.next('kip');
+    //         }
+    //     } else if (_.includes(valueString, 'rise')) {
+    //         this.customGloveData.gloveSeries[key] = "rise";
+    //         this.currentLeatherType.next('rise');
+    //         this.setSeriesOnGlove("rise")
+    //     } else {
+    //         this.currentLeatherType.next('cowhide');
+    //         console.log("cowhide")
+    //     }
 
-        this.customGloveData.gloveSeries[value] = formValue;
-        this._applyHtmlInput(htmlId)
-    }
+    //     this.customGloveData.gloveSeries[value] = formValue;
+    //     this._applyHtmlInput(htmlId)
+    // }
 
     setSeriesOnGlove = (input?: any, element?: any) => {
         let self = this;
         let series = input;
         let currentSeries = self.gloveSeries.series;
         let comparison;
-        console.log(input)
         if (!element) {
             self.gloveSeriesArray.forEach(
                 svgElement => {
@@ -752,12 +677,15 @@ export class GloveApi {
 
     //** Function run to return current glove section and color chosen to render in glove canvas */
     setGloveCanvas = (colorString: string) => {
+        const color = colorString.toLowerCase()
         const imageTypeSelected = this.imageType;
         _.forEach(this.gloveCustomData, (value, key) => {
             const section = value.gloveSection;
             if (section === imageTypeSelected) {
                 _.forEach(value.options, (o) => {
-                    if (o.valueString === colorString) {
+                    
+                    if (o.value === color) {
+                        console.log(o.value, color)
                         this._applyHtmlInput(o.id);
                         this.applyFillToCanvas(o.hex);
                     }
@@ -768,6 +696,7 @@ export class GloveApi {
 
     applyFillToCanvas = (value: string) => {
         const fill = value;
+        
         const svgLayerSuffix = "_x5F_";
         _.forEach(gloveCanvas, (value, key) => {
             const el = value.element;
@@ -846,13 +775,9 @@ export class GloveApi {
                                         drawing.initDraw();
                                         el.addClass('complete');
                                     });
-                                    // self.gloveCloneSideVertical.selectAll('#' + o.name).forEach(function (el) {
-                                    //     var drawing = new Drawing(statusCheckMark, 't15,32 s1.2', 150, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,10s0.5', self.gloveCloneSideVertical);
-                                    //     drawing.initDraw();
-                                    //     el.addClass('complete');
-                                    // })
 
                                 default:
+                                    
 
                             }
                         }
@@ -1151,7 +1076,7 @@ export class GloveApi {
 
                 if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
                     el.attr({ opacity: 0 })
-                    this.setSeriesOnGlove(filter, el);
+                    //this.setSeriesOnGlove(filter, el);
                 }
 
                 self.m1.append(self.oView);

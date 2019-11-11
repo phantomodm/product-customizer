@@ -64,7 +64,7 @@
                                 <div class="vertical-view_row">
                                     <div class="vertical-view__item wrap" *ngFor="let option of position.options">
                                         <button mat-raised-button type="button" color="primary"
-                                            (click)="setGloveType(option.shortName, option.fullName, option.value, position.formName,'subForm1')">{{option.fullName}}</button>
+                                            (click)="setGloveType(option.shortName, option.fullName, option.id, option.value, position.formName,'subForm1', position.img)">{{option.fullName}}</button>
                                     </div>
                                 </div>
                                 &nbsp;
@@ -82,7 +82,7 @@
                                 <mat-card-title>{{hand.label}}</mat-card-title>
                                 <div class="vertical-view_row">
                                     <mat-card class="vertical-view_column vertical-view-column_img"
-                                        *ngFor="let option of hand.options" (click)="setGloveHand($event)">
+                                        *ngFor="let option of hand.options" (click)="setGloveHand(option.id, option.value, option.valueString)">
                                         <div>
                                             <img mat-card-image src="./assets/images/{{option.img}}">
                                         </div>
@@ -188,8 +188,10 @@
 
                                 <div class="vertical-view__list vertical-flex-grow">
                                     <mat-card>
-                                        <mat-card-title>{{glove.size}}" Glove</mat-card-title>
-                                        <mat-card-content></mat-card-content>
+                                        <mat-card-title>{{glove.size}} Glove</mat-card-title>
+                                        <img mat-card-image [src]="handSizeImg">
+                                        <mat-card-content *ngFor="let item of filterdGloveContent"></mat-card-content>
+                                        
                                     </mat-card>
                                     <glove-carousel-view></glove-carousel-view>
                                 </div>
@@ -218,14 +220,14 @@
                                     <div class="vertical-view__item">
                                         <div class="horizontal-wizard-slider">
                                           <div *ngIf="sliderStatus">
-                                            <ng5-slider class="vertical-wizard-slider" [(value)]="value"
-                                              [options]="gloveSlider" (userChangeStart)="onFinishSliderOne(horizontalSlider.value)"
-                                              (userChange)="onFinishSliderOne(horizontalSlider.value)"></ng5-slider>
+                                            <ng5-slider #verticalSlider class="vertical-wizard-slider" [(value)]="value"
+                                              [options]="gloveSlider" (userChangeStart)="onFinishSliderOne(verticalSlider.value)"
+                                              (userChange)="onFinishSliderOne(verticalSlider.value)"></ng5-slider>
                                           </div>
                                           <div *ngIf="!sliderStatus">
-                                            <ng5-slider class="vertical-wizard-slider" [(value)]="valueEmbroidery"
-                                              [options]="embroiderySlider" (userChangeStart)="onFinishSliderOne(horizontalEmbSlider.value)"
-                                              (userChange)="onFinishSliderTwo(horizontalEmbSlider.value)"></ng5-slider>
+                                            <ng5-slider #verticalEmbSlider class="vertical-wizard-slider" [(value)]="valueEmbroidery"
+                                              [options]="embroiderySlider" (userChangeStart)="onFinishSliderOne(verticalEmbSlider.value)"
+                                              (userChange)="onFinishSliderTwo(verticalEmbSlider.value)"></ng5-slider>
                                           </div>
                                         </div>
                                       </div>&nbsp;

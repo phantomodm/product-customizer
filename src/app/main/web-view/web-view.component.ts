@@ -55,15 +55,21 @@ export class WebViewComponent implements OnInit, AfterViewInit {
       _.forOwn(res,(value,key)=>{ 
         !_.isEqual(key,'gloveWeb') ? false : this.allGloveWebs = this.filteredGloveWebs = value[0]['options'] ;  
       })
+      
     })
 
     this.nysApi.canvasListener$.subscribe(res => this.canvasLoaded = res);
 
     this.nysApi.currentGloveType$.subscribe(res => {
+      
+      console.log(res)
+      console.log(this.filteredGloveWebs)
       if(res != undefined){
         var filter = [];
         _.filter(this.filteredGloveWebs,(f)=> {
+          console.log(f)
           _.find(f.gloveType,m =>{
+            
             if(m == res){
              filter.push(f);
             }
@@ -84,6 +90,7 @@ export class WebViewComponent implements OnInit, AfterViewInit {
 
     !_.isEqual(this.canvasLoaded,true) ? this.nysApi.initCanvas() : false;    
     this.cdr.detectChanges();
+    
 
   }
 

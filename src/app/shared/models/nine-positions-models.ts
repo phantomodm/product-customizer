@@ -37,8 +37,20 @@ export interface GloveSlider {
 
 export interface GloveSize {
     size?:string;
-    content?:string;
+    content?:any;
     img?: string;
+}
+
+export interface GloveSizeContent {
+    infielder?: string;
+    oufielder?: string;
+    catcher?: string;
+    pitcher?: string;
+}
+
+export interface HtmlInputValue {
+    id: string;
+    value: string;
 }
 
 export interface NavFormControl { 

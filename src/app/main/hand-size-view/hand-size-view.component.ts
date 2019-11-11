@@ -8,7 +8,7 @@ import { GloveApi } from 'src/app/shared/lib/gloveApi';
   templateUrl: './hand-size-view.component.html',
   styleUrls: ['./hand-size-view.component.css']
 })
-export class HandSizeViewComponent implements OnInit {
+export class HandSizeViewComponent {
   @Input() hands;
   @ViewChild('handSize') carousel: NguCarousel<any>;
 
@@ -29,26 +29,10 @@ export class HandSizeViewComponent implements OnInit {
 
   constructor(private snackBar:MatSnackBar, private nysApi: GloveApi) { }
 
-  ngOnInit() {
 
-  }
-
-  setGloveHand(event){
-    const id = event.target.parentElement.id;
-    switch (id) {
-      case "leftHand":
-        this.snackBar.open("You wear your glove on LEFT",'DISMISS',{duration:2000})
-        break;    
-      default:
-        this.snackBar.open("You wear your glove on RIGHT",'DISMISS',{duration:2000})
-        break;
-    }
-    this.nysApi.setGloveHand(id);
-  }
-
-  setHandSize(label:string,value:string,formName:string){
-    const id = label;
-    console.log(id)
+  setHandSize(label:string, attribute:string, value:string,formName:string){
+    const id = label; 
+    const htmlValue = {'id': attribute,'value': value}
     switch (id) {
       case "small":
       this.snackBar.open("Glove opening adjusted for SMALL hands",'DISMISS',{duration:2000})
@@ -62,6 +46,7 @@ export class HandSizeViewComponent implements OnInit {
       default:
         break;
     }
-    this.nysApi.setHandSize(id);
+
+    this.nysApi.setHandSize(id, htmlValue);
   }
 }
