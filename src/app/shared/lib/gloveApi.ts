@@ -379,12 +379,7 @@ export class GloveApi {
 
     //** Sets selected glove size */
     setGloveSize = (event: any) => {
-        let value = event.value.toString();
-        console.log(value);
-        (value.length == 2) ? value += '.00'
-            : (value.length == 4) ? value += '0'
-                : null;
-
+        let value = event.toString();
         _.forEach(this.wizardSteps, (w) => {
             _.forEach(w.gloveSize, (g) => {
                 _.forEach(g.options, (o) => {

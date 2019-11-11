@@ -64,7 +64,7 @@
                                 <div class="vertical-view_row">
                                     <div class="vertical-view__item wrap" *ngFor="let option of position.options">
                                         <button mat-raised-button type="button" color="primary"
-                                            (click)="setGloveType(option.shortName, option.fullName, option.id, option.value, position.formName,'subForm1', position.img)">{{option.fullName}}</button>
+                                            (click)="setGloveType(option.shortName, option.fullName, option.id, option.value, position.formName,'subForm1', option.img)">{{option.fullName}}</button>
                                     </div>
                                 </div>
                                 &nbsp;
@@ -182,16 +182,17 @@
                                     <mat-slider [min]="slider.handSliderMin" [max]="slider.handSliderMax"
                                         [step]="slider.handSliderStep" [thumbLabel]=true
                                         [vertical]="slider.handSliderVertical" [value]="slider.handSliderValue"
-                                        [tickInterval]="slider.tickInterval" (change)="setGloveSize($event)">
+                                        [tickInterval]="slider.tickInterval" (change)="setGloveSize($event)"
+                                    >
                                     </mat-slider>
                                 </div>
 
                                 <div class="vertical-view__list vertical-flex-grow">
                                     <mat-card>
-                                        <mat-card-title>{{glove.size}} Glove</mat-card-title>
-                                        <img mat-card-image [src]="handSizeImg">
-                                        <mat-card-content *ngFor="let item of filterdGloveContent"></mat-card-content>
-                                        
+                                        <mat-card-title *ngIf="!glove.size"></mat-card-title>
+                                        <mat-card-title *ngIf="glove.size">{{glove.size}}" Glove</mat-card-title>
+                                        <img mat-card-image src={{handSizeImg}}>
+                                        <mat-card-content >{{glove.content || "Please select your glove size." }} </mat-card-content>
                                     </mat-card>
                                     <glove-carousel-view></glove-carousel-view>
                                 </div>

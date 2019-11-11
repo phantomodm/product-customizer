@@ -158,6 +158,8 @@
     display: flex;
     flex-flow: wrap;
     justify-content: flex-start;
+    align-items: center;
+    height: 460px;
 }
 
 @media (min-width:33.125rem){
@@ -166,7 +168,7 @@
     }
 
     .mat-slider-vertical{
-        min-height: 18.75rem;
+        min-height: 20rem;
     }
 
     .slider {

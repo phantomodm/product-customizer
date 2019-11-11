@@ -268,8 +268,6 @@ export class VerticalViewComponent implements OnInit  {
   }
 
   setGloveContent(){
-    
-    
     this.nysApi.currentGloveType$.subscribe(
       (res:any) => {
         if(res != undefined){
@@ -282,14 +280,52 @@ export class VerticalViewComponent implements OnInit  {
             })
           })
           console.log(filter)
-          this.filteredGloveContent = filter;
-          
+          this.filteredGloveContent = filter;          
         } else {
           return false;
         }
 
       }
     )
+  }
+
+  filterGloveSizeFilter(size:string){
+    const gloveSize = size
+    console.log(gloveSize)
+    _.find(this.filteredGloveContent, (r) =>{
+      if(gloveSize !== r.size){
+        return false;
+        
+      } else {
+        _.find(r.content,(value, key)=>{
+          
+          if(key !== this.currentGloveType){
+            
+            return false;
+          } else {
+            console.log(value)
+            this.glove.content = value;
+          }
+        })
+      }
+      
+      if(_.includes(gloveSize,".75")){
+        this.glove.size = ""
+        this.glove.content = `We currently do not have a ${gloveSize}" glove pattern.`
+      }
+      
+        
+    })
+    // const db = collection;
+    // return _.filter(collection, f =>{
+    //   return _.find(f.size, c => {
+    //     if(c !== this.glove.size){
+    //       return false;
+    //     } else {
+    //       return true;
+    //     }
+    //   })
+    // });    
   }
 
   setGloveHand(attributeId:string, valueString:string, value:string){
@@ -388,11 +424,15 @@ export class VerticalViewComponent implements OnInit  {
   } 
 
   //** Set glove size choice from frontend and snackbar confirmation bar*/
-  setGloveSize(event){
-    const id = event
-    console.log(id.value)
-    this.snackBar.open(id.value + "\" inch glove was selected.",'DISMISS',{duration:2000})
-    this.glove.size = `${id.value}`;    
+  setGloveSize(event:any){
+    let id = event.value.toString();
+    (id.length == 2) ? id += '.00'
+      : (id.length == 4) ? id += '0' 
+      : null;
+    this.snackBar.open(id + "\" inch glove was selected.",'DISMISS',{duration:2000})
+    this.glove.size = `${id}`;
+    this.glove.content = '';
+    this.filterGloveSizeFilter(id);
     this.nysApi.setGloveSize(id);
   }
 
@@ -406,6 +446,7 @@ export class VerticalViewComponent implements OnInit  {
     this.snackBar.open(`${name} glove was selected`,'DISMISS',{duration:500})
     this.setGloveOptions(glove, value, inputAttribute ,menuForm, control);
     this.nysApi.setPosition(glove);
+    console.log(img)
     this.handSizeImg = img;
     this.currentGloveType = name.toLowerCase();
     
