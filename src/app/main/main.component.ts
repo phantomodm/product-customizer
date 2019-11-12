@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { Observable, Subject, fromEvent, Subscription } from 'rxjs';
-import { takeUntil, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { GloveColors, WizardPrompts } from '../shared/models/nine-positions-models';
 import { GloveDataService } from '../shared/services/gloveData';
 import { MatDialog } from '@angular/material';
@@ -49,7 +49,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   gloveSeries;
   gloveBuildData: any;
   handSizeConfirmationDialog: any;
-  slider = {};
+  
 
   //* Properties whose values for down tree components */
   formValues = {}; //Holds/sync values from horizonatal and vertical menus
@@ -71,16 +71,12 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.slider = this.nysApi.customGloveData.slider;
+    
     this.gloveColorsMap$ = this.gloveData.getGloveColors();
     this.gloveColorsMap$.pipe(takeUntil(this.unsubscribe$)).subscribe(
       val => this.gloveColorsMap = val
     );
-
     this.gloveWizardSteps$ = this.gloveData.getWizardSteps();
-    this.gloveSliderView = this.nysApi.currentGlovePart$.subscribe((res)=>{
-      this.gloveSliderSelector = res;
-    })
   }
 
   ngOnDestroy(): void {
@@ -100,27 +96,5 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   setGlvSize(event){
     this.nysApi.setGloveSize(event);
   }
-
-  /**Tracks values from form child components and saves values in store. -REMOVED FOR NYSTIX.COM */
-  // syncForm(val){    
-  //   if(!_.isEqual(val,this.formValues)){
-  //     this.nysApi.saveFormValues(val);
-  //     this.formValues = _.assignIn(this.formValues,val);
-  //   } else {
-  //    return null;
-  //   }    
-  // }
-
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(YouthGloveConfirmComponent,{
-  //     width: '250px',
-  //     data: {gloveType: this.nysApi.customGloveData.isYouthGlove}
-  //   })
-
-  //   dialogRef.afterClosed().pipe(takeUntil(this.unsubscribe$)).subscribe(result => {
-  //     console.log("dialog is closed")
-  //     this.nysApi.customGloveData.isYouthGlove = result;
-  //   })
-  // }
 
 }

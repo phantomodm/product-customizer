@@ -1,32 +1,7 @@
 <div>
-  
-  <!-- <div [hidden]="(isScreenSmall$ | async)">
-      <horizontal-view [wizardPrompts]="gloveWizardSteps$ | async" [sliderStatus]="gloveSliderSelector"
-      [(emitComponent)]="emitComponent" [(formValues)]="formValues" 
-      [slider]="slider" [(stepIndex)]="currentWizardIndex" 
-      (updateFormValues)="syncForm($event)"
-      [gloveColorsMap]="gloveColorsMap"
-      [gloveWebs]="filteredGloveWebs"></horizontal-view>
-  </div> -->
-  <!-- <div>
-      <vertical-view [wizardPrompts]="gloveWizardSteps$ | async" [sliderStatus]="gloveSliderSelector" 
-      [(emitComponent)]="emitComponent" [(formValues)]="formValues" 
-      [slider]="slider" [(stepIndex)]="currentWizardIndex" 
-      (updateFormValues)="syncForm($event)"
-      [customParts]="customPartsValue$ | async"
-      [gloveColorsMap]="gloveColorsMap"
-      [gloveWebs]="filteredGloveWebs"
-      ></vertical-view>
-  </div> -->
-
   <div>
-    <vertical-view [wizardPrompts]="gloveWizardSteps$ | async" 
-    [sliderStatus]="gloveSliderSelector"     
-    [slider]="slider"    
-    [customParts]="customPartsValue$ | async"
-    [gloveColorsMap]="gloveColorsMap"
-    [gloveWebs]="filteredGloveWebs"
+    <vertical-view
+    [nysWizardSteps]="gloveWizardSteps$ | async"
     ></vertical-view>
-</div>
-
+    </div>
 </div>

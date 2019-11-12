@@ -99,13 +99,15 @@ export class VerticalWebViewComponent implements OnInit {
     this.nysApi.selectedWeb(id,value); 
   }
 
-  setWebOptions(name: string, formValue:string, control:string){
+  setWebOptions(name: string, formValue:string, menuName:string , control:string){
+    console.log(menuName)
     var id = control;
     this.snackBar.open(name + " selected",'DISMISS',{duration:2000})
     this.results = _.assignIn(this.results,{[id]:formValue});
     this.nysApi.saveFormValuesFromComponent(this.results);
     //this.updateFormValues.emit(this.results);
     this.webSelected(name, formValue);
+    this.nysApi.setWorkFlowValidity(menuName, control);
   }
 
   onSubmit(){

@@ -115,8 +115,7 @@ export class GloveApi {
                 menu: [
                     { step: STEPS.gloveSize, valid: false },
                     { step: STEPS.gloveWeb, valid: false },
-                    { step: STEPS.glovePersonalization, valid: false },
-                    { step: STEPS.gloveFont, valid: false }
+                    
                 ],
             }
         }, {
@@ -520,7 +519,7 @@ export class GloveApi {
     defaultColor = (l, el, grp) => {
         switch (true) {
             case l.includes("logo"):
-                el.attr({ fill: '#cacb2c', id: l });
+                el.attr({ fill: '#c0c0c0', id: l });
                 grp.add(el);
                 break;
             case l.includes("stch"):
@@ -528,12 +527,12 @@ export class GloveApi {
                 grp.add(el);
                 break;
             case l.includes('rse'):
-                el.attr({ fill: '#cacb2c', id: l, opacity: 1 });
+                el.attr({ fill: '#c0c0c0', id: l, opacity: 1 });
                 grp.add(el);
 
                 break;
             case l.includes('elt'):
-                el.attr({ fill: '#cacb2c', id: l, opacity: 0 });
+                el.attr({ fill: '#c0c0c0', id: l, opacity: 0 });
                 grp.add(el);
                 break;
             default:
@@ -610,29 +609,7 @@ export class GloveApi {
         })
     }
 
-    // setGloveSeries = (valueString: string, formValue: string, htmlId: string) => {
-    //     let key = "series";
-    //     let value = "value";
-
-    //     if (_.includes(valueString, 'elite')) {
-    //         this.customGloveData.gloveSeries[key] = "elite";
-    //         this.setSeriesOnGlove("elite");
-    //         if(_.includes(valueString,'kip')){
-    //             this.currentLeatherType.next('kip');
-    //         }
-    //     } else if (_.includes(valueString, 'rise')) {
-    //         this.customGloveData.gloveSeries[key] = "rise";
-    //         this.currentLeatherType.next('rise');
-    //         this.setSeriesOnGlove("rise")
-    //     } else {
-    //         this.currentLeatherType.next('cowhide');
-    //         console.log("cowhide")
-    //     }
-
-    //     this.customGloveData.gloveSeries[value] = formValue;
-    //     this._applyHtmlInput(htmlId)
-    // }
-
+    
     setSeriesOnGlove = (input?: any, element?: any) => {
         let self = this;
         let series = input;
@@ -674,19 +651,24 @@ export class GloveApi {
     setGloveCanvas = (colorString: string) => {
         const color = colorString.toLowerCase()
         const imageTypeSelected = this.imageType;
-        _.forEach(this.gloveCustomData, (value, key) => {
-            const section = value.gloveSection;
-            if (section === imageTypeSelected) {
-                _.forEach(value.options, (o) => {
-                    
-                    if (o.value === color) {
-                        console.log(o.value, color)
-                        this._applyHtmlInput(o.id);
-                        this.applyFillToCanvas(o.hex);
-                    }
-                })
-            }
-        })
+        console.log(imageTypeSelected)
+        if(!imageTypeSelected){
+            this.notifyOther({ option: 'Glove Customizer', value: "Please select a glove part to customize." });
+        } else {
+            _.forEach(this.gloveCustomData, (value, key) => {
+                const section = value.gloveSection;
+                if (section === imageTypeSelected) {
+                    _.forEach(value.options, (o) => {                        
+                        if (o.value === color) {
+                            console.log(o.value, color)
+                            this._applyHtmlInput(o.id);
+                            this.applyFillToCanvas(o.hex);
+                        }
+                    })
+                }
+            })  
+        }
+        
     }
 
     applyFillToCanvas = (value: string) => {

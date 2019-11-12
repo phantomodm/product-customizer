@@ -88,6 +88,10 @@
     min-width: 450px;
 }
 
+.hands{
+    width: 150px;
+    height: auto;
+}
 
 
 @media screen and (max-width:30rem){
@@ -99,6 +103,10 @@
     .glove-series_info{
         width:18%;
     }
+}
+
+.mat-img-buffer{
+    margin-right: 1.25rem;
 }
 
 .title {
@@ -149,7 +157,7 @@
 }
 
 .vertical-view__button button{
-    margin-right:8px;
+    margin-right:1.25rem;
 }
 
 
