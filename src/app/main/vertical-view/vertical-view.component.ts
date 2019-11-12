@@ -20,6 +20,7 @@ import { GloveSize } from 'src/app/shared/models/nine-positions-models';
 })
 export class VerticalViewComponent implements OnInit  {
   private unsubscribe$ = new Subject<void>();
+  errorNotifier: any;
 
   @Input('nysWizardSteps') wizardPrompts;
   @Input('gloveWebs') filteredGloveWebs;
@@ -71,6 +72,7 @@ export class VerticalViewComponent implements OnInit  {
   gloveSizeContent: any;
   handSizeImg: string;
   
+  
   constructor(private fb:FormBuilder, 
               private snackBar:MatSnackBar,
               private nysApi: GloveApi,
@@ -93,7 +95,18 @@ export class VerticalViewComponent implements OnInit  {
         this.embSliderColors(embroiderySliderData)
       }
     )
-
+    this.errorNotifier = this.nysApi.notifyObservables$.pipe(takeUntil(this.unsubscribe$)).subscribe((res)=>{
+      if(res.hasOwnProperty('option')){
+        switch (res.option) {
+          case 'Glove Customizer':
+            this.snackBar.open(res.value,'CLOSE',{duration:2000})
+            break;        
+          default:
+            break;
+        }
+      }
+      
+    })
     this.gloveData.getGloveSizeContent().pipe(takeUntil(this.unsubscribe$)).subscribe(res => {this.currentGloveContent = this.filteredGloveContent = res})
     this.formFields = this.nysApi.getFormValues();
     this.verticalForm = this.fb.group(this.formFields);
@@ -108,6 +121,7 @@ export class VerticalViewComponent implements OnInit  {
       val => _.forEach(val,(v)=>{
         this.customPartsValue.push(v);
       })
+      
     );
   }
 

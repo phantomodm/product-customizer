@@ -536,7 +536,7 @@ export class GloveApi {
                 grp.add(el);
                 break;
             default:
-                el.attr({ fill: '#956427', id: l });
+                el.attr({ fill: '#c0c0c0', id: l });
                 grp.add(el);
                 break;
         }
