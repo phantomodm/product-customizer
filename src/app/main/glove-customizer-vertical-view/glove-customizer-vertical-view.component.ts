@@ -29,7 +29,7 @@ export class GloveCustomizerVerticalViewComponent implements OnInit {
 
   constructor(config: NgbCarouselConfig) {
     config.interval = null;
-    config.showNavigationArrows = false;
+    config.showNavigationArrows = true;
     config.showNavigationIndicators = false;
    }
 

@@ -8,7 +8,7 @@ export const STEPS =
         glovePadding: 'glovePadding',
         gloveBreaking:  'gloveBreaking',
         gloveFont:'gloveFont',
-        glovePersonalization: 'glovePersonalization',
+        gloveName: 'gloveName',
         gloveSeries: 'gloveSeries',
         gloveWeb:'gloveWeb'
     }

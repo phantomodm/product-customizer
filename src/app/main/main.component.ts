@@ -26,7 +26,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   //** Boolean properties */
   isLoading: boolean;
-  gloveSliderSelector: boolean = true;
+  gloveSliderStatus: boolean = true;
   canvasLoaded: boolean = true;  
 
   //** Property which is an array of color name descriptions (ex.Black) for slider inputs  */
@@ -77,6 +77,9 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
       val => this.gloveColorsMap = val
     );
     this.gloveWizardSteps$ = this.gloveData.getWizardSteps();
+    this.gloveSliderView = this.nysApi.currentGlovePart$.subscribe((res)=>{
+      this.gloveSliderStatus = res;
+    })
   }
 
   ngOnDestroy(): void {

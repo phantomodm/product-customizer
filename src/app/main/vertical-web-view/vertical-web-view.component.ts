@@ -55,11 +55,9 @@ export class VerticalWebViewComponent implements OnInit {
 
     this.nysApi.canvasListener$.subscribe(res => this.canvasLoaded = res);
 
-    this.nysApi.currentGloveType$.subscribe(res => {
-      console.log(res)
+    this.nysApi.currentGloveType$.subscribe(res => {      
       if(res != undefined){     
-        var filter = [];
-        console.log(res)
+        var filter = [];        
         _.filter(this.allGloveWebs,(f)=> {
           _.find(f.gloveType,m =>{            
             if(m == res){
@@ -67,18 +65,7 @@ export class VerticalWebViewComponent implements OnInit {
             }
           })
         });
-        console.log(filter.length);
-        (filter.length <= 1) 
-          ? this.carouselTile = {
-            grid: {xs: 0, sm: 0, md: 0, lg: 0, all: 1},
-            slide: 0,            
-            point: {
-              visible: true
-            },
-            load: 2,
-            touch: true,
-            easing: 'ease'
-          } : console.log(this.carouselTile);
+        
         this.filteredGloveWebs = filter;
         this.cdr.detectChanges();
       } else {
@@ -99,14 +86,15 @@ export class VerticalWebViewComponent implements OnInit {
     this.nysApi.selectedWeb(id,value); 
   }
 
-  setWebOptions(name: string, formValue:string, menuName:string , control:string){
-    console.log(menuName)
+  setWebOptions(name: string, id:string, formValue:string, menuName:string , control:string){
+    const htmlValue = {'id':id, 'value': formValue}
     var id = control;
     this.snackBar.open(name + " selected",'DISMISS',{duration:2000})
-    this.results = _.assignIn(this.results,{[id]:formValue});
-    this.nysApi.saveFormValuesFromComponent(this.results);
+    // this.results = _.assignIn(this.results,{[id]:formValue});
+    // this.nysApi.saveFormValuesFromComponent(this.results);
     //this.updateFormValues.emit(this.results);
     this.webSelected(name, formValue);
+    this.nysApi.applyHtmlInput(htmlValue);
     this.nysApi.setWorkFlowValidity(menuName, control);
   }
 

@@ -12,3 +12,42 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.customizehelp {
+    background: white;
+}
+
+:focus{
+    outline:none;
+}
+
+button:focus {
+    outline:none;
+}
+
+.unselected {
+    fill: rgba(10,134,61,0.5);
+}
+
+.selected{
+    fill: rgba(24, 152, 238, 0.5);
+}
+
+.complete{
+    fill: rgba(10,134,61,1.0);
+}
+
+.carousel-control-prev-icon {
+    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_left-32px.svg') !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_right-32px.svg') !important;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background: none;
+    width: 2rem;
+    height: 2rem;
+}

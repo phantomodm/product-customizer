@@ -55,7 +55,7 @@
                             <div *ngFor="let hand of (wizardPrompts)?.gloveHand">
                                 <mat-card-title>{{hand.label}}</mat-card-title>
                                 <div class="vertical-view_row">
-                                    <mat-card class="vertical-view_column vertical-view-column_img mat-img-buffer"
+                                    <mat-card class="vertical-view_column vertical-view-column_img mat-img-buffer mat-elevation-z8"
                                         *ngFor="let option of hand.options" (click)="setGloveHand(option.id, option.value, option.valueString)">
                                         <div>
                                             <img class="hands" mat-card-image src="./assets/images/{{option.img}}">
@@ -126,7 +126,7 @@
                                             {{option.valueString}}
                                         </button>
                                     </div>
-                                </div> &nbsp;
+                                </div>&nbsp;
                                 <div class="vertical-view__button">
                                     <button mat-raised-button matStepperPrevious type="button">Back</button>
                                     <button *ngIf="verifySubMenuCompletion('subForm1')" mat-raised-button
@@ -154,11 +154,12 @@
                                         [step]="gloveSizeSlider.handSliderStep" [thumbLabel]=true
                                         [vertical]="gloveSizeSlider.handSliderVertical" [value]="gloveSizeSlider.handSliderValue"
                                         [tickInterval]="gloveSizeSlider.tickInterval" (change)="setGloveSize($event)"
+                                        
                                     >
                                     </mat-slider>
                                 </div>
 
-                                <div class="vertical-view__list vertical-flex-grow">
+                                <div class="vertical-view__list vertical-flex-grow mat-elevation-z8">
                                     <mat-card>
                                         <mat-card-title *ngIf="!glove.size"></mat-card-title>
                                         <mat-card-title *ngIf="glove.size">{{glove.size}}" Glove</mat-card-title>
@@ -189,15 +190,16 @@
                                         [showNavigationArrows]="showNavigationArrows" [question]="question">
                                     </glove-customizer-vertical-view>
 
-                                    <div class="vertical-view__item">
+                                    <div class="vertical-view__item spacer">
                                         <div class="horizontal-wizard-slider">
                                           <div *ngIf="sliderStatus">
-                                            <h3>Currently Customizing: Glove Leather</h3>
+                                            <p>Currently Customizing: <strong>Glove Leather</strong></p>
                                             <ng5-slider #verticalSlider class="vertical-wizard-slider" [(value)]="value"
                                               [options]="gloveSlider" 
                                               (userChange)="leatherSliderSelections(verticalSlider.value)"></ng5-slider>
                                           </div>
                                           <div *ngIf="!sliderStatus">
+                                            <p>Currently Customizing: <strong>Stitching/Embroidery Leather</strong></p>
                                             <ng5-slider #verticalEmbSlider class="vertical-wizard-slider" [(value)]="valueEmbroidery"
                                               [options]="embroiderySlider"
                                               (userChange)="embroiderySliderSelections(verticalEmbSlider.value)"></ng5-slider>
@@ -241,7 +243,7 @@
                                 <mat-card-title>{{question.label}}</mat-card-title>
                                 <div fxLayout="row" fxLayoutAlign="center" *ngFor="let option of question.options">
                                     <mat-form-field class="">
-                                        <input matInput formControlName="glovePersonalization"
+                                        <input matInput formControlName="gloveFont"
                                             placeholder="{{option.value}}" maxlength="16" [value]="">
                                         <button mat-button *ngIf="option.value" matSuffix mat-icon-button
                                             aria-label="Clear">
@@ -264,7 +266,7 @@
                             </div>&nbsp;
                             <div class="vertical-view__button">
                                 <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                <button *ngIf="verifySubMenuCompletion('subForm1')" mat-raised-button
+                                <button *ngIf="verifySubMenuCompletion('subForm2')" mat-raised-button
                                         (click)="nextStep()" type="button">Next</button>
                             </div>
                         </div>

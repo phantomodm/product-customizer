@@ -1,12 +1,12 @@
 <div class="hand-size-view_row">
   <ngu-carousel class="ngu-slider-main" style="min-width:200px; max-width: 400px" [inputs]="carouselTile" [dataSource]="hands">
-    <button type="button" class="leftRs" NguCarouselPrev>Previous</button>
-    <button type="button" class="rightRs" NguCarouselNext>Next</button>
+    <button type="button" class="leftRs" NguCarouselPrev></button>
+    <button type="button" class="rightRs" NguCarouselNext></button>
 
     <ngu-tile #handSize *nguCarouselDef="let hand;">
-      <section>
+      <section class="mat-elevation-z8">
         <label style="width: 100%" for={{hand.id}}>
-          <mat-card class="mat-elevation-z10">
+          <mat-card>
             <div class="hand-size-view_column">
             <div class="hand-size-view__list">
               <mat-card-header>

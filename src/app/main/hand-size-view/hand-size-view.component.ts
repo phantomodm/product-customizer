@@ -31,22 +31,9 @@ export class HandSizeViewComponent {
 
 
   setHandSize(label:string, attribute:string, value:string,formName:string){
-    const id = label; 
+    const id = label.toLowerCase(); 
     const htmlValue = {'id': attribute,'value': value}
-    switch (id) {
-      case "small":
-      this.snackBar.open("Glove opening adjusted for SMALL hands",'DISMISS',{duration:2000})
-        break;
-      case "average":
-      this.snackBar.open("Glove opening adjusted for AVERAGE hands",'DISMISS',{duration:2000})
-        break;
-      case "large":
-      this.snackBar.open("Glove opening adjusted for LARGE hands",'DISMISS',{duration:2000})
-        break;
-      default:
-        break;
-    }
-
+    this.snackBar.open(`Glove opening adjusted for ${label.toUpperCase()} hands`,'DISMISS',{duration:2000})
     this.nysApi.setHandSize(id, htmlValue);
   }
 }

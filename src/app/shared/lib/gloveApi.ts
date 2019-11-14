@@ -29,9 +29,6 @@ export class GloveApi {
     gloveCloneSummary1: any;
     gloveCloneSummary2: any;
     gloveCloneSummary3: any;
-    // vgloveCloneSummary1: any;
-    // vgloveCloneSummary2: any;
-    // vgloveCloneSummary3: any;
 
     svgCloneSummary = ["gloveCloneSummary1","gloveCloneSummary2","gloveCloneSummary3"]
 
@@ -115,7 +112,7 @@ export class GloveApi {
                 menu: [
                     { step: STEPS.gloveSize, valid: false },
                     { step: STEPS.gloveWeb, valid: false },
-                    
+                    { step: STEPS.gloveName, valid: false }
                 ],
             }
         }, {
@@ -131,6 +128,10 @@ export class GloveApi {
     gloveDesignData: GloveColors[] = [];
     embroiderySliderData: GloveColors[] = [];
     wizardSteps = [];
+    defaultFill = '#c0c0c0';
+    strokeFill = '#c0c0c0';
+    btnFill = 'rgba(10,134,61,0.4)';
+    svgBtnFill = 'rgba(10,134,61,0.4)';
 
     
 
@@ -212,7 +213,6 @@ export class GloveApi {
     setWizardStatus(subMenu: string, subMenuStatus?: boolean): boolean {
         const menu = subMenu;
         let status = false;
-
         _.forEach(this.workflow, (r) => {
             _.forEach(r, (value, key) => {
                 if (key === menu) {
@@ -234,7 +234,9 @@ export class GloveApi {
             _.forEach(model, (value: any, key) => {
                 if (key == menuName) {
                     _.forEach(value, (results) => {
+                        
                         if (results.step == completedStep) {
+                            console.log(results.step, completedStep)
                             results.valid = true;
                         }
                     })
@@ -248,6 +250,7 @@ export class GloveApi {
     async setGloveType(gloveTypeSelected) {
         const id = gloveTypeSelected;
         let htmlId;
+        let htmlValue;
         this.updateImageFilter = [];
         this.selectedWebFilter = [];
         _.forEach(this.wizardSteps, (w) => {
@@ -259,6 +262,7 @@ export class GloveApi {
                         this.customGloveData.shoWebType = o.webType;
                         let currentGlove = this.customGloveData.shoWebType;
                         htmlId = o.id;
+                        htmlValue = {'id': o.id, 'value': o.value}
                         this.currentGloveType.next(o.webType)
                     }
                 })
@@ -267,7 +271,7 @@ export class GloveApi {
         })
 
         this.imageFilter.next(this.updateImageFilter);
-        this._applyHtmlInput(htmlId);
+        //this._applyHtmlInput(htmlValue);
     }
 
     //** Sets customer web choice */
@@ -282,10 +286,10 @@ export class GloveApi {
                         this.gloveBody.webSelected = o.valueString;
                     }
 
-                    if (_.isEqual(value, o.value)) {
-                        console.log(o.value)
-                        this._applyHtmlInput(o.id)
-                    }
+                    // if (_.isEqual(value, o.value)) {
+                    //     console.log(o.value)
+                    //     this._applyHtmlInput({'id': o.id,'value': o.value})
+                    // }
                 })
             })
         })
@@ -333,7 +337,7 @@ export class GloveApi {
             glovePadding: '',
             gloveBreaking: '',
             gloveFont: '',
-            glovePersonalization: '',
+            gloveName: '',
             gloveSeries: '',
             gloveWeb: ''
         }
@@ -396,28 +400,12 @@ export class GloveApi {
     setHandSize(handSizeId: string, htmlValue:HtmlInputValue) {
         const id = handSizeId;
         this.gloveBody.handSize = id;
-        this.applyHtmlInput(htmlValue)
-        // _.forEach(this.wizardSteps, (w) => {
-        //     _.forEach(w.gloveFit, (value, key) => {
-        //         _.forEach(value.options, (o) => {
-        //             if (_.includes(id, _.toLower(o.valueString))) {
-        //                 console.log(id)
-        //                 if (_.isEqual(id, "smallHand")) {
-        //                     this.notifyOther({ option: 'Hand Size', value: id });
-        //                     //this.customGloveData.isYouthGlove = true;
-        //                     this._applyHtmlInput(o.id);
-        //                 }
-        //                 this.customGloveData.isYouthGlove = false;
-        //                 this._applyHtmlInput(o.id);
-        //             }
-        //         })
-        //     })
-        // })
+        this.applyHtmlInput(htmlValue);
     }
 
     private _applyHtmlInput(inputValue:HtmlInputValue) {
        const formId = `attribute_${inputValue.id}`;
-       console.log(inputValue)
+       console.log(typeof(inputValue))
         try {
             (<HTMLInputElement>document.getElementById(formId)).value = inputValue.value;
         } catch (error) {
@@ -477,10 +465,7 @@ export class GloveApi {
     //** Clears canvas of previously loaded glove on canvas*/
     clearGloveCanvas = () => {
         this.oView.clear(), this.iView.clear(), this.sView.clear();
-        // this.gloveCloneMainVertical.clear(); this.gloveCloneInsideVertical.clear(); this.gloveCloneSideVertical.clear();
-        //this.gloveCloneMainVertical.clear(); this.gloveCloneInsideVertical.clear(); this.gloveCloneSideVertical.clear();
         this.bgroup1.clear(), this.bgroup2.clear(), this.bgroup3.clear();
-        // this.vgroup1.clear(), this.vgroup2.clear(), this.vgroup3.clear();
     }
 
     //** Returns filtered array of images for step 5 */
@@ -519,20 +504,20 @@ export class GloveApi {
     defaultColor = (l, el, grp) => {
         switch (true) {
             case l.includes("logo"):
-                el.attr({ fill: '#c0c0c0', id: l });
+                el.attr({ fill: this.defaultFill, id: l });
                 grp.add(el);
                 break;
             case l.includes("stch"):
-                el.attr({ fill: 'none', id: l, stroke: '#af7533' });
+                el.attr({ fill: 'none', id: l, stroke: this.strokeFill });
                 grp.add(el);
                 break;
             case l.includes('rse'):
-                el.attr({ fill: '#c0c0c0', id: l, opacity: 1 });
+                el.attr({ fill: this.defaultFill, id: l, opacity: 1 });
                 grp.add(el);
 
                 break;
             case l.includes('elt'):
-                el.attr({ fill: '#c0c0c0', id: l, opacity: 0 });
+                el.attr({ fill: this.defaultFill, id: l, opacity: 0 });
                 grp.add(el);
                 break;
             default:
@@ -548,24 +533,15 @@ export class GloveApi {
         switch (id) {
             case "main":
                 self.bgroup1.add(element);
-                // self.vgroup1.add(element2);
                 self.m1.append(self.bgroup1);
-                //self.gloveCloneMainVertical.append(self.vgroup1);
-                //self.gloveCloneMainVertical.append(self.vgroup1);
                 break;
             case "inside":
                 self.bgroup2.add(element);
-                // self.vgroup2.add(element2);
                 self.m2.append(self.bgroup2);
-                //self.gloveCloneInsideVertical.append(self.vgroup2);
-                //self.gloveCloneInsideVertical.append(self.vgroup2);
                 break;
             case "side":
                 self.bgroup3.add(element);
-                // self.vgroup3.add(element2);
                 self.m3.append(self.bgroup3);
-                //self.gloveCloneSideVertical.append(self.vgroup3);
-                //self.gloveCloneSideVertical.append(self.vgroup3);
                 break;
             default:
             //console.log("end of draw")
@@ -575,8 +551,6 @@ export class GloveApi {
     svgEventListners = (element: any, obj: any) => {
         let self = this;
         element.click(function (e) {
-
-            ////console.log('Catcher clicked')
             if (!this.hasClass('selected')) {
                 self.m1.selectAll('.selected').forEach(function (el) {
                     el.removeClass('selected');
@@ -594,8 +568,7 @@ export class GloveApi {
             self.imageType = obj.name;
             self.customGloveData.currModel = obj.model;
             self.setGloveSliderControl(obj.name);
-            
-            //e.stopPropagation();
+
         });
 
         element.mouseover(function (e) {
@@ -651,7 +624,6 @@ export class GloveApi {
     setGloveCanvas = (colorString: string) => {
         const color = colorString.toLowerCase()
         const imageTypeSelected = this.imageType;
-        console.log(imageTypeSelected)
         if(!imageTypeSelected){
             this.notifyOther({ option: 'Glove Customizer', value: "Please select a glove part to customize." });
         } else {
@@ -660,7 +632,6 @@ export class GloveApi {
                 if (section === imageTypeSelected) {
                     _.forEach(value.options, (o) => {                        
                         if (o.value === color) {
-                            console.log(o.value, color)
                             this._applyHtmlInput(o.id);
                             this.applyFillToCanvas(o.hex);
                         }
@@ -672,13 +643,11 @@ export class GloveApi {
     }
 
     applyFillToCanvas = (value: string) => {
-        const fill = value;
-        
+        const fill = value;        
         const svgLayerSuffix = "_x5F_";
         _.forEach(gloveCanvas, (value, key) => {
             const el = value.element;
             const svgLayerId = value.svgBase;
-
             const svgElement = `#${this.gloveType}${svgLayerId}${svgLayerSuffix}`;
             const element = svgElement + this.imageType;
             if ($(element).length != 0) {
@@ -727,12 +696,6 @@ export class GloveApi {
                                         drawing.initDraw();
                                         el.addClass('complete');
                                     })
-
-                                    // self.gloveCloneMainVertical.selectAll('#' + o.name).forEach(function (el) {
-                                    //     var drawing = new Drawing(statusCheckMark, 't0,25 s1.4', 150, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,10s0.5', self.gloveCloneMainVertical);
-                                    //     drawing.initDraw();
-                                    //     el.addClass('complete');
-                                    // })
                                     break;
                                 case "mInside":
                                     self.m2.selectAll('#' + o.name).forEach(function (el) {
@@ -740,11 +703,6 @@ export class GloveApi {
                                         drawing.initDraw();
                                         el.addClass('complete');
                                     })
-                                    // self.gloveCloneInsideVertical.selectAll('#' + o.name).forEach(function (el) {
-                                    //     var drawing = new Drawing(statusCheckMark, 't15,32 s1.2', 150, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,10s0.5', self.gloveCloneInsideVertical);
-                                    //     drawing.initDraw();
-                                    //     el.addClass('complete');
-                                    // })
                                     break;
                                 case "mSideview":
                                     self.m3.selectAll('#' + o.name).forEach(function (el) {
@@ -752,41 +710,31 @@ export class GloveApi {
                                         drawing.initDraw();
                                         el.addClass('complete');
                                     });
-
-                                default:
-                                    
+                                default:                                    
 
                             }
                         }
                     )
                 }
-
-
             })
         });
     }
 
     private _applySvgViewBox(): void {
-        this.m1.attr({ viewBox: "0 0 400 400" });
-        this.m2.attr({ viewBox: "0 0 400 400" });
-        this.m3.attr({ viewBox: "0 0 400 400" });
-
-        // this.gloveCloneMainVertical.attr({ viewBox: "0 0 400 400" });
-        // this.gloveCloneInsideVertical.attr({ viewBox: "0 0 400 400" });
-        // this.gloveCloneSideVertical.attr({ viewBox: "0 0 400 400" });
+        // this.m1.attr({ viewBox: "-50 0 400 400" });
+        // this.m2.attr({ viewBox: "0 0 400 400" });
+        // this.m3.attr({ viewBox: "0 0 400 400" });
 
         this.gloveCloneSummary1.attr({ viewBox: "0 0 400 400" });
         this.gloveCloneSummary2.attr({ viewBox: "0 0 400 400" });
         this.gloveCloneSummary3.attr({ viewBox: "0 0 400 400" });
-        // this.vgloveCloneSummary1.attr({ viewBox: "0 0 400 400" });
-        // this.vgloveCloneSummary2.attr({ viewBox: "0 0 400 400" });
-        // this.vgloveCloneSummary3.attr({ viewBox: "0 0 400 400" });
     }
 
     //** Loads Catcher's mitt glove canvas */
     loadCatcher = () => {
         let self = this;
         self._applySvgViewBox();
+        this.m1.attr({ viewBox: "-20 -20 400 400"})
         Snap.load("assets/images/catcher_back_view.svg", (f) => {
             var g = f.selectAll('#cm_x5F_vw3_x5F_utoe, #cm_x5F_vw3_x5F_thb, #cm_x5F_vw3_x5F_bfg, #cm_x5F_vw3_x5F_web, #cm_x5F_vw3_x5F_plm, #cm_x5F_vw3_x5F_lin, #cm_x5F_vw3_x5F_bnd, #cm_x5F_vw3_x5F_fpad, #cm_x5F_vw3_x5F_stch, #cm_x5F_vw3_x5F_lce, #cm_x5F_vw3_x5F_logo, #cm_x5F_open_x5F_back');
             g.forEach(function (el, i) {
@@ -797,10 +745,10 @@ export class GloveApi {
                 //Apply default fills & add to group
                 self.defaultColor(layer, el, self.oView);
 
-                if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
-                    el.attr({ opacity: 0 })
-                    self.setSeriesOnGlove(filter, el);
-                }
+                // if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
+                //     el.attr({ opacity: 0 })
+                //     self.setSeriesOnGlove(filter, el);
+                // }
                 self.m1.append(self.oView);
                 //self.gloveCloneMainVertical.append(self.m1.clone(self.oView));
             });
@@ -826,8 +774,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
@@ -841,7 +789,7 @@ export class GloveApi {
             });
 
         });
-
+        this.m2.attr({ viewBox: "-10 -20 400 400"})
         Snap.load("assets/images/catcher_inside_view.svg", (f) => {
             var g = f.selectAll('#cm_x5F_vw2_x5F_plm, #cm_x5F_vw2_x5F_web, #cm_x5F_vw2_x5F_tgt, #cm_x5F_vw2_x5F_stch, #cm_x5F_vw2_x5F_bnd, #cm_x5F_vw2_x5F_lce, #cm_x5F_pocket_x5F_view');
 
@@ -863,8 +811,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -874,7 +822,7 @@ export class GloveApi {
             });
 
         });
-
+        this.m3.attr({ viewBox: "-20 0 400 400"})
         Snap.load("assets/images/catcher_side_view.svg", (f) => {
             var g = f.selectAll('#cm_x5F_vw1_x5F_utoe, #cm_x5F_vw1_x5F_thb, #cm_x5F_vw1_x5F_logo, #cm_x5F_vw1_x5F_bnd, #cm_x5F_vw1_x5F_plm, #cm_x5F_vw1_x5F_web, #cm_x5F_vw1_x5F_fpad, #cm_x5F_vw1_x5F_stch, #cm_x5F_vw1_x5F_lce, #cm_x5F_side_x5F_view');
 
@@ -895,8 +843,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -914,6 +862,7 @@ export class GloveApi {
     loadOutfield = () => {
         let self = this;
         self._applySvgViewBox();
+        this.m1.attr({ viewBox: "-25 -20 400 400"})
         Snap.load("assets/images/outfield_back_view.svg", (f) => {
             var g = f.selectAll('#of_x5F_vw3_x5F_wst, #of_x5F_vw3_x5F_logo, #of_x5F_vw3_x5F_indo, #of_x5F_vw3_x5F_indi, #of_x5F_vw3_x5F_mid, #of_x5F_vw3_x5F_rngo, #of_x5F_vw3_x5F_rngi, #of_x5F_vw3_x5F_pnko, #of_x5F_vw3_x5F_pnki, #of_x5F_vw3_x5F_plm, #of_x5F_vw3_x5F_wlt, #of_x5F_vw3_x5F_bnd, #of_x5F_vw3_x5F_stch, #of_x5F_vw3_x5F_web, #of_x5F_vw3_x5F_lce, #of_x5F_open_x5F_back, #of_x5F_vw3_x5F_rise, #of_x5F_vw3_x5F_elite, #of_x5F_elite_x5F_logo, #of_x5F_rise_x5F_logo');
 
@@ -962,8 +911,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x + 20, l.y, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        var btn = self.m1.rect(l.x + 20, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                         btn.append(title);
@@ -994,8 +943,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m2.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -1004,7 +953,7 @@ export class GloveApi {
                 )(l), false);
             });
         });
-
+        this.m3.attr({ viewBox: "-20 -20 400 400"})
         Snap.load("assets/images/outfield_side_view.svg", (f) => {
             var g = f.selectAll('#of_x5F_vw1_x5F_wst,#of_x5F_vw1_x5F_logo, #of_x5F_vw1_x5F_thbi, #of_x5F_vw1_x5F_thbo, #of_x5F_vw1_x5F_indo, #of_x5F_vw1_x5F_plm,#of_x5F_vw1_x5F_web, #of_x5F_vw1_x5F_bnd, #of_x5F_vw1_x5F_wlt, #of_x5F_vw1_x5F_stch, #of_x5F_vw1_x5F_lce, #of_x5F_side_x5F_view');
 
@@ -1025,8 +974,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -1041,6 +990,7 @@ export class GloveApi {
     loadInfield = () => {
         let self = this;
         self._applySvgViewBox();
+        this.m1.attr({ viewBox: "-20 -20 400 400"})
         Snap.load("assets/images/infield_swelt_back.svg", (f) => {
             var g = f.selectAll('#inf_x5F_vw3_x5F_wst, #inf_x5F_vw3_x5F_thbi, #inf_x5F_vw3_x5F_web, #inf_x5F_vw3_x5F_indo, #inf_x5F_vw3_x5F_plm, #inf_x5F_vw3_x5F_indi, #inf_x5F_vw3_x5F_mid, #inf_x5F_vw3_x5F_rngo, #inf_x5F_vw3_x5F_rngi, #inf_x5F_vw3_x5F_pnko, #inf_x5F_vw3_x5F_pnki, #inf_x5F_vw3_x5F_logo, #inf_x5F_vw3_x5F_wlt, #inf_x5F_vw3_x5F_stch, #inf_x5F_vw3_x5F_bnd, #inf_x5F_vw3_x5F_lce, #inf_x5F_open_x5F_back,#inf_x5F_vw3_x5F_rise,#inf_x5F_vw3_x5F_elite,#inf_x5F_logo_x5F_elite,#inf_x5F_logo_x5F_rise');
             g.forEach((el, i) => {
@@ -1091,8 +1041,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
@@ -1105,7 +1055,7 @@ export class GloveApi {
             });
 
         });
-
+        this.m2.attr({ viewBox: "0 -20 400 400"})
         Snap.load("assets/images/infield_swelt_pocket.svg", (f) => {
             var g = f.selectAll('#inf_x5F_vw2_x5F_plm, #inf_x5F_vw2_x5F_thbo, #inf_x5F_vw2_x5F_thbi, #inf_x5F_vw2_x5F_indo, #inf_x5F_vw2_x5F_indi,#inf_x5F_vw2_x5F_mid,#inf_x5F_vw2_x5F_rngo,#inf_x5F_vw2_x5F_rngi,#inf_x5F_vw2_x5F_pnko,#inf_x5F_vw2_x5F_pnki, #inf_x5F_vw2_x5F_web, #inf_x5F_vw2_x5F_stch, #inf_x5F_vw2_x5F_bnd , #inf_x5F_vw2_x5F_wlt, #inf_x5F_vw2_x5F_lce, #inf_x5F_open_x5F_pocket');
             g.forEach((el, i) => {
@@ -1129,8 +1079,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -1139,10 +1089,10 @@ export class GloveApi {
                 )(l), false);
             });
         });
-
+        this.m3.attr({ viewBox: "-50 -20 400 400"})
         Snap.load("assets/images/infield_swelt_side.svg", (f) => {
-            this.m3.attr({ viewBox: "-50 0 400 400" });
-            self._applySvgViewBox();
+            
+            //self._applySvgViewBox();
             // this.gloveCloneSideVertical.attr({ viewBox: "-50 0 400 400" });
             var g = f.selectAll('#inf_x5F_vw1_x5F_thbi, #inf_x5F_vw1_x5F_mid, #inf_x5F_vw1_x5F_indi, #inf_x5F_vw1_x5F_wst, #inf_x5F_vw1_x5F_logo, #inf_x5F_vw1_x5F_plm, #inf_x5F_vw1_x5F_bnd, #inf_x5F_vw1_x5F_indo, #inf_x5F_vw1_x5F_thbo, #inf_x5F_vw1_x5F_wlt, #inf_x5F_vw1_x5F_web, #inf_x5F_vw1_x5F_stch,  #inf_x5F_vw1_x5F_lce, #inf_x5F_open_x5F_side');
 
@@ -1164,8 +1114,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -1174,14 +1124,13 @@ export class GloveApi {
                 )(l), false);
             });
         });
-
-        ////console.log('Infield glove loaded.');
     };
 
     //** Loads pitcher glove canvas */
     loadPitcher = () => {
         let self = this;
         self._applySvgViewBox();
+        this.m1.attr({ viewBox: "-20 -20 400 400"})
         Snap.load("assets/images/pitcher_open_back.svg", function (f) {
             var g = f.selectAll(' #pitcher_x5F_vw3_x5F_wst, #pitcher_x5F_vw3_x5F_logo, #pitcher_x5F_vw3_x5F_thbi, #pitcher_x5F_vw3_x5F_plm, #pitcher_x5F_vw3_x5F_web, #pitcher_x5F_vw3_x5F_indi, #pitcher_x5F_vw3_x5F_indo, #pitcher_x5F_vw3_x5F_mid, #pitcher_x5F_vw3_x5F_rngo, #pitcher_x5F_vw3_x5F_rngi, #pitcher_x5F_vw3_x5F_pnko, #pitcher_x5F_vw3_x5F_pnki, #pitcher_x5F_vw3_x5F_stch, #pitcher_x5F_vw3_x5F_wlt, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_lce, #pitcher_x5F_open_x5F_back,#pitcher_x5F_vw3_x5F_rse,#pitcher_x5F_vw3_x5F_elt,#pitcher_x5F_logo_x5F_elite,#pitcher_x5F_logo_x5F_rise');
             g.forEach(function (el, i) {
@@ -1229,8 +1178,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                         btn.append(title);
@@ -1242,7 +1191,7 @@ export class GloveApi {
                 )(l), false);
             });
         });
-
+        this.m2.attr({ viewBox: "0 -20 400 400"})
         Snap.load("assets/images/9P_pitcher_pocket_view.svg", function (f) {
             var g = f.selectAll('#pitcher_x5F_vw2_x5F_plm, #pitcher_x5F_vw2_x5F_bfg, #pitcher_x5F_vw2_x5F_bnd,  #pitcher_x5F_vw2_x5F_web, #pitcher_x5F_vw2_x5F_wlt, #pitcher_x5F_vw2_x5F_stch, #pitcher_x5F_vw2_x5F_lce, #pitcher_x5F_pocket_x5F_view');
             g.forEach(function (el, i) {
@@ -1264,7 +1213,7 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'blue', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
@@ -1274,7 +1223,7 @@ export class GloveApi {
                 })(l), false);
             });
         });
-
+        this.m3.attr({ viewBox: "-25 -200 400 400"})
         Snap.load("assets/images/pitcher_side_view.svg", function (f) {
             var g = f.selectAll('#pitcher_x5F_vw1_x5F_lin,#pitcher_x5F_vw1_x5F_bfg,#pitcher_x5F_vw1_x5F_plm,#pitcher_x5F_vw1_x5F_web,#pitcher_x5F_vw1_x5F_wst,#pitcher_x5F_vw1_x5F_logo, #pitcher_x5F_vw1_x5F_wlt, #pitcher_x5F_vw1_x5F_bnd, #pitcher_x5F_vw1_x5F_stch, #pitcher_x5F_vw1_x5F_lce,#pitcher_x5F_open_x5F_side');
             g.forEach(function (el, i) {
@@ -1299,8 +1248,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
                     btn.append(title);
@@ -1316,6 +1265,7 @@ export class GloveApi {
     loadFbase = () => {
         let self = this;
         self._applySvgViewBox();
+        this.m1.attr({ viewBox: "-25 -20 400 400"})
         Snap.load("assets/images/fbase_back_view.svg", function (f) {
             var g = f.selectAll('#fbase_x5F_vw3_x5F_thb, #fbase_x5F_vw3_x5F_bfg, #fbase_x5F_vw3_x5F_plm, #fbase_x5F_vw3_x5F_utoe, #fbase_x5F_vw3_x5F_wst, #fbase_x5F_vw3_x5F_logo, #fbase_x5F_vw3_x5F_web, #fbase_x5F_vw3_x5F_stch, #fbase_x5F_vw3_x5F_bnd, #fbase_x5F_vw3_x5F_lce, #fbase_x5F_vw3_x5F_rise, #fbase_x5F_vw3_x5F_elite, #fbase_x5F_open_x5F_back, #fbase_x5F_logo_x5F_elite, #fbase_x5F_logo_x5F_rise');
             g.forEach(function (el, i) {
@@ -1354,8 +1304,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
@@ -1368,7 +1318,7 @@ export class GloveApi {
             });
 
         });
-
+        this.m2.attr({ viewBox: "0 -20 400 400"})
         Snap.load("assets/images/fbase_inside_view.svg", function (f) {
             var g = f.selectAll('#fbase_x5F_vw2_x5F_plm, #fbase_x5F_vw2_x5F_bnd, #fbase_x5F_vw2_x5F_web, #fbase_x5F_vw2_x5F_stch, #fbase_x5F_vw2_x5F_lce, #fbase_x5F_open_x5F_pocket');
 
@@ -1388,8 +1338,8 @@ export class GloveApi {
             ];
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
                     btn.append(title);
@@ -1400,7 +1350,7 @@ export class GloveApi {
 
 
         });
-
+        this.m3.attr({ viewBox: "-20 -20 400 400"})
         Snap.load("assets/images/fbase_side_view.svg", function (f) {
             var g = f.selectAll('#fbase_x5F_vw1_x5F_wst, #fbase_x5F_vw1_x5F_logo, #fbase_x5F_vw1_x5F_plm, #fbase_x5F_vw1_x5F_thb, #fbase_x5F_vw1_x5F_bfg, #fbase_x5F_vw1_x5F_utoe, #fbase_x5F_vw1_x5F_web, #fbase_x5F_vw1_x5F_stch, #fbase_x5F_vw1_x5F_bnd, #fbase_x5F_vw1_x5F_lce, #fbase_x5F_side_x5F_view');
 
@@ -1420,8 +1370,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'red', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
                     btn.append(title);
@@ -1436,147 +1386,23 @@ export class GloveApi {
     //** Startup script to initiate view */
     initCanvas() {
         this.fieldMap = Snap("#positions");
-        //this.gloveHand = Snap("#glove_hand_horizontal");
-        //this.vGloveHand = Snap("#glove_hand_vertical"); //clone of glove_hand_horizontal
-        //this.handSize = Snap("#hand_size_horizontal");
-        //this.vHandSize = Snap("#hand_size_vertical");
-
         this.m1 = Snap("#mOutside"), this.m2 = Snap("#mInside"), this.m3 = Snap("#mSideview");
-        // this.gloveCloneMainVertical = Snap("#vOutside");
-        // this.gloveCloneInsideVertical = Snap("#vInside");
-        // this.gloveCloneSideVertical = Snap("#vSideview");
 
         this.gloveCloneSummary1 = Snap("#gloveCloneSummary1");
         this.gloveCloneSummary2 = Snap("#gloveCloneSummary2");
         this.gloveCloneSummary3 = Snap("#gloveCloneSummary3");
-
-        // this.vgloveCloneSummary1 = Snap("#vgloveCloneSummary1");
-        // this.vgloveCloneSummary2 = Snap("#vgloveCloneSummary2");
-        // this.vgloveCloneSummary3 = Snap("#vgloveCloneSummary3");
 
         try {
             /* Glove Group Containers */
             this.oView = this.m1.group();
             this.iView = this.m2.group();
             this.sView = this.m3.group();
-            // this.verticalMainGroup = this.gloveCloneMainVertical.group(), this.verticalInsideGroup = this.gloveCloneInsideVertical.group(), this.verticalSideGroup = this.gloveCloneSideVertical.group();
+            
             this.bgroup1 = this.m1.group(), this.bgroup2 = this.m2.group(), this.bgroup3 = this.m3.group();
-            // this.vgroup1 = this.gloveCloneMainVertical.group(), this.vgroup2 = this.gloveCloneInsideVertical.group(), this.vgroup3 = this.gloveCloneSideVertical.group();
-            //this.dexterity = this.gloveHand.group(); 
-            //this.handSizeGroup = this.handSize.group();
             this.canvasListener.next(true);
-
-            let svgCircle = '<path id="check_circle" d="M42,50a25,25 0 1,0 50,0a25,25 0 1,0 -50,0" stroke="#7ac142" />',
-                svgCircleSpeed = 150;
-            let svgCheck = '<path id="check_mark" d="M50.1 25.2l7.1 7.2 16.7-16.8" draggable="false" stroke="white" stroke-width=3 />',
-                svgCheckSpeed = 140;
-
-            // // Wizard Question 2. What is position played? 
-            // Snap.load("assets/images/field2.svg", (f) => {
-            //     this.fieldMap.attr({ viewBox: "0 0 400 400" });
-            //     let self = this;
-            //     var g = f.selectAll('#base,#outfield,#infield,#mound,#lf_of,#cf_of,#rf_of,#ss_inf,#second_inf,#third_inf,#p_pitcher,#fb_fbase,#mitt_cm');
-            //     g.forEach((el, i) => {
-            //         var p = ['base', 'outfield', 'infield', 'mound', 'lf_of', 'cf_of', 'rf_of', 'ss_inf', 'second_inf', 'third_inf', 'p_pitcher', 'fb_fbase', 'mitt_cm'];
-            //         var layer = p[i];
-
-            //         if (layer.includes("base") || layer.includes("mound")) {
-            //             el.attr({ fill: 'black' });
-            //         } else {
-            //             el.attr({ fill: 'white' });
-            //         }
-
-            //         if (layer.includes("_")) {
-            //             el.attr({ fill: 'blue', stroke: 'red', strokeWidth: 1 });
-            //             var filteredName = layer.split('_').pop();
-            //             el.name = filteredName;
-            //             var myDrawing1 = new Drawing(svgCircle, 't5, 32, s1.1', svgCircleSpeed, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,-50s0.5', self.fieldMap);
-            //             var myDrawing2 = new Drawing(svgCheck, 't0,32 s1.3', svgCheckSpeed, 't' + el.getBBox().x + ',' + el.getBBox().y + 't0,-38s0.5', self.fieldMap);
-            //             ((() => {
-            //                 el.click(() => {
-
-            //                     if (!el.hasClass('.checked')) {
-            //                         self.fieldMap.selectAll('#check_circle, #check_mark').remove();
-
-            //                         myDrawing1.initDraw();
-            //                         myDrawing1.callOnFinished = function () {
-            //                             self.fieldMap.selectAll('#check_circle').attr({ fill: "#7ac142" });
-            //                             myDrawing2.initDraw();
-            //                         };
-            //                         el.addClass('checked');
-            //                         el.removeClass('unchecked');
-            //                     } else {
-            //                         el.removeClass('checked');
-            //                         el.addClass('unchecked');
-            //                         self.fieldMap.selectAll('checked').forEach(function (el) {
-            //                             el.remove();
-            //                         });
-            //                     }
-
-            //                     if (self.gloveType && self.gloveType === el.name) {
-            //                         ////console.log('Glove type are the same');
-            //                         ////console.log(el.name);
-            //                     } else {
-            //                         self.clearGloveCanvas();
-            //                         self.gloveType = el.name;
-
-
-            //                         switch (self.gloveType) {
-            //                             case 'inf':
-            //                                 self.setGloveSizeSlider("10.50", "12.00", .25);
-            //                                 self.loadInfield();
-            //                                 self.setGloveType(el.name);
-
-            //                                 break;
-            //                             case 'of':
-            //                                 self.setGloveSizeSlider("12.00", "13.00", .25);
-            //                                 self.loadOutfield();
-            //                                 self.setGloveType(el.name);
-            //                                 break;
-            //                             case 'fbase':
-            //                                 self.setGloveSizeSlider("12.50", "13.00", .25);
-            //                                 self.loadFbase();
-            //                                 self.setGloveType(el.name);
-            //                                 break;
-            //                             case 'cm':
-            //                                 self.setGloveSizeSlider("32.00", "34.00", .50);
-            //                                 self.loadCatcher();
-            //                                 self.setGloveType(el.name);
-            //                                 break;
-            //                             case 'pitcher':
-            //                                 self.setGloveSizeSlider("12.50", "13.00", .25);
-            //                                 self.loadPitcher();
-            //                                 self.setGloveType(el.name);
-            //                                 break;
-            //                             default:
-            //                             ////console.log('done');
-            //                         }
-            //                     }
-            //                 });
-            //             })(), false);
-            //         }
-            //         self.fieldMap.append(el);
-            //     });
-            // });           
-
         } catch (error) {
             return false;
         }
-
-        // function checkMarkCss(el: any, el2?: any, misc?: any, selected?: string) {
-        //     var elementArray = [];
-        //     elementArray.push(el, el2);
-        //     _.forEach(elementArray, (o) => {
-
-        //         if (selected.length == null || undefined || 0) {
-        //             o.select('#' + selected).removeClass('checked');
-        //             o.select('#' + selected).addClass('unchecked');
-        //         }
-        //         o.selectAll('#check_circle, #check_mark').remove();
-        //     })
-        //     elementArray = [];
-        // }
-
 
     } //initCanvas End
 

@@ -93,6 +93,9 @@
     height: auto;
 }
 
+.customizehelp {
+    background: white;
+}
 
 @media screen and (max-width:30rem){
     .glove-series{
@@ -107,6 +110,10 @@
 
 .mat-img-buffer{
     margin-right: 1.25rem;
+}
+
+.spacer {
+    margin-top: 0.625rem;
 }
 
 .title {
@@ -134,6 +141,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 12px;
+    margin-bottom: 0.5rem;
 }
 
 .vertical-flex-grow{
