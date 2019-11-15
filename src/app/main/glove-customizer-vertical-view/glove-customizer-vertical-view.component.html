@@ -1,26 +1,12 @@
-<!-- 
-<div >
-  <ngx-slick class="carousel " [config]='{"slidesToShow": 1, "slidesToScroll": 1}'>
-    <div ngxSlickItem class="slide ">
-        <svg id="vOutside"></svg>
-    </div>  
-      <div ngxSlickItem class="slide  center-slick">
-        <svg id="vInside"></svg>
-      </div>
-      <div ngxSlickItem class="slide  center-slick">
-        <svg id="vSideview"></svg>
-    </div>
-  </ngx-slick> 
-
-</div> -->
+<mat-icon (click)="startIntro()">help_outline</mat-icon>
 <ngb-carousel class="mat-elevation-z8">
-    <ng-template ngbSlide>
-        <div><svg id="mOutside" width="500" height="400"></svg></div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <div><svg id="mInside" width="500" height="400"></svg></div>
-    </ng-template>
-    <ng-template ngbSlide>
-        <div><svg id="mSideview" width="500" height="400"></svg></div>
-    </ng-template>  
-  </ngb-carousel>
+  <ng-template ngbSlide>
+      <div><svg id="mOutside" width="500" height="400"></svg></div>
+  </ng-template>
+  <ng-template ngbSlide>
+      <div><svg id="mInside" width="500" height="400"></svg></div>
+  </ng-template>
+  <ng-template ngbSlide>
+      <div><svg id="mSideview" width="500" height="400"></svg></div>
+  </ng-template>  
+</ngb-carousel>

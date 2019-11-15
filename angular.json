@@ -8,7 +8,9 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -26,12 +28,11 @@
               "src/assets/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css",
-              "src/assets/css/vendor/slick/slick-theme.css",
-              "src/assets/css/vendor/slick/slick.css"
+              "node_modules/intro.js/introjs.css"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
-              "src/assets/js/vendor/slick.js"
+              "node_modules/intro.js/intro.js"
               
             ],
             "es5BrowserSupport": true

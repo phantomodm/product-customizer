@@ -658,6 +658,11 @@
     "@types/long" "*"
     "@types/node" "*"
 
+"@types/intro.js@^2.4.5":
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/@types/intro.js/-/intro.js-2.4.5.tgz#9c96c0953a98d9fb2e0322809ffdd41e66c2865b"
+  integrity sha512-iBKhOzf6tgTzYsjkrkghGQJFA/pYB7WelXhg8SCbsgMHg6xeIqVzsEFpKlcBMS93WDuNfgwT0kfgyjXgCIIB5g==
+
 "@types/jasmine@*":
   version "3.4.4"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.4.4.tgz#be3fbd73e72725edb44e6f7f509cd52912d1550c"
@@ -1024,6 +1029,14 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
+
+angular-shepherd@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/angular-shepherd/-/angular-shepherd-0.4.0.tgz#69f186b0beb8ef36adb72d9dfd59830e27eabd05"
+  integrity sha512-jGy2fPnyDaXfIJ247kNVl6LT2thTbE51h37969Hdfl9dfz8q1UPgORSOJgraoYpfaqQ3cmLQZkHT+GyhQh5ptQ==
+  dependencies:
+    shepherd.js "^6.0.1"
+    tslib "^1.9.0"
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -3875,6 +3888,11 @@ interpret@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   integrity sha512-mT34yGKMNceBQUoVn7iCDKDntA7SC6gycMAWzGx1z/CMCTV7b2AAtXlo3nRyHZ1FelRkQbQjprHSYGwzLtkVbw==
+
+intro.js@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/intro.js/-/intro.js-2.9.3.tgz#001d9a7bca66d8f4d2d0253c9b3345e9ae4320c3"
+  integrity sha512-hC+EXWnEuJeA3CveGMat3XHePd2iaXNFJIVfvJh2E9IzBMGLTlhWvPIVHAgKlOpO4lNayCxEqzr4N02VmHFr9Q==
 
 invariant@^2.2.2:
   version "2.2.4"
@@ -6751,6 +6769,14 @@ shelljs@^0.8.1:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
+shepherd.js@^6.0.1:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/shepherd.js/-/shepherd.js-6.0.2.tgz#ded562607cf73c88f112e9a6dabc0481a7615035"
+  integrity sha512-QMkOjr08fmE8GVpi05bbmEN2NqCrDEnA4NGOI4Qk2WlV/QsAl347aoTMx7BEfMIrJeZSbLYaY2ZESvI+MRmlbQ==
+  dependencies:
+    smoothscroll-polyfill "^0.4.4"
+    tether "^2.0.0-beta.4"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -6765,6 +6791,11 @@ smart-buffer@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.2.tgz#5207858c3815cc69110703c6b94e46c15634395d"
   integrity sha512-JDhEpTKzXusOqXZ0BUIdH+CjFdO/CR3tLlf5CN34IypI+xMmXW1uB16OOY8z3cICbJlDAVJzNbwBhNO0wt9OAw==
+
+smoothscroll-polyfill@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.4.tgz#3a259131dc6930e6ca80003e1cb03b603b69abf8"
+  integrity sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
@@ -7388,6 +7419,11 @@ terser@^4.1.2:
     commander "^2.20.0"
     source-map "~0.6.1"
     source-map-support "~0.5.12"
+
+tether@^2.0.0-beta.4:
+  version "2.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/tether/-/tether-2.0.0-beta.4.tgz#5ad19a425c63d0ba9972b16e670ff192b09c8658"
+  integrity sha512-4VhiB7YqN2R5EJRj96HIPnaFWC9Xot2J0zTUHgItyYlq0pACXSiBaj9iIwfgD+O89aab9HdBd8iXjGfpz57B4A==
 
 through2@^2.0.0:
   version "2.0.5"

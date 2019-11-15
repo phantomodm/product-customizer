@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { IntroJsService } from 'src/app/shared/services/intro-js.service';
 
 @Component({
   selector: 'glove-customizer-vertical-view',
@@ -27,14 +28,19 @@ export class GloveCustomizerVerticalViewComponent implements OnInit {
     easing: 'ease'
   }
 
-  constructor(config: NgbCarouselConfig) {
+  constructor(config: NgbCarouselConfig, private intro: IntroJsService) {
     config.interval = null;
     config.showNavigationArrows = true;
     config.showNavigationIndicators = false;
-   }
+
+  }
 
   ngOnInit() {
-    console.log("vert")
+    
+  }
+
+  startIntro(){
+    this.intro.startIntro();
   }
 
 

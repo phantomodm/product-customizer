@@ -10,6 +10,7 @@ import { GloveDataService } from 'src/app/shared/services/gloveData';
 import { embroiderySliderData } from 'src/app/shared/data/api-data';
 import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
 import { GloveSize } from 'src/app/shared/models/nine-positions-models';
+import { IntroJsService } from 'src/app/shared/services/intro-js.service';
 
 
 
@@ -25,6 +26,8 @@ export class VerticalViewComponent implements OnInit  {
   @Input('nysWizardSteps') wizardPrompts;
   @Input('gloveWebs') filteredGloveWebs;
   @ViewChild('verticalMenu1') stepper;
+  @ViewChild('verticalSubMenu2') stepper2;
+  @ViewChild('customTool') customTool: MatStep;
 
   //**Misc */
   customPartsValue$: Observable<any>;
@@ -71,12 +74,16 @@ export class VerticalViewComponent implements OnInit  {
   filteredGloveContent: GloveSize[] = []
   gloveSizeContent: any;
   handSizeImg: string;
+  userGuide: boolean;
+
+
   
   
   constructor(private fb:FormBuilder, 
               private snackBar:MatSnackBar,
               private nysApi: GloveApi,
-              private gloveData: GloveDataService ) {}
+              private gloveData: GloveDataService,
+              private intro: IntroJsService ) {}
 
   ngOnInit() {
     this.gloveSlider = {
@@ -112,8 +119,6 @@ export class VerticalViewComponent implements OnInit  {
     this.formFields = this.nysApi.getFormValues();
     this.verticalForm = this.fb.group(this.formFields);
 
-
-    //this.tobedetermined();
   }
 
   //** Forgotten Function */
@@ -126,6 +131,13 @@ export class VerticalViewComponent implements OnInit  {
       })
       
     );
+  }
+
+  autoStartIntroJs(){
+    if(this.userGuide != true){
+      this.intro.startIntro()
+      this.userGuide = true; 
+    }    
   }
 
   initilizeGloveSlider(){
@@ -234,6 +246,7 @@ export class VerticalViewComponent implements OnInit  {
       switch (gloveSize) {
         case "10.75":
         case "12.25":
+        case "12.75":
             this.glove.size = "";
             this.glove.content = `We currently do not have a ${gloveSize}" glove pattern.`;
         default:
@@ -246,7 +259,6 @@ export class VerticalViewComponent implements OnInit  {
   setGloveHand(attributeId:string, value:string, valueString:string,){
     const name = valueString.toLowerCase();
     const htmlValue:HtmlInputValue = {'id': attributeId,'value': value}
-    console.log(name)
     switch (name) {
       case "left":
         this.snackBar.open("You wear your glove on LEFT.",'DISMISS',{duration:1000})
@@ -285,13 +297,14 @@ export class VerticalViewComponent implements OnInit  {
   setGloveSeries(event: string, value:string, attributeName: string, menuName:string, control:string){
     const htmlValue = {'id':attributeName,'value': value}
     if(control == "sportPlayed"){
-      switch(event){
-        case "Softball":
-          this.snackBar.open(event + " model selected.",'DISMISS',{duration:1000})
-          break;
-        default:
-          this.snackBar.open(event + " model selected.", 'DISMISS',{duration:1000})
-      }
+      this.snackBar.open(event + " model selected.",'DISMISS',{duration:1000})
+      // switch(event){
+      //   case "Softball":
+      //     this.snackBar.open(event + " model selected.",'DISMISS',{duration:1000})
+      //     break;
+      //   default:
+      //     this.snackBar.open(event + " model selected.", 'DISMISS',{duration:1000})
+      // }
     } 
     this.nysApi.applyHtmlInput(htmlValue);
     this.nysApi.setWorkFlowValidity(menuName, control);

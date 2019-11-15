@@ -172,13 +172,13 @@
                             </div>&nbsp;
                             <div class="vertical-view__button">
                                 <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                <button mat-raised-button matStepperNext type="button">Next</button>
+                                <button mat-raised-button matStepperNext type="button" (click)="autoStartIntroJs()">Next</button>
                             </div>
                         </div>
-                    </mat-step>
+                    </mat-step  > 
 
                     <!-- Question #2: Sub 2 -->
-                    <mat-step>
+                    <mat-step #customTool>
                         <mat-icon icon="thumbs-up"></mat-icon>
                         <ng-template matStepLabel>Customize</ng-template>
 
@@ -192,15 +192,15 @@
 
                                     <div class="vertical-view__item spacer">
                                         <div class="horizontal-wizard-slider">
-                                          <div *ngIf="sliderStatus">
+                                          <div id="slider-control" *ngIf="sliderStatus">
                                             <p>Currently Customizing: <strong>Glove Leather</strong></p>
-                                            <ng5-slider #verticalSlider class="vertical-wizard-slider" [(value)]="value"
+                                            <ng5-slider id="slider-control-leather" #verticalSlider class="vertical-wizard-slider" [(value)]="value"
                                               [options]="gloveSlider" 
                                               (userChange)="leatherSliderSelections(verticalSlider.value)"></ng5-slider>
                                           </div>
                                           <div *ngIf="!sliderStatus">
                                             <p>Currently Customizing: <strong>Stitching/Embroidery Leather</strong></p>
-                                            <ng5-slider #verticalEmbSlider class="vertical-wizard-slider" [(value)]="valueEmbroidery"
+                                            <ng5-slider id="slider-control-embroidery" #verticalEmbSlider class="vertical-wizard-slider" [(value)]="valueEmbroidery"
                                               [options]="embroiderySlider"
                                               (userChange)="embroiderySliderSelections(verticalEmbSlider.value)"></ng5-slider>
                                           </div>
