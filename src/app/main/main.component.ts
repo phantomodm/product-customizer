@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject, Subscription, BehaviorSubject } from 'rxjs';
+import { takeUntil, finalize } from 'rxjs/operators';
 import { GloveColors, WizardPrompts } from '../shared/models/nine-positions-models';
 import { GloveDataService } from '../shared/services/gloveData';
 import { MatDialog } from '@angular/material';
@@ -25,9 +25,11 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   isScreenSmall$: Observable<boolean>;
 
   //** Boolean properties */
-  isLoading: boolean;
+  isLoading$: Observable<boolean>;
   gloveSliderStatus: boolean = true;
   canvasLoaded: boolean = true;  
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  public loading$ = this.loadingSubject.asObservable();
 
   //** Property which is an array of color name descriptions (ex.Black) for slider inputs  */
   gloveCustomColors = [];
@@ -56,7 +58,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   gloveColorsMap$: Observable<GloveColors>; 
   gloveWizardSteps$: Observable<WizardPrompts>;
   
-  
   constructor(public dialog: MatDialog, private gloveData:GloveDataService, private nysApi: GloveApi ) {
     // const checkScreenSize = () => document.body.clientWidth < 960;
     // const source$ = fromEvent(window,'resize').pipe(takeUntil(this.unsubscribe$), distinctUntilChanged());
@@ -71,14 +72,17 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    
+    this.loadingSubject.next(true);
     this.gloveColorsMap$ = this.gloveData.getGloveColors();
     this.gloveColorsMap$.pipe(takeUntil(this.unsubscribe$)).subscribe(
       val => this.gloveColorsMap = val
     );
+    
     this.gloveWizardSteps$ = this.gloveData.getWizardSteps();
+    this.gloveWizardSteps$.subscribe(res=> this.loadingSubject.next(false))
     this.gloveSliderView = this.nysApi.currentGlovePart$.subscribe((res)=>{
       this.gloveSliderStatus = res;
+
     })
   }
 
@@ -86,7 +90,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
     this.unsubscribe$.next();
-    this.unsubscribe$.complete();    
+    this.unsubscribe$.complete();
+    this.loadingSubject.complete();
   }
 
   ngAfterViewInit(): void {
@@ -99,5 +104,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   setGlvSize(event){
     this.nysApi.setGloveSize(event);
   }
+
 
 }

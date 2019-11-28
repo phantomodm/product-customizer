@@ -1,3 +1,4 @@
+
 <mat-card>
     <form [formGroup]="verticalForm">
         <mat-vertical-stepper #verticalMenu1>
@@ -24,7 +25,7 @@
                             &nbsp;
 
                             <div class="vertical-view__button">
-                                <button mat-raised-button matStepperNext type="button">Next</button>
+                                <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                             </div>
 
                         </mat-step>
@@ -43,8 +44,8 @@
                                 </div>
                                 &nbsp;
                                 <div class="vertical-view__button">
-                                    <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                    <button mat-raised-button matStepperNext type="button">Next</button>
+                                    <button mat-button matStepperPrevious type="button">Back</button>
+                                    <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                                 </div>
                             </div>
                         </mat-step>
@@ -62,13 +63,13 @@
                                         </div>
 
                                         <div>
-                                            <button mat-raised-button type="button">{{option.valueString}}</button>
+                                            <button mat-button type="button" color="primary" >{{option.valueString}}</button>
                                         </div>
                                     </mat-card>
                                 </div> &nbsp;
                                 <div class="vertical-view__button">
-                                    <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                    <button mat-raised-button matStepperNext type="button">Next</button>
+                                    <button mat-button matStepperPrevious type="button">Back</button>
+                                    <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                                 </div>
                             </div>
 
@@ -86,8 +87,8 @@
                             </div>
                             &nbsp;
                             <div class="vertical-view__button">
-                                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                <button mat-raised-button matStepperNext type="button">Next</button>
+                                <button mat-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                             </div>
                         </mat-step>
                         <!-- Question #6 -->
@@ -109,8 +110,8 @@
                                 </div>
                             </div>&nbsp;
                             <div class="vertical-view__button">
-                                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                <button mat-raised-button matStepperNext type="button">Next</button>
+                                <button mat-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                             </div>
                         </mat-step> 
                         <!-- Question #7 -->
@@ -128,9 +129,9 @@
                                     </div>
                                 </div>&nbsp;
                                 <div class="vertical-view__button">
-                                    <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                    <button mat-button matStepperPrevious type="button">Back</button>
                                     <button *ngIf="verifySubMenuCompletion('subForm1')" mat-raised-button
-                                        (click)="nextStep()" type="button">Next</button>
+                                        (click)="nextStep()" type="button" color="accent">Next</button>
                                 </div>
                             </div>
                         </mat-step>
@@ -169,10 +170,10 @@
                                     <glove-carousel-view></glove-carousel-view>
                                 </div>
 
-                            </div>&nbsp;
+                            </div>
                             <div class="vertical-view__button">
-                                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                <button mat-raised-button matStepperNext type="button" (click)="autoStartIntroJs()">Next</button>
+                                <button mat-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button" (click)="autoStartIntroJs()" color="accent">Next</button>
                             </div>
                         </div>
                     </mat-step  > 
@@ -210,8 +211,8 @@
                             </div>
 
                             <div class="vertical-view__button">
-                                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                <button mat-raised-button matStepperNext type="button">Next</button>
+                                <button mat-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                             </div>
                         </div>
                     </mat-step>
@@ -228,8 +229,8 @@
                             </div>
 
                             <div class="vertical-view__button">
-                                <button mat-raised-button matStepperPrevious type="button">Back</button>
-                                <button mat-raised-button matStepperNext type="button">Next</button>
+                                <button mat-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                             </div>
                         </div>
                     </mat-step>
@@ -265,9 +266,9 @@
                                 </mat-radio-group>
                             </div>&nbsp;
                             <div class="vertical-view__button">
-                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-button matStepperPrevious type="button">Back</button>
                                 <button *ngIf="verifySubMenuCompletion('subForm2')" mat-raised-button
-                                        (click)="nextStep()" type="button">Next</button>
+                                        (click)="nextStep()" type="button" color="accent">Next</button>
                             </div>
                         </div>
                     </mat-step>
@@ -294,7 +295,7 @@
                         </ul>
 
                         <div class="finalize-view__button">
-                            <button type="submit">Add to Cart</button>
+                            <button type="submit" mat-raised-button color="accent">Add to Cart</button>
                         </div>
                     </mat-step>
                 </mat-horizontal-stepper>

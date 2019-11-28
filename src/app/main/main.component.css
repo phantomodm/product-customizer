@@ -1,0 +1,12 @@
+.wizard{
+    width: 1024px;
+}
+
+.spinner-container {
+    position: fixed;
+    width: 500px;
+    height: 600px;
+    left: 475px;
+    top: 200px;
+    z-index: 1000;
+}

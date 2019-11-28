@@ -47,8 +47,8 @@
     font-size: 0.75rem;
     padding: 1em 2em;
     min-width: 200px;
-    background: #0160b4;
-    border-color: #0160b4;
+    /* background: #0160b4;
+    border-color: #0160b4; */
     text-transform: uppercase;
     font-weight: 600;
     color: #fff;

@@ -17,6 +17,12 @@
 .hand-size-view__list:first-child {
     margin-bottom: 1.5rem;
 }
+
+.hand-size {
+    width: 150px;
+    height: auto;
+}
+
 label {
     margin-bottom: 0px !important;
 }

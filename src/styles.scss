@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/theming";
+
+// Include non-theme styles for core.
+@include mat-core();
+
+$mat-nystix-blue: (
+  50: #e3f2fd,
+  100: #5c5cad,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: #222f79,
+  600: #1e88e5,
+  700: #0C2340,
+  800: #1565c0,
+  900: #0d47a1,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$mat-green: (
+  50: #e8f5e9,
+  100: #c8e6c9,
+  200: #a5d6a7,
+  300: #81c784,
+  400: #66bb6a,
+  500: #4caf50,
+  600: #43a047,
+  700: #388e3c,
+  800: #2e7d32,
+  900: #1b5e20,
+  A100: #b9f6ca,
+  A200: #69f0ae,
+  A400: #00e676,
+  A700: #00c853,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// Define a theme.
+$primary: mat-palette($mat-nystix-blue,700,);
+$accent:  mat-palette($mat-cyan, 900, A100, A400);
+
+$theme: mat-light-theme($primary, $accent);
+
+$button: #00843D;
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.customizehelp {
+    background: white;
+}
+
+:focus{
+    outline:none;
+}
+
+button:focus {
+    outline:none;
+}
+
+.unselected {
+    fill: rgba(10,134,61,0.5);
+}
+
+.selected{
+    fill: rgba(24, 152, 238, 0.5);
+}
+
+.complete{
+    fill: rgba(10,134,61,1.0);
+}
+
+.carousel-control-prev-icon {
+    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_left-32px.svg') !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_right-32px.svg') !important;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background: none;
+    width: 2rem;
+    height: 2rem;
+}
+

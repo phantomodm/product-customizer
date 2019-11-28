@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild  } from '@angular/core';
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatStep, MatSnackBar, MatSnackBarConfig, MatSnackBarRef, SimpleSnackBar } from '@angular/material';
+import { MatStep, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import * as _ from 'lodash';
 import { takeUntil } from 'rxjs/operators';
 import { GloveSlider, HtmlInputValue } from 'src/app/shared/models/nine-positions-models';
@@ -22,6 +22,8 @@ import { IntroJsService } from 'src/app/shared/services/intro-js.service';
 export class VerticalViewComponent implements OnInit  {
   private unsubscribe$ = new Subject<void>();
   errorNotifier: any;
+
+
   @Input('') sliderStatus;
   @Input('nysWizardSteps') wizardPrompts;
   @Input('gloveWebs') filteredGloveWebs;
@@ -75,8 +77,6 @@ export class VerticalViewComponent implements OnInit  {
   gloveSizeContent: any;
   handSizeImg: string;
   userGuide: boolean;
-
-
   
   
   constructor(private fb:FormBuilder, 
@@ -93,6 +93,8 @@ export class VerticalViewComponent implements OnInit  {
     this.embroiderySlider = {
       stepsArray: []
     }
+
+    
 
     this.gloveSizeSlider = this.nysApi.customGloveData.slider;
     this.gloveData.getGloveSliderColors().pipe(takeUntil(this.unsubscribe$)).subscribe(
