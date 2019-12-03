@@ -12,8 +12,12 @@
     margin: 6px;
 }
 
+#hands {
+    max-width: 175;
+}
+
 #hands img{
-    width: 175px
+    width: 100%
 }
 
 .glove-series {
@@ -57,9 +61,14 @@
     line-height: 20px;
 }
 
+.finalize-view_image{
+    width:300px
+}
+
 .finalize-view__list {
     display: flex;
     justify-content: center;
+    width:300px
 }
 
 .finalize-view__list li {
@@ -71,8 +80,22 @@
     max-width: 30rem;
 }
 
-@media screen and (min-width:32rem){
+@media only screen and (max-width: 400px){
+    
+    .finalize-view__list {
+        display: flex;
+        flex-direction: column;
+        padding:0px;        
+    }
 
+    .finalize-view_image{
+        width:200px
+    }
+    
+}
+
+@media screen and (min-width:25rem){
+    
     .glove-series_info{
         justify-items: center;
     }
@@ -97,7 +120,14 @@
     background: white;
 }
 
-@media screen and (max-width:30rem){
+@media screen and (min-width:600px){
+    .vertical-view-column_img{
+        width: 30%;
+        flex-shrink: 0.8;
+    }
+}
+
+@media screen and (max-width: 600px){
     .glove-series{
         width: 17rem;
         justify-content: space-around;
@@ -105,6 +135,15 @@
     
     .glove-series_info{
         width:18%;
+    }
+
+    .mat-img-buffer{
+        margin-right: 0rem;
+    }
+
+    .vertical-view-column_img{
+        width: 40%;
+        flex-shrink: .8;
     }
 }
 
@@ -128,10 +167,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.vertical-view-column_img{
-    width: 30%;
 }
 
 .vertical-view_row{

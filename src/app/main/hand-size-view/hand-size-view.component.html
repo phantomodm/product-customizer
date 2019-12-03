@@ -1,31 +1,27 @@
-<div class="hand-size-view_row">
-  <ngu-carousel class="ngu-slider-main" [inputs]="carouselTile" [dataSource]="hands">
+<div>
+    <ngu-carousel class="ngu-slider-main" [inputs]="carouselTile" [dataSource]="hands">
     <button type="button" class="leftRs" NguCarouselPrev></button>
     <button type="button" class="rightRs" NguCarouselNext></button>
 
-    <ngu-tile #handSize *nguCarouselDef="let hand;">
-      <section class="mat-elevation-z8">
-        <label style = "width: 100%" for={{hand.id}}>
-          <mat-card>
-            <div class="hand-size-view_column">
-            <div class="hand-size-view__list">
-              <mat-card-header>
-                <mat-card-title>{{hand.valueString}}</mat-card-title>
-              </mat-card-header>
-              &nbsp;
-            </div>
-            <div class="hand-size-view__list">
-              <img class="hand-size" mat-card-image src="./assets/images/{{hand.img}}">
-            </div>
-            <div class="hand-size-view__list">
-              <mat-card-actions fxLayoutAlign="center">
-                <button mat-raised-button color="primary" (click)="setHandSize(hand.valueString, hand.id, hand.value, hand.formName)">Select</button>
-              </mat-card-actions>
-            </div>
-            </div>
-          </mat-card>
-        </label>
-      </section>
+    <ngu-tile #handSize *nguCarouselDef="let hand;">      
+      <section>        
+          <mat-card style="box-shadow: none;" (click)="setHandSize(hand.valueString, hand.id, hand.value, hand.formName)" >
+            <label  for={{hand.id}}>
+              <div class="hand-size-view_column">
+                <div class="hand-size-view__list">
+                  <mat-card-header>
+                    <mat-card-title>{{hand.valueString}}</mat-card-title>
+                  </mat-card-header>
+                  &nbsp;
+                </div>
+                <div class="hand-size-view__list">
+                  <img class="hand-size" mat-card-image src="./assets/images/{{hand.img}}">
+                </div>
+              </div>
+            </label>
+          </mat-card>        
+      </section>      
     </ngu-tile>
-  </ngu-carousel>
+  </ngu-carousel>  
 </div>
+<div class="swipe"></div>

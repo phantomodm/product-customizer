@@ -29,6 +29,32 @@
                             </div>
 
                         </mat-step>
+                        <!-- Question #2 -->
+                        <mat-step>
+
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Glove Quality</ng-template>
+                            <div *ngFor="let series of (wizardPrompts)?.gloveSeries">
+                                <div class="vertical-view_column">
+                                    <div class="title">
+                                        <mat-card-title>{{series.label}}</mat-card-title>
+                                    </div>
+                                    <div class="glove-series">
+                                        <div class="glove-series_info" fxFlexAlign="center"
+                                            *ngFor="let option of series.options"><button mat-raised-button
+                                                type="button" color="primary"
+                                                (click)="setGloveSeries(option.valueString,option.value, option.id, 'subForm1',series.formName)">{{option.valueString}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            &nbsp;
+                            <div class="vertical-view__button">
+                                <button mat-raised-button matStepperPrevious type="button">Back</button>
+                                <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
+                            </div>
+                        </mat-step>
                         
                         <!-- Question #3 -->
                         <mat-step>
@@ -55,7 +81,7 @@
                             <ng-template matStepLabel>Glove Hand</ng-template>
                             <div *ngFor="let hand of (wizardPrompts)?.gloveHand">
                                 <mat-card-title>{{hand.label}}</mat-card-title>
-                                <div class="vertical-view_row">
+                                <div class="vertical-view_row ">
                                     <mat-card class="vertical-view_column vertical-view-column_img mat-img-buffer mat-elevation-z8"
                                         *ngFor="let option of hand.options" (click)="setGloveHand(option.id, option.value, option.valueString)">
                                         <div>
@@ -80,7 +106,7 @@
                             <ng-template matStepLabel>Hand Size</ng-template>
                             <div *ngFor="let size of (wizardPrompts)?.gloveFit">
                                 <mat-card-title>{{size.label}}</mat-card-title>
-                                <div class="">
+                                <div class="vertical-view__list vertical-flex-grow">
                                     <hand-size-view [hands]="size.options"></hand-size-view>
                                     &nbsp;
                                 </div>
@@ -223,7 +249,7 @@
                         <div *ngFor="let question of (wizardPrompts)?.gloveWeb">
                             <mat-card-title>{{question.label}}</mat-card-title>
                             <div class="">
-                                <div class=" vertical-view__list vertical-flex-grow">
+                                <div class="vertical-view__list vertical-flex-grow">
                                     <vertical-web-view [webs]="filteredGloveWebs"></vertical-web-view>
                                 </div>&nbsp;
                             </div>
@@ -293,7 +319,7 @@
                                 <div class="finalize-view_image"><svg id="gloveCloneSummary3"></svg></div>
                             </li>
                         </ul>
-
+                        <div><button mat-raised-button color="accent" (click)="download()">Download Images</button></div>
                         <div class="finalize-view__button">
                             <button type="submit" mat-raised-button color="accent">Add to Cart</button>
                         </div>

@@ -13,7 +13,7 @@ export class IntroJsService {
     this.introJs.setOptions({
       steps: [
         { 
-          intro: `Welcome to NYStix Glove Customizer. Customizing a NYStix custom glove is simple and fun. 
+          intro: `Welcome to 9P Glove Customizer. Customizing a 9P custom glove is simple and fun. 
           This short tour will guide on how to use our tool to customize your order.`
         },
         {

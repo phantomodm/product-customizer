@@ -6,6 +6,7 @@ export const STEPS =
         handSize: 'handSize',
         gloveSize:  'gloveSize',
         glovePadding: 'glovePadding',
+        glovePersonalization: 'glovePersonalization',
         gloveBreaking:  'gloveBreaking',
         gloveFont:'gloveFont',
         gloveName: 'gloveName',

@@ -49,3 +49,17 @@
     background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_right-32px.svg') ;
     right: 0;
 }
+
+.swipe {
+    width: 50px;
+    height: 54px;
+    margin: auto;
+    display: none;
+    background-image: url('http://localhost:4200/assets/images/swipe.svg');
+}
+
+@media only screen and (max-width:610px){
+    .swipe {
+        display:block;
+    }
+}

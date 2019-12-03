@@ -14,10 +14,10 @@
                       &nbsp;
                   </div>
                   <div class="vertical-web-view__list">
-                    <img mat-card-image [src]="web.imageURL" >
+                    <img *ngIf="web.imageUrl != undefined" mat-card-image [src]= "webUri + web.imageURL" >
                   </div>
                   <div class="vertical-web-view__list">
-                    <mat-card-actions fxLayoutAlign="center">
+                    <mat-card-actions>
                       <button mat-raised-button color="primary"
                         (click)="setWebOptions(web.valueString,  web.id, web.value, 'subForm2' , 'gloveWeb')">Select</button>
                     </mat-card-actions>
@@ -26,5 +26,6 @@
           </label>
         </section>
       </ngu-tile>
-    </ngu-carousel>
+    </ngu-carousel> 
   </div>
+  <div class="swipe"></div>

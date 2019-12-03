@@ -17,20 +17,20 @@ import * as _ from 'lodash';
   }
 
   getGloveColors(): Observable<any>{
-    return this.db.list('nystixs-colors').valueChanges();
+    return this.db.list('nine-positions-colors').valueChanges();
   }
 
   getWizardData():Observable<any>{
-    return this.db.object('nystixs-design-wizard').snapshotChanges();
-    //return this.db.list('nystixs-design-wizard').valueChanges();
+    return this.db.object('nine-positions-design-wizard').snapshotChanges();
+    //return this.db.list('nine-positions-design-wizard').valueChanges();
   }
 
   getGloveInputElements():Observable<any>{
-    return this.db.object('nystixs-custom-elements').snapshotChanges();
+    return this.db.object('nine-positions-custom-elements').snapshotChanges();
   }
 
   getGloveSliderColors(): Observable<any> {
-    return this.db.list('nystixs-color-slider').valueChanges();
+    return this.db.list('nine-positions-color-slider').valueChanges();
   }
 
   getWizardSteps(): Observable<WizardPrompts> {
@@ -68,6 +68,6 @@ import * as _ from 'lodash';
   }
 
   getGloveSizeContent(): Observable<any>{
-    return this.db.list('nystixs-glove-guide').valueChanges() ;
+    return this.db.list('nine-positions-glove-guide').valueChanges() ;
   }
 }

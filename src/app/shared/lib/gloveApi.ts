@@ -98,6 +98,7 @@ export class GloveApi {
                 complete: false,
                 menu: [
                     { step: STEPS.sportPlayed, valid: false },
+                    { step: STEPS.gloveSeries, valid: false },
                     { step: STEPS.gloveType, valid: false },
                     { step: STEPS.gloveHand, valid: false },
                     { step: STEPS.handSize, valid: false },
@@ -112,6 +113,7 @@ export class GloveApi {
                 menu: [
                     { step: STEPS.gloveSize, valid: false },
                     { step: STEPS.gloveWeb, valid: false },
+                    { step: STEPS.glovePersonalization, valid: false },
                     { step: STEPS.gloveName, valid: false }
                 ],
             }
@@ -582,6 +584,27 @@ export class GloveApi {
         })
     }
 
+    setGloveSeries = (valueString: string, formValue: string) => {
+        let key = "series";
+        let value = "value";
+
+        if (_.includes(valueString, 'elite')) {
+            this.customGloveData.gloveSeries[key] = "elite";
+            this.setSeriesOnGlove("elite");
+            if(_.includes(valueString,'kip')){
+                this.currentLeatherType.next('kip');
+            }
+        } else if (_.includes(valueString, 'rise')) {
+            this.customGloveData.gloveSeries[key] = "rise";
+            this.currentLeatherType.next('rise');
+            this.setSeriesOnGlove("rise")
+        } else {
+            this.currentLeatherType.next('cowhide');
+            console.log("cowhide")
+        }
+
+        this.customGloveData.gloveSeries[value] = formValue;
+    }
     
     setSeriesOnGlove = (input?: any, element?: any) => {
         let self = this;
@@ -618,6 +641,14 @@ export class GloveApi {
 
         }
 
+    }
+
+    setInitialSeriesState(id:string, node:string, element?:any){
+        let self = this
+        if (_.includes(id, "rise") || _.includes(id, "elite")) {
+            element.attr({ opacity: 0 })
+            self.setSeriesOnGlove(node, element);
+        }
     }
 
     //** Function run to return current glove section and color chosen to render in glove canvas */
@@ -725,9 +756,9 @@ export class GloveApi {
         // this.m2.attr({ viewBox: "0 0 400 400" });
         // this.m3.attr({ viewBox: "0 0 400 400" });
 
-        this.gloveCloneSummary1.attr({ viewBox: "0 0 400 400" });
-        this.gloveCloneSummary2.attr({ viewBox: "0 0 400 400" });
-        this.gloveCloneSummary3.attr({ viewBox: "0 0 400 400" });
+        this.gloveCloneSummary1.attr({ viewBox: "110 0 350 400" });
+        this.gloveCloneSummary2.attr({ viewBox: "0 0 350 400" });
+        this.gloveCloneSummary3.attr({ viewBox: "100 0 350 400" });
     }
 
     //** Loads Catcher's mitt glove canvas */
@@ -744,13 +775,8 @@ export class GloveApi {
 
                 //Apply default fills & add to group
                 self.defaultColor(layer, el, self.oView);
-
-                // if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
-                //     el.attr({ opacity: 0 })
-                //     self.setSeriesOnGlove(filter, el);
-                // }
+                self.setInitialSeriesState(layer,filter,el);
                 self.m1.append(self.oView);
-                //self.gloveCloneMainVertical.append(self.m1.clone(self.oView));
             });
 
             var label = [{ name: "plm", x: null, y: null, title: "palm", model: "palmColor", canvas: ["mInside", "mSideview"] },
@@ -762,7 +788,7 @@ export class GloveApi {
             { name: "fpad", x: 166, y: 208, title: "finger protection", model: "protectionColor", canvas: ["mOutside"] },
             { name: "lce", x: 312, y: 65, title: "lace", model: "laceColor", canvas: ["mOutside"] },
             { name: "fgrl", x: 40.1, y: 184.6, title: "finger embroidery", model: "seriesColor", canvas: ["mOutside"] },
-            { name: "logo", x: 218, y: 299, title: "NYStix logo embroidery", model: "logoColor", canvas: ["mOutside", "mSideview"] },
+            { name: "logo", x: 218, y: 299, title: "9P logo embroidery", model: "logoColor", canvas: ["mOutside", "mSideview"] },
             { name: "tgt", x: null, y: null, title: "targets", model: "targetColor", canvas: ["mInside"] },
             { name: "stch", x: null, y: null, title: "stitching", model: "stitchingColor", canvas: ["mSideview"] },
             { name: "bnd", x: null, y: null, title: "binding", model: "bindingColor", canvas: ["mSideview"] }
@@ -775,7 +801,6 @@ export class GloveApi {
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                     } else {
                         var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
@@ -798,6 +823,7 @@ export class GloveApi {
                 var layer = p[i];
                 //Apply default fills & add to group
                 self.defaultColor(layer, el, self.iView);
+                //self.setInitialSeriesState(layer,filter,el);
 
                 self.m2.append(self.iView);
                 // self.gloveCloneInsideVertical.append(self.m2.clone(self.iView));
@@ -829,22 +855,21 @@ export class GloveApi {
             g.forEach((el, i) => {
                 var p = ["cm_x5F_vw1_x5F_utoe", "cm_x5F_vw1_x5F_thb", "cm_x5F_vw1_x5F_logo", "cm_x5F_vw1_x5F_bnd", "cm_x5F_vw1_x5F_plm", "cm_x5F_vw1_x5F_web", "cm_x5F_vw1_x5F_fpad", "cm_x5F_vw1_x5F_stch", "cm_x5F_vw1_x5F_lce", "cm_x5F_side_x5F_view"];
                 var layer = p[i];
+
                 //Apply default fills & add to group
                 self.defaultColor(layer, el, self.sView);
                 self.m3.append(self.sView);
-                // self.gloveCloneSideVertical.append(self.m3.clone(self.sView));
             });
 
             var label = [{ name: "psnl_font", x: 150, y: 175, title: "personalization" },
             // { name: "utoe", x: 150, y: 61, title: "web base" },
             { name: "bnd", x: 134, y: 121, title: "binding" },
             { name: "stch", x: 185, y: 147, title: "stitching" },
-            { name: "logo", x: 96, y: 147, title: "NYStix logo" }];
+            { name: "logo", x: 96, y: 147, title: "9P logo" }];
 
             _.forEach(label, (l) => {
                 ((function (l) {
                     var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -872,14 +897,8 @@ export class GloveApi {
                 var filter = layer.split('_').pop();
 
                 self.defaultColor(layer, el, self.oView);
-
-                if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
-                    el.attr({ opacity: 0 })
-                    self.setSeriesOnGlove(filter, el);
-                }
-
+                self.setInitialSeriesState(layer,filter,el);
                 self.m1.append(self.oView);
-                // self.gloveCloneMainVertical.append(self.m1.clone(self.oView));
             });
 
             var label = [{ name: "indo", x: 202, y: 84.3, title: "index outer", model: "indexOuter", canvas: ["mOutside"] },
@@ -895,7 +914,7 @@ export class GloveApi {
             //{ name: "lin", x: 132.4, y: 259, title: "lining", canvas: ["mOutside"] },
             { name: "wst", x: 110.9, y: 320.1, title: "wrist", model: "wristColor", canvas: ["mOutside", "mSideview"] },
             { name: "stch", x: null, y: null, title: "stiching", model: "stitchingColor", canvas: ["mSideview"] },
-            { name: "logo", x: 200, y: 314.1, title: "NYStix logo", model: "logoColor", canvas: ["mOutside"] },
+            { name: "logo", x: 200, y: 314.1, title: "9P logo", model: "logoColor", canvas: ["mOutside"] },
             { name: "fgrl", x: 127.9, y: 63.5, title: "finger logo", model: "seriesColor", canvas: ["mOutside"] },
             { name: "plm", x: null, y: null, title: "palm", model: "palmColor", canvas: ["mInside"] },
             { name: "lce", x: null, y: null, title: "lace", model: "laceColor", canvas: ["mInside", "mSideview"] },
@@ -912,7 +931,6 @@ export class GloveApi {
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                     } else {
                         var btn = self.m1.rect(l.x + 20, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                         btn.append(title);
@@ -1000,14 +1018,14 @@ export class GloveApi {
 
                 //Apply default fills & add to group
                 self.defaultColor(layer, el, self.oView);
-
+                this.setInitialSeriesState(layer,filter,el)
+                
                 if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
                     el.attr({ opacity: 0 })
                     //this.setSeriesOnGlove(filter, el);
                 }
 
                 self.m1.append(self.oView);
-                // self.gloveCloneMainVertical.append(self.m1.clone(self.oView));
             });
 
             this.indicatorMap = [];
@@ -1026,7 +1044,7 @@ export class GloveApi {
             //{ name: 'fpad', x: null, y: null, title: 'finger protection', canvas: ["mSideview"] },
             { name: 'lce', x: null, y: null, title: 'lace', model: 'laceColor', canvas: ["mSideview"] },
             { name: 'stch', x: null, y: null, title: 'stitching', model: 'stitchingColor', canvas: ["mOutside"] },
-            { name: 'logo', x: 244, y: 300, title: 'NYStix logo', model: 'logoColor', canvas: ["mOutside"] },
+            { name: 'logo', x: 244, y: 300, title: '9P logo', model: 'logoColor', canvas: ["mOutside"] },
             { name: 'wlt', x: 178, y: 150, title: 'welt', model: 'weltColor', canvas: ["mOutside", "mSideview"] },
             { name: 'wst', x: 150, y: 298, title: 'wrist', model: 'wristColor', canvas: ["mOutside", "mSideview"] },
             { name: 'fgrl', x: 160, y: 28.9, title: 'finger logo', model: 'seriesColor', canvas: ["mOutside"] },
@@ -1042,11 +1060,9 @@ export class GloveApi {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
                         var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
-
                         btn.append(title);
                         self.svgEventListners(btn, l);
                         self.drawSvgCanvas("main", btn);
@@ -1140,11 +1156,7 @@ export class GloveApi {
 
                 //Apply default fills & add to group
                 self.defaultColor(layer, el, self.oView);
-
-                if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
-                    el.attr({ opacity: 0 })
-                    this.setSeriesOnGlove(filter, el);
-                }
+                self.setInitialSeriesState(layer,filter,el)
 
                 self.m1.append(self.oView);
                 // self.gloveCloneMainVertical.append(self.m1.clone(self.oView));
@@ -1164,7 +1176,7 @@ export class GloveApi {
             //{ name: 'fpad', x: null, y: null, title: 'finger protection', canvas: ["mSideview"] },
             { name: 'lce', x: null, y: null, title: 'lace', model: 'laceColor', canvas: ["mSideview"] },
             { name: 'stch', x: null, y: null, title: 'stitching', model: 'stitchingColor', canvas: ["mOutside"] },
-            { name: 'logo', x: 244, y: 300, title: 'NYStix logo', model: 'logoColor', canvas: ["mOutside"] },
+            { name: 'logo', x: 244, y: 300, title: '9P logo', model: 'logoColor', canvas: ["mOutside"] },
             { name: 'wlt', x: 178, y: 150, title: 'welt', model: 'weltColor', canvas: ["mOutside", "mSideview"] },
             { name: 'wst', x: 150, y: 298, title: 'wrist', model: 'wristColor', canvas: ["mOutside", "mInside"] },
             { name: 'fgrl', x: 160, y: 28.9, title: 'finger logo', model: 'seriesLogo', canvas: ["mOutside"] },
@@ -1179,11 +1191,9 @@ export class GloveApi {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
                         var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                         btn.append(title);
-
                         self.svgEventListners(btn, l);
                         self.drawSvgCanvas("main", btn);
                     }
@@ -1258,7 +1268,6 @@ export class GloveApi {
                 })(l), false);
             });
         });
-        ////console.log('Pitcher\'s mitt loaded.');
     };
 
     //** Loads first base mitt canvas */
@@ -1275,10 +1284,7 @@ export class GloveApi {
 
                 //Apply default fills & add to group
                 self.defaultColor(layer, el, self.oView);
-                if (_.includes(layer, "rise") || _.includes(layer, "elite")) {
-                    el.attr({ opacity: 0 })
-                    self.setSeriesOnGlove(filter, el);
-                }
+                self.setInitialSeriesState(layer,filter,el);
                 self.m1.append(self.oView);
                 // self.gloveCloneMainVertical.append(self.m1.clone(self.oView));
             });
@@ -1305,7 +1311,6 @@ export class GloveApi {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
                         var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });

@@ -37,7 +37,7 @@ import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-car
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 
 
-const firebase = {
+const firebaseC = {
   "apiKey": "nys-glove-tool",
   "authDomain": "nys-glove-tool.firebaseapp.com",
   "databaseURL": "https://nys-glove-tool.firebaseio.com",
@@ -45,6 +45,13 @@ const firebase = {
   "storageBucket": "",
   "messagingSenderId": "215259533349"
 }
+var firebase = {
+  apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
+  authDomain: "positions-ui-web-data.firebaseapp.com",
+  databaseURL: "https://positions-ui-web-data.firebaseio.com",
+  projectId: "positions-ui-web-data",
+  messagingSenderId: "479822956029"
+};
 
 const routes: Routes = [
   { path: '', component: AppComponent },
