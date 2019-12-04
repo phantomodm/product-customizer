@@ -22,6 +22,11 @@
     margin-bottom: 1.5rem;
 }
 
+.web-img-size {
+    width: auto;
+    height: 172px;
+}
+
 /* img {
     width: 250px;
     height: 100%;

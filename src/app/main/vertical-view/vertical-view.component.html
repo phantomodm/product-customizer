@@ -80,7 +80,7 @@
                             <ng-template matStepLabel>Hand Size</ng-template>
                             <div *ngFor="let size of (wizardPrompts)?.gloveFit">
                                 <mat-card-title>{{size.label}}</mat-card-title>
-                                <div class="">
+                                <div class="vertical-view__list vertical-flex-grow">
                                     <hand-size-view [hands]="size.options"></hand-size-view>
                                     &nbsp;
                                 </div>

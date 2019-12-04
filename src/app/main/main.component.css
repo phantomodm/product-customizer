@@ -2,11 +2,14 @@
     width: 1024px;
 }
 
-.spinner-container {
+div.spinner-container{
     position: fixed;
-    width: 500px;
-    height: 600px;
-    left: 475px;
-    top: 200px;
     z-index: 1000;
+
+}
+.spinner {
+    position: relative;
+    left: 40vw;
+    top: 200px;
+    
 }
