@@ -774,8 +774,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
@@ -811,8 +811,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -843,8 +843,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -911,8 +911,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x + 20, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                        var btn = self.m1.rect(l.x + 20, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
                         self.indicatorMap.push({ name: l.name, label: l.title, model: l.model, touched: false, canvas: l.canvas });
                         btn.append(title);
@@ -943,8 +943,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m2.rect(l.x, l.y, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -974,8 +974,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -1041,8 +1041,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
@@ -1079,8 +1079,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -1114,8 +1114,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
                     btn.append(title);
                     self.svgEventListners(btn, l);
@@ -1178,8 +1178,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                         btn.append(title);
@@ -1213,8 +1213,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'blue', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneInsideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: 'blue', selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
                     btn.append(title);
@@ -1248,8 +1248,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
                     btn.append(title);
@@ -1304,8 +1304,8 @@ export class GloveApi {
                     if (l.x == null && l.y == null) {
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
                     } else {
-                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                        var btn = self.m1.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                        // var vBtn = self.gloveCloneMainVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                         var title = Snap.parse('<title>' + l.title + '</title>');
 
                         self.indicatorMap.push({ name: l.name, touched: false, canvas: l.canvas });
@@ -1338,8 +1338,8 @@ export class GloveApi {
             ];
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m2.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
                     btn.append(title);
@@ -1370,8 +1370,8 @@ export class GloveApi {
 
             _.forEach(label, (l) => {
                 ((function (l) {
-                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
-                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0, class:"pulse" });
+                    var btn = self.m3.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
+                    // var vBtn = self.gloveCloneSideVertical.rect(l.x - 6, l.y - 6, 15, 15, 50, 50).attr({ fill: self.svgBtnFill, selected: false, id: l.name, stroke: 'white', strokeWidth: 2.0 });
                     var title = Snap.parse('<title>' + l.title + '</title>');
 
                     btn.append(title);

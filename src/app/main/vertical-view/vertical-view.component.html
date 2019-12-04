@@ -56,16 +56,18 @@
                             <div *ngFor="let hand of (wizardPrompts)?.gloveHand">
                                 <mat-card-title>{{hand.label}}</mat-card-title>
                                 <div class="vertical-view_row">
-                                    <mat-card class="vertical-view_column vertical-view-column_img mat-img-buffer mat-elevation-z8"
+                                    <div class="vertical-view__item vertical-flex-grow">
+                                    <mat-card class= "mat-elevation-z8 mat-img-buffer"
                                         *ngFor="let option of hand.options" (click)="setGloveHand(option.id, option.value, option.valueString)">
                                         <div>
-                                            <img class="hands" mat-card-image src="./assets/images/{{option.img}}">
+                                            <img mat-card-image src="./assets/images/{{option.img}}">
                                         </div>
 
-                                        <div>
+                                        <!-- <div>
                                             <button mat-button type="button" color="primary" >{{option.valueString}}</button>
-                                        </div>
+                                        </div> -->
                                     </mat-card>
+                                </div>
                                 </div> &nbsp;
                                 <div class="vertical-view__button">
                                     <button mat-button matStepperPrevious type="button">Back</button>
