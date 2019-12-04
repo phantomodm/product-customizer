@@ -756,9 +756,9 @@ export class GloveApi {
         // this.m2.attr({ viewBox: "0 0 400 400" });
         // this.m3.attr({ viewBox: "0 0 400 400" });
 
-        this.gloveCloneSummary1.attr({ viewBox: "110 0 350 400" });
-        this.gloveCloneSummary2.attr({ viewBox: "0 0 350 400" });
-        this.gloveCloneSummary3.attr({ viewBox: "100 0 350 400" });
+        this.gloveCloneSummary1.attr({ viewBox: "50 450 400" });
+        this.gloveCloneSummary2.attr({ viewBox: "50 0 450 400" });
+        this.gloveCloneSummary3.attr({ viewBox: "50 0 450 400" });
     }
 
     //** Loads Catcher's mitt glove canvas */
