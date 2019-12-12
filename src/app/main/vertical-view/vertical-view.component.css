@@ -43,11 +43,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
 .finalize-view__button button{
-    display: flex;
-    justify-content: center;
+    
     font-size: 0.75rem;
     padding: 1em 2em;
     min-width: 200px;

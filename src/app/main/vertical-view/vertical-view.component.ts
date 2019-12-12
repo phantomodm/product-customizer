@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, wtfCreateScope  } from '@angular/core';
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -168,12 +168,33 @@ export class VerticalViewComponent implements OnInit  {
   }
 
   download(){
-    let canvas = ["gloveCloneSummary1", "gloveCloneSummary2", "gloveCloneSummary3"]
-    canvas.forEach( (s)=>{
+    let el = ["gloveCloneSummary1", "gloveCloneSummary2", "gloveCloneSummary3"]
+    el.forEach( (s)=>{
+      console.log(s)
       let img = new Image(), 
         serializer = new XMLSerializer(), 
         svgElement = serializer.serializeToString(document.getElementById(s));
       img.src = 'data:image/svg+xml;base64,'+ window.btoa(svgElement);
+
+      var canvas = document.createElement("canvas")
+      var w=400
+      var h= 450
+
+      canvas.width = w
+      canvas.height = h
+      canvas.getContext("2d").drawImage(img,0,0,w,h);
+      
+      let imageURL = canvas.toDataURL();
+
+      
+      let a = document.createElement('a');
+      a.download = "image"
+      a.href = imageURL
+      a.dataset.downloadurl = ["image/png", a.download, a.href].join(':');
+
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
 
 
     })
