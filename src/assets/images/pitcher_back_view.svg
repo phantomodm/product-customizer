@@ -172,7 +172,7 @@
 
 	
 
-		<image style="overflow:visible; enable-background:new;" width="720" height="950" xlink:href="./images/9P_pitcher_back_view.png"  transform="matrix(0.3674 0 0 0.3674 55.2474 2.5)">
+		<image id="glove-view-1" style="overflow:visible; enable-background:new;" width="720" height="950" xlink:href="./images/9P_pitcher_back_view.png"  transform="matrix(0.3674 0 0 0.3674 55.2474 2.5)">
 
 	</image>
 

@@ -169,7 +169,7 @@
 </g>
 <g id="pitcher_x5F_open_x5F_back">
 	
-		<image overflow="visible" width="720" height="950" xlink:href="assets/images/9P_pitcher_open_back1.png"  transform="matrix(0.3674 0 0 0.3674 55.2474 2.5)">
+		<image id="glove-view-1" overflow="visible" width="720" height="950" xlink:href="assets/images/9P_pitcher_open_back1.png"  transform="matrix(0.3674 0 0 0.3674 55.2474 2.5)">
 	</image>
 </g>
 </svg>

@@ -209,7 +209,7 @@
 </g>
 <g id="fbase_x5F_open_x5F_back">
 	
-		<image style="overflow:visible;enable-background:new;" width="800" height="921" xlink:href="assets/images/9P_fbase_back_view.png"  transform="matrix(0.38 0 0 0.38 36.9844 -1.464844e-05)">
+		<image id="glove-view-1" style="overflow:visible;enable-background:new;" width="800" height="921" xlink:href="assets/images/9P_fbase_back_view.png"  transform="matrix(0.38 0 0 0.38 36.9844 -1.464844e-05)">
 	</image>
 </g>
 <g id="fbase_x5F_logo_x5F_elite">

@@ -218,7 +218,7 @@
 
 <g id="pitcher_x5F_pocket_x5F_view">
 	
-	<image overflow="visible" width="2395" height="2667"  xlink:href="assets/images/9P_pitcher_pocket_view.png"  transform="matrix(0.146 0 0 0.131 0 0)">
+	<image id="glove-view-2" overflow="visible" width="2395" height="2667"  xlink:href="assets/images/9P_pitcher_pocket_view.png"  transform="matrix(0.146 0 0 0.131 0 0)">
 	</image>
 </g>
 </svg>
