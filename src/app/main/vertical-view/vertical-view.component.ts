@@ -11,10 +11,6 @@ import { embroiderySliderData } from 'src/app/shared/data/api-data';
 import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
 import { GloveSize } from 'src/app/shared/models/nine-positions-models';
 import { IntroJsService } from 'src/app/shared/services/intro-js.service';
-import mergeImages from 'merge-images';
-import * as htmlToImage from 'html-to-image';
-import * as download from 'downloadjs';
-import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'vertical-view',
