@@ -1,6 +1,7 @@
 <div>
-  <div class="spinner-container">
-    <div *ngIf="loading$ | async">
+  <h1>{{title}}</h1>
+  <div *ngIf="loading$ | async" class="spinner-container">
+    <div >
       <mat-spinner class="spinner"></mat-spinner>
     </div>
   </div>

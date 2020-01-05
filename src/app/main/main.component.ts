@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { Observable, Subject, Subscription, BehaviorSubject } from 'rxjs';
 import { takeUntil, finalize } from 'rxjs/operators';
 import { GloveColors, WizardPrompts } from '../shared/models/nine-positions-models';
@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 })
 
 export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
-  
+  @Input() title;
   //** Component properties Subscription/Observables  */
   private unsubscribe$ = new Subject<void>();
   screenSubscription: Subscription;

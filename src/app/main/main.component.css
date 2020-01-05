@@ -1,14 +1,11 @@
-.wizard{
-    width: 1024px;
-}
 
 div.spinner-container{
-    position: fixed;
+    position: relative;
     z-index: 1000;
 
 }
 .spinner {
-    position: relative;
+    position: fixed;
     left: 45vw;
     top: 100px;
     

@@ -3,11 +3,13 @@ const concat = require('concat');
 
 (async function build(){
     const files = [
-        './dist/inline.bundle.js',
-        './dist/polyfills.bundle.js',
-        './dist/main.bundle.js'
+        './dist/nystixs-glove-customizer/runtime.js',
+        './dist/nystixs-glove-customizer/es2015-polyfills.js',
+        './dist/nystixs-glove-customizer/polyfills.js',
+        './dist/nystixs-glove-customizer/scripts.js',
+        './dist/nystixs-glove-customizer/main.js'
     ]
 
     await fs.ensureDir('nystix-ui')
     await concat(files,'nystix-ui/nystix-customizer.js')
-})
+})();

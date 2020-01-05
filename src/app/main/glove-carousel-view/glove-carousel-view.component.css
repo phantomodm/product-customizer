@@ -45,8 +45,52 @@
     box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, 0.3);
     border-radius: 999px;
     right: 0;
+} 
+
+.leftRs,
+.rightRs {
+    position: absolute;
+    background: none;
+    border: none;
+    margin: auto;
+    width: 2rem;
+    height: 2rem;
+    top: 0;
+    bottom: 0;
 }
 
+.leftRs {       
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_left-32px.svg') ;
+    left: 0;
+}
+
+.rightRs {    
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_right-32px.svg') ;
+    right: 0;
+}
+
+.swipe {
+    width: 50px;
+    height: 54px;
+    margin: auto;
+    display: none;
+    /* background-image: url('./assets/images/swipe.svg'); */
+}
+@media only screen and (max-width:550px){
+    .leftRs  {
+        left: 50px;
+    }
+    .rightRs {
+        right: 50px;
+    }
+    
+}
+
+@media only screen and (max-width:610px){
+    .swipe {
+        display:block;
+    }
+}
 
 /* .glove-slider-containter {
     display: flex;

@@ -3,7 +3,7 @@
       <button type="button" class="leftRs" NguCarouselPrev></button>
       <button type="button" class="rightRs" NguCarouselNext></button>
   
-      <ngu-tile #verticalWeb *nguCarouselDef="let web;">
+      <ngu-tile #verticalWeb *nguCarouselDef="let web; let i = index">
         <section class="mat-elevation-z8">
           <label style="width: 100%" for={{web.id}}>
               <div class="vertical-web-view_column">

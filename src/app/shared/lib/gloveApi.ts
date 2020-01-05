@@ -3,12 +3,11 @@ import { STEPS, Glove, WebFilter } from '../models/wizard.models';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { GloveColors, HtmlInputValue } from '../models/nine-positions-models';
 import { GloveDataService } from '../services/gloveData';
-import { Options, CustomStepDefinition, LabelType } from 'ng5-slider';
 import { Drawing } from './snap.drawing.function';
 import "snapsvg-cjs";
 import * as _ from 'lodash';
 
-import { positionsDB, gloveWebOptions, gloveCanvas } from '../data/api-data';
+import { gloveCanvas } from '../data/api-data';
 import { StorageService } from '../services/storage-service.service';
 
 declare var Snap: any;
@@ -132,6 +131,7 @@ export class GloveApi {
     strokeFill = '#c0c0c0';
     btnFill = 'rgba(10,134,61,0.4)';
     svgBtnFill = 'rgba(10,134,61,0.6)';
+    formAttribute: any;
 
     
 
@@ -151,7 +151,7 @@ export class GloveApi {
             .subscribe(val => {
                 
                 _.forEach(val, (v) => {
-                    
+                    console.log(v)
                     this.gloveCustomData.push(v);
                 })
                 
@@ -179,6 +179,7 @@ export class GloveApi {
                 })
             })
         })
+        this.formAttribute = {"attributes":{"attribute_pa_glove-type":"","attribute_pa_hand-size":"","attribute_pa_throwing-arm":"","attribute_pa_glove-softness":"","attribute_pa_palm-protection":"","attribute_pa_thumb-finger-color":"","attribute_pa_back-finger-color":"","attribute_pa_thumb-outside-color":"","attribute_pa_thumb-inside-color":"","attribute_pa_index-inside-color":"","attribute_pa_index-outside-color":"","attribute_pa_middle-color":"","attribute_pa_ring-inside-color":"","attribute_pa_ring-ouside-color":"","attribute_pa_pinky-inside-color":"","attribute_pa_pinky-outside-color":"","attribute_pa_wrist-color":"","attribute_pa_web-base-color":"","attribute_pa_web-color":"","attribute_pa_welt-color":"","attribute_pa_palm-color":"","attribute_pa_lace-color":"","attribute_pa_target-color":"","attribute_pa_stitching-color":"","attribute_pa_finger-logo-color":"","attribute_pa_nystix-logo-color":"","attribute_pa_personalization-embroidery":"","attribute_pa_field-positions":"","attribute_pa_glove-size":"","attribute_pa_glove-font":"","attribute_pa_glove-webs":""},"availability_html":"<p class=\"stock in-stock\">20 in stock<\/p>\n","backorders_allowed":false,"dimensions":{"length":"12","width":"9","height":"5"},"dimensions_html":"12 &times; 9 &times; 5 in","display_price":200,"display_regular_price":200,"image":{"title":"Glove Design Wizard","caption":"","url":false,"alt":"","src":null,"srcset":false,"sizes":false,"full_src":null,"full_src_w":null,"full_src_h":null,"gallery_thumbnail_src":null,"gallery_thumbnail_src_w":null,"gallery_thumbnail_src_h":null,"thumb_src":null,"thumb_src_w":null,"thumb_src_h":null,"src_w":null,"src_h":null},"image_id":"","is_downloadable":false,"is_in_stock":true,"is_purchasable":true,"is_sold_individually":"no","is_virtual":false,"max_qty":20,"min_qty":1,"price_html":"","sku":"NYSFULLCUSTOM","variation_description":"","variation_id":84,"variation_is_active":true,"variation_is_visible":true,"weight":"2","weight_html":"2 lbs"};
     }
 
     initializeModel() {
@@ -405,10 +406,13 @@ export class GloveApi {
 
     private _applyHtmlInput(inputValue:HtmlInputValue) {
        const formId = `attribute_${inputValue.id}`;
-       console.log(typeof(inputValue))
+       
+        console.log(inputValue.id, inputValue.value)
         try {
-            (<HTMLInputElement>document.getElementById(formId)).value = inputValue.value;
-        } catch (error) {
+            $(`#${inputValue.id}`).val(inputValue.value);
+            $(`#${inputValue.id}`).trigger('change').trigger('select.fs');
+        } catch (error) {            
+            console.log(this.formAttribute);
             console.log("Dev Mode...")
         }
     }
@@ -624,15 +628,25 @@ export class GloveApi {
     setGloveCanvas = (colorString: string) => {
         const color = colorString.toLowerCase()
         const imageTypeSelected = this.imageType;
+        console.log(color)
         if(!imageTypeSelected){
             this.notifyOther({ option: 'Glove Customizer', value: "Please select a glove part to customize." });
         } else {
             _.forEach(this.gloveCustomData, (value, key) => {
                 const section = value.gloveSection;
                 if (section === imageTypeSelected) {
-                    _.forEach(value.options, (o) => {                        
+                    _.forEach(value.options, (o) => {
+                        if(_.includes(o.value,'-')){
+                            o.value = _.replace(o.value,'-'," ")
+                        }
+
                         if (o.value === color) {
-                            this._applyHtmlInput(o.id);
+                            
+                            if(_.includes(o.value," ")){
+                                o.value = _.replace(o.value," ", "-")
+                            }
+
+                            this._applyHtmlInput({'id':o.id,'value':o.value});
                             this.applyFillToCanvas(o.hex);
                         }
                     })
@@ -654,22 +668,20 @@ export class GloveApi {
                 $(element).attr({ "fill": fill });
 
                 if (_.includes(element, 'stch')) {
-                    console.log(element)
                     $(element).attr({ "fill": "none" })
                     $(element).attr({ "stroke": fill })
                 }
 
-                if (this.imageType == 'fgrl') {
-                    $(`${svgElement}rise`).attr({ "fill": fill });
-                    $(`${svgElement}elite`).attr({ "fill": fill });
-                }
+                // if (this.imageType == 'fgrl') {
+                //     $(`${svgElement}rise`).attr({ "fill": fill });
+                //     $(`${svgElement}elite`).attr({ "fill": fill });
+                // }
             } else {
                 return null;
             }
+            
         })
-        // this.gloveCloneMainVertical.append(this.m1.clone(this.oView));
-        // this.gloveCloneInsideVertical.append(this.m2.clone(this.iView));
-        // this.gloveCloneSideVertical.append(this.m3.clone(this.sView));
+
         this.gloveCloneSummary1.append(this.m1.clone(this.oView))
         this.gloveCloneSummary2.append(this.m2.clone(this.iView))
         this.gloveCloneSummary3.append(this.m3.clone(this.sView))
@@ -721,13 +733,11 @@ export class GloveApi {
     }
 
     private _applySvgViewBox(): void {
-        // this.m1.attr({ viewBox: "-50 0 400 400" });
-        // this.m2.attr({ viewBox: "0 0 400 400" });
-        // this.m3.attr({ viewBox: "0 0 400 400" });
 
-        this.gloveCloneSummary1.attr({ viewBox: "0 0 400 400" });
-        this.gloveCloneSummary2.attr({ viewBox: "0 0 400 400" });
-        this.gloveCloneSummary3.attr({ viewBox: "0 0 400 400" });
+        this.gloveCloneSummary1.attr({ viewBox: "50 0 450 400" });
+        this.gloveCloneSummary2.attr({ viewBox: "50 0 450 400" });
+        this.gloveCloneSummary3.attr({ viewBox: "50 0 450 400" });
+    
     }
 
     //** Loads Catcher's mitt glove canvas */
@@ -761,7 +771,7 @@ export class GloveApi {
             //{ name: "lin", x: 142, y: 230.6, title: "lining", canvas: ["mOutside"] },
             { name: "fpad", x: 166, y: 208, title: "finger protection", model: "protectionColor", canvas: ["mOutside"] },
             { name: "lce", x: 312, y: 65, title: "lace", model: "laceColor", canvas: ["mOutside"] },
-            { name: "fgrl", x: 40.1, y: 184.6, title: "finger embroidery", model: "seriesColor", canvas: ["mOutside"] },
+            //{ name: "fgrl", x: 40.1, y: 184.6, title: "finger embroidery", model: "seriesColor", canvas: ["mOutside"] },
             { name: "logo", x: 218, y: 299, title: "NYStix logo embroidery", model: "logoColor", canvas: ["mOutside", "mSideview"] },
             { name: "tgt", x: null, y: null, title: "targets", model: "targetColor", canvas: ["mInside"] },
             { name: "stch", x: null, y: null, title: "stitching", model: "stitchingColor", canvas: ["mSideview"] },
@@ -896,7 +906,7 @@ export class GloveApi {
             { name: "wst", x: 110.9, y: 320.1, title: "wrist", model: "wristColor", canvas: ["mOutside", "mSideview"] },
             { name: "stch", x: null, y: null, title: "stiching", model: "stitchingColor", canvas: ["mSideview"] },
             { name: "logo", x: 200, y: 314.1, title: "NYStix logo", model: "logoColor", canvas: ["mOutside"] },
-            { name: "fgrl", x: 127.9, y: 63.5, title: "finger logo", model: "seriesColor", canvas: ["mOutside"] },
+            //{ name: "fgrl", x: 127.9, y: 63.5, title: "finger logo", model: "seriesColor", canvas: ["mOutside"] },
             { name: "plm", x: null, y: null, title: "palm", model: "palmColor", canvas: ["mInside"] },
             { name: "lce", x: null, y: null, title: "lace", model: "laceColor", canvas: ["mInside", "mSideview"] },
             { name: "web", x: null, y: null, title: "web", model: "webColor", canvas: ["mInside", "mSideview"] },
@@ -1029,7 +1039,7 @@ export class GloveApi {
             { name: 'logo', x: 244, y: 300, title: 'NYStix logo', model: 'logoColor', canvas: ["mOutside"] },
             { name: 'wlt', x: 178, y: 150, title: 'welt', model: 'weltColor', canvas: ["mOutside", "mSideview"] },
             { name: 'wst', x: 150, y: 298, title: 'wrist', model: 'wristColor', canvas: ["mOutside", "mSideview"] },
-            { name: 'fgrl', x: 160, y: 28.9, title: 'finger logo', model: 'seriesColor', canvas: ["mOutside"] },
+            //{ name: 'fgrl', x: 160, y: 28.9, title: 'finger logo', model: 'seriesColor', canvas: ["mOutside"] },
             { name: 'thbi', x: null, y: null, title: 'thumb inner', model: 'thumbInner', canvas: ["mSideview"] },
             { name: 'thbo', x: null, y: null, title: 'thumb outer', model: 'thumbOuter', canvas: ["mInside", "mSideview"] },
             { name: 'plm', x: null, y: null, title: 'palm', model: 'palmColor', canvas: ["mInside", "mSideview"] }
@@ -1167,7 +1177,7 @@ export class GloveApi {
             { name: 'logo', x: 244, y: 300, title: 'NYStix logo', model: 'logoColor', canvas: ["mOutside"] },
             { name: 'wlt', x: 178, y: 150, title: 'welt', model: 'weltColor', canvas: ["mOutside", "mSideview"] },
             { name: 'wst', x: 150, y: 298, title: 'wrist', model: 'wristColor', canvas: ["mOutside", "mInside"] },
-            { name: 'fgrl', x: 160, y: 28.9, title: 'finger logo', model: 'seriesLogo', canvas: ["mOutside"] },
+            //{ name: 'fgrl', x: 160, y: 28.9, title: 'finger logo', model: 'seriesLogo', canvas: ["mOutside"] },
             { name: 'thbi', x: null, y: null, title: 'thumb inner', model: 'thumbInner', canvas: ["mSideview"] },
             { name: 'thbo', x: null, y: null, title: 'thumb outer', model: 'thumbOuter', canvas: ["mInside", "mSideview"] },
             { name: 'plm', x: null, y: null, title: 'palm', model: 'palmColor', canvas: ["mInside", "mSideview"] }
@@ -1293,7 +1303,7 @@ export class GloveApi {
             { name: "wst", x: 132, y: 320, title: "Wrist", model: 'wristColor', canvas: ["mOutside"] },
             //{ name: "fpad", x: 166, y: 208, title: "finger protection", canvas: ["mOutside"] },
             { name: "lce", x: null, y: null, title: "Laces", model: 'laceColor', canvas: ["mSideview"] },
-            { name: "fgrl", x: 100.1, y: 184.6, title: "finger embroidery", model: 'seriesColor', canvas: ["mOutside"] },
+            //{ name: "fgrl", x: 100.1, y: 184.6, title: "finger embroidery", model: 'seriesColor', canvas: ["mOutside"] },
             { name: "logo", x: 206, y: 310, title: "9P logo embroidery", model: 'logoColor', canvas: ["mOutside"] },
             { name: "stch", x: null, y: null, title: "stitching", model: 'stitchingColor', canvas: ["mSideview"] },
             { name: "bnd", x: null, y: null, title: "binding", model: 'bindingColor', canvas: ["mInside"] }

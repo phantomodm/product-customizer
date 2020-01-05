@@ -169,6 +169,11 @@
     align-items: center;
 }
 
+.vertical-view_glove_row{
+    display: flex;
+    justify-content: center;
+}
+
 .vertical-view_row{
     display: flex;
     flex-direction: row;
@@ -182,6 +187,7 @@
 
 .vertical-flex-grow{
     flex: 1 0;
+    width: 100%;
 }
 
 .vertical-view__item {
@@ -203,8 +209,6 @@
 .vertical-view__button button{
     margin-right:1.25rem;
 }
-
-
 
 .slider  {
     display: flex;
@@ -266,4 +270,21 @@
 .vert-dexterity{
     width: 125px;
     padding: 0.5rem;
+}
+
+.glove-editing-label{
+    display: flex;
+}
+
+.glove-editing-label > div {
+    padding-right: 10px;
+}
+
+@media only screen and (max-width:610px){
+    .glove-editing-label {
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+        padding-right: opx;
+    }
 }

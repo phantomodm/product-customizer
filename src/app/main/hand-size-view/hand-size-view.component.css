@@ -55,12 +55,12 @@ label {
 }
 
 .leftRs {       
-    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_left-32px.svg') ;
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_left-32px.svg') ;
     left: 0;
 }
 
 .rightRs {    
-    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_right-32px.svg') ;
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_right-32px.svg') ;
     right: 0;
 }
 
@@ -69,7 +69,7 @@ label {
     height: 54px;
     margin: auto;
     display: none;
-    background-image: url('http://localhost:4200/assets/images/swipe.svg');
+    /* background-image: url('./assets/images/swipe.svg'); */
 }
 @media only screen and (max-width:550px){
     .leftRs  {
@@ -128,11 +128,11 @@ label {
 }
 
 .leftRs {       
-    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_left-32px.svg') ;
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_left-32px.svg') ;
     left: 0;
 }
 
 .rightRs {    
-    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_right-32px.svg') ;
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_right-32px.svg') ;
     right: 0;
 } */

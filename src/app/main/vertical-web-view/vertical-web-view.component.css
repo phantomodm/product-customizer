@@ -12,6 +12,7 @@
 
 .vertical-web-view__list {
     display:flex;
+    justify-content: center;
 }
 
 .vertical-web-view__list:first-child {
@@ -46,11 +47,11 @@
 }
 
 .leftRs {       
-    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_left-32px.svg') ;
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_left-32px.svg') ;
     left: 0;
 }
 
 .rightRs {    
-    background-image: url('http://nystix.com/wp-content/uploads/keyboard_arrow_right-32px.svg') ;
+    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_right-32px.svg') ;
     right: 0;
 }

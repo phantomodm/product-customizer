@@ -10,6 +10,7 @@
 # dependencies
 /node_modules
 /node_modules.bak
+/node_modules.bak2
 
 # profiling files
 chrome-profiler-events.json
@@ -47,3 +48,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
+build-script.js
+yarn.lock
