@@ -106,6 +106,6 @@ export class AppModule {
 
   ngDoBootstrap(){
     const el = createCustomElement(MainComponent,{injector: this.injector})
-    customElements.define('glove-customizer', el)
+    customElements.define('ninep-glove-customizer', el)
   }
  }
