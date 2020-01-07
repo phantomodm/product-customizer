@@ -12,6 +12,7 @@
 
 .vertical-web-view__list {
     display:flex;
+    justify-content: center;
 }
 
 .vertical-web-view__list:first-child {
@@ -22,11 +23,10 @@
     margin-bottom: 1.5rem;
 }
 
-/* img {
-    width: 250px;
-    height: 100%;
-} */
-
+.web-img-size {
+    width: auto;
+    height: 172px;
+}
 
 .leftRs,
 .rightRs {

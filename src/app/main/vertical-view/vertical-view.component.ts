@@ -12,6 +12,8 @@ import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
 import { GloveSize } from 'src/app/shared/models/nine-positions-models';
 import { IntroJsService } from 'src/app/shared/services/intro-js.service';
 
+declare var jQuery: any;
+
 @Component({
   selector: 'vertical-view',
   templateUrl: './vertical-view.component.html',
@@ -577,6 +579,10 @@ export class VerticalViewComponent implements OnInit  {
       alert("Select a glove part before selecting a color")
     }
     //this.nysApi.setGloveCanvas(this.nysApi.indexToValue(index,this.gloveEmbroiderySlider));
+  }
+
+  onSubmit(){
+    const submit = jQuery('.single_add_to_cart_button').click();
   }
 
   ngOnDestroy(){

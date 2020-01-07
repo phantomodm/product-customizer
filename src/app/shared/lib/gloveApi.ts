@@ -7,11 +7,12 @@ import { Drawing } from './snap.drawing.function';
 import "snapsvg-cjs";
 import * as _ from 'lodash';
 
-import { positionsDB, gloveWebOptions, gloveCanvas } from '../data/api-data';
+import { gloveCanvas } from '../data/api-data';
 import { StorageService } from '../services/storage-service.service';
 
 declare var Snap: any;
 declare var $: any;
+declare var jQuery: any;
 
 @Injectable({
     providedIn: 'root'
@@ -408,9 +409,8 @@ export class GloveApi {
        const formId = `attribute_${inputValue.id}`;
        console.log(typeof(inputValue))
         try {
-            $(`#${inputValue.id}`).val(inputValue.value);
-            $(`#${inputValue.id}`).trigger('change').trigger('select.fs');
-            console.log(inputValue.id, inputValue.value)
+            jQuery(`#${inputValue.id}`).val(inputValue.value);
+            jQuery(`#${inputValue.id}`).trigger('change').trigger('select.fs');
         } catch (error) {
             console.log("Dev Mode...")
         }
