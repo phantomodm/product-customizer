@@ -15,7 +15,7 @@
                             <div class="vertical-view_column" *ngFor="let sport of (wizardPrompts)?.sportPlayed">
                                 <mat-card-title>{{sport.label}}</mat-card-title>
                                 <div class="vertical-view_row">
-                                    <div class="vertical-view__item" *ngFor="let option of sport.options"><button
+                                    <div class="vertical-view__item" *ngFor="let option of sport.options;let i = index"><button
                                             mat-raised-button type="button" color="primary"
                                             (click)="setGloveSeries(option.valueString, option.value, option.id, 'subForm1', sport.formName)">{{option.valueString}}</button>
                                     </div>
@@ -28,7 +28,28 @@
                             </div>
 
                         </mat-step>
+
                         <!-- Question #2 -->
+                        <mat-step>
+                            <mat-icon></mat-icon>
+                            <ng-template matStepLabel>Position</ng-template>
+                            <div *ngFor="let position of (wizardPrompts)?.positions">
+                                <mat-card-title>{{position.label}}</mat-card-title>
+                                <div class="vertical-view_row">
+                                    <div class="vertical-view__item wrap" *ngFor="let option of position.options;let i = index">
+                                        <button mat-raised-button type="button" color="primary"
+                                            (click)="setGloveType(option.shortName, option.fullName, option.id, option.value, position.formName,'subForm1', option.img)">{{option.fullName}}</button>
+                                    </div>
+                                </div>
+                                &nbsp;
+                                <div class="vertical-view__button">
+                                    <button mat-button matStepperPrevious type="button">Back</button>
+                                    <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
+                                </div>
+                            </div>
+                        </mat-step>
+
+                        <!-- Question #3 -->
                         <mat-step>
 
                             <mat-icon></mat-icon>
@@ -40,7 +61,7 @@
                                     </div>
                                     <div class="glove-series">
                                         <div class="glove-series_info" fxFlexAlign="center"
-                                            *ngFor="let option of series.options"><button mat-raised-button
+                                            *ngFor="let option of series.options;let i = index"><button mat-raised-button
                                                 type="button" color="primary"
                                                 (click)="setGloveSeries(option.valueString,option.value, option.id, 'subForm1',series.formName)">{{option.valueString}}</button>
                                         </div>
@@ -54,26 +75,7 @@
                                 <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
                             </div>
                         </mat-step>
-
-                        <!-- Question #3 -->
-                        <mat-step>
-                            <mat-icon></mat-icon>
-                            <ng-template matStepLabel>Position</ng-template>
-                            <div *ngFor="let position of (wizardPrompts)?.positions">
-                                <mat-card-title>{{position.label}}</mat-card-title>
-                                <div class="vertical-view_row">
-                                    <div class="vertical-view__item wrap" *ngFor="let option of position.options">
-                                        <button mat-raised-button type="button" color="primary"
-                                            (click)="setGloveType(option.shortName, option.fullName, option.id, option.value, position.formName,'subForm1', option.img)">{{option.fullName}}</button>
-                                    </div>
-                                </div>
-                                &nbsp;
-                                <div class="vertical-view__button">
-                                    <button mat-button matStepperPrevious type="button">Back</button>
-                                    <button mat-raised-button matStepperNext type="button" color="accent">Next</button>
-                                </div>
-                            </div>
-                        </mat-step>
+                        
                         <!-- Question #4 -->
                         <mat-step>
                             <mat-icon></mat-icon>
@@ -83,7 +85,7 @@
                                 <div class="vertical-view_row">
                                     <div class="vertical-view__item vertical-flex-grow">
                                         <mat-card class="mat-elevation-z8 mat-img-buffer"
-                                            *ngFor="let option of hand.options"
+                                            *ngFor="let option of hand.options;let i = index"
                                             (click)="setGloveHand(option.id, option.value, option.valueString)">
                                             <div>
                                                 <img mat-card-image src="./assets/images/{{option.img}}">
@@ -126,7 +128,7 @@
                             <div *ngFor="let pad of (wizardPrompts)?.gloveProtection">
                                 <mat-card-title>{{pad.label}}</mat-card-title>
                                 <div class="vertical-view_row">
-                                    <div class="vertical-view__item" *ngFor="let option of pad.options">
+                                    <div class="vertical-view__item" *ngFor="let option of pad.options;let i = index">
 
                                         <button mat-raised-button type="button" color="primary"
                                             (click)="setGloveOptions(option.valueString, option.value, option.id,'subForm1',pad.formName)">
@@ -149,7 +151,7 @@
                             <div *ngFor="let flex of (wizardPrompts)?.gloveCondition">
                                 <mat-card-title>{{flex.label}}</mat-card-title>
                                 <div class="vertical-view_row">
-                                    <div class="vertical-view__item" *ngFor="let option of flex.options">
+                                    <div class="vertical-view__item" *ngFor="let option of flex.options;let i = index">
                                         <button mat-raised-button type="button" color="primary"
                                             (click)="setGloveOptions(option.valueString, option.value, option.id, 'subForm1',flex.formName)">
                                             {{option.valueString}}
@@ -213,34 +215,37 @@
                         <ng-template matStepLabel>Customize</ng-template>
 
                         <div *ngFor="let question of (wizardPrompts)?.gloveDesign">
-                            <div class="vertical-view_column">
+                            <div class="vertical-view_glove_row">
                                 <div class="vertical-view__list vertical-flex-grow">
                                     <glove-customizer-vertical-view
                                         [showNavigationIndicators]="showNavigationIndicators"
                                         [showNavigationArrows]="showNavigationArrows" [question]="question">
                                     </glove-customizer-vertical-view>
 
-                                    <div class="vertical-view__item spacer">
-                                        <div class="horizontal-wizard-slider">
-                                            <div id="slider-control" *ngIf="sliderStatus">
-                                                <p>Currently Customizing: <strong>Glove Leather</strong></p>
-                                                <ng5-slider id="slider-control-leather" #verticalSlider
-                                                    class="vertical-wizard-slider" [(value)]="value"
-                                                    [options]="gloveSlider"
-                                                    (userChange)="leatherSliderSelections(verticalSlider.value)">
-                                                </ng5-slider>
+                                    <div class="vertical-view__item spacer"></div>
+                                    <div>                                        
+                                        <div id="slider-control" *ngIf="sliderStatus">
+                                            <div class="glove-editing-label">
+                                                <div ><p>Currently Customizing: </p></div> <div><strong>Glove Leather</strong></div>
                                             </div>
-                                            <div *ngIf="!sliderStatus">
-                                                <p>Currently Customizing: <strong>Stitching/Embroidery Leather</strong>
-                                                </p>
-                                                <ng5-slider id="slider-control-embroidery" #verticalEmbSlider
-                                                    class="vertical-wizard-slider" [(value)]="valueEmbroidery"
-                                                    [options]="embroiderySlider"
-                                                    (userChange)="embroiderySliderSelections(verticalEmbSlider.value)">
-                                                </ng5-slider>
-                                            </div>
+                                            <ng5-slider id="slider-control-leather" #verticalSlider
+                                                class="vertical-wizard-slider" [(value)]="value"
+                                                [options]="gloveSlider"
+                                                (userChange)="leatherSliderSelections(verticalSlider.value)">
+                                            </ng5-slider>
                                         </div>
-                                    </div>&nbsp;
+                                        <div *ngIf="!sliderStatus">
+                                            <div class="glove-editing-label">
+                                                <div ><p>Currently Customizing: </p></div> <div><strong>Stitching/Embroidery Leather</strong></div>
+                                            </div>
+                                            <ng5-slider id="slider-control-embroidery" #verticalEmbSlider
+                                                class="vertical-wizard-slider" [(value)]="valueEmbroidery"
+                                                [options]="embroiderySlider"
+                                                (userChange)="embroiderySliderSelections(verticalEmbSlider.value)">
+                                            </ng5-slider>
+                                        </div>
+                                    </div>
+                                    &nbsp;
                                 </div>
                             </div>
                             <div class="vertical-view__button">
@@ -291,7 +296,7 @@
                                     <mat-card-title>{{font.label}}</mat-card-title>
                                 </div>
                                 <mat-radio-group>
-                                    <mat-radio-button fxLayout="column" *ngFor="let option of font.options"
+                                    <mat-radio-button fxLayout="column" *ngFor="let option of font.options;let i = index"
                                         [name]="option.name" [value]="option.value"
                                         (click)="setGloveOptions(option.valueString, option.value, option.id, option.name, font.formName)">
                                         {{option.valueString}}

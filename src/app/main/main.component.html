@@ -1,11 +1,11 @@
 <div>
-  <div class="spinner-container">
-    <div *ngIf="loading$ | async">
+  <div *ngIf="loading$ | async" class="spinner-container" class="spinner-container">
+    <div>
       <mat-spinner class="spinner"></mat-spinner>
     </div>
- </div>
+</div>
  
-  <vertical-view
+<vertical-view
   [sliderStatus]="gloveSliderStatus"
   [nysWizardSteps]="gloveWizardSteps$ | async"
   ></vertical-view>

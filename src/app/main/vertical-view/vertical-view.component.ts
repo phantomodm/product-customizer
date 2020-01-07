@@ -442,10 +442,10 @@ export class VerticalViewComponent implements OnInit  {
     const htmlValue:HtmlInputValue = {'id': attributeId,'value': value}
     switch (name) {
       case "left":
-        this.snackBar.open("You wear your glove on LEFT.",'DISMISS',this.snackbarDuration)
+        this.snackBar.open("You throw with LEFT",'DISMISS',this.snackbarDuration)
         break;
       default:
-        this.snackBar.open("You wear your glove on RIGHT.",'DISMISS',this.snackbarDuration)
+        this.snackBar.open("You throw with RIGHT.",'DISMISS',this.snackbarDuration)
         break;
     }
     this.nysApi.setGloveHand(name, htmlValue);

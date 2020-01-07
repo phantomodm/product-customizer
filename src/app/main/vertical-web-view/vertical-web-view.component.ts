@@ -50,9 +50,10 @@ export class VerticalWebViewComponent implements OnInit {
     
     this.gloveWebs$ = this.gloveData.getWizardSteps().pipe(take(2),takeUntil(this.unsubscribe$)).subscribe(res => {
       _.forOwn(res,(value,key)=>{
-        !_.isEqual(key,'gloveWeb') ? false : this.webUri = value[0]['webUri']
-        !_.isEqual(key,'gloveWeb') ? false : this.allGloveWebs = this.filteredGloveWebs = value[0]['options'] ;
         
+        //!_.isEqual(key,'gloveWeb') ? false : this.webUri = value[0]['webUri']
+        !_.isEqual(key,'gloveWeb') ? false : this.allGloveWebs = this.filteredGloveWebs = value[0]['options'] ;
+        console.log(this.allGloveWebs)
       })
     })
 

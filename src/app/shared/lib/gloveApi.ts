@@ -3,7 +3,6 @@ import { STEPS, Glove, WebFilter } from '../models/wizard.models';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { GloveColors, HtmlInputValue } from '../models/nine-positions-models';
 import { GloveDataService } from '../services/gloveData';
-import { Options, CustomStepDefinition, LabelType } from 'ng5-slider';
 import { Drawing } from './snap.drawing.function';
 import "snapsvg-cjs";
 import * as _ from 'lodash';
@@ -409,7 +408,9 @@ export class GloveApi {
        const formId = `attribute_${inputValue.id}`;
        console.log(typeof(inputValue))
         try {
-            (<HTMLInputElement>document.getElementById(formId)).value = inputValue.value;
+            $(`#${inputValue.id}`).val(inputValue.value);
+            $(`#${inputValue.id}`).trigger('change').trigger('select.fs');
+            console.log(inputValue.id, inputValue.value)
         } catch (error) {
             console.log("Dev Mode...")
         }
@@ -661,13 +662,30 @@ export class GloveApi {
             _.forEach(this.gloveCustomData, (value, key) => {
                 const section = value.gloveSection;
                 if (section === imageTypeSelected) {
-                    _.forEach(value.options, (o) => {                        
+                    _.forEach(value.options, (o) => {
+                        if(_.includes(o.value,'-')){
+                            o.value = _.replace(o.value,'-'," ")
+                        }
+
                         if (o.value === color) {
-                            this._applyHtmlInput(o.id);
+                            
+                            if(_.includes(o.value," ")){
+                                o.value = _.replace(o.value," ", "-")
+                            }
+                            
+                            this._applyHtmlInput({'id':o.id,'value':o.value});
                             this.applyFillToCanvas(o.hex);
                         }
                     })
                 }
+                // if (section === imageTypeSelected) {
+                //     _.forEach(value.options, (o) => {                        
+                //         if (o.value === color) {
+                //             this._applyHtmlInput(o.id);
+                //             this.applyFillToCanvas(o.hex);
+                //         }
+                //     })
+                // }
             })  
         }
         
@@ -681,6 +699,8 @@ export class GloveApi {
             const svgLayerId = value.svgBase;
             const svgElement = `#${this.gloveType}${svgLayerId}${svgLayerSuffix}`;
             const element = svgElement + this.imageType;
+            console.log(element)
+            console.log(this.imageType)
             if ($(element).length != 0) {
                 $(element).attr({ "fill": fill });
 
@@ -689,12 +709,14 @@ export class GloveApi {
                     $(element).attr({ "fill": "none" })
                     $(element).attr({ "stroke": fill })
                 }
-
+                
+                
+            } else {
                 if (this.imageType == 'fgrl') {
+                    console.log(svgElement)
                     $(`${svgElement}rise`).attr({ "fill": fill });
                     $(`${svgElement}elite`).attr({ "fill": fill });
                 }
-            } else {
                 return null;
             }
         })

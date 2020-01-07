@@ -3,7 +3,7 @@
     <button type="button" class="leftRs" NguCarouselPrev></button>
     <button type="button" class="rightRs" NguCarouselNext></button>
 
-    <ngu-tile #handSize *nguCarouselDef="let hand;">      
+    <ngu-tile #handSize *nguCarouselDef="let hand;let i = index">      
       <section>        
           <mat-card style="box-shadow: none;" (click)="setHandSize(hand.valueString, hand.id, hand.value, hand.formName)" >
             <label  for={{hand.id}}>
