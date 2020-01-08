@@ -453,26 +453,34 @@ export class VerticalViewComponent implements OnInit  {
     this.nysApi.setGloveHand(name, htmlValue);
   }
 
-  setGloveOptions(event: string, formValue:string, optionAttribute:string, menuName: string, control:string){
-    const htmlValue = {'id':optionAttribute,'value':formValue}
+  setGloveOptions(event: string, formValue:string, attribute:string, menuName?: string, control?:string){
+    let htmlValue;
+    if(attribute != undefined){
+      htmlValue = {'id': attribute,'value':formValue}
+    } else {
+      htmlValue = {'id':"pa_glove-personalization", 'value': formValue}
+    }
+    
     this.nysApi.setWorkFlowValidity(menuName,control);
     this.nysApi.applyHtmlInput(htmlValue);
-    console.log(event)
+    console.log(htmlValue)
     switch (event) {
       case "Softball":
       case "Baseball":
-        this.snackBar.open(event + " model selected.", 'DISMISS',this.snackbarDuration)
+        this.snackBar.open(event + " model selected.", 'DISMISS',this.snackbarDuration )
         break;
       case "No Pad":
       case "Thin Pad":
-        this.snackBar.open(event + " is required in palm.",'DISMISS',this.snackbarDuration)
+        this.snackBar.open(event + " is required in palm.",'DISMISS',this.snackbarDuration )
         break;
       case "Yes":
-        this.snackBar.open("Glove will be softened.",'DISMISS',this.snackbarDuration)
+        this.snackBar.open(" Glove will be softened.",'DISMISS',this.snackbarDuration )
         break;
       case "No":
-        this.snackBar.open(" Glove will be stiff.",'DISMISS',this.snackbarDuration)
+        this.snackBar.open(" Glove will be stiff.",'DISMISS',this.snackbarDuration )
+        break;
       default:
+        this.snackBar.open( `Personalization color ${event} selected.`,'DISMISS',this.snackbarDuration )
         break;
     }
   }

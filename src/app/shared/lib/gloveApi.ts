@@ -407,7 +407,6 @@ export class GloveApi {
 
     private _applyHtmlInput(inputValue:HtmlInputValue) {
        const formId = `attribute_${inputValue.id}`;
-       console.log(typeof(inputValue))
         try {
             jQuery(`#${inputValue.id}`).val(inputValue.value);
             jQuery(`#${inputValue.id}`).trigger('change').trigger('select.fs');

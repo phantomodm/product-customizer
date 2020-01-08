@@ -218,6 +218,56 @@
     height: 460px;
 }
 
+.radio-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+.radio-input__item {
+    display:flex;
+}
+
+.radio-input-row{
+    width:50%;
+    align-items: center;
+}
+
+.radio-buttons {
+    height: 1.5625rem;
+    width: 1.5625rem;
+    display: flex;
+    margin: 2px;
+}
+
+.wrap{
+    flex-wrap: wrap;
+}
+
+.web-buttons{
+    width: 3.125rem;
+    height:3.125rem;
+    margin:2px;
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.web-buttons img {
+    height: 100%;
+    padding: 2px;
+}
+
+.qo-tooltip-class .tooltip-inner {
+    background-color: purple;
+}
+
+.qo-tooltip-class .arrow::before {
+    border-top-color: purple;
+}
+
+
 @media (min-width:33.125rem){
     .vertical-flex-grow {
         flex: 0.2 0 250px;
@@ -286,5 +336,17 @@
         align-items: center;
         justify-items: center;
         padding-right: 0px;
+    }
+
+    .radio-buttons {
+        height: 2rem;
+        width: 2rem;
+        margin-right: .312rem;
+    }
+
+    .mat-card-title {
+        font-size: 1.2rem;
+        font-weight: 400;
+        margin-bottom: 6px;
     }
 }

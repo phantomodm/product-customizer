@@ -13,6 +13,7 @@ export class IntroJsService {
     this.introJs.setOptions({
       steps: [
         { 
+          element: '#guide',
           intro: `Welcome to 9P Glove Customizer. Customizing a 9P custom glove is simple and fun. 
           This short tour will guide on how to use our tool to customize your order.`
         },
