@@ -685,13 +685,6 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/jquery@*":
-  version "3.3.31"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.31.tgz#27c706e4bf488474e1cb54a71d8303f37c93451b"
-  integrity sha512-Lz4BAJihoFw5nRzKvg4nawXPzutkv7wmfQ5121avptaSIXlDNJCUuxZxX/G+9EVidZGuO0UBlk+YjKbwRKJigg==
-  dependencies:
-    "@types/sizzle" "*"
-
 "@types/lodash@^4.14.129":
   version "4.14.144"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.144.tgz#12e57fc99064bce45e5ab3c8bc4783feb75eab8e"
@@ -731,18 +724,6 @@
   version "3.0.16"
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-3.0.16.tgz#50a4755f8e33edacd9c406729e9b930d2451902a"
   integrity sha512-lMC2G0ItF2xv4UCiwbJGbnJlIuUixHrioOhNGHSCsYCJ8l4t9hMCUimCytvFv7qy6AfSzRxhRHoGa+UqaqwyeA==
-
-"@types/sizzle@*":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
-  integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
-
-"@types/slick-carousel@^1.6.33":
-  version "1.6.33"
-  resolved "https://registry.yarnpkg.com/@types/slick-carousel/-/slick-carousel-1.6.33.tgz#473cd8dffb73a7a7965aee119dd256b857ce3683"
-  integrity sha512-JYECbTcqpcNYiKy3bsnBCKUuf8bIf74UJMd21Da6LrGt1zVj1GgfQD4BZTGUCEDzF2a7hchuRpg240Y93Py/iQ==
-  dependencies:
-    "@types/jquery" "*"
 
 "@types/snapsvg@^0.5.0":
   version "0.5.0"
@@ -5170,11 +5151,6 @@ ng5-slider@^1.1.14:
     rxjs "^5.5.6"
     rxjs-compat "^6.5.2"
     tslib "^1.7.1"
-
-ngx-slick@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/ngx-slick/-/ngx-slick-0.2.1.tgz#63f2525b953977f7f8780dc8cebea46553642fec"
-  integrity sha512-1ynZi91njdTNuc0fkzpIceLWwlu4wyn8IGFZqxqLGup4z3Frl+d4fRgTtZYhSufqp8hSx263I699NloWJgbG0A==
 
 ngx-webstorage@3.0:
   version "3.0.2"

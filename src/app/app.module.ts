@@ -22,7 +22,6 @@ import {
 } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SlickModule } from 'ngx-slick';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NguCarouselModule } from '@ngu/carousel';
 import { NgxWebstorageModule } from 'ngx-webstorage';
@@ -37,14 +36,6 @@ import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-car
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 
 
-const firebaseC = {
-  "apiKey": "nys-glove-tool",
-  "authDomain": "nys-glove-tool.firebaseapp.com",
-  "databaseURL": "https://nys-glove-tool.firebaseio.com",
-  "projectId": "nys-glove-tool",
-  "storageBucket": "",
-  "messagingSenderId": "215259533349"
-}
 var firebase = {
   apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
   authDomain: "positions-ui-web-data.firebaseapp.com",
@@ -94,7 +85,6 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     NgbModule,
     Ng5SliderModule,
-    SlickModule.forRoot(),
     NguCarouselModule,
     NgxWebstorageModule.forRoot()
   ],
