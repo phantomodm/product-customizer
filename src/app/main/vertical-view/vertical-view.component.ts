@@ -457,14 +457,14 @@ export class VerticalViewComponent implements OnInit  {
     const htmlValue = {'id':optionAttribute,'value':formValue}
     this.nysApi.setWorkFlowValidity(menuName,control);
     this.nysApi.applyHtmlInput(htmlValue);
-
+    console.log(event)
     switch (event) {
       case "Softball":
       case "Baseball":
         this.snackBar.open(event + " model selected.", 'DISMISS',this.snackbarDuration)
         break;
-      case "No padding":
-      case "Padding":
+      case "No Pad":
+      case "Thin Pad":
         this.snackBar.open(event + " is required in palm.",'DISMISS',this.snackbarDuration)
         break;
       case "Yes":
@@ -490,12 +490,12 @@ export class VerticalViewComponent implements OnInit  {
       //     this.snackBar.open(event + " model selected.", 'DISMISS',this.snackbarDuration)
       // }
     } else {
-      eventFilter = event.split('(').pop().slice(0,-1);
+      eventFilter = event.split('(').pop().slice(0);
       console.log(eventFilter)
 
       switch(eventFilter){
-        case "Rise":
-        case "Elite JS":
+        case "Rise Series":
+        case "Elite Steerhide":
         case "Elite Kip":
         this.snackBar.open(`${eventFilter} series selected.`,'DISMISS', this.snackbarDuration)
         break;
