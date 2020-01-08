@@ -458,7 +458,7 @@ export class VerticalViewComponent implements OnInit  {
     if(attribute != undefined){
       htmlValue = {'id': attribute,'value':formValue}
     } else {
-      htmlValue = {'id':"pa_glove-personalization", 'value': formValue}
+      htmlValue = {'id':"pa_personalization-embroidery", 'value': formValue}
     }
     
     this.nysApi.setWorkFlowValidity(menuName,control);
