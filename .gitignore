@@ -40,8 +40,11 @@ speed-measure-plugin.json
 npm-debug.log
 yarn-error.log
 yarn.lock
+package-lock.json
 testem.log
 /typings
+/dist
+build-script.js
 
 # System Files
 .DS_Store
