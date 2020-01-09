@@ -15,6 +15,7 @@ declare var $: any;
 export class GloveApiService {
   gloveSeries: any;
   gloveData: any;
+  gloveType = {}
   design: any;
   data: any;
   build: any;
@@ -42,8 +43,11 @@ export class GloveApiService {
 
   constructor(private customData: GloveDataService) {
 
-    this.colors = gloveColor;
-
+    //this.colors = gloveColor; 
+    this.customData.getQuickOrderColor().subscribe(colors=>{
+      console.log(colors)
+      this.colors = colors
+    })
     console.log('running...');
 
     // this.customData.getQuickOrderColor().subscribe(res => {this.colors = res; console.log(this.colors)})
@@ -66,8 +70,7 @@ export class GloveApiService {
     this.build = this.gloveData.data.build;
     this.optionTitle = this.gloveData.domTitle;
     this.gloveSeries = this.gloveData.gloveSeries;
-
-
+    
   }
 
   init(designProfile?: string, gloveType?: string) {
@@ -107,7 +110,7 @@ export class GloveApiService {
     /* Glove Group Containers */
     this.oView = this.svgMain.group(), this.iView = this.svgInside.group(), this.sView = this.svgSide.group();
 
-    switch (this.imageBase) {
+    switch (_.toLower(this.imageBase)) {
       case 'catcher-mitt':
         this.loadCatcher();
         break;
@@ -117,7 +120,7 @@ export class GloveApiService {
       case 'inf':
         this.loadInfield();
         break;
-      case 'inf_dw':
+      case 'dual welt glove':
         this.loadInfield2Welt();
         break;
       case 'fbase':
@@ -164,22 +167,37 @@ export class GloveApiService {
     return colorCode;
   }
 
-  getHexIdFromDomSelection(event: any, fill: string, value: string, element: string) {
+  getHexIdFromDomSelection(payload:{section: string,value: string}) {
     const self = this;
-    const gloveSection = event.target.dataset.glove_section;
     const imgBase = self.imageBase;
-    const domValue = value;
-    const elementId = element;
-
-    switch (value) {
-      case ('rise_series'):
-      case ('elite_japanese_steer'):
-      case ('elite_kip'):
-        self.selectAndFillToGloveSeries(gloveSection, imgBase);
+    const section = payload.section;
+    const value = payload.value;
+    const fill = _.forEach(this.colors,(c)=>{
+      return _.forEach(c,(v,k)=>{
+        if (v == value){
+          return c.hex;
+        }
+      })
+    })
+    switch(section){
+      case "Glove Series":
+        if (value.includes("rise")){
+          self.selectAndFillToGloveSeries("rise",imgBase)
+        } else if (value.includes("elite")){
+          self.selectAndFillToGloveSeries("rise",imgBase)
+        }
+        break;
+      case "Glove Body Color":
+        self.applyFillToCanvas('body',fill ,imgBase);
+        break;
+      case "Glove Accent Color":
+        self.applyFillToCanvas('accent', fill ,imgBase);
+        break;
+      case "Glove Trim Color":
+        self.applyFillToCanvas('trim', fill ,imgBase);
         break;
       default:
-        self.applyFillToCanvas(gloveSection, fill, imgBase);
-        self.applyHtmlInput(elementId, domValue);
+
     }
     
   }
@@ -480,19 +498,19 @@ export class GloveApiService {
 
   }
 
-  applyHtmlInput(element: string, value: string) {
-    try {
-      try {
-        ( document.getElementById(`${element}_${value}`) as HTMLInputElement).checked = true;
+  // applyHtmlInput(element: string, value: string) {
+  //   try {
+  //     try {
+  //       ( document.getElementById(`${element}_${value}`) as HTMLInputElement).checked = true;
 
-      } catch (error) {
-        ( document.getElementById(element) as HTMLInputElement).value = value;
-      }
+  //     } catch (error) {
+  //       ( document.getElementById(element) as HTMLInputElement).value = value;
+  //     }
 
-    } catch (error) {
-      console.log('Dev mode');
-    }
-  }
+  //   } catch (error) {
+  //     console.log('Dev mode');
+  //   }
+  // }
 
   // ** Set glove series selection in local model*/
   // TODO - Examine value output from frontend and make necessary changes

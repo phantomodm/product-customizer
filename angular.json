@@ -29,8 +29,6 @@
             ],
             "scripts": [
               "src/assets/js/jquery/jquery.min.js",
-              "./node_modules/gsap/umd/TweenMax.js",
-              "./node_modules/gsap/umd/ScrollToPlugin.js",
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js"
               }

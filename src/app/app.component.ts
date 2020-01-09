@@ -8,7 +8,7 @@ import { Component , Input, OnInit} from '@angular/core';
 export class AppComponent implements OnInit{
   @Input() profile;
   @Input() glove;
-  title = 'ng-webcomponent-base';
+ 
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
