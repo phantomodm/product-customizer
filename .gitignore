@@ -11,6 +11,8 @@
 /node_modules
 /node_modules.bak
 /node_modules.bak2
+/node_modules1
+
 
 # profiling files
 chrome-profiler-events.json
@@ -53,3 +55,4 @@ yarn.lock
 build-script.js
 nystix-ui/ninep-customizer.js
 /nystix
+build-script.js
