@@ -64,6 +64,7 @@ export class VerticalViewComponent implements OnInit  {
   embroiderySlider: Options;
   value: number;
   valueEmbroidery: number;
+  snackbarDuration = 500
   
   // End Slider properties declaration */
 
@@ -95,7 +96,6 @@ export class VerticalViewComponent implements OnInit  {
     }
 
     
-
     this.gloveSizeSlider = this.nysApi.customGloveData.slider;
     this.gloveData.getGloveSliderColors().pipe(takeUntil(this.unsubscribe$)).subscribe(
       (res:GloveSlider[]) => {        
@@ -263,10 +263,10 @@ export class VerticalViewComponent implements OnInit  {
     const htmlValue:HtmlInputValue = {'id': attributeId,'value': value}
     switch (name) {
       case "left":
-        this.snackBar.open("You throw with LEFT.",'DISMISS',{duration:1000})
+        this.snackBar.open("You throw with LEFT.",'DISMISS',{duration:this.snackbarDuration})
         break;    
       default:
-        this.snackBar.open("You throw with your RIGHT.",'DISMISS',{duration:1000})
+        this.snackBar.open("You throw with your RIGHT.",'DISMISS',{duration:this.snackbarDuration})
         break;
     }
     this.nysApi.setGloveHand(name, htmlValue);
@@ -280,17 +280,17 @@ export class VerticalViewComponent implements OnInit  {
     switch (event) {
       case "Softball":
       case "Baseball":
-        this.snackBar.open(event + " model selected.", 'DISMISS',{duration:1000})
+        this.snackBar.open(event + " model selected.", 'DISMISS',{duration:this.snackbarDuration})
         break;
       case "No padding":
       case "Padding":
-        this.snackBar.open(event + " is required in palm.",'DISMISS',{duration:1000})
+        this.snackBar.open(event + " is required in palm.",'DISMISS',{duration:this.snackbarDuration})
         break;
       case "Yes":
-        this.snackBar.open("Glove will be softened.",'DISMISS',{duration:1000})
+        this.snackBar.open("Glove will be softened.",'DISMISS',{duration:this.snackbarDuration})
         break;
       case "No":
-        this.snackBar.open(" Glove will be stiff.",'DISMISS',{duration:1000})
+        this.snackBar.open(" Glove will be stiff.",'DISMISS',{duration:this.snackbarDuration})
       default:
         break;
     }
@@ -299,14 +299,7 @@ export class VerticalViewComponent implements OnInit  {
   setGloveSeries(event: string, value:string, attributeName: string, menuName:string, control:string){
     const htmlValue = {'id':attributeName,'value': value}
     if(control == "sportPlayed"){
-      this.snackBar.open(event + " model selected.",'DISMISS',{duration:1000})
-      // switch(event){
-      //   case "Softball":
-      //     this.snackBar.open(event + " model selected.",'DISMISS',{duration:1000})
-      //     break;
-      //   default:
-      //     this.snackBar.open(event + " model selected.", 'DISMISS',{duration:1000})
-      // }
+      this.snackBar.open(event + " model selected.",'DISMISS',{duration:this.snackbarDuration})
     } 
     this.nysApi.applyHtmlInput(htmlValue);
     this.nysApi.setWorkFlowValidity(menuName, control);
@@ -318,7 +311,7 @@ export class VerticalViewComponent implements OnInit  {
     (id.length == 2) ? id += '.00'
       : (id.length == 4) ? id += '0' 
       : null;
-    this.snackBar.open(id + "\" inch glove was selected.",'DISMISS',{duration:1000})
+    this.snackBar.open(id + "\" inch glove was selected.",'DISMISS',{duration:this.snackbarDuration})
     this.glove.size = `${id}`;
     this.glove.content = '';
     this.filterGloveSizeFilter(id);

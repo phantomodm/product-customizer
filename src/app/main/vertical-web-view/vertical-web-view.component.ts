@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
-import { GloveWebs } from 'src/app/shared/models/nine-positions-models';
+import { GloveWebs } from 'src/app/shared/models/nystixs-models';
 import { MatSnackBar } from '@angular/material';
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
 import { GloveDataService } from 'src/app/shared/services/gloveData';
