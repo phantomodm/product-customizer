@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { STEPS, Glove, WebFilter } from '../models/wizard.models';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { GloveColors, HtmlInputValue } from '../models/nine-positions-models';
+import { GloveColors, HtmlInputValue } from '../models/nystixs-models';
 import { GloveDataService } from '../services/gloveData';
 import { Drawing } from './snap.drawing.function';
 import "snapsvg-cjs";

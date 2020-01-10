@@ -59,7 +59,7 @@ export class VerticalWebViewComponent implements OnInit {
       if(res != undefined){     
         var filter = [];        
         _.filter(this.allGloveWebs,(f)=> {
-          _.find(f.gloveType,m =>{            
+          _.find(f.gloveType,m => {            
             if(m == res){
              filter.push(f);
             }

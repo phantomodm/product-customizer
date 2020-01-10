@@ -5,11 +5,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatStep, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import * as _ from 'lodash';
 import { takeUntil } from 'rxjs/operators';
-import { GloveSlider, HtmlInputValue } from 'src/app/shared/models/nine-positions-models';
+import { GloveSlider, HtmlInputValue } from 'src/app/shared/models/nystixs-models';
 import { GloveDataService } from 'src/app/shared/services/gloveData';
 import { embroiderySliderData } from 'src/app/shared/data/api-data';
 import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
-import { GloveSize } from 'src/app/shared/models/nine-positions-models';
+import { GloveSize } from 'src/app/shared/models/nystixs-models';
 import { IntroJsService } from 'src/app/shared/services/intro-js.service';
 
 
@@ -212,8 +212,8 @@ export class VerticalViewComponent implements OnInit  {
         if(res != undefined){
           var filter = [];
           _.filter(this.currentGloveContent, (f)=>{
-            _.find(f.content, (value,key) => {
-              if(key == res){
+            _.find(f.content, (v:string,k:string) => {
+              if(k == res){
                 filter.push(f);
               }
             })

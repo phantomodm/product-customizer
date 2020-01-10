@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable, of, combineLatest, BehaviorSubject } from 'rxjs';
-import { GloveColors, WizardPrompts } from '../models/nine-positions-models';
-import { map,tap, filter, flatMap, finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { WizardPrompts } from '../models/nystixs-models';
+import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 @Injectable({
