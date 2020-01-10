@@ -1,0 +1,23 @@
+
+
+.product-details-wrapper{
+    display: flex;
+}
+
+#quickCustomGloves {
+    display: flex;
+    margin-right:10px;
+    width:100%;
+}
+.product-detail-wrapper #quickCustomGloves{
+    flex-grow: 1;    
+}
+
+.ywapo_single_option_image + .ywapo_option_label {
+    display:none;
+}
+ 
+.summary{
+    flex-grow: 0.5;
+    width: 100%;
+}

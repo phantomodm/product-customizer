@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GloveDataService } from './glove-data.service';
 import * as _ from 'lodash';
-import { TweenLite, Power2 } from 'gsap';
+import { gsap } from 'gsap';
 import * as Snap from 'snapsvg-cjs';
 import {interval, timer, BehaviorSubject} from 'rxjs';
 import { takeWhile, take} from 'rxjs/operators';
@@ -335,7 +335,7 @@ export class GloveApiService {
                     self.svgMain.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                   // self.svgMain.select(element).attr({ fill: fillHex });
                   break;
                 }
@@ -346,7 +346,7 @@ export class GloveApiService {
                     self.svgInside.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                   // self.svgInside.select(element).attr({ fill: fillHex });
                   break;
                 }
@@ -357,7 +357,7 @@ export class GloveApiService {
                     self.svgSide.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                   // self.svgSide.select(element).attr({ fill: fillHex });
                   break;
                 }
@@ -378,7 +378,7 @@ export class GloveApiService {
                     break;
                   }
                   // self.svgMain.select(element).attr({ fill: fillHex });
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                 }
                 break;
               case 'svgInside':
@@ -388,7 +388,7 @@ export class GloveApiService {
                     break;
                   }
                   // self.svgInside.select(element).attr({ fill: fillHex });
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                 }
                 break;
               case 'svgSide':
@@ -398,7 +398,7 @@ export class GloveApiService {
                     break;
                   }
                   // self.svgSide.select(element).attr({ fill: fillHex });
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                 }
                 break;
               default:
@@ -416,7 +416,7 @@ export class GloveApiService {
                     self.svgMain.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 1 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 1 });
                   // self.svgMain.select(element).attr({ fill: fillHex });
                 }
                 break;
@@ -428,7 +428,7 @@ export class GloveApiService {
                     break;
                   }
                   // self.svgInside.select(element).attr({ fill: fillHex });
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                 }
 
                 break;
@@ -440,7 +440,7 @@ export class GloveApiService {
                     break;
                   }
                   // self.svgSide.select(element).attr({ fill: fillHex });
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                 }
                 break;
               default:
@@ -459,7 +459,7 @@ export class GloveApiService {
 
                     break;
                   }
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                   // self.svgMain.select(element).attr({ fill: fillHex });
                 }
                 break;
@@ -471,7 +471,7 @@ export class GloveApiService {
                     break;
                   }
                   
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                 }                
 
                 break;
@@ -483,7 +483,7 @@ export class GloveApiService {
 
                     break;
                   }
-                  TweenLite.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: Power2.easeInOut, fill: fillHex, delay: 0.5 });
                   // self.svgSide.select(element).attr({ fill: fillHex });
                 }
                 break;

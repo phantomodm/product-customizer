@@ -14,8 +14,7 @@ declare var $: any;
 export class MainComponent implements OnInit, AfterViewInit {
   @Input() glove;
   @Input() profile;
-  // data$: Observable<any>;
-  // watcher$ = false;
+
   currentInput = new Subject<string>();
   currentInput$ = this.currentInput.asObservable();
   gloveType: { "name": string; "type": string; }[];
@@ -33,6 +32,23 @@ export class MainComponent implements OnInit, AfterViewInit {
       { "name":"infield glove","type":"inf" },
     ]
     
+    
+    
+  }
+
+  applyFill(obj:{id:string,domValue:string}) {
+    this.gloveApi.getHexIdFromDomSelection({section: obj.id,value: obj.domValue});
+  }
+
+  ngAfterViewInit(): void {
+    _.forEach(this.gloveType, g=>{
+      _.forEach(g,(v,k) =>{
+        if (v == this.glove.toLowerCase()){
+          this.gloveApi.init(this.profile,g.type.toLowerCase());
+        }
+      })
+    });
+
     if (typeof $ == undefined ){
       var $ = jQuery;
 
@@ -53,24 +69,9 @@ export class MainComponent implements OnInit, AfterViewInit {
           let value = $(this)[0].textContent;
           this.applyFill({id:this.currentInput, domValue:value})
         }
-      })      
-
+      });
     }
-    
-  }
-
-  applyFill(obj:{id:string,domValue:string}) {
-    this.gloveApi.getHexIdFromDomSelection({section: obj.id,value: obj.domValue});
-  }
-
-  ngAfterViewInit(): void {
-    _.forEach(this.gloveType, g=>{
-      _.forEach(g,(v,k) =>{
-        if (v == this.glove.toLowerCase()){
-          this.gloveApi.init(this.profile,g.type.toLowerCase());
-        }
-      })
-    })
+    console.log('hi')
     
   }
 
