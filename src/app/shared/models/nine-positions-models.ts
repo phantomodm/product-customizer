@@ -32,6 +32,7 @@ export interface GloveWebs {
 export interface GloveSlider {
     value:string;
     hex:string;
+    embroidery:boolean;
     leather:string[];
 }
 

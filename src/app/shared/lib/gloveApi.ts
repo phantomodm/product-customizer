@@ -156,7 +156,6 @@ export class GloveApi {
                     
                     this.gloveCustomData.push(v);
                 })
-                
             });
 
         this.gloveData.getWizardSteps().subscribe(val => {
@@ -238,7 +237,7 @@ export class GloveApi {
                     _.forEach(value, (results) => {
                         
                         if (results.step == completedStep) {
-                            console.log(results.step, completedStep)
+                            //console.log(results.step, completedStep)
                             results.valid = true;
                         }
                     })
@@ -289,7 +288,7 @@ export class GloveApi {
                     }
 
                     // if (_.isEqual(value, o.value)) {
-                    //     console.log(o.value)
+                    //     //console.log(o.value)
                     //     this._applyHtmlInput({'id': o.id,'value': o.value})
                     // }
                 })
@@ -348,7 +347,7 @@ export class GloveApi {
     //**Saves reactive forms input. Called from wizard parent component */
     saveFormValues(obj) {
         if (!_.isEqual(obj, this.tempFormArray)) {
-            //console.log("Token being saved to store:")
+            ////console.log("Token being saved to store:")
             let token = {}
             _.forOwn(obj, (value, key) => {
                 this.formValues[key] = value;
@@ -411,7 +410,7 @@ export class GloveApi {
             jQuery(`#${inputValue.id}`).val(inputValue.value);
             jQuery(`#${inputValue.id}`).trigger('change').trigger('select.fs');
         } catch (error) {
-            console.log("Dev Mode...")
+            //console.log("Dev Mode...")
         }
     }
 
@@ -546,7 +545,7 @@ export class GloveApi {
                 self.m3.append(self.bgroup3);
                 break;
             default:
-            //console.log("end of draw")
+            ////console.log("end of draw")
         }
     }
 
@@ -593,14 +592,16 @@ export class GloveApi {
             this.setSeriesOnGlove("elite");
             if(_.includes(valueString,'kip')){
                 this.currentLeatherType.next('kip');
+            } else {
+                this.currentLeatherType.next('jkip')
             }
         } else if (_.includes(valueString, 'rise')) {
             this.customGloveData.gloveSeries[key] = "rise";
-            this.currentLeatherType.next('rise');
+            this.currentLeatherType.next('steer');
             this.setSeriesOnGlove("rise")
         } else {
             this.currentLeatherType.next('cowhide');
-            console.log("cowhide")
+            //console.log("cowhide")
         }
 
         this.customGloveData.gloveSeries[value] = formValue;
@@ -677,14 +678,6 @@ export class GloveApi {
                         }
                     })
                 }
-                // if (section === imageTypeSelected) {
-                //     _.forEach(value.options, (o) => {                        
-                //         if (o.value === color) {
-                //             this._applyHtmlInput(o.id);
-                //             this.applyFillToCanvas(o.hex);
-                //         }
-                //     })
-                // }
             })  
         }
         
@@ -698,13 +691,11 @@ export class GloveApi {
             const svgLayerId = value.svgBase;
             const svgElement = `#${this.gloveType}${svgLayerId}${svgLayerSuffix}`;
             const element = svgElement + this.imageType;
-            console.log(element)
-            console.log(this.imageType)
             if ($(element).length != 0) {
                 $(element).attr({ "fill": fill });
 
                 if (_.includes(element, 'stch')) {
-                    console.log(element)
+                    //console.log(element)
                     $(element).attr({ "fill": "none" })
                     $(element).attr({ "stroke": fill })
                 }
@@ -712,16 +703,13 @@ export class GloveApi {
                 
             } else {
                 if (this.imageType == 'fgrl') {
-                    console.log(svgElement)
+                    //console.log(svgElement)
                     $(`${svgElement}rise`).attr({ "fill": fill });
                     $(`${svgElement}elite`).attr({ "fill": fill });
                 }
                 return null;
             }
         })
-        // this.gloveCloneMainVertical.append(this.m1.clone(this.oView));
-        // this.gloveCloneInsideVertical.append(this.m2.clone(this.iView));
-        // this.gloveCloneSideVertical.append(this.m3.clone(this.sView));
         this.gloveCloneSummary1.append(this.m1.clone(this.oView))
         this.gloveCloneSummary2.append(this.m2.clone(this.iView))
         this.gloveCloneSummary3.append(this.m3.clone(this.sView))
@@ -829,7 +817,7 @@ export class GloveApi {
                         btn.append(title);
                         self.svgEventListners(btn, l);
                         self.drawSvgCanvas("main", btn);
-                        ////console.log(self.gloveCloneMainVertical.node.childNodes)
+                        //////console.log(self.gloveCloneMainVertical.node.childNodes)
                     }
                 })(l), false);
             });
@@ -1405,7 +1393,7 @@ export class GloveApi {
                     self.drawSvgCanvas("side", btn);
                 })(l), false);
             });
-            ////console.log('First base mitt loaded.');
+            //////console.log('First base mitt loaded.');
         });
     };
 
