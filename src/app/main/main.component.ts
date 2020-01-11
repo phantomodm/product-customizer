@@ -62,7 +62,18 @@ export class MainComponent implements OnInit, AfterViewInit {
           value = value+=1;
           values.push( $(this).context[ value.toString() ] );
           if (values.length){
-            this.applyFill({id:this.currentInput, domValue:values[0]})
+            if (values[0] == 'f. green'){
+              this.applyFill({id:this.currentInput, domValue:"forest-green"})
+            } else if(values[0] == 'navy'){
+              try {
+                this.applyFill({id:this.currentInput, domValue:values[0]})
+              } catch (error) {
+                this.applyFill({id:this.currentInput, domValue:"navy-blue"})
+              }
+
+            } else {
+              this.applyFill({id:this.currentInput, domValue:values[0]})
+            }
           }          
         },
         click: function(){
