@@ -133,7 +133,7 @@ export class GloveApiService {
         this.loadPitcher();
         break;
       default:
-        this.loadCatcher();
+        
         break;
     }
     
