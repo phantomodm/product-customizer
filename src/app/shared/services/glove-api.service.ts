@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GloveDataService } from './glove-data.service';
 import * as _ from 'lodash';
-import { gsap } from 'gsap';
+import { gsap } from 'gsap/dist/gsap';
 import * as Snap from 'snapsvg-cjs';
 import {interval, timer, BehaviorSubject} from 'rxjs';
 import { takeWhile, take} from 'rxjs/operators';
