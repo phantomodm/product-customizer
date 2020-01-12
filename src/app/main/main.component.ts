@@ -32,14 +32,7 @@ export class MainComponent implements OnInit, AfterViewInit {
       { "name":"infield glove","type":"inf" },
     ]
 
-    _.forEach(this.gloveType, g=>{
-      _.forEach(g,(v,k) =>{
-        if (v == this.glove.toLowerCase()){
-          console.log(this.profile,g.type.toLowerCase())
-          this.gloveApi.init(this.profile,g.type.toLowerCase());
-        }
-      })
-    });
+    
     
     
     
@@ -50,7 +43,14 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-   
+    _.forEach(this.gloveType, g=>{
+      _.forEach(g,(v,k) =>{
+        if (v == this.glove.toLowerCase()){
+          this.gloveApi.init(this.profile,g.type.toLowerCase())
+          
+        }
+      })
+    });
 
     if (typeof $ == undefined ){
       var $ = jQuery;

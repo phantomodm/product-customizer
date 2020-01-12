@@ -3,11 +3,13 @@ const concat = require('concat');
 
 (async function build(){
     const files = [
-        './dist/ng-product-beta/inline.js',
-        './dist/ng-product-beta/polyfills.js',
-        './dist/ng-product-beta/main.js'
+        '../product-customizer/dist/ng-product-demo/runtime.js',
+        '../product-customizer/dist/ng-product-demo/polyfills.js',
+        '../product-customizer/dist/ng-product-demo/es2015-polyfills.js',
+        '../product-customizer/dist/ng-product-demo/scripts.js',
+        '../product-customizer/dist/ng-product-demo/main.js'
     ]
 
-    await fs.ensureDir('ng-product-beta')
-    await concat(files,'quick-order-beta.js')
-})
+    await fs.ensureDir('nystix-ui')
+    await concat(files,'nystix-ui/ninep-quick-customizer.js')
+})();
