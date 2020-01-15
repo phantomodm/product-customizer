@@ -1,32 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule, Injector } from '@angular/core';
+import { NgModule, Injector, Injectable, ErrorHandler } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule} from '@angular/fire/database';
 import { NguCarouselModule} from '@ngu/carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import {
-//   MatIconModule,
-//   MatInputModule,
-//   MatCardModule,
-//   MatRadioModule,
-//   MatCheckboxModule,
-//   MatStepperModule,
-//   MatSliderModule,
-//   MatDividerModule,
-//   MatButtonModule,
-//   MatSnackBarModule,
-//   MatSlideToggleModule,
-//   MatProgressSpinnerModule
-// } from '@angular/material';
+import * as Sentry from "@sentry/browser";
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
-// import { QuickOrderImageCarouselComponent } from './main/quick-order-image-carousel/quick-order-image-carousel.component';
-// import { QuickOrderInputElementsComponent } from './main/quick-order-input-elements/quick-order-input-elements.component';
 
 const firebase = {
   apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
@@ -39,6 +23,19 @@ const firebase = {
     measurementId: "G-D3BQ4CWZX3"
 }
 
+Sentry.init({
+  dsn: "https://c97a385c4a8d4d268ff84a13fac917b0@sentry.io/1883251"
+});
+
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    Sentry.showReportDialog({ eventId });
+  }
+}
+
 const routes: Routes = [
   { path: '', component: AppComponent },
   { path: 'home', component: MainComponent}, 
@@ -49,33 +46,17 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     MainComponent
-    // QuickOrderImageCarouselComponent,
-    // QuickOrderInputElementsComponent
   ],
   imports: [
     BrowserModule,
-    // FormsModule,
-    // ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
-    // MatIconModule,
-    // MatInputModule,
-    // MatCardModule,
-    // MatRadioModule,
-    // MatCheckboxModule,
-    // MatStepperModule,
-    // MatSliderModule,
-    // MatDividerModule,
-    // MatButtonModule,
-    // MatSnackBarModule,
-    // MatSlideToggleModule,
-    // MatProgressSpinnerModule,
     NguCarouselModule,
     NgbModule
   ],
-  providers: [],
+  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
   entryComponents:[MainComponent]
 })
 export class AppModule {
