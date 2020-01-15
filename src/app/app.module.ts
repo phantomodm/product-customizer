@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule, Injector } from '@angular/core';
+import { NgModule, Injector, Injectable, ErrorHandler } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule} from '@angular/fire/database';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -24,7 +24,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NguCarouselModule } from '@ngu/carousel';
-import { NgxWebstorageModule } from 'ngx-webstorage';
+//import { NgxWebstorageModule } from 'ngx-webstorage';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
@@ -34,7 +34,17 @@ import { GloveCustomizerVerticalViewComponent } from './main/glove-customizer-ve
 import { ImageCarouselComponent } from './main/image-carousel/image-carousel.component';
 import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-carousel-view.component';
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
+import * as Sentry from "@sentry/browser";
+Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
 
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    Sentry.showReportDialog({ eventId });
+  }
+}
 
 var firebase = {
   apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
@@ -86,9 +96,10 @@ const routes: Routes = [
     NgbModule,
     Ng5SliderModule,
     NguCarouselModule,
-    NgxWebstorageModule.forRoot()
+    //NgxWebstorageModule.forRoot()
   ],
   entryComponents:[MainComponent],
+  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }]
   
 })
 export class AppModule {

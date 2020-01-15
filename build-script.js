@@ -10,6 +10,6 @@ const concat = require('concat');
         './dist/ninep-glove-customizer/main.js',
     ]
 
-    await fs.ensureDir('ninep-ui')
-    await concat(files,'./ninep-ui/ninep-customizer.js')
-})
+    await fs.ensureDir('ninep-ui-new')
+    await concat(files,'./ninep-ui-new/ninep-customizer.js')
+})()
