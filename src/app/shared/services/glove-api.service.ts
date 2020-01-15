@@ -3,11 +3,11 @@ import { GloveDataService } from './glove-data.service';
 import * as _ from 'lodash';
 import { gsap } from 'gsap/dist/gsap';
 import * as Snap from 'snapsvg-cjs';
-import { interval, timer, BehaviorSubject } from 'rxjs';
+import { interval, timer, BehaviorSubject, Subject } from 'rxjs';
 import { takeWhile, take } from 'rxjs/operators';
 
 declare var $: any;
-
+declare var jQuery: any;
 @Injectable({
   providedIn: 'root'
 })
@@ -40,7 +40,6 @@ export class GloveApiService {
   gloveInputOptions$ = this.gloveInputOptions.asObservable()
   leatherColors: string[] = [];
 
-
   constructor(private customData: GloveDataService) {
 
     this.customData.getQuickOrderColor().subscribe(colors => {
@@ -53,8 +52,7 @@ export class GloveApiService {
       })
 
     })
-    console.log('running...');
-
+    console.log('Glove customizer running...');
     this.gloveData = {
       gloveSeries: {},
       design: {},
@@ -94,10 +92,10 @@ export class GloveApiService {
         }
 
         /** Observable timer for slow connections */
-        const starter = interval(5000);
+        const starter = interval(1000);
         starter.pipe(takeWhile(checkData), take(1)).subscribe((res) => {
-          this.initCanvas();
-          console.log("Inititating Canvas...")
+          this.initCanvas();         
+          
         });
       }
     );
@@ -159,6 +157,7 @@ export class GloveApiService {
 
       });
     }, 2500);
+
   }
 
 
@@ -173,24 +172,51 @@ export class GloveApiService {
     return colorCode;
   }
 
+  showSeriesOnGlove(){
+    const self = this;
+    const imageBase = self.imageBase;
+    
+  }
+  
   getHexIdFromDomSelection(payload: { section: string, value: string }) {
     const self = this;
     const imgBase = self.imageBase;
     const section = payload.section;
-    const value = payload.value;
-    const fill = _.forEach(this.colors, (c) => {
-      return _.forEach(c, (v, k) => {
-        if (v == value && c.embroidery == false) {
-          return c.hex;
-        }
+    const value = _.toLower(payload.value);
+    let fill;
+
+    if (section != "Glove Series"){
+      _.forEach(this.colors, (c) => {
+        _.forEach(c, (v, k) => {
+
+          if (v == value) {
+            fill = c.hex;
+          } else if (value == 'f. green' && v == "forest-green") {
+            fill = c.hex;
+          } else if (value == 'navy' && v == "navy-blue") {
+            fill = c.hex;
+          } else if (value == 'hot pink' && v == "hot-pink") {
+            fill = c.hex;
+          } else if (value == 'vegas gold' && v == "vegas-gold") {
+            fill = c.hex;
+          } else if (value == 'yellow gold' && v == "yellow-gold") {
+            fill = c.hex;
+          } else if (value == 'lemon yellow' && v == "lemon-yellow") {
+            fill = c.hex;
+          } else if (value == 'sky blue' && v == "sky-blue") {
+            fill = c.hex;
+          }
+
+        })
       })
-    })
+    }
+
     switch (section) {
       case "Glove Series":
-        if (value.includes("rise")) {
+        if (value == "rise") {
           self.selectAndFillToGloveSeries("rise", imgBase)
-        } else if (value.includes("elite")) {
-          self.selectAndFillToGloveSeries("rise", imgBase)
+        } else if (_.includes(value, "elite")) {
+          self.selectAndFillToGloveSeries("elite", imgBase)
         }
         break;
       case "Glove Body Color":
@@ -206,6 +232,7 @@ export class GloveApiService {
         self.applyFillToCanvas('logo', fill, imgBase);
         break;
       default:
+        break;
 
     }
 
@@ -919,7 +946,7 @@ export class GloveApiService {
     const self = this;
 
     Snap.load('assets/images/nine-positions/infield_dwelt_back.svg', (f) => {
-      this.svgMain.attr({ viewBox: '0 0 400 400' });
+      this.svgMain.attr({ viewBox: '-50 0 400 400' });
 
       const g = f.selectAll('#inf_dw_x5F_vw3_x5F_bfg, #inf_dw_x5F_vw3_x5F_mid, #inf_dw_x5F_vw3_x5F_wst, #inf_dw_x5F_vw3_x5F_wlt, #inf_dw_x5F_vw3_x5F_bnd, #inf_dw_x5F_vw3_x5F_logo, #inf_dw_x5F_vw3_x5F_web, #inf_dw_x5F_vw3_x5F_plm, #inf_dw_x5F_vw3_x5F_stch, #inf_dw_x5F_vw3_x5F_lce, #inf_dw_x5F_dwelt_x5F_back, #inf_dw_x5F_vw3_x5F_rse, inf_dw_x5F_vw3_x5F_elt, inf_dw_x5F_elite_x5F_logo, inf_dw_x5F_rise_x5F_logo');
       g.forEach((el, i) => {
@@ -968,7 +995,7 @@ export class GloveApiService {
     });
 
     Snap.load('assets/images/nine-positions/infield_dwelt_side.svg', (f) => {
-      this.svgSide.attr({ viewBox: '0 0 400 400' });
+      this.svgSide.attr({ viewBox: '-50 0 400 400' });
       // this.gloveCloneSideVertical.attr({ viewBox: "0 0 400 400" });
       // tslint:disable-next-line: max-line-length
       const g = f.selectAll('#inf_dw_x5F_vw1_x5F_plm, #inf_dw_x5F_vw1_x5F_bfg, #inf_dw_x5F_vw1_x5F_mid, #inf_dw_x5F_vw1_x5F_wlt, #inf_dw_x5F_vw1_x5F_web, #inf_dw_x5F_vw1_x5F_wst, #inf_dw_x5F_vw1_x5F_stch, #inf_dw_x5F_vw1_x5F_bnd, #inf_dw_x5F_vw1_x5F_lce, #inf_dw_x5F_vw1_x5F_logo, #inf_dw_x5F_dwelt_x5F_side');

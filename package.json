@@ -1,6 +1,6 @@
 {
-  "name": "ng-webcomponent-base",
-  "version": "0.0.0",
+  "name": "ninep-quick-customizer",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
