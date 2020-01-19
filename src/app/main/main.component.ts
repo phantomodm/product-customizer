@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, OnDestroy, HostListener } from '@angular/core';
 import { GloveApiService } from '../shared/services/glove-api.service';
 import { Subject, fromEvent } from 'rxjs';
 import * as _ from 'lodash';
@@ -12,8 +12,17 @@ declare var $: any;
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit, AfterViewInit {
-  private unsubscribe$ = new Subject<void>();
+export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
+  private unsubscribe$ = new Subject<boolean>();
+  
+  @HostListener('window:beforeunload',['$event'])
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
+  }
+
   @Input() glove;
   @Input() profile;
 
@@ -26,11 +35,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   ywapoSelect$: any;
   ywapoClick$: any;
 
-  constructor(private gloveApi: GloveApiService) {
-
-
-
-  }
+  constructor(private gloveApi: GloveApiService) {  }
 
   ngOnInit() {
 
@@ -43,7 +48,7 @@ export class MainComponent implements OnInit, AfterViewInit {
       { "name": "infield glove", "type": "inf" },
     ]
 
-    this.currentInput$.subscribe(res => this.input = res)
+    this.currentInput$.pipe(takeUntil(this.unsubscribe$)).subscribe(res => this.input = res)
   }
 
   applyFill(obj: { id: string, domValue: string }) {
@@ -65,7 +70,6 @@ export class MainComponent implements OnInit, AfterViewInit {
       const containerChanged$ = hover$.pipe(map((element: any) => {
 
         let value = jQuery(element.currentTarget).parent().siblings().text().trim()
-
         if (value != undefined) {
           switch (value) {
             case "Glove Series":
@@ -73,8 +77,10 @@ export class MainComponent implements OnInit, AfterViewInit {
             case "Glove Accent Color":
             case "Glove Trim Color":
             case "Glove Logo Color":
+              
               try {
                 this.currentInput.next(value)
+                this.applyFill({ id: this.input, domValue: value })
               } catch (error) {
                 //console.log('Caught undefined')
               }
@@ -87,9 +93,8 @@ export class MainComponent implements OnInit, AfterViewInit {
       }))
       this.newContainer$ = containerChanged$.subscribe()
 
-      const ywapoInput$ = fromEvent(jQuery('.ywapo_input'), 'change').pipe(takeUntil(this.unsubscribe$), distinctUntilChanged(), take(1));
+      const ywapoInput$ = fromEvent(jQuery('.ywapo_input'), 'change').pipe(takeUntil(this.unsubscribe$), distinctUntilChanged());
       const ywapoInputChange$ = ywapoInput$.pipe(map((element: any) => {
-
         let value = Number(jQuery(element.currentTarget).val()), values = [], valueString;
         value = value += 1;
         if (value != undefined) {

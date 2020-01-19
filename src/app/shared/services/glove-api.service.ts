@@ -184,7 +184,7 @@ export class GloveApiService {
     const section = payload.section;
     const value = _.toLower(payload.value);
     let fill;
-
+    console.log(payload)
     if (section != "Glove Series"){
       _.forEach(this.colors, (c) => {
         _.forEach(c, (v, k) => {

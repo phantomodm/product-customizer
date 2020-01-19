@@ -46,3 +46,4 @@ yarn.lock
 # System Files
 .DS_Store
 Thumbs.db
+nystix-ui/ninep-quick-customizer.js
