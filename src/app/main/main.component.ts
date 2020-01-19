@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { Observable, Subject, Subscription, BehaviorSubject } from 'rxjs';
 import { takeUntil, finalize } from 'rxjs/operators';
 import { GloveColors, WizardPrompts } from '../shared/models/nine-positions-models';
@@ -17,7 +17,7 @@ import * as _ from 'lodash';
 export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   
   //** Component properties Subscription/Observables  */
-  private unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<boolean>();
   screenSubscription: Subscription;
   gloveSliderView: Subscription;
   gloveWebs$: Subscription;
@@ -86,12 +86,13 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
+  @HostListener('window:beforeunload',['$event'])
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-    this.loadingSubject.complete();
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
+    this.loadingSubject.unsubscribe();
   }
 
   ngAfterViewInit(): void {

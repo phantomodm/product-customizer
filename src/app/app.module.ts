@@ -35,6 +35,7 @@ import { ImageCarouselComponent } from './main/image-carousel/image-carousel.com
 import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-carousel-view.component';
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 import * as Sentry from "@sentry/browser";
+
 Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
 
 @Injectable()
@@ -95,8 +96,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     NgbModule,
     Ng5SliderModule,
-    NguCarouselModule,
-    //NgxWebstorageModule.forRoot()
+    NguCarouselModule
   ],
   entryComponents:[MainComponent],
   providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }]

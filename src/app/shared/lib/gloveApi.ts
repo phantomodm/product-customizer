@@ -8,7 +8,7 @@ import "snapsvg-cjs";
 import * as _ from 'lodash';
 
 import { gloveCanvas } from '../data/api-data';
-import { StorageService } from '../services/storage-service.service';
+//import { StorageService } from '../services/storage-service.service';
 
 declare var Snap: any;
 declare var $: any;
@@ -137,7 +137,7 @@ export class GloveApi {
 
     
 
-    constructor(private gloveData: GloveDataService, private storage: StorageService) {
+    constructor(private gloveData: GloveDataService) {
 
         this.initializeModel();
         this.gloveBody = this.customGloveData.gloveBody;

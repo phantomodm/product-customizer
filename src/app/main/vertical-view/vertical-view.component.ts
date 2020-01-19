@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, wtfCreateScope  } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, HostListener  } from '@angular/core';
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatStep, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import * as _ from 'lodash';
@@ -20,7 +20,7 @@ declare var jQuery: any;
   styleUrls: ['./vertical-view.component.css']
 })
 export class VerticalViewComponent implements OnInit  {
-  private unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<boolean>();
   errorNotifier: any;
 
 
@@ -609,9 +609,12 @@ export class VerticalViewComponent implements OnInit  {
     const submit = jQuery('.single_add_to_cart_button').click();
   }
 
-  ngOnDestroy(){
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  @HostListener('window:beforeunload',['$event'])
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
   }
 
 }

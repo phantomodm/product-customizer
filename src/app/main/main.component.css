@@ -5,12 +5,13 @@
 div.spinner-container{
     position: fixed;
     z-index: 1000;
+    width: 100%;
 
 }
 
 .spinner {
-    position: relative;
-    left: 45vw;
+    position: absolute;
+    left: 45%;
     top: 100px;
     
 }

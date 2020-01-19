@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input, HostListener } from '@angular/core';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { GloveWebs } from 'src/app/shared/models/nine-positions-models';
 import { MatSnackBar } from '@angular/material';
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./vertical-web-view.component.css']
 })
 export class VerticalWebViewComponent implements OnInit {
-  private unsubscribe$ = new Subject<void>();
+  private unsubscribe$ = new Subject<boolean>();
   @Input('webs') webs ;
   @ViewChild('verticalWeb') carousel: NguCarousel<any>;
 
@@ -102,9 +102,13 @@ export class VerticalWebViewComponent implements OnInit {
   onSubmit(){
     (<HTMLElement>document.getElementById("form-action-addToCart")).click();
   }
-  
+
+  @HostListener('window:beforeunload',['$event'])
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
   }
+
 }
