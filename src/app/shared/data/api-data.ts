@@ -47,7 +47,7 @@ export const embroiderySliderData = [
     {"value": "Bright Gold","hex": "#ffdf00"} 
 ];
 
-export const gloveCanvas = [
+export const gloveCanvas = [ 
     { "element": "gloveMainHorizontal", "svgBase": "_x5F_vw3" },
     { "element": "gloveMainVertical", "svgBase": "_x5F_vw3" },
     { "element": "gloveInsideHorizontal", "svgBase": "_x5F_vw2" },
@@ -55,8 +55,7 @@ export const gloveCanvas = [
     { "element": "gloveSideHorizontal", "svgBase": "_x5F_vw1" },
     { "element": "gloveSideVertical", "svgBase": "_x5F_vw1" }
 ];
-
-export const positionsDB = [ 
+ const positionsDB = [ 
     { name: 'inf', webType:'infield', fullName: 'Infielder', id: 'be17a3e20675205a77d639bff21aa861', x: 268.8, y: 184.7, img: ['http://placehold.it/300?text=1','http://placehold.it/300?text=2'], sliderMin:'11.00',sliderMax:'12.00', handSliderStep:.25 },
     { name: 'fbase',webType:'first base', fullName: 'First Base', id: 'd3e010d441ce466adf810ebda8c8b055', x: 290, y: 275, img: ['http://placehold.it/300?text=1'], sliderMin:'12.50',sliderMax:'13.00', handSliderStep:.25 },
     { name: 'pitcher', webType:'pitcher',fullName: 'Pitcher', id: 'b2f09f9cbef030087ab73be43851968f', x: 186.5, y: 276.5, img: ['http://placehold.it/300?text=1'], sliderMin:'11.00',sliderMax:'12.50',handSliderStep:.25 },

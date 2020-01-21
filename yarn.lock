@@ -1016,14 +1016,6 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-angular-shepherd@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/angular-shepherd/-/angular-shepherd-0.4.0.tgz#69f186b0beb8ef36adb72d9dfd59830e27eabd05"
-  integrity sha512-jGy2fPnyDaXfIJ247kNVl6LT2thTbE51h37969Hdfl9dfz8q1UPgORSOJgraoYpfaqQ3cmLQZkHT+GyhQh5ptQ==
-  dependencies:
-    shepherd.js "^6.0.1"
-    tslib "^1.9.0"
-
 ansi-colors@^3.0.0:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
@@ -6782,14 +6774,6 @@ shelljs@^0.8.1:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shepherd.js@^6.0.1:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/shepherd.js/-/shepherd.js-6.0.2.tgz#ded562607cf73c88f112e9a6dabc0481a7615035"
-  integrity sha512-QMkOjr08fmE8GVpi05bbmEN2NqCrDEnA4NGOI4Qk2WlV/QsAl347aoTMx7BEfMIrJeZSbLYaY2ZESvI+MRmlbQ==
-  dependencies:
-    smoothscroll-polyfill "^0.4.4"
-    tether "^2.0.0-beta.4"
-
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -6804,11 +6788,6 @@ smart-buffer@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.2.tgz#5207858c3815cc69110703c6b94e46c15634395d"
   integrity sha512-JDhEpTKzXusOqXZ0BUIdH+CjFdO/CR3tLlf5CN34IypI+xMmXW1uB16OOY8z3cICbJlDAVJzNbwBhNO0wt9OAw==
-
-smoothscroll-polyfill@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.4.tgz#3a259131dc6930e6ca80003e1cb03b603b69abf8"
-  integrity sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
@@ -7432,11 +7411,6 @@ terser@^4.1.2:
     commander "^2.20.0"
     source-map "~0.6.1"
     source-map-support "~0.5.12"
-
-tether@^2.0.0-beta.4:
-  version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/tether/-/tether-2.0.0-beta.4.tgz#5ad19a425c63d0ba9972b16e670ff192b09c8658"
-  integrity sha512-4VhiB7YqN2R5EJRj96HIPnaFWC9Xot2J0zTUHgItyYlq0pACXSiBaj9iIwfgD+O89aab9HdBd8iXjGfpz57B4A==
 
 through2@^2.0.0:
   version "2.0.5"

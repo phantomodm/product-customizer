@@ -271,7 +271,7 @@ export class GloveApi {
             })
         })
 
-        this.imageFilter.next(this.updateImageFilter);
+        //this.imageFilter.next(this.updateImageFilter);
         //this._applyHtmlInput(htmlValue);
     }
 
@@ -347,7 +347,7 @@ export class GloveApi {
     //**Saves reactive forms input. Called from wizard parent component */
     saveFormValues(obj) {
         if (!_.isEqual(obj, this.tempFormArray)) {
-            ////console.log("Token being saved to store:")
+            //console.log("Token being saved to store:")
             let token = {}
             _.forOwn(obj, (value, key) => {
                 this.formValues[key] = value;
@@ -615,13 +615,13 @@ export class GloveApi {
         if (!element) {
             self.gloveSeriesArray.forEach(
                 svgElement => {
-                    comparison = _.includes((svgElement.node.id), series);
+                    comparison = _.includes((svgElement.node.id), currentSeries);
                     switch (comparison) {
-                        case true:
-                            svgElement.attr({ opacity: 1 })
+                        case false:
+                            svgElement.attr({ opacity: 0 })
                             break;
                         default:
-                            svgElement.attr({ opacity: 0 })
+                            svgElement.attr({ opacity: 1 })
                             break;
                     }
                 }
@@ -645,11 +645,13 @@ export class GloveApi {
     }
 
     setInitialSeriesState(id:string, node:string, element?:any){
-        let self = this
-        if (_.includes(id, "rise") || _.includes(id, "elite")) {
+        let self = this;
+        const series = id
+        if ( _.includes(series, "rise") || _.includes(series, "elite")) {
             element.attr({ opacity: 0 })
             self.setSeriesOnGlove(node, element);
         }
+
     }
 
     //** Function run to return current glove section and color chosen to render in glove canvas */
@@ -687,6 +689,7 @@ export class GloveApi {
         const fill = value;        
         const svgLayerSuffix = "_x5F_";
         _.forEach(gloveCanvas, (value, key) => {
+            console.log(value)
             const el = value.element;
             const svgLayerId = value.svgBase;
             const svgElement = `#${this.gloveType}${svgLayerId}${svgLayerSuffix}`;
@@ -817,7 +820,7 @@ export class GloveApi {
                         btn.append(title);
                         self.svgEventListners(btn, l);
                         self.drawSvgCanvas("main", btn);
-                        //////console.log(self.gloveCloneMainVertical.node.childNodes)
+                        //console.log(self.gloveCloneMainVertical.node.childNodes)
                     }
                 })(l), false);
             });
@@ -1156,10 +1159,10 @@ export class GloveApi {
         let self = this;
         self._applySvgViewBox();
         this.m1.attr({ viewBox: "-20 -20 400 400"})
-        Snap.load("assets/images/pitcher_open_back.svg", function (f) {
-            var g = f.selectAll(' #pitcher_x5F_vw3_x5F_wst, #pitcher_x5F_vw3_x5F_logo, #pitcher_x5F_vw3_x5F_thbi, #pitcher_x5F_vw3_x5F_plm, #pitcher_x5F_vw3_x5F_web, #pitcher_x5F_vw3_x5F_indi, #pitcher_x5F_vw3_x5F_indo, #pitcher_x5F_vw3_x5F_mid, #pitcher_x5F_vw3_x5F_rngo, #pitcher_x5F_vw3_x5F_rngi, #pitcher_x5F_vw3_x5F_pnko, #pitcher_x5F_vw3_x5F_pnki, #pitcher_x5F_vw3_x5F_stch, #pitcher_x5F_vw3_x5F_wlt, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_lce, #pitcher_x5F_open_x5F_back,#pitcher_x5F_vw3_x5F_rse,#pitcher_x5F_vw3_x5F_elt,#pitcher_x5F_logo_x5F_elite,#pitcher_x5F_logo_x5F_rise');
+        Snap.load("assets/images/pitcher_back_view.svg", function (f) {
+            var g = f.selectAll(' #pitcher_x5F_vw3_x5F_wst, #pitcher_x5F_vw3_x5F_logo, #pitcher_x5F_vw3_x5F_thbi, #pitcher_x5F_vw3_x5F_plm, #pitcher_x5F_vw3_x5F_web, #pitcher_x5F_vw3_x5F_indi, #pitcher_x5F_vw3_x5F_indo, #pitcher_x5F_vw3_x5F_mid, #pitcher_x5F_vw3_x5F_rngo, #pitcher_x5F_vw3_x5F_rngi, #pitcher_x5F_vw3_x5F_pnko, #pitcher_x5F_vw3_x5F_pnki, #pitcher_x5F_vw3_x5F_stch, #pitcher_x5F_vw3_x5F_wlt, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_lce, #pitcher_x5F_open_x5F_back, #pitcher_x5F_vw3_x5F_rise, #pitcher_x5F_vw3_x5F_elite, #pitcher_x5F_logo_x5F_elite, #pitcher_x5F_logo_x5F_rise');
             g.forEach(function (el, i) {
-                var p = ["pitcher_x5F_vw3_x5F_wst", "pitcher_x5F_vw3_x5F_logo", "pitcher_x5F_vw3_x5F_thbi", "pitcher_x5F_vw3_x5F_plm", "pitcher_x5F_vw3_x5F_web", "pitcher_x5F_vw3_x5F_indi", "pitcher_x5F_vw3_x5F_indo", "pitcher_x5F_vw3_x5F_mid", "pitcher_x5F_vw3_x5F_rngo", "pitcher_x5F_vw3_x5F_rngi", "pitcher_x5F_vw3_x5F_pnko", "pitcher_x5F_vw3_x5F_pnki", "pitcher_x5F_vw3_x5F_stch", "pitcher_x5F_vw3_x5F_wlt", "pitcher_x5F_vw3_x5F_bnd", "pitcher_x5F_vw3_x5F_bnd", "pitcher_x5F_vw3_x5F_lce", "pitcher_x5F_open_x5F_back", "pitcher_x5F_vw3_x5F_rse", "pitcher_x5F_vw3_x5F_elt", "pitcher_x5F_logo_x5F_elite", "pitcher_x5F_logo_x5F_rise"];
+                var p = ["pitcher_x5F_vw3_x5F_wst", "pitcher_x5F_vw3_x5F_logo", "pitcher_x5F_vw3_x5F_thbi", "pitcher_x5F_vw3_x5F_plm", "pitcher_x5F_vw3_x5F_web", "pitcher_x5F_vw3_x5F_indi", "pitcher_x5F_vw3_x5F_indo", "pitcher_x5F_vw3_x5F_mid", "pitcher_x5F_vw3_x5F_rngo", "pitcher_x5F_vw3_x5F_rngi", "pitcher_x5F_vw3_x5F_pnko", "pitcher_x5F_vw3_x5F_pnki", "pitcher_x5F_vw3_x5F_stch", "pitcher_x5F_vw3_x5F_wlt", "pitcher_x5F_vw3_x5F_bnd",  "pitcher_x5F_vw3_x5F_lce", "pitcher_x5F_open_x5F_back", "pitcher_x5F_vw3_x5F_rise", "pitcher_x5F_vw3_x5F_elite", "pitcher_x5F_logo_x5F_elite", "pitcher_x5F_logo_x5F_rise"];
                 var layer = p[i];
                 var filter = layer.split("_").pop();
 
@@ -1227,7 +1230,7 @@ export class GloveApi {
                 { name: 'plm', x: 196, y: 207, title: 'Palm' },
                 { name: 'lce', x: 188, y: 40, title: 'Lace' },
                 { name: 'web', x: 86, y: 90, title: 'Web' },
-                { name: 'thbo', x: 86, y: 90, title: 'Thumb Outer' }
+                { name: 'thbo', x: 35, y: 90, title: 'Thumb Outer' }
             ];
 
             _.forEach(label, (l) => {
@@ -1242,7 +1245,7 @@ export class GloveApi {
                 })(l), false);
             });
         });
-        this.m3.attr({ viewBox: "-25 -200 400 400"})
+        this.m3.attr({ viewBox: "-25 -20 400 400"})
         Snap.load("assets/images/pitcher_side_view.svg", function (f) {
             var g = f.selectAll('#pitcher_x5F_vw1_x5F_lin,#pitcher_x5F_vw1_x5F_bfg,#pitcher_x5F_vw1_x5F_plm,#pitcher_x5F_vw1_x5F_web,#pitcher_x5F_vw1_x5F_wst,#pitcher_x5F_vw1_x5F_logo, #pitcher_x5F_vw1_x5F_wlt, #pitcher_x5F_vw1_x5F_bnd, #pitcher_x5F_vw1_x5F_stch, #pitcher_x5F_vw1_x5F_lce,#pitcher_x5F_open_x5F_side');
             g.forEach(function (el, i) {
@@ -1393,7 +1396,7 @@ export class GloveApi {
                     self.drawSvgCanvas("side", btn);
                 })(l), false);
             });
-            //////console.log('First base mitt loaded.');
+            //console.log('First base mitt loaded.');
         });
     };
 

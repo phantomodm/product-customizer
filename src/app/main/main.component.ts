@@ -59,16 +59,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   gloveWizardSteps$: Observable<WizardPrompts>;
   
   constructor(public dialog: MatDialog, private gloveData:GloveDataService, private nysApi: GloveApi ) {
-    // const checkScreenSize = () => document.body.clientWidth < 960;
-    // const source$ = fromEvent(window,'resize').pipe(takeUntil(this.unsubscribe$), distinctUntilChanged());
-    // const screenSizeChanged$ = source$.pipe(map(checkScreenSize));
-    // this.isScreenSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
-  
-    // this.handSizeConfirmationDialog = this.nysApi.notifyObservables$.pipe(takeUntil(this.unsubscribe$)).subscribe((res)=>{
-    //   if (res.hasOwnProperty('option') && res.option === 'Hand Size'){
-    //     this.openDialog();
-    //   } 
-    // })
+
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, HostListener  } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, HostListener, OnDestroy  } from '@angular/core';
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
 import { Observable, Subject} from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -19,9 +19,10 @@ declare var jQuery: any;
   templateUrl: './vertical-view.component.html',
   styleUrls: ['./vertical-view.component.css']
 })
-export class VerticalViewComponent implements OnInit  {
+export class VerticalViewComponent implements OnInit , OnDestroy {
   private unsubscribe$ = new Subject<boolean>();
   errorNotifier: any;
+
 
 
   @Input('') sliderStatus;
@@ -174,162 +175,6 @@ export class VerticalViewComponent implements OnInit  {
       this.userGuide = true;
     }
   }
-
-  // download(){
-  //   let svgElement = document.getElementById('gloveCloneSummary1')
-  //   let image = svgElement.querySelector('image')
-  //   let url = image.href.baseVal,
-  //   urlWidth = image.width.baseVal.value,
-  //   urlHeight = image.height.baseVal.value
-    
-  //   //let image = document.getElementById('glove-view-1')
-
-  //   // htmlToImage.toBlob(<HTMLImageElement> <unknown>image)
-  //   // .then(function (blob) {
-  //   //   window.saveAs(blob, 'my-node.png');
-  //   // });
-
-  //   htmlToImage.toPng(svgElement,{width:1000,height:urlHeight}).then(function(dataUrl){
-      
-  //     mergeImages([url,dataUrl]).then(b64 => {
-  //       //console.log(b64)
-  //       download(b64,"newglove.png")
-  //     })
-      
-  //   })
-  //   var blob = new Blob([url], {type: "xlink:href"});
-  //   var url2 = window.URL.createObjectURL(blob);
-  //   var a = document.createElement("a");
-  //   a.href = url;
-  //   a.download = "glove.png";
-  //   a.click();
-
-  //   // const toBase64 = file => new Promise((resolve, reject) => {
-  //   //   const reader = new FileReader();
-  //   //   reader.readAsDataURL(file);
-  //   //   reader.onload = () => resolve(reader.result);
-  //   //   reader.onerror = error => reject(error);
-  //   // });
-
-  //   // async function Main() {
-  //   //   const file = ( <HTMLInputElement> <unknown> document.querySelector('#glove-view-1')).files[0];
-  //   //   //console.log(await toBase64(file));
-  //   // }
-
-  //   // Main()
-
-
-  //   // let el = ["gloveCloneSummary1", "gloveCloneSummary2", "gloveCloneSummary3"]
-  //   // el.forEach( (s)=>{
-  //   //   htmlToImage.toPng(document.getElementById('s')).then(function(dataUrl){
-  //   //     download(dataUrl,'my-glove.png')
-  //   //   })
-  //   // })"xlink:href"
-
-  //   // function downloadSVG(content, fileName)
-  //   //   {
-  //   //     var svgURL = blobURL(content, 'xlink:href');
-  //   //     var newElem = document.createElement('a');
-  //   //     newElem.href = svgURL;
-  //   //     newElem.setAttribute('download', fileName);
-  //   //     document.body.appendChild(newElem);
-  //   //     newElem.click();
-  //   //     document.body.removeChild(newElem);
-  //   //   }
-
-  //   // function blobURL(content, contentType)
-  //   // {
-  //   //   var blob = new Blob([content], {type: contentType});
-  //   //   return (window.URL || window.webkitURL).createObjectURL(blob);
-  //   // }
-
-  //   // downloadSVG(image,"my-glove.png")
-
-  //   // function downSVG(el?:any){
-  //   //   let blob = new Blob([url], {type: 'xlink:href'} )
-  //   //   saveAs(blob,"my-glove.png")
-  //   // }
-
-  //   // downSVG()
-
-  //   //mergeImages([url,]).then(b64 => //console.log(b64))
-
-  // }
-
-  // download(){
-  //   let el = ["gloveCloneSummary1", "gloveCloneSummary2", "gloveCloneSummary3"]
-  //   let get_image = (id:string) => {
-  //     let img_png = new Image() ,
-  //         serializer = new XMLSerializer(),
-  //         imageElement = serializer.serializeToString(document.getElementById(id));
-  //         img_png.src = 'data:image/png;base64,'+ window.btoa(imageElement);
-  //         //console.log(img_png.src)
-  //         return img_png.src;
-  //   }
-
-  //   let merge = (images:any)=>{
-  //     //console.log(images)
-  //     return mergeImages(images).then(//console.log);
-  //   }
-
-  //   el.forEach( (s)=>{
-  //     let images = [];
-  //     let img = new Image(),
-  //       serializer = new XMLSerializer(),
-  //       svgElement = serializer.serializeToString(document.getElementById(s));
-  //     img.src = 'data:image/svg+xml;base64,'+ window.btoa(svgElement);
-  //     let addtoTempDb = (image,image2)=>{
-  //       images.push(image2,image)
-  //     }
-
-  //     let img2 = new Image();
-
-  //     //img2.src = 'data:image/png;base64,'+ window.btoa(document.getElementById("glove-view-1"))
-
-
-  //     switch (s) {
-  //       case "gloveCloneSummary1":
-  //         img2.src = get_image('glove-view-1');
-  //         addtoTempDb(img2,img);
-  //         break;
-  //       case "gloveCloneSummary2":
-  //         img2.src = get_image('glove-view-2');
-  //         addtoTempDb(img2,img);
-  //         break;
-  //       case "gloveCloneSummary3":
-  //         img2.src = get_image('glove-view-3');
-  //         addtoTempDb(img2,img);
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //     //console.log(img)
-  //     var canvas = document.createElement("canvas")
-  //     var w=400
-  //     var h=450
-
-  //     canvas.width = w
-  //     canvas.height = h
-  //     canvas.getContext("2d").drawImage(
-  //      merge(images),0,0,w,h);
-
-
-  //     let imageURL = canvas.toDataURL();
-
-
-  //     let a = document.createElement('a');
-  //     a.download = "image"
-  //     a.href = imageURL
-  //     a.dataset.downloadurl = ["image/png", a.download, a.href].join(':');
-
-  //     document.body.appendChild(a);
-  //     a.click();
-  //     document.body.removeChild(a);
-
-  //   })
-
-
-  // }
 
   initilizeGloveSlider(){
     this.leatherSliderColors(this.filteredDataSlider);

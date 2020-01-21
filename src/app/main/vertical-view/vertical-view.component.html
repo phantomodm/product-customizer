@@ -123,10 +123,14 @@
                         </mat-step>
                         <!-- Question #6 -->
                         <mat-step>
-                            <mat-icon></mat-icon>
+                            
                             <ng-template matStepLabel>Protection</ng-template>
                             <div *ngFor="let pad of (wizardPrompts)?.gloveProtection">
                                 <mat-card-title>{{pad.label}}</mat-card-title>
+                                <mat-icon  
+                            matTooltip = "Higher quality gloves usually do not have padding included. Padding is included in department store gloves to make up for lower quality construction. We can add padding if you need it. "
+                            matTooltipPosition = "after"
+                            >help_outline</mat-icon>
                                 <div class="vertical-view_row">
                                     <div class="vertical-view__item" *ngFor="let option of pad.options;let i = index">
 
@@ -149,7 +153,16 @@
                             <mat-icon></mat-icon>
                             <ng-template matStepLabel>Flexibility</ng-template>
                             <div *ngFor="let flex of (wizardPrompts)?.gloveCondition">
-                                <mat-card-title>{{flex.label}}</mat-card-title>
+                                <mat-card-title>{{flex.label}} 
+                                    <span>
+                                        <mat-icon
+                                        matTooltip = " When the factory completes a high quality glove, the glove is stiff and has no flexibility. Our factories help the 'break-in' process by applying pressure into the palm which makes closing the glove closer easier. Players will still need to oil, catch, pound the fingers and hinges to get your glove game ready sooner."
+                                        matTooltipPosition = "after"
+                                        > help_outline</mat-icon>
+                                    </span>
+                                
+                                </mat-card-title>
+                                
                                 <div class="vertical-view_row">
                                     <div class="vertical-view__item" *ngFor="let option of flex.options;let i = index">
                                         <button mat-raised-button type="button" color="primary"
@@ -197,7 +210,6 @@
                                         <mat-card-content>{{glove.content || "Please select your glove size." }}
                                         </mat-card-content>
                                     </mat-card>
-                                    <glove-carousel-view></glove-carousel-view>
                                 </div>
 
                             </div>

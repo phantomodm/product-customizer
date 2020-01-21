@@ -18,7 +18,8 @@ import {
   MatButtonModule,
   MatSnackBarModule,
   MatSlideToggleModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatTooltipModule
 } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,8 +32,8 @@ import { MainComponent } from './main/main.component';
 import { VerticalViewComponent } from './main/vertical-view/vertical-view.component';
 import { HandSizeViewComponent } from './main/hand-size-view/hand-size-view.component';
 import { GloveCustomizerVerticalViewComponent } from './main/glove-customizer-vertical-view/glove-customizer-vertical-view.component';
-import { ImageCarouselComponent } from './main/image-carousel/image-carousel.component';
-import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-carousel-view.component';
+//import { ImageCarouselComponent } from './main/image-carousel/image-carousel.component';
+//import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-carousel-view.component';
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 import * as Sentry from "@sentry/browser";
 
@@ -68,8 +69,6 @@ const routes: Routes = [
     VerticalViewComponent,
     HandSizeViewComponent,
     GloveCustomizerVerticalViewComponent,
-    ImageCarouselComponent,
-    GloveCarouselViewComponent,
     VerticalWebViewComponent
   ],
   imports: [
@@ -94,6 +93,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     NgbModule,
     Ng5SliderModule,
     NguCarouselModule
