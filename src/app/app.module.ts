@@ -37,16 +37,16 @@ import { GloveCustomizerVerticalViewComponent } from './main/glove-customizer-ve
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 import * as Sentry from "@sentry/browser";
 
-Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
+// Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
 
-@Injectable()
-export class SentryErrorHandler implements ErrorHandler {
-  constructor() {}
-  handleError(error) {
-    const eventId = Sentry.captureException(error.originalError || error);
-    Sentry.showReportDialog({ eventId });
-  }
-}
+// @Injectable()
+// export class SentryErrorHandler implements ErrorHandler {
+//   constructor() {}
+//   handleError(error) {
+//     const eventId = Sentry.captureException(error.originalError || error);
+//     Sentry.showReportDialog({ eventId });
+//   }
+// }
 
 var firebase = {
   apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
@@ -99,7 +99,7 @@ const routes: Routes = [
     NguCarouselModule
   ],
   entryComponents:[MainComponent],
-  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }]
+  //providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }]
   
 })
 export class AppModule {

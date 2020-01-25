@@ -2,10 +2,10 @@ import { Component, OnInit, Input, ViewChild, HostListener, OnDestroy  } from '@
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
 import { Observable, Subject} from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatStep, MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import { MatStep, MatSnackBar, MatSnackBarConfig, MatSlider} from '@angular/material';
 import * as _ from 'lodash';
 import { takeUntil } from 'rxjs/operators';
-import { GloveSlider, HtmlInputValue } from 'src/app/shared/models/nine-positions-models';
+import { GloveSlider, HtmlInputValue, Sliders, Sliders2 } from 'src/app/shared/models/nine-positions-models';
 import { GloveDataService } from 'src/app/shared/services/gloveData';
 import { embroiderySliderData } from 'src/app/shared/data/api-data';
 import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
@@ -31,7 +31,9 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   @ViewChild('verticalMenu1') stepper;
   @ViewChild('verticalSubMenu2') stepper2;
   @ViewChild('customTool') customTool: MatStep;
-
+  @ViewChild('gloveSliderCustom') gloveSliderCustom:MatSlider;
+  @ViewChild('gloveSliderEmbroidery') gloveSliderEmbroidery:MatSlider;
+  @ViewChild('gloveSliderSignature') gloveSliderSignature:MatSlider;
   //**Misc */
   customPartsValue$: Observable<any>;
   customPartsValue = [];
@@ -54,12 +56,15 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   imgSlideConfig = {"slidesToShow": 1, "slidesToScroll": 1, "swipeToslide":true};
 
  //** properties and functions to manage Ng5-slider*/
+  displayValue: string;
   filteredDataSlider: GloveSlider[] = [];
   gloveDataSlider: GloveSlider[];
-  gloveEmbDataSlider: GloveSlider[];
+  gloveEmbDataSlider = [];
   gloveEmbroiderySlider: string[];
   gloveCustomSlider = [];
-  gloveSizeSlider = {}
+  gloveSizeSlider: Sliders;
+  amGloveSlider: Sliders2 = {};
+  amEmbGloveSlider: Sliders2 = {};
 
   gloveSlider: Options;
   embroiderySlider: Options;
@@ -86,7 +91,9 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
               private snackBar:MatSnackBar,
               private nysApi: GloveApi,
               private gloveData: GloveDataService,
-              private intro: IntroJsService ) {}
+              private intro: IntroJsService ) {
+
+              }
 
   ngOnInit() {
     this.gloveSlider = {
@@ -96,15 +103,43 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
     this.embroiderySlider = {
       stepsArray: []
     }
-
+    
     this.gloveSizeSlider = this.nysApi.customGloveData.slider;
     this.gloveData.getGloveSliderColors().pipe(takeUntil(this.unsubscribe$)).subscribe(
       (res:GloveSlider[]) => {
         this.gloveDataSlider = this.filteredDataSlider = res;
         this.leatherSliderColors(this.gloveDataSlider);
-        this.gloveEmbDataSlider = _.filter(this.gloveDataSlider,(f)=>{
-          return f.embroidery == true;
+        console.log(this.gloveDataSlider)
+        
+        this.amGloveSlider = {
+          min: "0",
+          max: "25",
+          vertical: false,
+          thumbLabel: true,
+          value: 0,
+          step: 1,
+          tickInterval: 5
+        }
+
+        this.amEmbGloveSlider = {
+          min: "0",
+          max: "25",
+          vertical: false,
+          thumbLabel: true,
+          value: 0,
+          step: 1,
+          tickInterval: 5
+        }
+
+        
+        _.filter(this.gloveDataSlider,(f)=>{
+          if(f.embroidery == true){
+            this.gloveEmbDataSlider.push(f.value)
+          }           
         })
+        console.log(this.gloveEmbDataSlider.length)
+        console.log(this.gloveEmbDataSlider)
+        this.amEmbGloveSlider.max = (this.gloveEmbDataSlider.length -1 ).toString();
         this.embSliderColors(this.gloveEmbDataSlider)
         //console.log(this.gloveEmbDataSlider)
       }
@@ -116,18 +151,21 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
 
     this.nysApi.currentLeatherType$.subscribe(res => {
       var filter = []
+      console.log(res)
       switch (res) {
         case "steer":
         case "jkip":
         case "kip":
           _.filter(this.filteredDataSlider,(f)=>{
             _.find(f.leather,leather => {
-              if(leather == res || !leather.length){
+              if( leather == res ){
                 filter.push(f)
               }
             })
           })
+          this.filteredDataSlider = filter;
           this.leatherSliderColors(filter);
+          this.amGloveSlider.max = filter.length.toString();
           break;
 
         default:
@@ -182,6 +220,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   }
 
   //**Glove Leather Slider */
+  
   leatherSliderColors(db:GloveSlider[]){
     this.gloveCustomSlider = _.map(db, 'value');
     this.value = this.nysApi.valueToIndex("Start", this.gloveCustomSlider);
@@ -448,6 +487,81 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
       alert("Select a glove part before selecting a color")
     }
     //this.nysApi.setGloveCanvas(this.nysApi.indexToValue(index,this.gloveEmbroiderySlider));
+  }
+
+  onGloveSliderChange(){
+    let color = this.nysApi.indexToValue(+this.gloveSliderCustom.displayValue, this.gloveCustomSlider)
+    //this.gloveSliderCustom.displayValue = this.nysApi.indexToValue(index, this.filteredDataSlider);
+
+    switch (color) {
+      case "Lemon Yellow":
+        jQuery('.glove-slider .mat-slider-thumb-label-text').text("L. Yellow")
+        break;
+      case "Forest Green":
+        jQuery('.glove-slider .mat-slider-thumb-label-text').text("F. Green")
+        break;    
+      default:
+        jQuery('.glove-slider .mat-slider-thumb-label-text').text(color)
+        break;
+    }
+    this.nysApi.setGloveCanvas(color);
+  }
+
+  onEmbroiderySliderChange(){
+    let color = this.nysApi.indexToValue(+this.gloveSliderEmbroidery.displayValue, this.gloveEmbDataSlider)
+    console.log(this.gloveSliderEmbroidery.displayValue)
+    switch (color) {
+      case "Yellow Gold":
+        jQuery('.embroidery-slider .mat-slider-thumb-label-text').text("Y. Gold")
+        break;
+      case "Neon Green":
+        jQuery('.embroidery-slider .mat-slider-thumb-label-text').text("Neon")
+        break;
+      case "Forest Green":
+        jQuery('.embroidery-slider .mat-slider-thumb-label-text').text("F. Green")
+        break;    
+      default:
+        jQuery('.embroidery-slider .mat-slider-thumb-label-text').text(color)
+        break;
+    }
+    
+    this.nysApi.setGloveCanvas(color);
+
+  }
+
+  onSignatureChange(payload, query = false ){
+    let color = this.nysApi.indexToValue(+this.gloveSliderSignature.displayValue, this.gloveEmbDataSlider)
+    switch (color) {
+      case "Yellow Gold":
+        jQuery('.signature-slider .mat-slider-thumb-label-text').text("Y. Gold")
+        break;
+      case "Neon Green":
+        jQuery('.signature-slider .mat-slider-thumb-label-text').text("Neon")
+        break;
+      case "Forest Green":
+        jQuery('.signature-slider .mat-slider-thumb-label-text').text("F. Green")
+        break;    
+      default:
+        jQuery('.signature-slider .mat-slider-thumb-label-text').text(color)
+        break;
+    }
+    
+    if (query == true){
+      _.forEach(payload,(p)=>{
+        _.forEach(p,(value,key)=>{
+          if ( value == color ){
+            this.nysApi.applyHtmlInput({'id':"pa_personalization-embroidery",'value': p.value });
+          } else if ( ( color == "Navy" ) && _.includes( p.valueString, color ) ) {
+            this.nysApi.applyHtmlInput({'id':"pa_personalization-embroidery",'value': p.value });
+          }
+        })
+      })
+    }
+    
+
+
+    
+    
   }
 
   onSubmit(){

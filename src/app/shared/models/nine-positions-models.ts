@@ -66,3 +66,26 @@ export interface NavFormControl {
     glovePersonalization: string; 
     gloveSeries: string; 
     gloveWeb: string; }
+
+
+    export interface Sliders {
+        handSliderMax?: string,
+        handSliderMin?: string,
+        handSliderStep?: number, 
+        handSliderVertical?: boolean, 
+        handSliderLabel?: boolean, 
+        handSliderValue?: string, 
+        tickInterval?: number,
+        showTicks?:number
+    }
+
+    export interface Sliders2 {
+        max?: string,
+        min?: string,
+        step?: number, 
+        vertical?: boolean, 
+        thumbLabel?: boolean, 
+        value?: number, 
+        tickInterval?: number,
+        showTicks?:number
+    }

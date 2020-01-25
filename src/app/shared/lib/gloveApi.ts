@@ -187,7 +187,7 @@ export class GloveApi {
         this.formValues = {};
         this.gloveBody = {};
         this.gloveSeries = {};
-        this.slider = { handSliderMax: '', handSliderMin: '', handSliderStep: .25, handSliderVertical: true, handSliderLabel: true, handSliderValue: '', tickInterval: 1 }
+        this.slider = { handSliderMax: '0', handSliderMin: '22', handSliderStep: .25, handSliderVertical: true, handSliderLabel: true, handSliderValue: '', tickInterval: 1 }
     }
 
     //* Function to add broadcast data to Observable subscribers */
@@ -668,9 +668,8 @@ export class GloveApi {
                         if(_.includes(o.value,'-')){
                             o.value = _.replace(o.value,'-'," ")
                         }
-
+                        
                         if (o.value === color) {
-                            
                             if(_.includes(o.value," ")){
                                 o.value = _.replace(o.value," ", "-")
                             }
@@ -689,7 +688,6 @@ export class GloveApi {
         const fill = value;        
         const svgLayerSuffix = "_x5F_";
         _.forEach(gloveCanvas, (value, key) => {
-            console.log(value)
             const el = value.element;
             const svgLayerId = value.svgBase;
             const svgElement = `#${this.gloveType}${svgLayerId}${svgLayerSuffix}`;
