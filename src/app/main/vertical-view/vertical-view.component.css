@@ -275,7 +275,7 @@ mat-icon {
 
 @media (min-width:33.125rem){
     .vertical-flex-grow {
-        flex: 0.2 0 250px;
+        flex: 0.1 0 250px;
     }
 
     .mat-slider-vertical{
@@ -353,5 +353,9 @@ mat-icon {
         font-size: 1.2rem;
         font-weight: 400;
         margin-bottom: 6px;
+    }
+
+    .margin-bottom {
+        margin-bottom: 20px;
     }
 }

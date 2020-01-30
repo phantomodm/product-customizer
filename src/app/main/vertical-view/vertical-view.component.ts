@@ -108,7 +108,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
     this.gloveData.getGloveSliderColors().pipe(takeUntil(this.unsubscribe$)).subscribe(
       (res:GloveSlider[]) => {
         this.gloveDataSlider = this.filteredDataSlider = res;
-        this.leatherSliderColors(this.gloveDataSlider);
+        //this.leatherSliderColors(this.gloveDataSlider);
         console.log(this.gloveDataSlider)
         
         this.amGloveSlider = {
@@ -137,17 +137,16 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
             this.gloveEmbDataSlider.push(f.value)
           }           
         })
-        console.log(this.gloveEmbDataSlider.length)
-        console.log(this.gloveEmbDataSlider)
-        this.amEmbGloveSlider.max = (this.gloveEmbDataSlider.length -1 ).toString();
-        this.embSliderColors(this.gloveEmbDataSlider)
-        //console.log(this.gloveEmbDataSlider)
+
+        this.amEmbGloveSlider.max = (this.gloveEmbDataSlider.length - 1 ).toString();
+        //this.embSliderColors(this.gloveEmbDataSlider)
+
       }
     )
 
-    this.gloveData.getGloveSliderColors().subscribe(
-      (res:GloveSlider[]) => this.gloveDataSlider = this.filteredDataSlider = res
-    )
+    // this.gloveData.getGloveSliderColors().subscribe(
+    //   (res:GloveSlider[]) => this.gloveDataSlider = this.filteredDataSlider = res
+    // )
 
     this.nysApi.currentLeatherType$.subscribe(res => {
       var filter = []
@@ -156,21 +155,20 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         case "steer":
         case "jkip":
         case "kip":
-          _.filter(this.filteredDataSlider,(f)=>{
+          _.filter(this.gloveDataSlider,(f)=>{
             _.find(f.leather,leather => {
-              if( leather == res ){
-                filter.push(f)
+              if( leather == res ){                
+                filter.push(f.value)
               }
             })
           })
           this.filteredDataSlider = filter;
-          this.leatherSliderColors(filter);
-          this.amGloveSlider.max = filter.length.toString();
+          
+          this.amGloveSlider.max = (this.filteredDataSlider.length  - 1).toString();
           break;
 
         default:
-          this.leatherSliderColors(this.filteredDataSlider)          
-          //this.embSliderColors(this.gloveEmbDataSlider)
+          this.leatherSliderColors(this.filteredDataSlider) 
           break;
       }
     })
@@ -372,6 +370,10 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
       case "Thin Pad":
         this.snackBar.open(event + " is required in palm.",'DISMISS',this.snackbarDuration )
         break;
+      case "Block Font":
+      case "Script Font":
+        this.snackBar.open(event + " embroidery selected.",'DISMISS',this.snackbarDuration )
+        break;
       case "Yes":
         this.snackBar.open(" Glove will be softened.",'DISMISS',this.snackbarDuration )
         break;
@@ -490,9 +492,9 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   }
 
   onGloveSliderChange(){
-    let color = this.nysApi.indexToValue(+this.gloveSliderCustom.displayValue, this.gloveCustomSlider)
+    let color = this.nysApi.indexToValue(+this.gloveSliderCustom.displayValue, this.filteredDataSlider)
     //this.gloveSliderCustom.displayValue = this.nysApi.indexToValue(index, this.filteredDataSlider);
-
+    console.log(this.filteredDataSlider)
     switch (color) {
       case "Lemon Yellow":
         jQuery('.glove-slider .mat-slider-thumb-label-text').text("L. Yellow")
