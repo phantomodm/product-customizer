@@ -432,7 +432,7 @@ export class GloveApi {
             switch (this.gloveType) {
                 case 'inf':
                     this.setGloveType(selected);
-                    this.setGloveSizeSlider("10.50", "12.00", .25);
+                    this.setGloveSizeSlider("11.00", "12.00", .25);
                     this.loadInfield();
                     break;
                 case 'of':
@@ -668,12 +668,12 @@ export class GloveApi {
                         if(_.includes(o.value,'-')){
                             o.value = _.replace(o.value,'-'," ")
                         }
-                        
+
                         if (o.value === color) {
                             if(_.includes(o.value," ")){
                                 o.value = _.replace(o.value," ", "-")
                             }
-                            
+                            console.log(o.value)
                             this._applyHtmlInput({'id':o.id,'value':o.value});
                             this.applyFillToCanvas(o.hex);
                         }

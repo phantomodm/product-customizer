@@ -357,7 +357,8 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   setGloveOptions(event: string, formValue:string, attribute:string, menuName?: string, control?:string){
     
     let htmlValue;
-    htmlValue = {'id': attribute,'value':formValue}
+    console.log(formValue)
+    htmlValue = {'id': attribute,'value':formValue.toLowerCase()}
     this.nysApi.setWorkFlowValidity(menuName,control);
     this.nysApi.applyHtmlInput(htmlValue);
     //console.log(htmlValue)
@@ -491,7 +492,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
     //this.nysApi.setGloveCanvas(this.nysApi.indexToValue(index,this.gloveEmbroiderySlider));
   }
 
-  onGloveSliderChange(){
+  onGloveSliderChange(query = false){
     let color = this.nysApi.indexToValue(+this.gloveSliderCustom.displayValue, this.filteredDataSlider)
     //this.gloveSliderCustom.displayValue = this.nysApi.indexToValue(index, this.filteredDataSlider);
     console.log(this.filteredDataSlider)
@@ -506,10 +507,18 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         jQuery('.glove-slider .mat-slider-thumb-label-text').text(color)
         break;
     }
-    this.nysApi.setGloveCanvas(color);
+
+    if (query == false){
+      if(color.toLowerCase() === "navy"){
+        this.nysApi.setGloveCanvas("navy blue")
+      } else {
+        this.nysApi.setGloveCanvas(color);
+      }      
+    }
+    
   }
 
-  onEmbroiderySliderChange(){
+  onEmbroiderySliderChange(query=false){
     let color = this.nysApi.indexToValue(+this.gloveSliderEmbroidery.displayValue, this.gloveEmbDataSlider)
     console.log(this.gloveSliderEmbroidery.displayValue)
     switch (color) {
@@ -521,13 +530,21 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         break;
       case "Forest Green":
         jQuery('.embroidery-slider .mat-slider-thumb-label-text').text("F. Green")
-        break;    
+        break;
       default:
         jQuery('.embroidery-slider .mat-slider-thumb-label-text').text(color)
         break;
     }
+
+    if (query == false){
+      if(color.toLowerCase() === "navy"){
+        this.nysApi.setGloveCanvas("navy blue")
+      } else {
+        this.nysApi.setGloveCanvas(color);
+      }      
+    }
     
-    this.nysApi.setGloveCanvas(color);
+    
 
   }
 
@@ -548,13 +565,15 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         break;
     }
     
-    if (query == true){
+    if (query == false){
       _.forEach(payload,(p)=>{
         _.forEach(p,(value,key)=>{
           if ( value == color ){
             this.nysApi.applyHtmlInput({'id':"pa_personalization-embroidery",'value': p.value });
+            console.log(p.value)
           } else if ( ( color == "Navy" ) && _.includes( p.valueString, color ) ) {
             this.nysApi.applyHtmlInput({'id':"pa_personalization-embroidery",'value': p.value });
+            console.log(p.value)
           }
         })
       })

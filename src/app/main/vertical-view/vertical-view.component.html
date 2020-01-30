@@ -245,7 +245,7 @@
                                             </div>
                                             <div class="glove-slider">
                                                 <mat-slider class="glove-slider" #gloveSliderCustom
-                                                    (input)="onGloveSliderChange()" (change)="onGloveSliderChange()"
+                                                    (input)="onGloveSliderChange(true)" (change)="onGloveSliderChange()"
                                                     [min]="amGloveSlider.min" [max]="amGloveSlider.max"
                                                     [step]="amGloveSlider.step" [value]="amGloveSlider.value"
                                                     [thumbLabel]="amGloveSlider.thumbLabel" [tickInterval]=5>
@@ -267,8 +267,8 @@
                                             </div>
                                             <div id="slider-control-embroidery" class="glove-slider">
                                                 <mat-slider class="embroidery-slider" #gloveSliderEmbroidery
-                                                    (input)="onEmbroiderySliderChange()"
-                                                    (change)="onEmbroiderySliderChange()" [min]="amEmbGloveSlider.min"
+                                                    (input)="onEmbroiderySliderChange(true)"
+                                                    (change)="onEmbroiderySliderChange(false)" [min]="amEmbGloveSlider.min"
                                                     [max]="amEmbGloveSlider.max" [step]="amEmbGloveSlider.step"
                                                     [value]="amEmbGloveSlider.value"
                                                     [thumbLabel]="amEmbGloveSlider.thumbLabel" [tickInterval]=5>
@@ -320,7 +320,7 @@
         
                                             <div style="width:100%" class="signature-slider">
                                                 <mat-slider class="signature-slider" #gloveSliderSignature
-                                                    (input)="onSignatureChange( undefined , true )"
+                                                    (input)="onSignatureChange( undefined, true )"
                                                     (change)="onSignatureChange(question.options)" [min]="amEmbGloveSlider.min"
                                                     [max]="amEmbGloveSlider.max" [step]="amEmbGloveSlider.step"
                                                     [value]="amEmbGloveSlider.value" [thumbLabel]="amEmbGloveSlider.thumbLabel"
