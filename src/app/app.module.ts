@@ -49,13 +49,7 @@ import { PositionGloveViewComponent } from './main/position-glove-view/position-
 //   }
 // }
 
-var firebase = {
-  apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
-  authDomain: "positions-ui-web-data.firebaseapp.com",
-  databaseURL: "https://positions-ui-web-data.firebaseio.com",
-  projectId: "positions-ui-web-data",
-  messagingSenderId: "479822956029"
-};
+
 
 const routes: Routes = [
   { path: '', component: AppComponent },
