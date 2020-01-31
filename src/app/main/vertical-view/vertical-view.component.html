@@ -35,12 +35,16 @@
                             <ng-template matStepLabel>Position</ng-template>
                             <div *ngFor="let position of (wizardPrompts)?.positions">
                                 <mat-card-title>{{position.label}}</mat-card-title>
-                                <div class="vertical-view_row">
+                                <div class="vertical-view__list vertical-flex-grow">
+                                    <position-glove-view  [positions] = "position.options" (gloveData)="setGloveType($event)"></position-glove-view>
+                                </div>
+                                
+                                <!-- <div class="vertical-view_row">
                                     <div class="vertical-view__item wrap" *ngFor="let option of position.options">
                                         <button mat-raised-button type="button" color="primary"
                                             (click)="setGloveType(option.shortName, option.fullName, option.id, option.value, position.formName,'subForm1', option.img)">{{option.fullName}}</button>
                                     </div>
-                                </div>
+                                </div> -->
                                 &nbsp;
                                 <div class="vertical-view__button">
                                     <button mat-button matStepperPrevious type="button">Back</button>

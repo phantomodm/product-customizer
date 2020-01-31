@@ -36,6 +36,7 @@ import { GloveCustomizerVerticalViewComponent } from './main/glove-customizer-ve
 //import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-carousel-view.component';
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 import * as Sentry from "@sentry/browser";
+import { PositionGloveViewComponent } from './main/position-glove-view/position-glove-view.component';
 
 // Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
 
@@ -69,7 +70,8 @@ const routes: Routes = [
     VerticalViewComponent,
     HandSizeViewComponent,
     GloveCustomizerVerticalViewComponent,
-    VerticalWebViewComponent
+    VerticalWebViewComponent,
+    PositionGloveViewComponent
   ],
   imports: [
     BrowserModule,

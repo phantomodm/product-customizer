@@ -4,7 +4,7 @@ import { Observable, Subject} from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatStep, MatSnackBar, MatSnackBarConfig, MatSlider} from '@angular/material';
 import * as _ from 'lodash';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 import { GloveSlider, HtmlInputValue, Sliders, Sliders2 } from 'src/app/shared/models/nine-positions-models';
 import { GloveDataService } from 'src/app/shared/services/gloveData';
 import { embroiderySliderData } from 'src/app/shared/data/api-data';
@@ -23,8 +23,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   private unsubscribe$ = new Subject<boolean>();
   errorNotifier: any;
 
-
-
   @Input('') sliderStatus;
   @Input('nysWizardSteps') wizardPrompts;
   @Input('gloveWebs') filteredGloveWebs;
@@ -34,6 +32,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   @ViewChild('gloveSliderCustom') gloveSliderCustom:MatSlider;
   @ViewChild('gloveSliderEmbroidery') gloveSliderEmbroidery:MatSlider;
   @ViewChild('gloveSliderSignature') gloveSliderSignature:MatSlider;
+
   //**Misc */
   customPartsValue$: Observable<any>;
   customPartsValue = [];
@@ -105,7 +104,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
     }
     
     this.gloveSizeSlider = this.nysApi.customGloveData.slider;
-    this.gloveData.getGloveSliderColors().pipe(takeUntil(this.unsubscribe$)).subscribe(
+    this.gloveData.getGloveSliderColors().pipe(take(1)).subscribe(
       (res:GloveSlider[]) => {
         this.gloveDataSlider = this.filteredDataSlider = res;
         //this.leatherSliderColors(this.gloveDataSlider);
@@ -144,10 +143,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
       }
     )
 
-    // this.gloveData.getGloveSliderColors().subscribe(
-    //   (res:GloveSlider[]) => this.gloveDataSlider = this.filteredDataSlider = res
-    // )
-
     this.nysApi.currentLeatherType$.subscribe(res => {
       var filter = []
       console.log(res)
@@ -166,9 +161,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
           
           this.amGloveSlider.max = (this.filteredDataSlider.length  - 1).toString();
           break;
-
         default:
-          this.leatherSliderColors(this.filteredDataSlider) 
           break;
       }
     })
@@ -177,7 +170,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
       if(res.hasOwnProperty('option')){
         switch (res.option) {
           case 'Glove Customizer':
-            this.open(res);
+            this.errorSnackBar(res);
             //this.snackBar.open(res.value,'CLOSE',{panelClass:'customizehelp' ,duration:2000})
             break;
           default:
@@ -193,18 +186,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
 
   }
 
-  //** Forgotten Function */
-
-  tobedetermined(){
-    this.customPartsValue$ = this.gloveData.getCustomParts();
-    this.customPartsValue$.pipe(takeUntil(this.unsubscribe$)).subscribe(
-      val => _.forEach(val,(v)=>{
-        this.customPartsValue.push(v);
-      })
-
-    );
-  }
-
   autoStartIntroJs(){
     if(this.userGuide != true){
       this.intro.startIntro()
@@ -212,64 +193,64 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
     }
   }
 
-  initilizeGloveSlider(){
-    this.leatherSliderColors(this.filteredDataSlider);
-    this.embSliderColors(this.gloveEmbDataSlider);
-  }
+  // initilizeGloveSlider(){
+  //   this.leatherSliderColors(this.filteredDataSlider);
+  //   this.embSliderColors(this.gloveEmbDataSlider);
+  // }
 
-  //**Glove Leather Slider */
+  // //**Glove Leather Slider */
   
-  leatherSliderColors(db:GloveSlider[]){
-    this.gloveCustomSlider = _.map(db, 'value');
-    this.value = this.nysApi.valueToIndex("Start", this.gloveCustomSlider);
+  // leatherSliderColors(db:GloveSlider[]){
+  //   this.gloveCustomSlider = _.map(db, 'value');
+  //   this.value = this.nysApi.valueToIndex("Start", this.gloveCustomSlider);
 
-    this.gloveSlider = {
-      floor:0,
-      ceil:0,
-      showSelectionBar: true,
-      stepsArray: this.gloveCustomSlider.map((color:string):CustomStepDefinition => {
-      return { value: this.nysApi.valueToIndex(color,this.gloveCustomSlider) };
-      }),
-      translate: (value: number, label: LabelType): string =>{
-      return this.nysApi.indexToValue(value, this.gloveCustomSlider);
-      },
-      showTicks:true,
-      getPointerColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
-      getTickColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
-      getSelectionBarColor: (value:number): string => {
-      return this.nysApi.setSliderColor(value,db);
-      }
-    }
-  }
+  //   this.gloveSlider = {
+  //     floor:0,
+  //     ceil:0,
+  //     showSelectionBar: true,
+  //     stepsArray: this.gloveCustomSlider.map((color:string):CustomStepDefinition => {
+  //     return { value: this.nysApi.valueToIndex(color,this.gloveCustomSlider) };
+  //     }),
+  //     translate: (value: number, label: LabelType): string =>{
+  //     return this.nysApi.indexToValue(value, this.gloveCustomSlider);
+  //     },
+  //     showTicks:true,
+  //     getPointerColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+  //     getTickColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+  //     getSelectionBarColor: (value:number): string => {
+  //     return this.nysApi.setSliderColor(value,db);
+  //     }
+  //   }
+  // }
 
-  //**Embroidery color slider */
-  embSliderColors(db: { "value": string; "hex": string; }[]){
+  // //**Embroidery color slider */
+  // embSliderColors(db: { "value": string; "hex": string; }[]){
 
-    this.gloveEmbroiderySlider = _.map(db,'value');
-    this.valueEmbroidery = this.nysApi.valueToIndex("Start",this.gloveEmbroiderySlider);
+  //   this.gloveEmbroiderySlider = _.map(db,'value');
+  //   this.valueEmbroidery = this.nysApi.valueToIndex("Start",this.gloveEmbroiderySlider);
 
-    this.embroiderySlider = {
-      showSelectionBar: true,
-      stepsArray: this.gloveEmbroiderySlider.map((color:string):CustomStepDefinition => {
-      return { value: this.nysApi.valueToIndex(color,this.gloveEmbroiderySlider) };
-      }),
-      translate: (value: number, label: LabelType): string =>{
-      return this.nysApi.indexToValue(value, this.gloveEmbroiderySlider);
-      },showTicks:true,
-      getPointerColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
-      getTickColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
-      getSelectionBarColor: (value:number): string => {
-      return this.nysApi.setSliderColor(value,db);
-      }
-    }
-  }
+  //   this.embroiderySlider = {
+  //     showSelectionBar: true,
+  //     stepsArray: this.gloveEmbroiderySlider.map((color:string):CustomStepDefinition => {
+  //     return { value: this.nysApi.valueToIndex(color,this.gloveEmbroiderySlider) };
+  //     }),
+  //     translate: (value: number, label: LabelType): string =>{
+  //     return this.nysApi.indexToValue(value, this.gloveEmbroiderySlider);
+  //     },showTicks:true,
+  //     getPointerColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+  //     getTickColor:(value:number): string =>{ return this.nysApi.setSliderColor(value,db)},
+  //     getSelectionBarColor: (value:number): string => {
+  //     return this.nysApi.setSliderColor(value,db);
+  //     }
+  //   }
+  // }
 
   //** Advance to next step of master stepper */
   nextStep(){
     this.stepper.next();
   }
 
-  open(data){
+  errorSnackBar(data){
     let config = new MatSnackBarConfig();
     config.duration = 500
     config.panelClass = ['.customizehelp']
@@ -345,7 +326,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
 
   setGlovePersonalization(event: string, formValue:string, attribute:string,){
     let htmlValue;
-    //console.log(event)
     if(attribute != undefined){
       htmlValue = {'id': attribute,'value':formValue}
     } else {
@@ -354,14 +334,14 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
     this.nysApi.applyHtmlInput(htmlValue);
     this.snackBar.open( `Personalization color ${event} selected.`,'DISMISS',this.snackbarDuration )
   }
+
   setGloveOptions(event: string, formValue:string, attribute:string, menuName?: string, control?:string){
     
     let htmlValue;
-    console.log(formValue)
     htmlValue = {'id': attribute,'value':formValue.toLowerCase()}
     this.nysApi.setWorkFlowValidity(menuName,control);
     this.nysApi.applyHtmlInput(htmlValue);
-    //console.log(htmlValue)
+
     switch (event) {
       case "Softball":
       case "Baseball":
@@ -392,16 +372,8 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
     let eventFilter
     if(control == "sportPlayed"){
       this.snackBar.open(event + " model selected.",'DISMISS',this.snackbarDuration)
-      // switch(event){
-      //   case "Softball":
-      //     this.snackBar.open(event + " model selected.",'DISMISS',this.snackbarDuration)
-      //     break;
-      //   default:
-      //     this.snackBar.open(event + " model selected.", 'DISMISS',this.snackbarDuration)
-      // }
     } else {
       eventFilter = event.split('(').pop().slice(0);
-      //console.log(eventFilter)
 
       switch(eventFilter){
         case "Rise Series":
@@ -413,7 +385,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         this.snackBar.open("Cowhide selected.",'DISMISS', this.snackbarDuration)
       }
     }
-    //console.log(event)
+
     this.nysApi.customGloveData.gloveSeries.series = _.lowerCase(eventFilter);
     this.nysApi.setGloveSeries(_.lowerCase(event), value);
     this.nysApi.applyHtmlInput(htmlValue);
@@ -434,16 +406,24 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   }
 
   //** Set position choice from frontend and snackbar confirmation bar*/
-  setGloveType(shortName:string, name:string, attributeId:string, value:string, control:string, menuForm:string, img?:string){
-    this.setGloveContent();
-    let glove = shortName;
-    const inputAttribute = attributeId;
-    this.snackBar.open(`${name} glove was selected`,'DISMISS',this.snackbarDuration)
-    this.setGloveOptions(glove, value, inputAttribute ,menuForm, control);
-    this.nysApi.setPosition(glove);
-    this.handSizeImg = img;
-    this.currentGloveType = name.toLowerCase();
+  // setGloveType(shortName:string, name:string, attributeId:string, value:string, control:string, menuForm:string, img?:string){
+    setGloveType(position:{gloveSizeImg:string, gloveType:string, gloveShortName:string,value:string, attribute:string, menu:string, formControl:string}){
+      console.log(position)
+      this.setGloveContent();
+    //let glove = shortName;
+    // const inputAttribute = attributeId;
+    // this.snackBar.open(`${name} glove was selected`,'DISMISS',this.snackbarDuration)
+    // this.setGloveOptions(glove, value, inputAttribute ,menuForm, control);
+    // this.nysApi.setPosition(glove);
+    // this.handSizeImg = img;
+    // this.currentGloveType = name.toLowerCase();
 
+    
+      this.snackBar.open(`${position.gloveType} glove was selected`,'DISMISS',this.snackbarDuration)
+      this.setGloveOptions(position.gloveShortName, position.value, position.attribute, position.menu, position.formControl)
+      this.nysApi.setPosition(position.gloveShortName)
+      this.handSizeImg = position.gloveSizeImg;
+      this.currentGloveType = position.gloveType.toLowerCase();
   }
 
   //** Function executed by mat-stepper Output(selectionChange) emitter to track subMenu steps completed */
@@ -472,7 +452,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   //**Function call from click event from custom glove slider */
   leatherSliderSelections(event:number){
     const index = event;
-    //console.log(index)
     if(index != undefined){
       this.nysApi.setGloveCanvas(this.nysApi.indexToValue(index,this.gloveCustomSlider));
     } else {
@@ -494,7 +473,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
 
   onGloveSliderChange(query = false){
     let color = this.nysApi.indexToValue(+this.gloveSliderCustom.displayValue, this.filteredDataSlider)
-    //this.gloveSliderCustom.displayValue = this.nysApi.indexToValue(index, this.filteredDataSlider);
     console.log(this.filteredDataSlider)
     switch (color) {
       case "Lemon Yellow":
@@ -543,9 +521,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         this.nysApi.setGloveCanvas(color);
       }      
     }
-    
-    
-
   }
 
   onSignatureChange(payload, query = false ){
@@ -578,11 +553,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         })
       })
     }
-    
-
-
-    
-    
+ 
   }
 
   onSubmit(){

@@ -1,0 +1,27 @@
+<div>
+  <ngu-carousel class="ngu-slider-main" [inputs]="carouselTile" [dataSource]="positions">
+  <button type="button" class="leftRs" NguCarouselPrev></button>
+  <button type="button" class="rightRs" NguCarouselNext></button>
+
+  <ngu-tile #positions *nguCarouselDef="let position">      
+    <section>        
+        <mat-card style="box-shadow: none;" (click)="setGloveType(position.shortName, position.fullName, position.id, position.value, position.formName,'subForm1', position.img)" >
+          <label  for={{position.id}}>
+            <div class="positions-view_column">
+              <div class="positions-view__list">
+                <mat-card-header>
+                  <mat-card-title>{{position.valueString}}</mat-card-title>
+                </mat-card-header>
+                &nbsp;
+              </div>
+              <div class="positions-view__list">
+                <img class="positions" mat-card-image src="https:{{position.img}}">
+              </div>
+            </div>
+          </label>
+        </mat-card>        
+    </section>      
+  </ngu-tile>
+</ngu-carousel>  
+</div>
+<div class="swipe"></div>

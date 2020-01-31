@@ -1,0 +1,99 @@
+.positions-view_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.positions-view_column {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.positions-view__list {
+    display:flex;
+}
+
+.positions-view__list:first-child {
+    margin-bottom: 1.5rem;
+}
+
+.positions-view_size {
+   display:flex;
+}
+
+section {
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.positions {
+    width: 150px;
+    height: auto;
+}
+
+label {
+    margin-bottom: 0px !important;
+}
+
+.leftRs,
+.rightRs {
+    position: absolute;
+    background: none;
+    border: none;
+    margin: auto;
+    width: 2rem;
+    height: 2rem;
+    top: 0;
+    bottom: 0;
+}
+
+.leftRs {       
+    background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_left-32px.svg') ;
+    left: 0;
+}
+
+.rightRs {    
+    background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_right-32px.svg') ;
+    right: 0;
+}
+
+.swipe {
+    width: 50px;
+    height: 54px;
+    margin: auto;
+    display: none;
+    background-image: url('http://localhost:4200/assets/images/swipe.svg');
+}
+
+@media only screen and (max-width:450px){
+    .leftRs {
+        left: 5px;
+    }
+
+    .rightRS {
+        right: 5px;
+    }
+}
+
+@media only screen and (min-width:450px){
+    .leftRs  {
+        left: 50px;
+    }
+    .rightRs {
+        right: 50px;
+    }
+    
+}
+
+@media only screen and (max-width:610px){
+    .swipe {
+        display:block;
+    }
+}
