@@ -1,3 +1,18 @@
 mat-icon:hover {
     cursor: pointer;
 }
+
+.carousel-control-prev-icon {
+    background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_left-32px.svg') !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_right-32px.svg') !important;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background: none;
+    width: 2rem;
+    height: 2rem;
+}

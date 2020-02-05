@@ -43,11 +43,13 @@
 .leftRs {       
     background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_left-32px.svg') ;
     left: 0;
+    background-repeat: no-repeat;
 }
 
 .rightRs {    
     background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_right-32px.svg') ;
     right: 0;
+    background-repeat: no-repeat;
 }
 
 .swipe {
@@ -55,7 +57,7 @@
     height: 54px;
     margin: auto;
     display: none;
-    background-image: url('http://localhost:4200/assets/images/swipe.svg');
+    background-image: url('../../../assets/images/swipe.svg');
 }
 
 @media only screen and (max-width:610px){

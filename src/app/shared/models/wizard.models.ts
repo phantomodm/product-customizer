@@ -18,6 +18,7 @@ export const STEPS =
         gloveType?: string;
         imageType?: string;
         currModel?: string;
+        currentAttrib?: string;
         gloveSeries?: {
             series?: any;
             value?: string

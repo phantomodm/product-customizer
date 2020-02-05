@@ -120,6 +120,11 @@
     background: white;
 }
 
+.raise-container {
+    position: relative;
+    top: -35px
+}
+
 @media screen and (min-width:600px){
     .vertical-view-column_img{
         width: 30%;

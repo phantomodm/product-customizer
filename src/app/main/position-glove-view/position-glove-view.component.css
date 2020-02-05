@@ -15,6 +15,8 @@
 
 .positions-view__list {
     display:flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .positions-view__list:first-child {
@@ -34,7 +36,7 @@ section {
 
 
 .positions {
-    width: 150px;
+    width: auto;
     height: auto;
 }
 
@@ -57,11 +59,13 @@ label {
 .leftRs {       
     background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_left-32px.svg') ;
     left: 0;
+    background-repeat: no-repeat;
 }
 
 .rightRs {    
     background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_right-32px.svg') ;
     right: 0;
+    background-repeat: no-repeat;
 }
 
 .swipe {
@@ -69,7 +73,7 @@ label {
     height: 54px;
     margin: auto;
     display: none;
-    background-image: url('http://localhost:4200/assets/images/swipe.svg');
+    background-image: url('../../../assets/images/swipe.svg');
 }
 
 @media only screen and (max-width:450px){
@@ -84,10 +88,10 @@ label {
 
 @media only screen and (min-width:450px){
     .leftRs  {
-        left: 50px;
+        left: 10px;
     }
     .rightRs {
-        right: 50px;
+        right: 10px;
     }
     
 }

@@ -134,6 +134,7 @@ export class GloveApi {
     strokeFill = '#c0c0c0';
     btnFill = 'rgba(10,134,61,0.4)';
     svgBtnFill = 'rgba(10,134,61,0.4)';
+    currentAttrib: string;
 
     
 
@@ -144,6 +145,7 @@ export class GloveApi {
         this.gloveSeries = this.customGloveData.gloveSeries;
         this.gloveType = this.customGloveData.gloveType;
         this.imageType = this.customGloveData.imageType;
+        this.currentAttrib = this.customGloveData.currentAttrib;
         this.slider = this.customGloveData.slider;
         this.indicatorMap = this.customGloveData.indicatorCanvasMap;
         this.formValues = this.customGloveData.formValues;
@@ -165,7 +167,7 @@ export class GloveApi {
             
         })
 
-        this.gloveData.getGloveColors().subscribe(val => {
+        this.gloveData.getGloveColors().subscribe(val => { 
             this.gloveDesignData = [];
             this.embroiderySliderData = [];
             _.forEach(val, (v) => {
@@ -183,7 +185,7 @@ export class GloveApi {
     }
 
     initializeModel() {
-        this.customGloveData = { gloveType: '', imageType: '', currModel: '', gloveSeries: {}, formValues: {}, gloveBody: { gloveHand: '', handSize: '' }, gloveDescription: '', isYouthGlove: false, indicatorCanvasMap: [], slider: { handSliderMax: '', handSliderMin: '', handSliderStep: .25, handSliderVertical: true, handSliderLabel: true, handSliderValue: '', tickInterval: 1 }, shoWebType: '' };
+        this.customGloveData = { gloveType: '', imageType: '', currentAttrib: '',currModel: '', gloveSeries: {}, formValues: {}, gloveBody: { gloveHand: '', handSize: '' }, gloveDescription: '', isYouthGlove: false, indicatorCanvasMap: [], slider: { handSliderMax: '', handSliderMin: '', handSliderStep: .25, handSliderVertical: true, handSliderLabel: true, handSliderValue: '', tickInterval: 1 }, shoWebType: '' };
         this.formValues = {};
         this.gloveBody = {};
         this.gloveSeries = {};
@@ -567,6 +569,15 @@ export class GloveApi {
                 this.addClass('unselected');
             }
             self.imageType = obj.name;
+            _.forEach(self.gloveCustomData, (v,k)=>{
+                const section = v.gloveSection;
+                if (section === self.imageType) {
+                    
+                    _.forEach(v.options, (o) => {
+                        self.currentAttrib = o.id;
+                    })
+                }
+            })
             self.customGloveData.currModel = obj.model;
             self.setGloveSliderControl(obj.name);
 
@@ -661,25 +672,55 @@ export class GloveApi {
         if(!imageTypeSelected){
             this.notifyOther({ option: 'Glove Customizer', value: "Please select a glove part to customize." });
         } else {
-            _.forEach(this.gloveCustomData, (value, key) => {
-                const section = value.gloveSection;
-                if (section === imageTypeSelected) {
-                    _.forEach(value.options, (o) => {
-                        if(_.includes(o.value,'-')){
-                            o.value = _.replace(o.value,'-'," ")
-                        }
+            
+            if( imageTypeSelected !== 'logo' || "fgrl" || "psnl" ) {
+                _.find(this.gloveDesignData, (o) => {
+                    if(_.includes(o.value, '-')){
+                        o.value = _.replace(o.value,'-'," ")
+                    }
+                    if (o.value === color){
+                        if(_.includes(o.value," ")){
+                            o.value = _.replace(o.value," ","-")
+                        }    
+                        this._applyHtmlInput({'id':this.currentAttrib,'value':o.value});
+                        this.applyFillToCanvas(o.hex);
 
-                        if (o.value === color) {
-                            if(_.includes(o.value," ")){
-                                o.value = _.replace(o.value," ", "-")
-                            }
-                            console.log(o.value)
-                            this._applyHtmlInput({'id':o.id,'value':o.value});
-                            this.applyFillToCanvas(o.hex);
-                        }
-                    })
-                }
-            })  
+                    }
+                } )
+            } else {
+                _.find(this.embroiderySliderData,(o) => {
+                    if(_.includes(o.value, '-')){
+                        o.value = _.replace(o.value,'-'," ")
+                    }
+                    if (o.value === color){
+                        if(_.includes(o.value," ")){
+                            o.value = _.replace(o.value," ","-")
+                        }    
+                        this._applyHtmlInput({'id':this.currentAttrib,'value':o.value});
+                        this.applyFillToCanvas(o.hex);    
+                    }
+                })
+            }           
+
+            // _.forEach(this.gloveCustomData, (value, key) => {
+            //     const section = value.gloveSection;
+            //     if (section === imageTypeSelected) {
+            //         _.forEach(value.options, (o) => {
+            //             if(_.includes(o.value,'-')){
+            //                 o.value = _.replace(o.value,'-'," ")
+            //             }
+
+            //             if (o.value === color) {
+            //                 if(_.includes(o.value," ")){
+            //                     o.value = _.replace(o.value," ", "-")
+            //                 }
+            //                 console.log(o.value)
+            //                 this._applyHtmlInput({'id':o.id,'value':o.value});
+            //                 this.applyFillToCanvas(o.hex);
+            //             }
+            //         })
+            //     }
+            // })  
         }
         
     }
@@ -762,10 +803,6 @@ export class GloveApi {
     }
 
     private _applySvgViewBox(): void {
-        // this.m1.attr({ viewBox: "-50 0 400 400" });
-        // this.m2.attr({ viewBox: "0 0 400 400" });
-        // this.m3.attr({ viewBox: "0 0 400 400" });
-
         this.gloveCloneSummary1.attr({ viewBox: "50 0 450 400" });
         this.gloveCloneSummary2.attr({ viewBox: "50 0 450 400" });
         this.gloveCloneSummary3.attr({ viewBox: "50 0 450 400" });
@@ -951,6 +988,7 @@ export class GloveApi {
             });
         });
 
+        this.m2.attr({ viewBox: "-25 -20 400 400"})
         Snap.load("assets/images/outfield_inside_view.svg", (f) => {
             var g = f.selectAll('#of_x5F_vw2_x5F_thbo, #of_x5F_vw2_x5F_thbi, #of_x5F_vw2_x5F_plm, #of_x5F_vw2_x5F_indo, #of_x5F_vw2_x5F_indi, #of_x5F_vw2_x5F_mid, #of_x5F_vw2_x5F_rngo, #of_x5F_vw2_x5F_rngi, #of_x5F_vw2_x5F_pnki, #of_x5F_vw2_x5F_pnko, #of_x5F_vw2_x5F_wlt, #of_x5F_vw2_x5F_web, #of_x5F_vw2_x5F_bnd, #of_x5F_vw2_x5F_stch, #of_x5F_vw2_x5F_lce, #of_x5F_open_x5F_pocket');
 
@@ -981,6 +1019,7 @@ export class GloveApi {
                 )(l), false);
             });
         });
+
         this.m3.attr({ viewBox: "-20 -20 400 400"})
         Snap.load("assets/images/outfield_side_view.svg", (f) => {
             var g = f.selectAll('#of_x5F_vw1_x5F_wst,#of_x5F_vw1_x5F_logo, #of_x5F_vw1_x5F_thbi, #of_x5F_vw1_x5F_thbo, #of_x5F_vw1_x5F_indo, #of_x5F_vw1_x5F_plm,#of_x5F_vw1_x5F_web, #of_x5F_vw1_x5F_bnd, #of_x5F_vw1_x5F_wlt, #of_x5F_vw1_x5F_stch, #of_x5F_vw1_x5F_lce, #of_x5F_side_x5F_view');

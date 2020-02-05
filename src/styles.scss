@@ -123,6 +123,14 @@ button:focus {
     height: 2rem;
 }
 
+.carousel-control-prev {
+    left: -10px;
+}
+
+.carousel-control-next {
+    right: -10px;
+}
+
 .mat-slider-horizontal {
     width:100% !important;
 }

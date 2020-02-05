@@ -17,7 +17,7 @@ export class PositionGloveViewComponent implements OnInit {
 
   public carouselTile: NguCarouselConfig =
   {
-    grid: {xs: 1, sm: 1, md: 2, lg: 2, all: 0},
+    grid: {xs: 1, sm: 1, md: 2, lg: 3, all: 0},
     slide: 2,
     speed: 400,
     animation: 'lazy',
@@ -43,6 +43,7 @@ export class PositionGloveViewComponent implements OnInit {
     }
     let glove = shortName;
     const inputAttribute = attributeId;
+    console.log(name)
     this.snackBar.open(`${name} glove was selected`,'DISMISS',this.snackbarDuration)
     //this.setGloveOptions(glove, value, inputAttribute ,menuForm, control);
     this.nysApi.setPosition(glove);

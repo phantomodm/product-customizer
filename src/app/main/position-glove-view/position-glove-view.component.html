@@ -5,7 +5,7 @@
 
   <ngu-tile #positions *nguCarouselDef="let position">      
     <section>        
-        <mat-card style="box-shadow: none;" (click)="setGloveType(position.shortName, position.fullName, position.id, position.value, position.formName,'subForm1', position.img)" >
+        <mat-card style="box-shadow: none; height:80%;width:auto;" (click)="setGloveType(position.shortName, position.valueString, position.id, position.value, position.formName,'subForm1', position.img)" >
           <label  for={{position.id}}>
             <div class="positions-view_column">
               <div class="positions-view__list">
@@ -15,7 +15,7 @@
                 &nbsp;
               </div>
               <div class="positions-view__list">
-                <img class="positions" mat-card-image src="https:{{position.img}}">
+                <img mat-card-image src="https:{{position.wImg}}">
               </div>
             </div>
           </label>
