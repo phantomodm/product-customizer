@@ -146,7 +146,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         case "kip":
           _.filter(this.gloveDataSlider,(f)=>{
             _.find(f.leather,leather => {
-              if( leather == res ){                
+              if( leather == res ){            
                 filter.push(f.value)
               }
             })
@@ -305,6 +305,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   }
 
   setGloveSeries(event: string, value:string, attributeName: string, menuName:string, control:string){
+    console.log(event)
     const htmlValue = {'id':attributeName,'value': value}
     let eventFilter
     if(control == "sportPlayed"){
@@ -411,7 +412,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         jQuery('.glove-slider .mat-slider-thumb-label-text').text(color)
         break;
     }
-
+    console.log(color)
     if (query == false){
       if(color.toLowerCase() === "navy"){
         this.nysApi.setGloveCanvas("navy blue")
@@ -483,7 +484,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   }
 
   onSubmit(){
-    const submit = jQuery('.single_add_to_cart_button').click();
+    const submit = jQuery('.single_add_to_cart_button').removeClass('disabled').click();
   }
 
   @HostListener('window:beforeunload',['$event'])

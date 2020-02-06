@@ -4,8 +4,7 @@
     justify-content: center;
 }
 
-.positions-view_column {
-    
+.positions-view_column {    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,5 +102,14 @@ label {
 @media only screen and (max-width:610px){
     .swipe {
         display:block;
+    }
+}
+
+@media only screen and (min-width:1200px){
+    .leftRs  {
+        left: -5px;
+    }
+    .rightRs {
+        right: -5px;
     }
 }

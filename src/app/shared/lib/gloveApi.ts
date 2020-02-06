@@ -611,7 +611,10 @@ export class GloveApi {
             this.currentLeatherType.next('steer');
             this.setSeriesOnGlove("rise")
         } else {
-            this.currentLeatherType.next('cowhide');
+            this.customGloveData.gloveSeries[key] = "rise";
+            this.currentLeatherType.next('steer');
+            this.setSeriesOnGlove("rise")
+            this.applyHtmlInput({id:'rise series', value:'rise-series'})
             //console.log("cowhide")
         }
 
