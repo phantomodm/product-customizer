@@ -208,7 +208,7 @@
                         <div *ngFor="let question of (wizardPrompts)?.gloveSize">
 
                             <mat-card-title>{{question.label}}</mat-card-title>
-                            <div class="raise-container">
+                            <div style="position:relative; top: -3px;" class="">
                                 <div class="vertical-view_row">
                                     <div class="vertical-view__list slider">
                                         <mat-slider [min]="gloveSizeSlider.handSliderMin"
@@ -221,11 +221,14 @@
                                         </mat-slider>
                                     </div>
 
-                                    <div class="vertical-view__list vertical-flex-grow mat-elevation-z8">
+                                    <div class="vertical-view__item vertical-flex-grow mat-elevation-z8">
                                         <mat-card>
                                             <mat-card-title *ngIf="!glove.size"></mat-card-title>
                                             <mat-card-title *ngIf="glove.size">{{glove.size}}" Glove</mat-card-title>
-                                            <img mat-card-image src={{handSizeImg}}>
+                                            <div>
+                                                <img  src={{handSizeImg}}>
+                                            </div>
+                                            
                                             <mat-card-content>{{glove.content || "Please select your glove size." }}
                                             </mat-card-content>
                                         </mat-card>

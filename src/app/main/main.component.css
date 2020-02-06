@@ -16,8 +16,7 @@ div.spinner-container{
 }
 
 .spinner {
-    position: absolute;
-    
+    position: absolute;    
     top: 150px;
     z-index: 1000;
     

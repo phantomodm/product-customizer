@@ -43,7 +43,6 @@ export class PositionGloveViewComponent implements OnInit {
     }
     let glove = shortName;
     const inputAttribute = attributeId;
-    console.log(name)
     this.snackBar.open(`${name} glove was selected`,'DISMISS',this.snackbarDuration)
     //this.setGloveOptions(glove, value, inputAttribute ,menuForm, control);
     this.nysApi.setPosition(glove);

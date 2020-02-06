@@ -1139,7 +1139,7 @@ export class GloveApi {
             var label = [{ name: 'plm', x: 200, y: 167.1, title: 'PALM' },
             { name: 'thbo', x: 91, y: 235.5, title: 'Thumb Outer' },
             //{ name: 'lce', x: 196.4, y: 30.1, title: 'lace' },
-            { name: 'pnki', x: 356, y: 170, title: 'Pinky inner' },
+            { name: 'pnki', x: 356, y: 150, title: 'Pinky inner' },
             { name: 'web', x: 82, y: 100, title: 'Web' }
 
             ];
