@@ -1,10 +1,7 @@
 <div class="main">
-  <div *ngIf="loading$ | async"  class="spinner-container" class="spinner-container">
-    <mat-spinner class="spinner"></mat-spinner>    
-</div>
- 
-<vertical-view
-  [sliderStatus]="gloveSliderStatus"
-  [nysWizardSteps]="gloveWizardSteps$ | async"
-  ></vertical-view>
+  <div *ngIf="loading$ | async" class="spinner-container" class="spinner-container">
+    <mat-spinner class="spinner"></mat-spinner>
+  </div>
+
+  <vertical-view style="width: 100%;" [sliderStatus]="gloveSliderStatus" [nysWizardSteps]="gloveWizardSteps$ | async"></vertical-view>
 </div>

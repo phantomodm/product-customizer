@@ -17,7 +17,7 @@ export class PositionGloveViewComponent implements OnInit {
 
   public carouselTile: NguCarouselConfig =
   {
-    grid: {xs: 1, sm: 1, md: 2, lg: 3, all: 0},
+    grid: {xs: 1, sm: 2, md: 3, lg: 4, all: 0},
     slide: 2,
     speed: 400,
     animation: 'lazy',
@@ -25,7 +25,7 @@ export class PositionGloveViewComponent implements OnInit {
     point: {
       visible: true
     },
-    load: 2,
+    load: 3,
     touch: true,
     easing: 'ease'
   }

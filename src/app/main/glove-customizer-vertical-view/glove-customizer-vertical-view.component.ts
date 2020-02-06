@@ -40,7 +40,9 @@ export class GloveCustomizerVerticalViewComponent implements OnInit {
   }
 
   startIntro(){
-    this.intro.startIntro();
+    setTimeout(() => {
+      this.intro.startIntro();
+    }, 3000);
   }
 
 

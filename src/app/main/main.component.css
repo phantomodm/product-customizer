@@ -2,16 +2,23 @@
     width: 1024px;
 }
 
+.main {
+    display: flex;
+    width: 1024px;
+}
+
 div.spinner-container{
-    position: fixed;
+    position: relative;
     z-index: 1000;
     width: 100%;
+    left: 48%;
 
 }
 
 .spinner {
     position: absolute;
-    left: 45%;
-    top: 100px;
+    
+    top: 150px;
+    z-index: 1000;
     
 }

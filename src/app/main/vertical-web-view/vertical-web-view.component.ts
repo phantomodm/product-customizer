@@ -57,7 +57,8 @@ export class VerticalWebViewComponent implements OnInit {
     this.nysApi.canvasListener$.subscribe(res => this.canvasLoaded = res);
 
     this.nysApi.currentGloveType$.subscribe(res => {      
-      if(res != undefined){     
+      if(res != undefined){
+        console.log(res) 
         var filter = [];        
         _.filter(this.allGloveWebs,(f)=> {
           _.find(f.gloveType,m =>{            

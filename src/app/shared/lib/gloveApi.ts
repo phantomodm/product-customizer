@@ -672,8 +672,8 @@ export class GloveApi {
         if(!imageTypeSelected){
             this.notifyOther({ option: 'Glove Customizer', value: "Please select a glove part to customize." });
         } else {
-            
-            if( imageTypeSelected !== 'logo' || "fgrl" || "psnl" ) {
+            console.log(!_.isEqual(imageTypeSelected,'logo'))
+            if( (imageTypeSelected != 'logo') && (imageTypeSelected != 'fgrl') && (imageTypeSelected != 'stch') ) {
                 _.find(this.gloveDesignData, (o) => {
                     if(_.includes(o.value, '-')){
                         o.value = _.replace(o.value,'-'," ")
@@ -688,7 +688,9 @@ export class GloveApi {
                     }
                 } )
             } else {
+                console.log(imageTypeSelected)
                 _.find(this.embroiderySliderData,(o) => {
+                    console.log(o.value, color)
                     if(_.includes(o.value, '-')){
                         o.value = _.replace(o.value,'-'," ")
                     }
@@ -726,7 +728,7 @@ export class GloveApi {
     }
 
     applyFillToCanvas = (value: string) => {
-        const fill = value;        
+        const fill = value;console.log(fill)
         const svgLayerSuffix = "_x5F_";
         _.forEach(gloveCanvas, (value, key) => {
             const el = value.element;

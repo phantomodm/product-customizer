@@ -20,7 +20,7 @@
 }
 
 .positions-view__list:first-child {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .positions-view_size {
@@ -42,6 +42,10 @@ section {
 
 label {
     margin-bottom: 0px !important;
+}
+
+.tile_image > .tile {
+    width:400px;
 }
 
 .leftRs,
