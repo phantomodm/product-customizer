@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService, LocalStorage } from 'ngx-webstorage';
 import * as _ from 'lodash';
 
 @Injectable({
@@ -7,34 +6,32 @@ import * as _ from 'lodash';
 })
 
 export class StorageService {
-  @LocalStorage('NYStixCustomGloveBuild',{}) gloveBuildLocalStorage;
   
-  constructor(private storage:LocalStorageService) { }
+  constructor() { }
 
   initializeStorage(payload:{}){
-    if(!this.storage.retrieve('NYStixCustomGloveBuild')){
-      this.localStorageInit('NYStixCustomGloveBuild',{}); 
-    } 
-    else {
-      this.localStorageImport('NYStixCustomGloveBuild',payload);    
+    if(!localStorage.getItem('9PCustomGloveBuild')){ 
+      localStorage.setItem('9PCustomGloveBuild',JSON.stringify({})) 
+    } else {
+      JSON.parse(localStorage.getItem('9PCustomGloveBuild'))   
     }
   }
 
   saveToStorage(payload:any){
     const values = _.clone(payload);
-    this.localStorageExport('NYStixCustomGloveBuild',values);
+    this.localStorageExport('9PCustomGloveBuild',values);
   }
 
   localStorageImport = (key:any,destination:any) => {
-    const storageDB = _.clone(this.storage.retrieve(key));
+    const storageDB = _.clone(localStorage.getItem(key));
     _.assignIn(destination,storageDB);
   }
 
   localStorageInit = (key:string,value:any) => {
-      this.storage.store(key,value);
+      localStorage.setItem('9PCustomGloveBuild',JSON.stringify(value))
   }
 
   localStorageExport = (key:string,value: any) => {
-      this.storage.store(key,value);
+      localStorage.setItem('9PCustomGloveBuild',JSON.stringify(value))
   }
 }
