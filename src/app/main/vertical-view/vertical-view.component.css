@@ -166,7 +166,13 @@ mat-card  {
 }
 
 .mat-img-buffer{
-    margin-right: 1.25rem;
+    margin-right: 10px;
+    padding-right: 16px;
+}
+
+.mat-img-buffer:nth-child(2){
+    margin-right: 0px;
+    padding-right: 0px;
 }
 
 .spacer {
@@ -294,7 +300,7 @@ mat-icon {
 
 @media (min-width:33.125rem){
     .vertical-flex-grow {
-        flex: 0.1 0 300px;
+        flex: 0.2 0 300px;
     }
 
     .mat-slider-vertical{
