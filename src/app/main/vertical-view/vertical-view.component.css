@@ -1,4 +1,6 @@
-
+mat-card  {
+    padding-left: 0px;
+}
 
 #hands mat-card {
     margin-right: 8px;
@@ -225,7 +227,8 @@ mat-icon {
     flex-flow: wrap;
     justify-content: flex-start;
     align-items: center;
-    height: 460px;
+    width: 100%;
+    padding: 0px 5px;
 }
 
 .radio-input-container {
@@ -280,7 +283,7 @@ mat-icon {
 
 @media (min-width:33.125rem){
     .vertical-flex-grow {
-        flex: 0.1 0 250px;
+        flex: 0.1 0 300px;
     }
 
     .mat-slider-vertical{
@@ -355,8 +358,8 @@ mat-icon {
     }
 
     .mat-card-title {
-        font-size: 1.2rem;
-        font-weight: 400;
+        font-size: 1.1rem;
+        font-weight: 500;
         margin-bottom: 6px;
     }
 

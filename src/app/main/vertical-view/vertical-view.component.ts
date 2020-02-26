@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild, HostListener, OnDestroy  } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, HostListener, OnDestroy, ElementRef  } from '@angular/core';
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
 import { Observable, Subject} from 'rxjs';
+import { debounceTime } from 'rxjs/operators'
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatStep, MatSnackBar, MatSnackBarConfig, MatSlider} from '@angular/material';
 import * as _ from 'lodash';
@@ -32,6 +33,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   @ViewChild('gloveSliderCustom') gloveSliderCustom:MatSlider;
   @ViewChild('gloveSliderEmbroidery') gloveSliderEmbroidery:MatSlider;
   @ViewChild('gloveSliderSignature') gloveSliderSignature:MatSlider;
+  @ViewChild('personalizationInput') personalization: ElementRef;
 
   //**Misc */
   customPartsValue$: Observable<any>;
@@ -83,6 +85,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
   gloveSizeContent: any;
   handSizeImg: string;
   userGuide: boolean;
+  gloveName: Subject<string> = new Subject();
   
 
 
@@ -138,6 +141,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
       }
     )
 
+
     this.nysApi.currentLeatherType$.subscribe(res => {
       var filter = []
       switch (res) {
@@ -170,7 +174,13 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         }
       }
     })
-
+    this.gloveName.pipe(takeUntil(this.unsubscribe$),debounceTime(500)).subscribe(res => {
+      try {
+        this.personalization.nativeElement.value = res;      
+      } catch (error) {
+        jQuery('product_personalization').val(res);
+      }
+    })
     this.gloveData.getGloveSizeContent().pipe(takeUntil(this.unsubscribe$)).subscribe(res => {this.currentGloveContent = this.filteredGloveContent = res})
     this.formFields = this.nysApi.getFormValues();
     this.verticalForm = this.fb.group(this.formFields);
@@ -481,6 +491,11 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
       })
     }
  
+  }
+
+  setSignatureInput(personalization:string){
+    console.log(personalization);
+    this.gloveName.next(personalization)
   }
 
   onSubmit(){

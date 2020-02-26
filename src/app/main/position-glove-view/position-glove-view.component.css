@@ -60,13 +60,13 @@ label {
 }
 
 .leftRs {       
-    background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_left-32px.svg') ;
+    background-image: url('//9positions.com/wp-content/uploads/2020/01/keyboard_arrow_left-32px.svg') ;
     left: 0;
     background-repeat: no-repeat;
 }
 
 .rightRs {    
-    background-image: url('//9positions.wpmudev.host/wp-content/uploads/2020/01/keyboard_arrow_right-32px.svg') ;
+    background-image: url('//9positions.com/wp-content/uploads/2020/01/keyboard_arrow_right-32px.svg') ;
     right: 0;
     background-repeat: no-repeat;
 }

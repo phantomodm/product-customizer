@@ -205,42 +205,48 @@
                     <mat-step>
 
                         <ng-template matStepLabel>Glove Size</ng-template>
-                        <div *ngFor="let question of (wizardPrompts)?.gloveSize">
+                        <div *ngFor="let question of (wizardPrompts)?.gloveSize" class="vertical-view_column">
 
                             <mat-card-title>{{question.label}}</mat-card-title>
-                            <div style="position:relative; top: -3px;" class="">
-                                <div class="vertical-view_row">
+                            <div style="position:relative; top: -3px; max-width: 400px;" class="">
+                                <div class="vertical-view_column" style="padding: 8px;">
+                                    <mat-card style="padding:8px">
+                                    <div class="vertical-view__item vertical-flex-grow mat-elevation-z8" style="display:flex; flex-direction: column; align-items:center">
+                                        <div>
+                                            <mat-card-title *ngIf="!glove.size" style="height: 36px;"></mat-card-title>
+                                            <mat-card-title *ngIf="glove.size">{{glove.size}}" Glove
+                                            </mat-card-title>
+                                        </div>
+
+                                        <div>
+                                            <img style="width: 100%;" src={{handSizeImg}}>
+                                        </div>
+                                        <div>
+                                            <mat-card-content style="padding: 8px;">{{glove.content || "Please select your glove size." }}
+                                            </mat-card-content>
+                                        </div>
+                                                                   
+                                    </div>
+                                    
+                                    </mat-card>
                                     <div class="vertical-view__list slider">
                                         <mat-slider [min]="gloveSizeSlider.handSliderMin"
                                             [max]="gloveSizeSlider.handSliderMax"
                                             [step]="gloveSizeSlider.handSliderStep" [thumbLabel]=true
-                                            [vertical]="gloveSizeSlider.handSliderVertical"
                                             [value]="gloveSizeSlider.handSliderValue"
                                             [tickInterval]="gloveSizeSlider.tickInterval"
                                             (change)="setGloveSize($event)">
                                         </mat-slider>
-                                    </div>
-
-                                    <div class="vertical-view__item vertical-flex-grow mat-elevation-z8">
-                                        <mat-card>
-                                            <mat-card-title *ngIf="!glove.size"></mat-card-title>
-                                            <mat-card-title *ngIf="glove.size">{{glove.size}}" Glove</mat-card-title>
-                                            <div>
-                                                <img  src={{handSizeImg}}>
-                                            </div>
-                                            
-                                            <mat-card-content>{{glove.content || "Please select your glove size." }}
-                                            </mat-card-content>
-                                        </mat-card>
-                                    </div>
+                                    </div> 
                                 </div>
-                            
-                            <div class="vertical-view__button">
-                                <button mat-button matStepperPrevious type="button">Back</button>
-                                <button mat-raised-button matStepperNext type="button" (click)="autoStartIntroJs()"
-                                    color="accent">Next</button>
+
+                                
                             </div>
                         </div>
+                        <div class="vertical-view__button">
+                            <button mat-button matStepperPrevious type="button">Back</button>
+                            <button mat-raised-button matStepperNext type="button" (click)="autoStartIntroJs()"
+                                color="accent">Next</button>
                         </div>
                     </mat-step>
 
@@ -305,7 +311,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="vertical-view__button">
                                 <button mat-button matStepperPrevious type="button">Back</button>
@@ -337,7 +343,7 @@
                         <ng-template matStepLabel>Personalize</ng-template>
                         <div class="vertical-view_column">
                             <div class="vertical-view_row">
-                                <mat-card style="width:600px" class="mat-elevation-z8 margin-bottom">
+                                <mat-card style="width:600px;padding: 10px;" class="mat-elevation-z8 margin-bottom">
                                     <div *ngFor="let question of (wizardPrompts)?.gloveSignature">
                                         <mat-card-title>{{question.label}}</mat-card-title>
 
@@ -356,7 +362,7 @@
                                         <mat-card-title>{{question.label}}</mat-card-title>
                                         <div *ngFor="let option of question.options">
                                             <mat-form-field class="">
-                                                <input matInput formControlName="gloveFont"
+                                                <input #gloveName (keyup)="setSignatureInput(gloveName.value)" matInput formControlName="gloveFont"
                                                     placeholder="{{option.value}}" maxlength="16" [value]="">
                                                 <button mat-button *ngIf="option.value" matSuffix mat-icon-button
                                                     aria-label="Clear">
