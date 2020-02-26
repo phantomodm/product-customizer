@@ -11,5 +11,5 @@ const concat = require('concat');
     ]
 
     await fs.ensureDir('ninep-ui-new')
-    await concat(files,'./ninep-ui-new/ninep-customizer.js')
+    await concat(files,'./ninep-ui-new/nystix-customizer.js')
 })()
