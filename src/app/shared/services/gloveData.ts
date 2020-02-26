@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { WizardPrompts } from '../models/nine-positions-models';
+import { WizardPrompts } from '../models/nystix-models';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 
@@ -17,20 +17,20 @@ import * as _ from 'lodash';
   }
 
   getGloveColors(): Observable<any>{
-    return this.db.list('nine-positions-colors').valueChanges();
+    return this.db.list('nystix-colors').valueChanges();
   }
 
   getWizardData():Observable<any>{
-    return this.db.object('nine-positions-design-wizard').snapshotChanges();
-    //return this.db.list('nine-positions-design-wizard').valueChanges();
+    return this.db.object('nystix-design-wizard').snapshotChanges();
+    //return this.db.list('nystix-design-wizard').valueChanges();
   }
 
   getGloveInputElements():Observable<any>{
-    return this.db.object('nine-positions-custom-elements').snapshotChanges();
+    return this.db.object('nystix-custom-elements').snapshotChanges();
   }
 
   getGloveSliderColors(): Observable<any> {
-    return this.db.list('nine-positions-color-slider').valueChanges();
+    return this.db.list('nystix-color-slider').valueChanges();
   }
 
   getWizardSteps(): Observable<WizardPrompts> {
@@ -68,6 +68,6 @@ import * as _ from 'lodash';
   }
 
   getGloveSizeContent(): Observable<any>{
-    return this.db.list('nine-positions-glove-guide').valueChanges() ;
+    return this.db.list('nystix-glove-guide').valueChanges() ;
   }
 }

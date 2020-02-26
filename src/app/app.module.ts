@@ -32,23 +32,31 @@ import { MainComponent } from './main/main.component';
 import { VerticalViewComponent } from './main/vertical-view/vertical-view.component';
 import { HandSizeViewComponent } from './main/hand-size-view/hand-size-view.component';
 import { GloveCustomizerVerticalViewComponent } from './main/glove-customizer-vertical-view/glove-customizer-vertical-view.component';
-//import { ImageCarouselComponent } from './main/image-carousel/image-carousel.component';
-//import { GloveCarouselViewComponent } from './main/glove-carousel-view/glove-carousel-view.component';
 import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-view.component';
 import * as Sentry from "@sentry/browser";
 import { PositionGloveViewComponent } from './main/position-glove-view/position-glove-view.component';
 
-// Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
+Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
 
-// @Injectable()
-// export class SentryErrorHandler implements ErrorHandler {
-//   constructor() {}
-//   handleError(error) {
-//     const eventId = Sentry.captureException(error.originalError || error);
-//     Sentry.showReportDialog({ eventId });
-//   }
-// }
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    Sentry.showReportDialog({ eventId });
+  }
+}
 
+const firebase = {
+  apiKey: "AIzaSyCZH5clhiOV3Ia38MiQQwvSMSegHL4qU_g",
+  authDomain: "nystix-ui-web-data.firebaseapp.com",
+  databaseURL: "https://nystix-ui-web-data.firebaseio.com",
+  projectId: "nystix-ui-web-data",
+  storageBucket: "nystix-ui-web-data.appspot.com",
+  messagingSenderId: "243122665158",
+  appId: "1:243122665158:web:c7c24a321610e16bc209c7",
+  measurementId: "G-3G0Z0KDLP7"
+};
 
 
 const routes: Routes = [
@@ -66,6 +74,7 @@ const routes: Routes = [
     GloveCustomizerVerticalViewComponent,
     VerticalWebViewComponent,
     PositionGloveViewComponent
+   
   ],
   imports: [
     BrowserModule,

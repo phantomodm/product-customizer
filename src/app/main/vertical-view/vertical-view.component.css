@@ -82,6 +82,17 @@ mat-card  {
     padding-right: 5px;
 }
 
+.font-buttons{
+    width:100px;
+    margin-right: 5px;
+}
+
+@media only screen and (max-width: 380px){
+    .font-buttons{
+        margin-bottom: 5px;
+    }
+}
+
 @media only screen and (max-width: 400px){
     
     .finalize-view__list {
@@ -350,6 +361,8 @@ mat-icon {
         justify-items: center;
         padding-right: 0px;
     }
+
+    
 
     .radio-buttons {
         height: 2rem;

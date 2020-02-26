@@ -37,8 +37,7 @@
                                 <div *ngFor="let position of (wizardPrompts)?.positions">
                                     <mat-card-title>{{position.label}}</mat-card-title>
                                     <div class="vertical-view__list vertical-flex-grow">
-                                        <position-glove-view [positions]="position.options"
-                                            (gloveData)="setGloveType($event)"></position-glove-view>
+                                        <position-glove-view [positions]="position.options" (gloveData)="setGloveType($event)"> </position-glove-view>
                                     </div>
 
                                     <!-- <div class="vertical-view_row">
@@ -376,7 +375,7 @@
                                             <mat-card-title>{{font.label}}</mat-card-title>
                                         </div>
                                         <div class="vertical-view_row">
-                                            <img style="width:100px;margin-right: 5px;" src="{{option.img}}"
+                                            <img class="font-buttons" src="{{option.img}}"
                                                 *ngFor="let option of font.options"
                                                 (click)="setGloveOptions(option.valueString, option.value, option.id, option.name, font.formName)">
                                         </div>

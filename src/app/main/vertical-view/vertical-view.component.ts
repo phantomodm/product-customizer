@@ -6,11 +6,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatStep, MatSnackBar, MatSnackBarConfig, MatSlider} from '@angular/material';
 import * as _ from 'lodash';
 import { takeUntil, take } from 'rxjs/operators';
-import { GloveSlider, HtmlInputValue, Sliders, Sliders2 } from 'src/app/shared/models/nine-positions-models';
+import { GloveSlider, HtmlInputValue, Sliders, Sliders2 } from 'src/app/shared/models/nystix-models';
 import { GloveDataService } from 'src/app/shared/services/gloveData';
 import { embroiderySliderData } from 'src/app/shared/data/api-data';
 import { Options, LabelType, CustomStepDefinition } from 'ng5-slider';
-import { GloveSize } from 'src/app/shared/models/nine-positions-models';
+import { GloveSize } from 'src/app/shared/models/nystix-models';
 import { IntroJsService } from 'src/app/shared/services/intro-js.service';
 
 declare var jQuery: any;
@@ -146,7 +146,6 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
       var filter = []
       switch (res) {
         case "steer":
-        case "jkip":
         case "kip":
           _.filter(this.gloveDataSlider,(f)=>{
             _.find(f.leather,leather => {
@@ -399,17 +398,15 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
 
   embroiderySliderSelections(event:number){
     const index = event;
-    //console.log(index)
     if(index != undefined){
       this.nysApi.setGloveCanvas(this.nysApi.indexToValue(index,this.gloveCustomSlider));
     } else {
       alert("Select a glove part before selecting a color")
     }
-    //this.nysApi.setGloveCanvas(this.nysApi.indexToValue(index,this.gloveEmbroiderySlider));
   }
 
   onGloveSliderChange(query = false){
-    let color = this.nysApi.indexToValue(+this.gloveSliderCustom.displayValue, this.filteredDataSlider)
+    let color:any = this.nysApi.indexToValue(+this.gloveSliderCustom.displayValue, this.filteredDataSlider);
 
     switch (color) {
       case "Lemon Yellow":
@@ -422,7 +419,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
         jQuery('.glove-slider .mat-slider-thumb-label-text').text(color)
         break;
     }
-    console.log(color)
+
     if (query == false){
       if(color.toLowerCase() === "navy"){
         this.nysApi.setGloveCanvas("navy blue")
@@ -435,7 +432,7 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
 
   onEmbroiderySliderChange(query=false){
     let color = this.nysApi.indexToValue(+this.gloveSliderEmbroidery.displayValue, this.gloveEmbDataSlider)
-    console.log(this.gloveSliderEmbroidery.displayValue)
+
     switch (color) {
       case "Yellow Gold":
         jQuery('.embroidery-slider .mat-slider-thumb-label-text').text("Y. Gold")

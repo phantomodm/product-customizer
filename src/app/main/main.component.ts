@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { Observable, Subject, Subscription, BehaviorSubject } from 'rxjs';
 import { takeUntil, finalize } from 'rxjs/operators';
-import { GloveColors, WizardPrompts } from '../shared/models/nine-positions-models';
+import { GloveColors, WizardPrompts } from '../shared/models/nystix-models';
 import { GloveDataService } from '../shared/services/gloveData';
 import { MatDialog } from '@angular/material';
 import { GloveApi } from '../shared/lib/gloveApi';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { STEPS, Glove, WebFilter } from '../models/wizard.models';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { GloveColors, HtmlInputValue } from '../models/nine-positions-models';
+import { GloveColors, HtmlInputValue } from '../models/nystix-models';
 import { GloveDataService } from '../services/gloveData';
 import { Drawing } from './snap.drawing.function';
 import "snapsvg-cjs";
@@ -598,24 +598,15 @@ export class GloveApi {
         let key = "series";
         let value = "value";
 
-        if (_.includes(valueString, 'elite')) {
-            this.customGloveData.gloveSeries[key] = "elite";
-            this.setSeriesOnGlove("elite");
-            if(_.includes(valueString,'kip')){
-                this.currentLeatherType.next('kip');
-            } else {
-                this.currentLeatherType.next('jkip')
-            }
-        } else if (_.includes(valueString, 'rise')) {
-            this.customGloveData.gloveSeries[key] = "rise";
+        if (_.includes(valueString, 'kip')) {
+            this.currentLeatherType.next('kip')
+            this.customGloveData.gloveSeries[key] = "kip";
+           
+        } else if (_.includes(valueString, 'steer')) {
+            this.customGloveData.gloveSeries[key] = "steer";
             this.currentLeatherType.next('steer');
-            this.setSeriesOnGlove("rise")
         } else {
-            this.customGloveData.gloveSeries[key] = "rise";
             this.currentLeatherType.next('steer');
-            this.setSeriesOnGlove("rise")
-            this.applyHtmlInput({id:'rise series', value:'rise-series'})
-            //console.log("cowhide")
         }
 
         this.customGloveData.gloveSeries[value] = formValue;
@@ -675,7 +666,6 @@ export class GloveApi {
         if(!imageTypeSelected){
             this.notifyOther({ option: 'Glove Customizer', value: "Please select a glove part to customize." });
         } else {
-            console.log(!_.isEqual(imageTypeSelected,'logo'))
             if( (imageTypeSelected != 'logo') && (imageTypeSelected != 'fgrl') && (imageTypeSelected != 'stch') ) {
                 _.find(this.gloveDesignData, (o) => {
                     if(_.includes(o.value, '-')){
@@ -691,9 +681,7 @@ export class GloveApi {
                     }
                 } )
             } else {
-                console.log(imageTypeSelected)
                 _.find(this.embroiderySliderData,(o) => {
-                    console.log(o.value, color)
                     if(_.includes(o.value, '-')){
                         o.value = _.replace(o.value,'-'," ")
                     }
@@ -705,33 +693,13 @@ export class GloveApi {
                         this.applyFillToCanvas(o.hex);    
                     }
                 })
-            }           
-
-            // _.forEach(this.gloveCustomData, (value, key) => {
-            //     const section = value.gloveSection;
-            //     if (section === imageTypeSelected) {
-            //         _.forEach(value.options, (o) => {
-            //             if(_.includes(o.value,'-')){
-            //                 o.value = _.replace(o.value,'-'," ")
-            //             }
-
-            //             if (o.value === color) {
-            //                 if(_.includes(o.value," ")){
-            //                     o.value = _.replace(o.value," ", "-")
-            //                 }
-            //                 console.log(o.value)
-            //                 this._applyHtmlInput({'id':o.id,'value':o.value});
-            //                 this.applyFillToCanvas(o.hex);
-            //             }
-            //         })
-            //     }
-            // })  
+            }
         }
         
     }
 
     applyFillToCanvas = (value: string) => {
-        const fill = value;console.log(fill)
+        const fill = value;
         const svgLayerSuffix = "_x5F_";
         _.forEach(gloveCanvas, (value, key) => {
             const el = value.element;
@@ -742,12 +710,9 @@ export class GloveApi {
                 $(element).attr({ "fill": fill });
 
                 if (_.includes(element, 'stch')) {
-                    //console.log(element)
                     $(element).attr({ "fill": "none" })
                     $(element).attr({ "stroke": fill })
                 }
-                
-                
             } else {
                 if (this.imageType == 'fgrl') {
                     //console.log(svgElement)
