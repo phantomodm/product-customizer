@@ -65,7 +65,7 @@ export class AppModule {
     
   ngDoBootstrap(){
     const el = createCustomElement(MainComponent,{injector: this.injector})
-    customElements.define('nine-positions-quick-customs', el)
+    customElements.define('nystix-quick-customs', el)
   };
     
   
