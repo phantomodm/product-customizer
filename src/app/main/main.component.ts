@@ -117,8 +117,13 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
             } catch (error) {
               this.applyFill({ id: this.input, domValue: "navy-blue" })
             }
+          } else if (value == 'royal') {
+            try {
+              this.applyFill({ id: this.input, domValue: value })
+            } catch (error) {
+              this.applyFill({ id: this.input, domValue: "royal-blue" })
+            }
           } else {
-            console.log(value)
             this.applyFill({ id: this.input, domValue: value })
 
           }
