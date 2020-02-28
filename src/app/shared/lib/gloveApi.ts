@@ -992,10 +992,10 @@ export class GloveApi {
 
         this.m3.attr({ viewBox: "-20 -20 400 400"})
         Snap.load("assets/images/outfield_side_view.svg", (f) => {
-            var g = f.selectAll('#of_x5F_vw1_x5F_wst,#of_x5F_vw1_x5F_logo, #of_x5F_vw1_x5F_thbi, #of_x5F_vw1_x5F_thbo, #of_x5F_vw1_x5F_indo, #of_x5F_vw1_x5F_plm,#of_x5F_vw1_x5F_web, #of_x5F_vw1_x5F_bnd, #of_x5F_vw1_x5F_wlt, #of_x5F_vw1_x5F_stch, #of_x5F_vw1_x5F_lce, #of_x5F_side_x5F_view');
+            var g = f.selectAll('#of_x5F_vw1_x5F_wst, #of_x5F_vw1_x5F_thbi, #of_x5F_vw1_x5F_thbo, #of_x5F_vw1_x5F_indo, #of_x5F_vw1_x5F_plm,#of_x5F_vw1_x5F_web, #of_x5F_vw1_x5F_bnd, #of_x5F_vw1_x5F_wlt, #of_x5F_vw1_x5F_stch, #of_x5F_vw1_x5F_lce, #of_x5F_side_x5F_view');
 
             g.forEach((el, i) => {
-                var p = ["of_x5F_vw1_x5F_wst", "of_x5F_vw1_x5F_logo", "of_x5F_vw1_x5F_thbi", "of_x5F_vw1_x5F_thbo", "of_x5F_vw1_x5F_indo", "of_x5F_vw1_x5F_plm", "of_x5F_vw1_x5F_web", "of_x5F_vw1_x5F_bnd", "of_x5F_vw1_x5F_wlt", "of_x5F_vw1_x5F_stch", "of_x5F_vw1_x5F_lce", "of_x5F_side_x5F_view"];
+                var p = ["of_x5F_vw1_x5F_wst", "of_x5F_vw1_x5F_thbi", "of_x5F_vw1_x5F_thbo", "of_x5F_vw1_x5F_indo", "of_x5F_vw1_x5F_plm", "of_x5F_vw1_x5F_web", "of_x5F_vw1_x5F_bnd", "of_x5F_vw1_x5F_wlt", "of_x5F_vw1_x5F_stch", "of_x5F_vw1_x5F_lce", "of_x5F_side_x5F_view"];
                 var layer = p[i];
 
                 self.defaultColor(layer, el, self.sView);
@@ -1129,10 +1129,10 @@ export class GloveApi {
             
             //self._applySvgViewBox();
             // this.gloveCloneSideVertical.attr({ viewBox: "-50 0 400 400" });
-            var g = f.selectAll('#inf_x5F_vw1_x5F_thbi, #inf_x5F_vw1_x5F_mid, #inf_x5F_vw1_x5F_indi, #inf_x5F_vw1_x5F_wst, #inf_x5F_vw1_x5F_logo, #inf_x5F_vw1_x5F_plm, #inf_x5F_vw1_x5F_bnd, #inf_x5F_vw1_x5F_indo, #inf_x5F_vw1_x5F_thbo, #inf_x5F_vw1_x5F_wlt, #inf_x5F_vw1_x5F_web, #inf_x5F_vw1_x5F_stch,  #inf_x5F_vw1_x5F_lce, #inf_x5F_open_x5F_side');
+            var g = f.selectAll('#inf_x5F_vw1_x5F_thbi, #inf_x5F_vw1_x5F_mid, #inf_x5F_vw1_x5F_indi, #inf_x5F_vw1_x5F_wst, #inf_x5F_vw1_x5F_plm, #inf_x5F_vw1_x5F_bnd, #inf_x5F_vw1_x5F_indo, #inf_x5F_vw1_x5F_thbo, #inf_x5F_vw1_x5F_wlt, #inf_x5F_vw1_x5F_web, #inf_x5F_vw1_x5F_stch,  #inf_x5F_vw1_x5F_lce, #inf_x5F_open_x5F_side');
 
             g.forEach((el, i) => {
-                var p = ["inf_x5F_vw1_x5F_thbi", "inf_x5F_vw1_x5F_mid", "inf_x5F_vw1_x5F_indi", "inf_x5F_vw1_x5F_wst", "inf_x5F_vw1_x5F_logo", "inf_x5F_vw1_x5F_plm", "inf_x5F_vw1_x5F_bnd", "inf_x5F_vw1_x5F_indo", "inf_x5F_vw1_x5F_thbo", "inf_x5F_vw1_x5F_wlt", "inf_x5F_vw1_x5F_web", "inf_x5F_vw1_x5F_stch", "inf_x5F_vw1_x5F_lce", "inf_x5F_open_x5F_side"];
+                var p = ["inf_x5F_vw1_x5F_thbi", "inf_x5F_vw1_x5F_mid", "inf_x5F_vw1_x5F_indi", "inf_x5F_vw1_x5F_wst", "inf_x5F_vw1_x5F_plm", "inf_x5F_vw1_x5F_bnd", "inf_x5F_vw1_x5F_indo", "inf_x5F_vw1_x5F_thbo", "inf_x5F_vw1_x5F_wlt", "inf_x5F_vw1_x5F_web", "inf_x5F_vw1_x5F_stch", "inf_x5F_vw1_x5F_lce", "inf_x5F_open_x5F_side"];
 
                 //Apply default fills & add to group
                 self.defaultColor(p[i], el, self.sView);
