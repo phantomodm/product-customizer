@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as introJs from 'intro.js/intro.js';
+import * as introJs from 'intro.js';
 
 
 @Injectable({

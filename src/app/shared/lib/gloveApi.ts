@@ -783,7 +783,7 @@ export class GloveApi {
         let self = this;
         self._applySvgViewBox();
         this.m1.attr({ viewBox: "-20 -20 400 400"})
-        Snap.load("assets/images/catcher_back_view.svg", (f) => {
+        Snap.load("assets/images/nys_catcher_back_view.svg", (f) => {
             var g = f.selectAll('#cm_x5F_vw3_x5F_utoe, #cm_x5F_vw3_x5F_thb, #cm_x5F_vw3_x5F_bfg, #cm_x5F_vw3_x5F_web, #cm_x5F_vw3_x5F_plm, #cm_x5F_vw3_x5F_lin, #cm_x5F_vw3_x5F_bnd, #cm_x5F_vw3_x5F_fpad, #cm_x5F_vw3_x5F_stch, #cm_x5F_vw3_x5F_lce, #cm_x5F_vw3_x5F_logo, #cm_x5F_open_x5F_back');
             g.forEach(function (el, i) {
                 var p = ["cm_x5F_vw3_x5F_utoe", "cm_x5F_vw3_x5F_thb", "cm_x5F_vw3_x5F_bfg", "cm_x5F_vw3_x5F_web", "cm_x5F_vw3_x5F_plm", "cm_x5F_vw3_x5F_lin", "cm_x5F_vw3_x5F_bnd", "cm_x5F_vw3_x5F_fpad", "cm_x5F_vw3_x5F_stch", "cm_x5F_vw3_x5F_lce", "cm_x5F_vw3_x5F_logo", "#cm_x5F_open_xF_back"];
@@ -866,7 +866,7 @@ export class GloveApi {
 
         });
         this.m3.attr({ viewBox: "-20 0 400 400"})
-        Snap.load("assets/images/catcher_side_view.svg", (f) => {
+        Snap.load("assets/images/nys_catcher_side_view.svg", (f) => {
             var g = f.selectAll('#cm_x5F_vw1_x5F_utoe, #cm_x5F_vw1_x5F_thb, #cm_x5F_vw1_x5F_logo, #cm_x5F_vw1_x5F_bnd, #cm_x5F_vw1_x5F_plm, #cm_x5F_vw1_x5F_web, #cm_x5F_vw1_x5F_fpad, #cm_x5F_vw1_x5F_stch, #cm_x5F_vw1_x5F_lce, #cm_x5F_side_x5F_view');
 
             g.forEach((el, i) => {
@@ -1028,10 +1028,10 @@ export class GloveApi {
         let self = this;
         self._applySvgViewBox();
         this.m1.attr({ viewBox: "-20 -20 400 400"})
-        Snap.load("assets/images/infield_swelt_back.svg", (f) => {
-            var g = f.selectAll('#inf_x5F_vw3_x5F_wst, #inf_x5F_vw3_x5F_thbi, #inf_x5F_vw3_x5F_web, #inf_x5F_vw3_x5F_indo, #inf_x5F_vw3_x5F_plm, #inf_x5F_vw3_x5F_indi, #inf_x5F_vw3_x5F_mid, #inf_x5F_vw3_x5F_rngo, #inf_x5F_vw3_x5F_rngi, #inf_x5F_vw3_x5F_pnko, #inf_x5F_vw3_x5F_pnki, #inf_x5F_vw3_x5F_logo, #inf_x5F_vw3_x5F_wlt, #inf_x5F_vw3_x5F_stch, #inf_x5F_vw3_x5F_bnd, #inf_x5F_vw3_x5F_lce, #inf_x5F_open_x5F_back,#inf_x5F_vw3_x5F_rise,#inf_x5F_vw3_x5F_elite,#inf_x5F_logo_x5F_elite,#inf_x5F_logo_x5F_rise');
+        Snap.load("assets/images/nys_infield_swelt_back.svg", (f) => {
+            var g = f.selectAll('#inf_x5F_vw3_x5F_wst, #inf_x5F_vw3_x5F_thbi, #inf_x5F_vw3_x5F_web, #inf_x5F_vw3_x5F_indo, #inf_x5F_vw3_x5F_plm, #inf_x5F_vw3_x5F_indi, #inf_x5F_vw3_x5F_mid, #inf_x5F_vw3_x5F_rngo, #inf_x5F_vw3_x5F_rngi, #inf_x5F_vw3_x5F_pnko, #inf_x5F_vw3_x5F_pnki, #inf_x5F_vw3_x5F_logo, #inf_x5F_vw3_x5F_wlt, #inf_x5F_vw3_x5F_stch, #inf_x5F_vw3_x5F_bnd, #inf_x5F_vw3_x5F_lce, #inf_x5F_open_x5F_back');
             g.forEach((el, i) => {
-                var p = ["inf_x5F_vw3_x5F_wst", "inf_x5F_vw3_x5F_thbi", "inf_x5F_vw3_x5F_web", "inf_x5F_vw3_x5F_indo", "inf_x5F_vw3_x5F_plm", "inf_x5F_vw3_x5F_indi", "inf_x5F_vw3_x5F_mid", "inf_x5F_vw3_x5F_rngo", "inf_x5F_vw3_x5F_rngi", "inf_x5F_vw3_x5F_pnko", "inf_x5F_vw3_x5F_pnki", "inf_x5F_vw3_x5F_logo", "inf_x5F_vw3_x5F_wlt", "inf_x5F_vw3_x5F_stch", "inf_x5F_vw3_x5F_bnd", "inf_x5F_vw3_x5F_lce", "inf_x5F_open_x5F_back", "inf_x5F_vw3_x5F_rise", "inf_x5F_vw3_x5F_elite", "inf_x5F_logo_x5F_elite", "inf_x5F_logo_x5F_rise"];
+                var p = ["inf_x5F_vw3_x5F_wst", "inf_x5F_vw3_x5F_thbi", "inf_x5F_vw3_x5F_web", "inf_x5F_vw3_x5F_indo", "inf_x5F_vw3_x5F_plm", "inf_x5F_vw3_x5F_indi", "inf_x5F_vw3_x5F_mid", "inf_x5F_vw3_x5F_rngo", "inf_x5F_vw3_x5F_rngi", "inf_x5F_vw3_x5F_pnko", "inf_x5F_vw3_x5F_pnki", "inf_x5F_vw3_x5F_logo", "inf_x5F_vw3_x5F_wlt", "inf_x5F_vw3_x5F_stch", "inf_x5F_vw3_x5F_bnd", "inf_x5F_vw3_x5F_lce", "inf_x5F_open_x5F_back"];
                 var layer = p[i];
                 var filter = layer.split('_').pop();
 
@@ -1125,11 +1125,11 @@ export class GloveApi {
             });
         });
         this.m3.attr({ viewBox: "-50 -20 400 400"})
-        Snap.load("assets/images/infield_swelt_side.svg", (f) => {
+        Snap.load("assets/images/nys_infield_swelt_side.svg", (f) => {
             
             //self._applySvgViewBox();
             // this.gloveCloneSideVertical.attr({ viewBox: "-50 0 400 400" });
-            var g = f.selectAll('#inf_x5F_vw1_x5F_thbi, #inf_x5F_vw1_x5F_mid, #inf_x5F_vw1_x5F_indi, #inf_x5F_vw1_x5F_wst, #inf_x5F_vw1_x5F_plm, #inf_x5F_vw1_x5F_bnd, #inf_x5F_vw1_x5F_indo, #inf_x5F_vw1_x5F_thbo, #inf_x5F_vw1_x5F_wlt, #inf_x5F_vw1_x5F_web, #inf_x5F_vw1_x5F_stch,  #inf_x5F_vw1_x5F_lce, #inf_x5F_open_x5F_side');
+            var g = f.selectAll('#inf_x5F_vw1_x5F_thbi, #inf_x5F_vw1_x5F_mid, #inf_x5F_vw1_x5F_indi, #inf_x5F_vw1_x5F_wst, #inf_x5F_vw1_x5F_plm, #inf_x5F_vw1_x5F_bnd, #inf_x5F_vw1_x5F_indo, #inf_x5F_vw1_x5F_thbo, #inf_x5F_vw1_x5F_wlt, #inf_x5F_vw1_x5F_web, #inf_x5F_vw1_x5F_stch, #inf_x5F_vw1_x5F_lce, #inf_x5F_open_x5F_side');
 
             g.forEach((el, i) => {
                 var p = ["inf_x5F_vw1_x5F_thbi", "inf_x5F_vw1_x5F_mid", "inf_x5F_vw1_x5F_indi", "inf_x5F_vw1_x5F_wst", "inf_x5F_vw1_x5F_plm", "inf_x5F_vw1_x5F_bnd", "inf_x5F_vw1_x5F_indo", "inf_x5F_vw1_x5F_thbo", "inf_x5F_vw1_x5F_wlt", "inf_x5F_vw1_x5F_web", "inf_x5F_vw1_x5F_stch", "inf_x5F_vw1_x5F_lce", "inf_x5F_open_x5F_side"];
@@ -1166,10 +1166,10 @@ export class GloveApi {
         let self = this;
         self._applySvgViewBox();
         this.m1.attr({ viewBox: "-20 -20 400 400"})
-        Snap.load("assets/images/pitcher_back_view.svg", function (f) {
-            var g = f.selectAll(' #pitcher_x5F_vw3_x5F_wst, #pitcher_x5F_vw3_x5F_logo, #pitcher_x5F_vw3_x5F_thbi, #pitcher_x5F_vw3_x5F_plm, #pitcher_x5F_vw3_x5F_web, #pitcher_x5F_vw3_x5F_indi, #pitcher_x5F_vw3_x5F_indo, #pitcher_x5F_vw3_x5F_mid, #pitcher_x5F_vw3_x5F_rngo, #pitcher_x5F_vw3_x5F_rngi, #pitcher_x5F_vw3_x5F_pnko, #pitcher_x5F_vw3_x5F_pnki, #pitcher_x5F_vw3_x5F_stch, #pitcher_x5F_vw3_x5F_wlt, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_lce, #pitcher_x5F_open_x5F_back, #pitcher_x5F_vw3_x5F_rise, #pitcher_x5F_vw3_x5F_elite, #pitcher_x5F_logo_x5F_elite, #pitcher_x5F_logo_x5F_rise');
+        Snap.load("assets/images/nys_pitcher_open_back.svg", function (f) {
+            var g = f.selectAll(' #pitcher_x5F_vw3_x5F_wst, #pitcher_x5F_vw3_x5F_logo, #pitcher_x5F_vw3_x5F_thbi, #pitcher_x5F_vw3_x5F_plm, #pitcher_x5F_vw3_x5F_web, #pitcher_x5F_vw3_x5F_indi, #pitcher_x5F_vw3_x5F_indo, #pitcher_x5F_vw3_x5F_mid, #pitcher_x5F_vw3_x5F_rngo, #pitcher_x5F_vw3_x5F_rngi, #pitcher_x5F_vw3_x5F_pnko, #pitcher_x5F_vw3_x5F_pnki, #pitcher_x5F_vw3_x5F_stch, #pitcher_x5F_vw3_x5F_wlt, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_bnd, #pitcher_x5F_vw3_x5F_lce, #pitcher_x5F_open_x5F_back');
             g.forEach(function (el, i) {
-                var p = ["pitcher_x5F_vw3_x5F_wst", "pitcher_x5F_vw3_x5F_logo", "pitcher_x5F_vw3_x5F_thbi", "pitcher_x5F_vw3_x5F_plm", "pitcher_x5F_vw3_x5F_web", "pitcher_x5F_vw3_x5F_indi", "pitcher_x5F_vw3_x5F_indo", "pitcher_x5F_vw3_x5F_mid", "pitcher_x5F_vw3_x5F_rngo", "pitcher_x5F_vw3_x5F_rngi", "pitcher_x5F_vw3_x5F_pnko", "pitcher_x5F_vw3_x5F_pnki", "pitcher_x5F_vw3_x5F_stch", "pitcher_x5F_vw3_x5F_wlt", "pitcher_x5F_vw3_x5F_bnd",  "pitcher_x5F_vw3_x5F_lce", "pitcher_x5F_open_x5F_back", "pitcher_x5F_vw3_x5F_rise", "pitcher_x5F_vw3_x5F_elite", "pitcher_x5F_logo_x5F_elite", "pitcher_x5F_logo_x5F_rise"];
+                var p = ["pitcher_x5F_vw3_x5F_wst", "pitcher_x5F_vw3_x5F_logo", "pitcher_x5F_vw3_x5F_thbi", "pitcher_x5F_vw3_x5F_plm", "pitcher_x5F_vw3_x5F_web", "pitcher_x5F_vw3_x5F_indi", "pitcher_x5F_vw3_x5F_indo", "pitcher_x5F_vw3_x5F_mid", "pitcher_x5F_vw3_x5F_rngo", "pitcher_x5F_vw3_x5F_rngi", "pitcher_x5F_vw3_x5F_pnko", "pitcher_x5F_vw3_x5F_pnki", "pitcher_x5F_vw3_x5F_stch", "pitcher_x5F_vw3_x5F_wlt", "pitcher_x5F_vw3_x5F_bnd",  "pitcher_x5F_vw3_x5F_lce", "pitcher_x5F_open_x5F_back"];
                 var layer = p[i];
                 var filter = layer.split("_").pop();
 
@@ -1253,8 +1253,8 @@ export class GloveApi {
             });
         });
         this.m3.attr({ viewBox: "-25 -20 400 400"})
-        Snap.load("assets/images/pitcher_side_view.svg", function (f) {
-            var g = f.selectAll('#pitcher_x5F_vw1_x5F_lin,#pitcher_x5F_vw1_x5F_bfg,#pitcher_x5F_vw1_x5F_plm,#pitcher_x5F_vw1_x5F_web,#pitcher_x5F_vw1_x5F_wst,#pitcher_x5F_vw1_x5F_logo, #pitcher_x5F_vw1_x5F_wlt, #pitcher_x5F_vw1_x5F_bnd, #pitcher_x5F_vw1_x5F_stch, #pitcher_x5F_vw1_x5F_lce,#pitcher_x5F_open_x5F_side');
+        Snap.load("assets/images/nys_pitcher_side_view.svg", function (f) {
+            var g = f.selectAll('#pitcher_x5F_vw1_x5F_lin,#pitcher_x5F_vw1_x5F_bfg,#pitcher_x5F_vw1_x5F_plm,#pitcher_x5F_vw1_x5F_web,#pitcher_x5F_vw1_x5F_wst,#pitcher_x5F_vw1_x5F_logo, #pitcher_x5F_vw1_x5F_wlt, #pitcher_x5F_vw1_x5F_bnd, #pitcher_x5F_vw1_x5F_stch, #pitcher_x5F_vw1_x5F_lce, #pitcher_x5F_open_x5F_side');
             g.forEach(function (el, i) {
                 var p = ["pitcher_x5F_vw1_x5F_lin", "pitcher_x5F_vw1_x5F_bfg", "pitcher_x5F_vw1_x5F_plm", "pitcher_x5F_vw1_x5F_web", "pitcher_x5F_vw1_x5F_wst", "pitcher_x5F_vw1_x5F_logo", "pitcher_x5F_vw1_x5F_wlt", "pitcher_x5F_vw1_x5F_bnd", "pitcher_x5F_vw1_x5F_stch", "pitcher_x5F_vw1_x5F_lce", "pitcher_x5F_open_x5F_side"];
 
@@ -1294,10 +1294,10 @@ export class GloveApi {
         let self = this;
         self._applySvgViewBox();
         this.m1.attr({ viewBox: "-25 -20 400 400"})
-        Snap.load("assets/images/fbase_back_view.svg", function (f) {
-            var g = f.selectAll('#fbase_x5F_vw3_x5F_thb, #fbase_x5F_vw3_x5F_bfg, #fbase_x5F_vw3_x5F_plm, #fbase_x5F_vw3_x5F_utoe, #fbase_x5F_vw3_x5F_wst, #fbase_x5F_vw3_x5F_logo, #fbase_x5F_vw3_x5F_web, #fbase_x5F_vw3_x5F_stch, #fbase_x5F_vw3_x5F_bnd, #fbase_x5F_vw3_x5F_lce, #fbase_x5F_vw3_x5F_rise, #fbase_x5F_vw3_x5F_elite, #fbase_x5F_open_x5F_back, #fbase_x5F_logo_x5F_elite, #fbase_x5F_logo_x5F_rise');
+        Snap.load("assets/images/nys_fbase_back_view.svg", function (f) {
+            var g = f.selectAll('#fbase_x5F_vw3_x5F_thb, #fbase_x5F_vw3_x5F_bfg, #fbase_x5F_vw3_x5F_plm, #fbase_x5F_vw3_x5F_utoe, #fbase_x5F_vw3_x5F_wst, #fbase_x5F_vw3_x5F_logo, #fbase_x5F_vw3_x5F_web, #fbase_x5F_vw3_x5F_stch, #fbase_x5F_vw3_x5F_bnd, #fbase_x5F_vw3_x5F_lce,#fbase_x5F_open_x5F_back');
             g.forEach(function (el, i) {
-                var p = ["fbase_x5F_vw3_x5F_thb", "fbase_x5F_vw3_x5F_bfg", "fbase_x5F_vw3_x5F_plm", "fbase_x5F_vw3_x5F_utoe", "fbase_x5F_vw3_x5F_wst", "fbase_x5F_vw3_x5F_logo", "fbase_x5F_vw3_x5F_web", "fbase_x5F_vw3_x5F_stch", "fbase_x5F_vw3_x5F_bnd", "fbase_x5F_vw3_x5F_lce", "fbase_x5F_vw3_x5F_rise", "fbase_x5F_vw3_x5F_elite", "fbase_x5F_open_x5F_back", "fbase_x5F_logo_x5F_elite", "fbase_x5F_logo_x5F_rise"];
+                var p = ["fbase_x5F_vw3_x5F_thb", "fbase_x5F_vw3_x5F_bfg", "fbase_x5F_vw3_x5F_plm", "fbase_x5F_vw3_x5F_utoe", "fbase_x5F_vw3_x5F_wst", "fbase_x5F_vw3_x5F_logo", "fbase_x5F_vw3_x5F_web", "fbase_x5F_vw3_x5F_stch", "fbase_x5F_vw3_x5F_bnd", "fbase_x5F_vw3_x5F_lce", "fbase_x5F_open_x5F_back"];
                 var layer = p[i];
                 var filter = layer.split('_').pop();
 
