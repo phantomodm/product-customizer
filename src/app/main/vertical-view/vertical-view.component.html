@@ -392,7 +392,7 @@
 
                         <div class="vertical-view__button">
                             <button mat-button matStepperPrevious type="button">Back</button>
-                            <button *ngIf="verifySubMenuCompletion('subForm2')" mat-raised-button (click)="nextStep()"
+                            <button *ngIf="verifySubMenuCompletion('subForm2')" mat-raised-button (click)="nextStep()" (click)="removeCheck()"
                                 type="button" color="accent">Next</button>
                         </div>
 

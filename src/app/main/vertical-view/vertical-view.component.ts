@@ -493,6 +493,16 @@ export class VerticalViewComponent implements OnInit , OnDestroy {
  
   }
 
+  removeCheck() : void {
+    <HTMLElement>(
+      (<unknown>(
+        document
+          .querySelectorAll("[id^='pathS']")
+          .forEach((element) => element.remove())
+      ))
+    );
+  }
+
   setSignatureInput(personalization:string){
     console.log(personalization);
     this.gloveName.next(personalization)

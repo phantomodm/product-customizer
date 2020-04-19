@@ -38,17 +38,27 @@ import { VerticalWebViewComponent } from './main/vertical-web-view/vertical-web-
 import * as Sentry from "@sentry/browser";
 import { PositionGloveViewComponent } from './main/position-glove-view/position-glove-view.component';
 
-// Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
+Sentry.init({dsn: "https://c99465224dd4472baa076dd87c7219c8@sentry.io/1883254"})
 
-// @Injectable()
-// export class SentryErrorHandler implements ErrorHandler {
-//   constructor() {}
-//   handleError(error) {
-//     const eventId = Sentry.captureException(error.originalError || error);
-//     Sentry.showReportDialog({ eventId });
-//   }
-// }
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    Sentry.showReportDialog({ eventId });
+  }
+}
 
+const firebase = {
+  apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
+  authDomain: "positions-ui-web-data.firebaseapp.com",
+  databaseURL: "https://positions-ui-web-data.firebaseio.com",
+  projectId: "positions-ui-web-data",
+  storageBucket: "positions-ui-web-data.appspot.com",
+  messagingSenderId: "479822956029",
+  appId: "1:479822956029:web:b938e763162d7bbffdc594",
+  measurementId: "G-D3BQ4CWZX3"
+};
 
 
 const routes: Routes = [
