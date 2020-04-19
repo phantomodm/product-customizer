@@ -469,6 +469,7 @@ export class GloveApi {
     clearGloveCanvas = () => {
         this.oView.clear(), this.iView.clear(), this.sView.clear();
         this.bgroup1.clear(), this.bgroup2.clear(), this.bgroup3.clear();
+        this.gloveCloneSummary1.clear(),this.gloveCloneSummary2.clear(),this.gloveCloneSummary3.clear();
     }
 
     //** Returns filtered array of images for step 5 */
@@ -728,6 +729,7 @@ export class GloveApi {
         this.gloveCloneSummary1.selectAll('rect').attr({ opacity: 0 })
         this.gloveCloneSummary2.selectAll('rect').attr({ opacity: 0 })
         this.gloveCloneSummary3.selectAll('rect').attr({ opacity: 0 })
+
         this.setCheckStatus(this.indicatorMap, true, this.imageType);
     }
 
