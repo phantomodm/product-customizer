@@ -48,7 +48,16 @@ export class SentryErrorHandler implements ErrorHandler {
 }
 
 
-
+const firebase = {
+  apiKey: "AIzaSyCZH5clhiOV3Ia38MiQQwvSMSegHL4qU_g",
+  authDomain: "nystix-ui-web-data.firebaseapp.com",
+  databaseURL: "https://nystix-ui-web-data.firebaseio.com",
+  projectId: "nystix-ui-web-data",
+  storageBucket: "nystix-ui-web-data.appspot.com",
+  messagingSenderId: "243122665158",
+  appId: "1:243122665158:web:c7c24a321610e16bc209c7",
+  measurementId: "G-3G0Z0KDLP7"
+};
 
 const routes: Routes = [
   { path: '', component: AppComponent },

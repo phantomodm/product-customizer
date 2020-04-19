@@ -832,7 +832,7 @@ export class GloveApi {
 
         });
         this.m2.attr({ viewBox: "-10 -20 400 400"})
-        Snap.load("assets/images/catcher_inside_view.svg", (f) => {
+        Snap.load("assets/images/nys_catcher_inside_view.svg", (f) => {
             var g = f.selectAll('#cm_x5F_vw2_x5F_plm, #cm_x5F_vw2_x5F_web, #cm_x5F_vw2_x5F_tgt, #cm_x5F_vw2_x5F_stch, #cm_x5F_vw2_x5F_bnd, #cm_x5F_vw2_x5F_lce, #cm_x5F_pocket_x5F_view');
 
             g.forEach((el, i) => {
@@ -905,7 +905,7 @@ export class GloveApi {
         let self = this;
         self._applySvgViewBox();
         this.m1.attr({ viewBox: "-25 -20 400 400"})
-        Snap.load("assets/images/outfield_back_view.svg", (f) => {
+        Snap.load("assets/images/nys_outfield_back_view.svg", (f) => {
             var g = f.selectAll('#of_x5F_vw3_x5F_wst, #of_x5F_vw3_x5F_logo, #of_x5F_vw3_x5F_indo, #of_x5F_vw3_x5F_indi, #of_x5F_vw3_x5F_mid, #of_x5F_vw3_x5F_rngo, #of_x5F_vw3_x5F_rngi, #of_x5F_vw3_x5F_pnko, #of_x5F_vw3_x5F_pnki, #of_x5F_vw3_x5F_plm, #of_x5F_vw3_x5F_wlt, #of_x5F_vw3_x5F_bnd, #of_x5F_vw3_x5F_stch, #of_x5F_vw3_x5F_web, #of_x5F_vw3_x5F_lce, #of_x5F_open_x5F_back, #of_x5F_vw3_x5F_rise, #of_x5F_vw3_x5F_elite, #of_x5F_elite_x5F_logo, #of_x5F_rise_x5F_logo');
 
             g.forEach(function (el, i) {
@@ -959,7 +959,7 @@ export class GloveApi {
         });
 
         this.m2.attr({ viewBox: "-25 -20 400 400"})
-        Snap.load("assets/images/outfield_inside_view.svg", (f) => {
+        Snap.load("assets/images/nys_outfield_inside_view.svg", (f) => {
             var g = f.selectAll('#of_x5F_vw2_x5F_thbo, #of_x5F_vw2_x5F_thbi, #of_x5F_vw2_x5F_plm, #of_x5F_vw2_x5F_indo, #of_x5F_vw2_x5F_indi, #of_x5F_vw2_x5F_mid, #of_x5F_vw2_x5F_rngo, #of_x5F_vw2_x5F_rngi, #of_x5F_vw2_x5F_pnki, #of_x5F_vw2_x5F_pnko, #of_x5F_vw2_x5F_wlt, #of_x5F_vw2_x5F_web, #of_x5F_vw2_x5F_bnd, #of_x5F_vw2_x5F_stch, #of_x5F_vw2_x5F_lce, #of_x5F_open_x5F_pocket');
 
             g.forEach((el, i) => {
@@ -989,9 +989,9 @@ export class GloveApi {
                 )(l), false);
             });
         });
-
+ 
         this.m3.attr({ viewBox: "-20 -20 400 400"})
-        Snap.load("assets/images/outfield_side_view.svg", (f) => {
+        Snap.load("assets/images/nys_outfield_side_view.svg", (f) => {
             var g = f.selectAll('#of_x5F_vw1_x5F_wst, #of_x5F_vw1_x5F_thbi, #of_x5F_vw1_x5F_thbo, #of_x5F_vw1_x5F_indo, #of_x5F_vw1_x5F_plm,#of_x5F_vw1_x5F_web, #of_x5F_vw1_x5F_bnd, #of_x5F_vw1_x5F_wlt, #of_x5F_vw1_x5F_stch, #of_x5F_vw1_x5F_lce, #of_x5F_side_x5F_view');
 
             g.forEach((el, i) => {
@@ -1091,7 +1091,7 @@ export class GloveApi {
 
         });
         this.m2.attr({ viewBox: "0 -20 400 400"})
-        Snap.load("assets/images/infield_swelt_pocket.svg", (f) => {
+        Snap.load("assets/images/nys_infield_swelt_pocket.svg", (f) => {
             var g = f.selectAll('#inf_x5F_vw2_x5F_plm, #inf_x5F_vw2_x5F_thbo, #inf_x5F_vw2_x5F_thbi, #inf_x5F_vw2_x5F_indo, #inf_x5F_vw2_x5F_indi,#inf_x5F_vw2_x5F_mid,#inf_x5F_vw2_x5F_rngo,#inf_x5F_vw2_x5F_rngi,#inf_x5F_vw2_x5F_pnko,#inf_x5F_vw2_x5F_pnki, #inf_x5F_vw2_x5F_web, #inf_x5F_vw2_x5F_stch, #inf_x5F_vw2_x5F_bnd , #inf_x5F_vw2_x5F_wlt, #inf_x5F_vw2_x5F_lce, #inf_x5F_open_x5F_pocket');
             g.forEach((el, i) => {
                 var p = ["inf_x5F_vw2_x5F_plm", "inf_x5F_vw2_x5F_thbo", "inf_x5F_vw2_x5F_thbi", "inf_x5F_vw2_x5F_indo", "inf_x5F_vw2_x5F_indi", "inf_x5F_vw2_x5F_mid", "inf_x5F_vw2_x5F_rngo", "inf_x5F_vw2_x5F_rngi", "inf_x5F_vw2_x5F_pnko", "inf_x5F_vw2_x5F_pnki", "inf_x5F_vw2_x5F_web", "inf_x5F_vw2_x5F_stch", "inf_x5F_vw2_x5F_bnd", "inf_x5F_vw2_x5F_wlt", "inf_x5F_vw2_x5F_lce", "inf_x5F_open_x5F_pocket"];
@@ -1343,7 +1343,7 @@ export class GloveApi {
 
         });
         this.m2.attr({ viewBox: "0 -20 400 400"})
-        Snap.load("assets/images/fbase_inside_view.svg", function (f) {
+        Snap.load("assets/images/nys_fbase_inside_view.svg", function (f) {
             var g = f.selectAll('#fbase_x5F_vw2_x5F_plm, #fbase_x5F_vw2_x5F_bnd, #fbase_x5F_vw2_x5F_web, #fbase_x5F_vw2_x5F_stch, #fbase_x5F_vw2_x5F_lce, #fbase_x5F_open_x5F_pocket');
 
             g.forEach(function (el, i) {
@@ -1375,7 +1375,7 @@ export class GloveApi {
 
         });
         this.m3.attr({ viewBox: "-20 -20 400 400"})
-        Snap.load("assets/images/fbase_side_view.svg", function (f) {
+        Snap.load("assets/images/nys_fbase_side_view.svg", function (f) {
             var g = f.selectAll('#fbase_x5F_vw1_x5F_wst, #fbase_x5F_vw1_x5F_logo, #fbase_x5F_vw1_x5F_plm, #fbase_x5F_vw1_x5F_thb, #fbase_x5F_vw1_x5F_bfg, #fbase_x5F_vw1_x5F_utoe, #fbase_x5F_vw1_x5F_web, #fbase_x5F_vw1_x5F_stch, #fbase_x5F_vw1_x5F_bnd, #fbase_x5F_vw1_x5F_lce, #fbase_x5F_side_x5F_view');
 
             g.forEach(function (el, i) {
