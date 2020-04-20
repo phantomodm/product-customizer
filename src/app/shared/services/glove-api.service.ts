@@ -917,7 +917,7 @@ export class GloveApiService {
     });
 
     Snap.load('assets/images/nine-positions/catcher_fastback_side.svg', (f) => {
-      this.svgSide.attr({ viewBox: '0 0 400 400' });
+      this.svgSide.attr({ viewBox: '-50 0 400 400' });
       const g = f.selectAll('#catcher-fastback_x5F_vw1_x5F_thb, #catcher-fastback_x5F_vw1_x5F_logo, #catcher-fastback_x5F_vw1_x5F_utoe, #catcher-fastback_x5F_vw1_x5F_wlt, #catcher-fastback_x5F_vw1_x5F_web, #catcher-fastback_x5F_vw1_x5F_bnd, #catcher-fastback_x5F_vw1_x5F_plm, #catcher-fastback_x5F_vw1_x5F_stch, #catcher-fastback_x5F_vw1_x5F_blt, #catcher-fastback_x5F_vw1_x5F_lce, #catcher-fastback_x5F_vw1_x5F_fastback_x5F_side');
 
       g.forEach((el, i) => {
