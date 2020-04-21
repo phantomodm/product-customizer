@@ -98,7 +98,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
         let value = Number(jQuery(element.currentTarget).val()), values = [], valueString;
         value = value += 1;
         if (value != undefined) {
-          valueString = _.toLower(jQuery(element.currentTarget).context[value.toString()].text)
+          valueString = _.toLower( jQuery(element.currentTarget).context[value.toString()].label )
         }
         this.applyFill({ id: this.input, domValue: valueString })
       }))
