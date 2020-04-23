@@ -23,13 +23,12 @@ import {
   GloveSlider,
   HtmlInputValue,
   Sliders,
-  Sliders2,
+  Sliders2
 } from "src/app/shared/models/nystix-models";
-import { GloveDataService } from "src/app/shared/services/gloveData";
-import { embroiderySliderData } from "src/app/shared/data/api-data";
-import { Options, LabelType, CustomStepDefinition } from "ng5-slider";
+import { Options } from "ng5-slider";
 import { GloveSize } from "src/app/shared/models/nystix-models";
 import { IntroJsService } from "src/app/shared/services/intro-js.service";
+import { GloveDataService } from 'src/app/shared/services/gloveData';
 
 declare var jQuery: any;
 
