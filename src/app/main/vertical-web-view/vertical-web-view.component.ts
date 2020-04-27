@@ -4,7 +4,7 @@ import { GloveWebs } from 'src/app/shared/models/nine-positions-models';
 import { MatSnackBar } from '@angular/material';
 import { GloveApi } from 'src/app/shared/lib/gloveApi';
 import { GloveDataService } from 'src/app/shared/services/gloveData';
-import { takeUntil, take } from 'rxjs/operators';
+import { takeUntil, take, distinctUntilChanged } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Subject } from 'rxjs';
 
@@ -48,7 +48,7 @@ export class VerticalWebViewComponent implements OnInit {
 
   ngOnInit() {
     
-    this.gloveWebs$ = this.gloveData.getWizardSteps().pipe(take(2),takeUntil(this.unsubscribe$)).subscribe(res => {
+    this.gloveWebs$ = this.gloveData.getWizardSteps().pipe(distinctUntilChanged(),take(2),takeUntil(this.unsubscribe$)).subscribe(res => {
       _.forOwn(res,(value,key)=>{
         !_.isEqual(key,'gloveWeb') ? false : this.allGloveWebs = this.filteredGloveWebs = value[0]['options'] ;
       })
