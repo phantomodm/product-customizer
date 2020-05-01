@@ -2,7 +2,7 @@ import {  HostListener, OnDestroy, Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import * as Snap from 'snapsvg-cjs';
 import {interval, timer, BehaviorSubject, Subject} from 'rxjs';
-import { gsap } from 'gsap';
+import { gsap } from 'gsap/dist/gsap';
 import { takeWhile, take, finalize, takeUntil} from 'rxjs/operators';
 import { GloveDataService } from './glove-data.service';
 import { gloveColor } from '../shared/data/data';
@@ -238,6 +238,7 @@ export class GloveApiService implements OnDestroy {
                 // console.log(element)
                 if ($(element).length != 0) {
                   if (_.includes(element, 'stch')) {
+                    console.log(element)
                     self.svgSide.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
@@ -386,6 +387,7 @@ export class GloveApiService implements OnDestroy {
 
     if(event === "change"){
       try {
+        console.log(value)
         $(`#${element}`).val(value);
         $(`#${element}`).trigger("change").trigger("select.fs");
       } catch (error) {
