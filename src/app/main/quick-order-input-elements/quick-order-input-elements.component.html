@@ -1,0 +1,162 @@
+<div>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    "
+  >
+    <h2>Quick Order Glove</h2>
+    <span>PRICE</span>
+    <h4>$230</h4>
+
+    <div *ngFor="let data of gloveData | async">
+      <div class="form-group">
+        <label for="{{ data.elementId }}">{{ data.elementLabel }}</label
+        ><i
+          class="fas fa-info-circle"
+          [openDelay]="100"
+          [closeDelay]="200"
+          triggers="mouseenter:mouseleave"
+          ngbPopover="{{ data?.elementHelp }}"
+          popoverTitle="Glove Series"
+        ></i>
+        <ng-container [ngSwitch]="data.id == 'gloveWeb'">
+          <ng-container *ngSwitchCase="true">
+            <div id="{{ data.elementId }}" class="radio-input-container">
+              <ng-container
+                *ngFor="let option of filterWebInputs(data.elementOptions)"
+              >
+                <div
+                  id="{{ data.elementId }}_{{ option.value }}"
+                  class="web-buttons zoom"
+                  type="button"
+                  (click)="applyFill($event, option.hex)"
+                  ngbTooltip="{{ option.valueString }}"
+                  tooltipClass="qo-tooltip-class"
+                >
+                  <ng-container>
+                    <img
+                      src="{{ option.imageUrl }}"
+                      alt="{{ option.valueString }}"
+                    />
+                  </ng-container>
+
+                  <!-- <img src="{{data.uri}}{{option | webFilter: 'outfield'}}" alt=""> -->
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <div
+              id="{{ data.elementId }}"
+              class="radio-input-container"
+              *ngIf="data.elementType == 'radio'"
+            >
+              <ng-container
+                *ngFor="
+                  let option of filterColorInputs(data.elementOptions, data.id)
+                "
+              >
+                <div class="radio-button-holder">
+                  <div
+                    id="{{ data.elementId }}_{{ option.value }}"
+                    [attr.data-glove_section]="option.gloveSection"
+                    class="radio-buttons"
+                    [style.background]="option.hex"
+                    type="button"
+                    (click)="
+                      applyFill(
+                        $event,
+                        option.hex,
+                        option.value,
+                        data.elementId
+                      )
+                    "
+                    ngbTooltip="{{ option.innerHtml }}"
+                    tooltipClass="qo-tooltip-class"
+                  ></div>
+                </div>
+              </ng-container>
+            </div>
+
+            <div
+              id="{{ data.elementId }}"
+              *ngIf="data.elementType != 'radio'"
+              class="form-group"
+            >
+              <select
+                #select
+                [attr.data-glove_section]="data.elementInfo"
+                class="form-control"
+                name="glove_series"
+                id="{{ data.elementId }}"
+                (change)="changeEvent($event)"
+              >
+                <option
+                  id="{{ data.elementId }}_{{ option.value }}"
+                  *ngFor="let option of data.elementOptions"
+                  value="{{ option.value }}"
+                  >{{ option.innerHtml }}
+                </option>
+              </select>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+      
+    <div class="form-group">
+      <label>Personalization</label>
+      <input
+        #personalization
+        type="text"
+        maxlength="16"
+        class="form-control"
+        placeholder="Personalization"
+        (keyup)="inputPersonalization(personalization.value)"
+      />
+    </div>
+
+
+    <div class="quantity buttons_added">
+      <label class="screen-reader-text" for="quantity_5ea9b63add19d"></label>
+      <input
+        type="number"
+        id="quantity_5ea9b63add19d"
+        class="input-text qty text"
+        step="1"
+        min="1"
+        max=""
+        name="quantity"
+        value="1"
+        title="Qty"
+        size="4"
+        placeholder=""
+        inputmode="numeric"
+      />
+      <div class="quantity-nav">
+        <a href="javascript:void(0)" class="quantity-button quantity-up plus"
+          >&nbsp;</a
+        ><a
+          href="javascript:void(0)"
+          class="quantity-button quantity-down minus"
+          >&nbsp;</a
+        >
+      </div>
+    </div>
+    <div>
+      <button
+      style="background-color: #3bb54a; align-items: flex-end;"
+      type="button"
+      class="btn btn-primary btn-lg btn-block add-to-cart"
+      type="submit"
+      (click)="onSubmit()"
+    >
+      Add to Cart
+    </button>  
+    </div>  
+        
+  </div>
+</div>

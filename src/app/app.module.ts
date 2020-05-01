@@ -1,63 +1,75 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { createCustomElement } from '@angular/elements';
-import { NgModule, Injector, Injectable, ErrorHandler } from '@angular/core';
-import { Routes, RouterModule} from '@angular/router';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule} from '@angular/fire/database';
-import { NguCarouselModule} from '@ngu/carousel';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import * as Sentry from "@sentry/browser";
-
-import { AppComponent } from './app.component';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, Injector } from "@angular/core";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { createCustomElement } from "@angular/elements";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainComponent } from './main/main.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from "./app-routing.module";
+import { AngularFireModule } from "@angular/fire";
+
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatCardModule } from "@angular/material/card";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatSliderModule } from "@angular/material/slider";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+
+import { AppComponent } from "./app.component";
+import { MainComponent } from "./main/main.component";
+import { QuickOrderInputElementsComponent } from "./main/quick-order-input-elements/quick-order-input-elements.component";
+import { QuickOrderImageCarouselComponent } from "./main/quick-order-image-carousel/quick-order-image-carousel.component";
+
 
 const firebase = {
-  apiKey: "AIzaSyAZzo3fKO93uAd1O4NV4gC_JjhVceRnCAM",
-    authDomain: "positions-ui-web-data.firebaseapp.com",
-    databaseURL: "https://positions-ui-web-data.firebaseio.com",
-    projectId: "positions-ui-web-data",
-    storageBucket: "positions-ui-web-data.appspot.com",
-    messagingSenderId: "479822956029",
-    appId: "1:479822956029:web:b938e763162d7bbffdc594",
-    measurementId: "G-D3BQ4CWZX3"
-}
-
-Sentry.init({
-  dsn: "https://c97a385c4a8d4d268ff84a13fac917b0@sentry.io/1883251"
-});
-
-@Injectable()
-export class SentryErrorHandler implements ErrorHandler {
-  constructor() {}
-  handleError(error) {
-    const eventId = Sentry.captureException(error.originalError || error);
-    Sentry.showReportDialog({ eventId });
-  }
-}
-
-const routes: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'home', component: MainComponent}, 
-  { path: '**', component: AppComponent },
-];
+  apiKey: "AIzaSyCZH5clhiOV3Ia38MiQQwvSMSegHL4qU_g",
+  authDomain: "nystix-ui-web-data.firebaseapp.com",
+  databaseURL: "https://nystix-ui-web-data.firebaseio.com",
+  projectId: "nystix-ui-web-data",
+  storageBucket: "nystix-ui-web-data.appspot.com",
+  messagingSenderId: "243122665158",
+  appId: "1:243122665158:web:c7c24a321610e16bc209c7",
+  measurementId: "G-3G0Z0KDLP7",
+};
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    QuickOrderInputElementsComponent,
+    QuickOrderImageCarouselComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
-    NguCarouselModule,
-    NgbModule
+    NgbModule,
+    MatIconModule,
+    MatInputModule,
+    MatCardModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatStepperModule,
+    MatSliderModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
-  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
-  entryComponents:[MainComponent]
+  providers: [],
+  entryComponents: [AppComponent],
 })
 export class AppModule {
 

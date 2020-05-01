@@ -8,6 +8,9 @@ import { Component , Input, OnInit} from '@angular/core';
 export class AppComponent implements OnInit{
   @Input() profile;
   @Input() glove;
+  @Input() name;
+  @Input() price;
+  title = 'fastlanetool';
  
 
   ngOnInit(): void {
