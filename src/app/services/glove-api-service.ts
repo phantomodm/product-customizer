@@ -219,7 +219,7 @@ export class GloveApiService implements OnDestroy {
                     self.svgMain.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                   // self.svgMain.select(element).attr({ fill: fillHex });
                   break;
                 }
@@ -230,7 +230,7 @@ export class GloveApiService implements OnDestroy {
                     self.svgInside.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                   // self.svgInside.select(element).attr({ fill: fillHex });
                   break;
                 }
@@ -241,7 +241,7 @@ export class GloveApiService implements OnDestroy {
                     self.svgSide.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                   // self.svgSide.select(element).attr({ fill: fillHex });
                   break;
                 }
@@ -262,7 +262,7 @@ export class GloveApiService implements OnDestroy {
                     break;
                   }
                   // self.svgMain.select(element).attr({ fill: fillHex });
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                 }
                 break;
               case 'svgInside':
@@ -272,7 +272,7 @@ export class GloveApiService implements OnDestroy {
                     break;
                   }
                   // self.svgInside.select(element).attr({ fill: fillHex });
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                 }
                 break;
               case 'svgSide':
@@ -282,7 +282,7 @@ export class GloveApiService implements OnDestroy {
                     break;
                   }
                   // self.svgSide.select(element).attr({ fill: fillHex });
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                 }
                 break;
               default:
@@ -300,7 +300,7 @@ export class GloveApiService implements OnDestroy {
                     self.svgMain.select(element).attr({ fill: 'none', stroke: fillHex });
                     break;
                   }
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 1 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 1 });
                   // self.svgMain.select(element).attr({ fill: fillHex });
                 }
                 break;
@@ -312,7 +312,7 @@ export class GloveApiService implements OnDestroy {
                     break;
                   }
                   // self.svgInside.select(element).attr({ fill: fillHex });
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                 }
 
                 break;
@@ -324,7 +324,7 @@ export class GloveApiService implements OnDestroy {
                     break;
                   }
                   // self.svgSide.select(element).attr({ fill: fillHex });
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                 }
                 break;
               default:
@@ -343,7 +343,7 @@ export class GloveApiService implements OnDestroy {
 
                     break;
                   }
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                   // self.svgMain.select(element).attr({ fill: fillHex });
                 }
                 break;
@@ -355,7 +355,7 @@ export class GloveApiService implements OnDestroy {
                     break;
                   }
                   
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                 }                
 
                 break;
@@ -367,7 +367,7 @@ export class GloveApiService implements OnDestroy {
 
                     break;
                   }
-                  gsap.to(element, 1, { ease: "power2.easeInOut", fill: fillHex, delay: 0.5 });
+                  gsap.to(element, 1, { ease: "power2.inOut", fill: fillHex, delay: 0.5 });
                   // self.svgSide.select(element).attr({ fill: fillHex });
                 }
                 break;
