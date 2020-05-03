@@ -3,15 +3,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
-
-.carousel-control-prev-icon {
-    background: #fff no-repeat center center;
-    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_left-32px.svg') !important;
-}
-
-.carousel-control-next-icon {
-    /* background: #bfbfca no-repeat center center; */
-    background: #fff no-repeat center center;
-    background-image: url('//nystix.jacobsultd.wpmudev.host/wp-content/uploads/sites/2/2019/12/keyboard_arrow_right-32px.svg') !important;
+.form-control {
+    background-color: #fff !important;
 }

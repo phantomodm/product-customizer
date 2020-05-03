@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
+    padding-bottom: 10px;
 }
 
 .nystix-image-container {
     /* background: #8080805e; */
-    background: #000000bd;
+    /* background: #000000bd; */
 }
 
 .nystix-product-details {
@@ -26,6 +27,10 @@
 .nystix-product-details {
     padding-right: 15px;
     padding-left: 15px;
+}
+
+.summary {
+    display:none;
 }
 
 

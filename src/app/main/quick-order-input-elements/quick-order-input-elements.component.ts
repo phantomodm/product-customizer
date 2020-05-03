@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewChildren, QueryList } from "@angular/core";
+import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewChildren, QueryList, Input } from "@angular/core";
 import { GloveApiService } from "src/app/services/glove-api-service";
 import { DomSanitizer } from "@angular/platform-browser";
 import * as _ from "lodash";
@@ -15,6 +15,9 @@ declare var $: any;
 export class QuickOrderInputElementsComponent implements OnInit, AfterViewInit {
   private unsubscribe$ = new Subject<boolean>();
   @ViewChild('') personalization: HTMLInputElement;
+  @Input('') price;
+  @Input('') name;
+  @Input('') price2;
 
   gloveData;
   gloveType;
@@ -35,15 +38,11 @@ export class QuickOrderInputElementsComponent implements OnInit, AfterViewInit {
   }
 
   public sanitizeImage(image: string) {
-    //console.log(image);
     return this._sanitizer.bypassSecurityTrustUrl(`url(${image})`);
   }
 
   ngOnInit() {
-    this.gloveData = this.gloveApi.gloveInputOptions$;
-    //this.webs = this.webFilter = webImages;
-    console.log(this.gloveData);
-    
+    this.gloveData = this.gloveApi.gloveInputOptions$;    
   }
 
   ngAfterViewInit() {
@@ -67,7 +66,6 @@ export class QuickOrderInputElementsComponent implements OnInit, AfterViewInit {
     if (event !== "gloveWeb") {
       return false;
     }
-    console.log("gloveWeb");
     return true;
   }
 
@@ -114,9 +112,14 @@ export class QuickOrderInputElementsComponent implements OnInit, AfterViewInit {
   }
 
   applyFill(event, fill, value?, elementId?) {
-    console.log(event, fill, value, elementId);
+    console.log("ApplyFill ", event, fill, value, elementId);
     const target = event.target.dataset.glove_section;
     this.gloveApi.getHexIdFromDomSelection(event, fill, value, elementId);
+  }
+
+  selectWeb( element , value ){
+    console.log("SelectWeb ",element, value)
+    this.gloveApi.applyHtmlInput(element,value)
   }
 
   changeEvent(event) {
@@ -124,7 +127,7 @@ export class QuickOrderInputElementsComponent implements OnInit, AfterViewInit {
     const value = event.target.value;
     const _id = event.target.id;
     const eventType = event.type;
-    console.log(event)
+    console.log("Change",event)
     if (_.isEqual(name, "glove_series")) {
       switch (value) {
         case "kip":

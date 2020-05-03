@@ -13,6 +13,8 @@ export class MainComponent implements OnInit, AfterViewInit {
   @Input() profile;
   @Input() price;
   @Input() name;
+  @Input() price2;
+
   //data$: Observable<any>;
   watcher$ = false;
   gloveType: { name: string; type: string; }[];

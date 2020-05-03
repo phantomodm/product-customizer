@@ -1,9 +1,12 @@
-
 <div class="main">
-    <div  class="nystix-image-container">
-      <quick-order-image-carousel></quick-order-image-carousel>
-    </div>
-    <div class="nystix-product-details">
-      <quick-order-input-elements></quick-order-input-elements>
-    </div>
+  <div class="nystix-image-container">
+    <quick-order-image-carousel></quick-order-image-carousel>
   </div>
+  <div class="nystix-product-details">
+    <quick-order-input-elements
+      [price]="price"
+      [name]="name"
+      [price2]="price2"
+    ></quick-order-input-elements>
+  </div>
+</div>

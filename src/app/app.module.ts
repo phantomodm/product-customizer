@@ -7,19 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AngularFireModule } from "@angular/fire";
-
-import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
-import { MatCardModule } from "@angular/material/card";
-import { MatRadioModule } from "@angular/material/radio";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatStepperModule } from "@angular/material/stepper";
-import { MatSliderModule } from "@angular/material/slider";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatButtonModule } from "@angular/material/button";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppComponent } from "./app.component";
@@ -55,18 +42,6 @@ const firebase = {
     AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
     NgbModule,
-    MatIconModule,
-    MatInputModule,
-    MatCardModule,
-    MatRadioModule,
-    MatCheckboxModule,
-    MatStepperModule,
-    MatSliderModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatSlideToggleModule,
-    MatProgressSpinnerModule
   ],
   providers: [],
   entryComponents: [AppComponent],
