@@ -104,7 +104,7 @@ const routes: Routes = [
     NguCarouselModule
   ],
   entryComponents:[MainComponent],
-  //providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }]
+  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }]
   
 })
 export class AppModule {
