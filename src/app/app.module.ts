@@ -14,17 +14,8 @@ import { MainComponent } from "./main/main.component";
 import { QuickOrderInputElementsComponent } from "./main/quick-order-input-elements/quick-order-input-elements.component";
 import { QuickOrderImageCarouselComponent } from "./main/quick-order-image-carousel/quick-order-image-carousel.component";
 
+const firebase = {}
 
-const firebase = {
-  apiKey: "AIzaSyCZH5clhiOV3Ia38MiQQwvSMSegHL4qU_g",
-  authDomain: "nystix-ui-web-data.firebaseapp.com",
-  databaseURL: "https://nystix-ui-web-data.firebaseio.com",
-  projectId: "nystix-ui-web-data",
-  storageBucket: "nystix-ui-web-data.appspot.com",
-  messagingSenderId: "243122665158",
-  appId: "1:243122665158:web:c7c24a321610e16bc209c7",
-  measurementId: "G-3G0Z0KDLP7",
-};
 
 @NgModule({
   declarations: [
