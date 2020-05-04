@@ -29,7 +29,7 @@
     "@firebase/app-types": "^0.4.0",
     "@ng-bootstrap/ng-bootstrap": "^4.2.1",
     "@ngu/carousel": "^1.5.5",
-    "@sentry/browser": "^5.11.1",
+    "@sentry/browser": "^5.15.5",
     "@types/gsap": "^1.20.2",
     "@types/jquery": "^3.3.36",
     "@types/lodash": "^4.14.129",

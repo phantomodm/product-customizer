@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, Injector } from "@angular/core";
+import { NgModule, Injector, Injectable, ErrorHandler } from "@angular/core";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { createCustomElement } from "@angular/elements";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +14,22 @@ import { MainComponent } from "./main/main.component";
 import { QuickOrderInputElementsComponent } from "./main/quick-order-input-elements/quick-order-input-elements.component";
 import { QuickOrderImageCarouselComponent } from "./main/quick-order-image-carousel/quick-order-image-carousel.component";
 
+import * as Sentry from "@sentry/browser";
+
 const firebase = {}
+
+Sentry.init({
+  dsn: "https://16cf816d74304ff9805b80139fb8f7cb@o213549.ingest.sentry.io/5223261"
+});
+
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    Sentry.showReportDialog({ eventId });
+  }
+}
 
 
 @NgModule({
@@ -34,7 +49,7 @@ const firebase = {}
     AngularFireDatabaseModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
   entryComponents: [AppComponent],
 })
 export class AppModule {
