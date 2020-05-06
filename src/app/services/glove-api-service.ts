@@ -81,7 +81,7 @@ export class GloveApiService implements OnDestroy {
 
   init(designProfile?: string, gloveType?: string) {
     const profile = designProfile;
-    this.imageBase = gloveType;
+    ("first base" === gloveType) ? this.imageBase = "fbase" : this.imageBase = gloveType;     
     console.log("Getting profile");
     this.customData
       .getProfileData()
@@ -133,7 +133,7 @@ export class GloveApiService implements OnDestroy {
         break;
       case "fbase":
         this.loadFbase();
-        this.gloveTypeWatcher.next("fbase");
+        this.gloveTypeWatcher.next("first base");
         break;
       case "of":
         this.loadOutfield();
