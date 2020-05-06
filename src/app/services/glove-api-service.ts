@@ -91,7 +91,6 @@ export class GloveApiService implements OnDestroy {
         _.forEach(data, (v, k) => {
           if (_.isEqual(profile, k)) {
             self.data = self.data.build = v.build;
-            console.log(self.data)
             self.formData = v.formData;
             self.gloveInputOptions.next(v.formData);
           }
@@ -204,7 +203,7 @@ export class GloveApiService implements OnDestroy {
       if ($(element).length != 0) {
         if (_.includes(element, "stch")) {
           self.svgMain.select(element).attr({ fill: "none", stroke: fillHex });
-          return true;
+          return;
         } else {
           gsap.to(element, 1, {
             ease: "power2.inOut",

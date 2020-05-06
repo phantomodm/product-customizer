@@ -16,7 +16,9 @@ import { QuickOrderImageCarouselComponent } from "./main/quick-order-image-carou
 
 import * as Sentry from "@sentry/browser";
 
-const firebase = {}
+const firebase = {
+
+}
 
 Sentry.init({
   dsn: "https://16cf816d74304ff9805b80139fb8f7cb@o213549.ingest.sentry.io/5223261"
