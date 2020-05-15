@@ -40,10 +40,11 @@ export class GloveApiService {
   gloveInputOptions = new BehaviorSubject([]);
   gloveInputOptions$ = this.gloveInputOptions.asObservable();
   leatherColors: string[] = [];
-  canvasLoaded: any;
+  canvasLoaded = false;
 
   private unsubscribe$ = new Subject<boolean>();
-  colorsHex: any;
+  colorsHex = [];
+  gloveProfile: string[];
 
   constructor(private customData: GloveDataService) {
     this.customData
@@ -55,7 +56,9 @@ export class GloveApiService {
         });
         this.colors = res;
       });
-
+    
+    this.gloveProfile = ["one-color-mitt", "one-color-glove","dual-color-glove","tri-color-glove", "dual-color-mitt","tri-color-mitt","trim-color-mitt","web-change-glove","web-change-mitt"]
+    
     console.log("Glove customizer running...");
     this.gloveData = {
       gloveSeries: {},
@@ -78,18 +81,31 @@ export class GloveApiService {
     this.optionTitle = this.gloveData.domTitle;
     this.gloveSeries = this.gloveData.gloveSeries;
   }
+  
+  private _randomizer(db:string[]){
+    let random = _.random(0, db.length -1);
+    return db[random];
+  }
 
   init(designProfile?: string, gloveType?: string) {
-    const profile = designProfile;
-    this.imageBase = gloveType;
+    const profile = this._randomizer(this.gloveProfile);
+    const mitts = ["catcher-mitt", "fbase"]
+    const gloves = ["inf","of"]
+
+    if (_.includes(profile,"mitt")){
+      this.imageBase = mitts[Math.floor(Math.random() * mitts.length)]
+    } else {
+      this.imageBase = gloves[Math.floor(Math.random() * gloves.length)]
+    }
+
     this.customData.getProfileData().subscribe((data) => {
       const self = this;
       _.forEach(data, (v, k) => {
-        if (_.isEqual(profile, k)) {
+
+        if ( _.isEqual(profile, k )) {
           self.data = Object.assign(self.data.build, v.build);
           self.formData = v.formData;
           self.gloveInputOptions.next(v.formData);
-          return true;
         }
       });
 
@@ -99,6 +115,7 @@ export class GloveApiService {
         console.log("Canvas Initiated Call");
       }
     });
+
   }
 
   initCanvas() {
@@ -110,6 +127,8 @@ export class GloveApiService {
     (this.oView = this.svgMain.group()),
       (this.iView = this.svgInside.group()),
       (this.sView = this.svgSide.group());
+
+    
 
     switch (_.toLower(this.imageBase)) {
       case "catcher-mitt":
@@ -137,7 +156,7 @@ export class GloveApiService {
         break;
     }
 
-    const _timer = timer(5000);
+    const _timer = timer(2500);
     const runner = _timer.subscribe((val) => {
       _.forEach(this.data, (v, k) => {
         const fill = _.random(0, this.colorsHex.length - 1);
@@ -155,6 +174,11 @@ export class GloveApiService {
         }
       });
     });
+    
+    const series = ["rise","elite"]
+    this.selectAndFillToGloveSeries( series[Math.floor(Math.random() * series.length)], this.imageBase)
+
+    this.canvasLoaded = true;
   }
 
   // ** Function run to return current glove section and color chosen to render in glove canvas */
@@ -242,6 +266,7 @@ export class GloveApiService {
       const el = value.element;
       const svgLayerId = "_x5F";
       const svgElement = `#${glveType}${svgLayerId}`;
+      console.log(bodyPart)
       switch (bodyPart) {
         case "rise":
           _.forEach(fillObj.logo, (f) => {
@@ -249,7 +274,7 @@ export class GloveApiService {
             switch (el) {
               case "svgMain":
                 if ($(element).length != 0) {
-                  //self.svgMain.select(element).attr({ opacity: 1 });
+                  self.svgMain.select(element).attr({ opacity: 1 });
                 } else {
                   if (($(element).length = 0)) {
                     self.svgMain.select(element).attr({ opacity: 0 });

@@ -56,7 +56,7 @@ const routes: Routes = [
     NguCarouselModule,
     NgbModule
   ],
-  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
+  // providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
   entryComponents:[MainComponent]
 })
 export class AppModule {

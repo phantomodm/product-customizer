@@ -17,6 +17,10 @@ export class GloveDataService {
     return this.af.object('nine-positions-quick-order').snapshotChanges();
   }
 
+  getYotpoReviews(): Observable<any>{
+    return this.af.list('nine-positions-yotpo').valueChanges();
+  }
+
   getQuickOrderColor(): Observable<any>{
     return this.af.list('nine-positions-colors').valueChanges();
   }

@@ -6,8 +6,6 @@ import { Component , Input, OnInit} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  @Input() profile;
-  @Input() glove;
  
 
   ngOnInit(): void {
