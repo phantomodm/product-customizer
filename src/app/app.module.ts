@@ -17,12 +17,19 @@ import { QuickOrderImageCarouselComponent } from "./main/quick-order-image-carou
 import * as Sentry from "@sentry/browser";
 
 const firebase = {
-
+  apiKey: "AIzaSyCZH5clhiOV3Ia38MiQQwvSMSegHL4qU_g",
+  authDomain: "nystix-ui-web-data.firebaseapp.com",
+  databaseURL: "https://nystix-ui-web-data.firebaseio.com",
+  projectId: "nystix-ui-web-data",
+  storageBucket: "nystix-ui-web-data.appspot.com",
+  messagingSenderId: "243122665158",
+  appId: "1:243122665158:web:c7c24a321610e16bc209c7",
+  measurementId: "G-3G0Z0KDLP7",
 }
 
-Sentry.init({
-  dsn: "https://16cf816d74304ff9805b80139fb8f7cb@o213549.ingest.sentry.io/5223261"
-});
+// Sentry.init({
+//   dsn: "https://16cf816d74304ff9805b80139fb8f7cb@o213549.ingest.sentry.io/5223261"
+// });
 
 @Injectable()
 export class SentryErrorHandler implements ErrorHandler {
@@ -51,7 +58,7 @@ export class SentryErrorHandler implements ErrorHandler {
     AngularFireDatabaseModule,
     NgbModule,
   ],
-  providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
+  //providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
   entryComponents: [AppComponent],
 })
 export class AppModule {

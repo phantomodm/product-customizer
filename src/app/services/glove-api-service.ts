@@ -43,6 +43,8 @@ export class GloveApiService implements OnDestroy {
   gloveTypeWatcher$ = this.gloveTypeWatcher.asObservable();
   colorsHex = [];
   canvasLoaded = false;
+  sticky: any;
+  stickyView: any;
 
   constructor(private customData: GloveDataService) {
     //this.colors = gloveColor;
@@ -147,8 +149,9 @@ export class GloveApiService implements OnDestroy {
         this.loadCatcher();
         break;
     }
+
     console.log(" Before random call");    
-    const _timer = timer(5000);
+    const _timer = timer(2500);
     const runner = _timer.subscribe((val) => {
       _.forEach(this.data, (v,k) => { 
         const fill = _.random(0, this.colorsHex.length - 1);
@@ -165,9 +168,19 @@ export class GloveApiService implements OnDestroy {
             break;
         }
       });
+      //this.sticky.append(this.svgMain.clone());
     });
 
     this.canvasLoaded = true;
+
+    //Add Sticky Element
+    // function addSticky(){
+    //   this.sticky = Snap("#nystix-sticky");
+    //   this.sticky.attr({ viewBox: "0 0 400 400" });
+    // }
+
+    // $(document).ready(addSticky)
+    //console.log( (document.getElementById("nystix-sticky")) )
   }
 
   // ** Function run to return current glove section and color chosen to render in glove canvas */
@@ -198,7 +211,19 @@ export class GloveApiService implements OnDestroy {
     self.applyHtmlInput(elementId, domValue);
   }
 
+  refreshCanvas(){
+    //this.sticky.append(this.svgMain.clone())
+    return;
+  }
+
   applyFillToCanvas(sectionToFill, colorValue, gloveType) {
+    // if( this.sticky === undefined ){
+    //   this.sticky = Snap("#nystix-sticky");
+    //   //
+    // } else {
+    //   this.sticky.append(this.svgMain.clone())
+    // }
+
     let main = (element: string) => {
       if ($(element).length != 0) {
         if (_.includes(element, "stch")) {
@@ -212,6 +237,10 @@ export class GloveApiService implements OnDestroy {
           });
         }
       }
+      // setTimeout(() => {
+      //   this.sticky.append(this.svgMain.clone())
+      // }, 3000);
+      
     };
     let inside = (element: string) => {
       if ($(element).length != 0) {
@@ -270,7 +299,7 @@ export class GloveApiService implements OnDestroy {
                 break;
             }
           });
-
+          this.refreshCanvas();
           break;
         case "accent":
           _.forEach(fillObj.accent, (d) => {
@@ -289,6 +318,7 @@ export class GloveApiService implements OnDestroy {
                 break;
             }
           });
+          this.refreshCanvas();
           break;
         case "trim":
           _.forEach(fillObj.trim, (d) => {
@@ -307,6 +337,7 @@ export class GloveApiService implements OnDestroy {
                 break;
             }
           });
+          this.refreshCanvas();
           break;
         case "logo":
           _.forEach(fillObj.logo, (d) => {
@@ -319,7 +350,6 @@ export class GloveApiService implements OnDestroy {
                 inside(element);
                 break;
               case "svgSide":
-                // console.log('logos')
                 side(element);
                 break;
               default:
@@ -328,8 +358,14 @@ export class GloveApiService implements OnDestroy {
           });
           break;
         default:
+          this.refreshCanvas();
       }
     });
+    
+
+    
+    
+    
   }
 
   applyHtmlInput(element: string, value: string, event?: string) {

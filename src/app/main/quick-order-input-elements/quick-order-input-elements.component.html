@@ -26,14 +26,15 @@
     <div *ngFor="let data of gloveData | async">
       <div class="form-group">
         <label for="{{ data.elementId }}">{{ data.elementLabel }}</label
-        ><i
+        >
+        <!-- <i
           class="fas fa-info-circle"
           [openDelay]="100"
           [closeDelay]="200"
           triggers="mouseenter:mouseleave"
           ngbPopover="{{ data?.elementHelp }}"
           popoverTitle="Glove Series"
-        ></i>
+        ></i> -->
         <ng-container [ngSwitch]="data.id == 'gloveWeb'">
           <ng-container *ngSwitchCase="true">
             <div class="radio-input-container">
